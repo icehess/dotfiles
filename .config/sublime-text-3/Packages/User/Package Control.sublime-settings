@@ -1,0 +1,22 @@
+{
+	"installed_packages":
+	[
+		"Babel",
+		"ColorSchemeEditor",
+		"Dockerfile Syntax Highlighting",
+		"Duotones Colorschemes",
+		"EditorConfig",
+		"Erlyman",
+		"FileBrowser",
+		"GitGutter",
+		"GitSavvy",
+		"HexViewer",
+		"HTML-CSS-JS Prettify",
+		"Material Theme",
+		"Package Control",
+		"SCSS",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"SublimeLinter-eslint"
+	]
+}
