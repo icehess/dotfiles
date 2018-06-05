@@ -1,0 +1,7 @@
+[user]
+	name = Hesaam Farhang
+	email = hesaam@2600hz.com
+[core]
+	excludesfile = "$HOME/.gitignore_global"
+[push]
+	default = simple

@@ -1,0 +1,102 @@
+#
+# MODIFIED COAMMANDS:
+# -------------------
+#
+#alias diff='colordiff'              # it's now set in .bashrc, requires colordiff package
+#alias grep='grep --color=auto'		# it's now set in .bashrc
+#alias more='less'
+#alias df='df -h'
+#alias du='du -c -h'
+
+#alias mkdir='mkdir -p -v'
+#alias nano='nano -w'
+#alias ping='ping -c 5'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+
+alias cdimenpar='cd ~/Developing/Projects/ImenPardis/'
+alias cdpspar='cd ~/Developing/Projects/ImenPardis/PSPardis/'
+
+#
+# NEW COMMANDS:
+# -------------
+#
+#alias da='date "+%A, %B %d, %Y [%T]"'
+#alias du1='du --max-depth=1'
+alias hist='history | grep'      # requires an argument
+alias whatismyip="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'" # or:
+#alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias psgrep='ps aux | grep $1'
+# alias `simplehttpd` to start a simple webserver in the current director 
+alias simplehttpd='python -m SimpleHTTPServer 8888 >/dev/null 2>&1&';
+
+if [ $UID -ne 0 ]; then
+	alias httpdump="sudo tcpdump -i eth0 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+	alias openports='sudo netstat --all --numeric --programs --inet --inet6'
+	alias localip="sudo ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+else
+	alias httpdump="tcpdump -i eth0 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+	alias openports='netstat --all --numeric --programs --inet --inet6'
+	alias localip="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+fi
+
+
+#
+# PRIVILEGED ACCESS:
+# ------------------
+#
+#if [ $UID -ne 0 ]; then
+#    alias sudo='sudo '
+#    alias scat='sudo cat'
+#    alias svim='sudo vim'
+#    alias snano='sudo nano'
+    #alias root='sudo su'
+#    alias reboot='sudo reboot'
+#    alias halt='sudo halt'
+    #alias update='sudo pacman -Su'
+    #alias netcfg='sudo netcfg2'
+#fi
+
+#
+# LS:
+# ---
+#
+#alias ls='ls --color=auto'			# it's now set in .bashrc
+#alias lr='ls -R'                    # recursive ls
+alias lf='ls -F'
+alias ll='ls -lAF'
+alias la='ls -A'
+alias lx='ll -BX'                   # sort by extension
+alias lz='ll -rS'                   # sort by size
+alias lt='ll -rt'                   # sort by date
+alias lm='la | more'
+
+#
+# SAFETY FEATURES:
+# ----------------
+#
+#alias cp='cp -i'
+#alias mv='mv -i'
+#alias rm='rm -I'                    # 'rm -i' prompts for every file
+#alias ln='ln -i'
+#alias chown='chown --preserve-root'
+#alias chmod='chmod --preserve-root'
+#alias chgrp='chgrp --preserve-root'
+
+#
+# PACMAN ALIASES (if applicable, replace 'pacman' with 'yaourt'/'pacaur'/whatever):
+# ---------------------------------------------------------------------------------
+#
+#alias pac="pacman -S"      # default action     - install one or more packages
+#alias pacu="pacman -Syu"   # '[u]pdate'         - upgrade all packages to their newest version
+#alias pacs="pacman -Ss"    # '[s]earch'         - search for a package using one or more keywords
+#alias paci="pacman -Si"    # '[i]nfo'           - show information about a package
+#alias pacr="pacman -R"     # '[r]emove'         - uninstall one or more packages
+#alias pacl="pacman -Sl"    # '[l]ist'           - list all packages of a repository
+#alias pacll="pacman -Qqm"  # '[l]ist [l]ocal'   - list all packages which were locally installed (e.g. AUR packages)
+#alias paclo="pacman -Qdt"  # '[l]ist [o]rphans' - list all packages which are orphaned
+#alias paco="pacman -Qo"    # '[o]wner'          - determine which package owns a given file
+#alias pacf="pacman -Ql"    # '[f]iles'          - list all files installed by a given package
+#alias pacc="pacman -Sc"    # '[c]lean cache'    - delete all not currently installed package files
+#alias pacm="makepkg -fci"  # '[m]ake'           - make package from PKGBUILD file in current directory
