@@ -1,0 +1,14 @@
+#! /bin/bash
+
+# Set up ssh-agent
+if [ -z "$(pgrep ssh-agent)" ]; then
+    rm -rf /tmp/ssh-*
+    eval $(ssh-agent -s) > /dev/null
+    ssh-add ~/.ssh/hesaam_github
+else
+    export SSH_AGENT_PID=$(pgrep ssh-agent)
+    export SSH_AUTH_SOCK=$(find /tmp/ssh-* -name agent.*)
+fi
+
+sudo mount --bind /mnt/c /c
+export DOCKER_HOST=tcp://0.0.0.0:2375

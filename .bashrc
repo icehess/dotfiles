@@ -84,3 +84,7 @@ alias kz="cd $HOME/work/2600hz/kazoo/master; export KAZOO_SRC=/work/2600hz/kazoo
 alias kz2="cd $HOME/work/2600hz/kazoo/4.2; export KAZOO_SRC=/work/2600hz/kazoo/4.2"
 alias kz1="cd $HOME/work/2600hz/kazoo/4.1; export KAZOO_SRC=/work/2600hz/kazoo/4.1"
 
+if [ -e ~/.bashlocal ]; then
+    . ~/.bashlocal
+fi
+
