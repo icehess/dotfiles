@@ -522,6 +522,9 @@ highlight link markdownCode Delimiter
 highlight link markdownCodeBlock Delimiter
 highlight link markdownListMarker Todo
 
+" disable background color earse to to fix issue with background
+set t_ut=
+
 " Custom mode for distraction-free editing
 function! ProseMode()
   call goyo#execute(0, [])
@@ -571,7 +574,7 @@ augroup END
 " "  :20  :  up to 20 lines of command-line history will be remembered
 " "  %    :  saves and restores the buffer list
 " "  n... :  where to save the viminfo files
-set viminfo='10,\"100,:20,%,n~/.viminfo"'
+" set viminfo='10,\"100,:20,%,n~/.viminfo"'
 
 
 " ----------------------------------------------------------------------------
