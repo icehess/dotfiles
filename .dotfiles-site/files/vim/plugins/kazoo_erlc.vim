@@ -3,17 +3,18 @@
 let g:ale_erlang_erlc_options = get(g:, 'ale_erlang_erlc_options', '')
 let g:ale_erlang_erlc_env_vars = get(g:, 'ale_erlang_erlc_env_vars', '')
 
-function! ale_linters#erlang#erlc#GetCommand(buffer) abort
+function! ale_linters#erlang#kazoo_erlc#GetCommand(buffer) abort
     let l:output_file = tempname()
     call ale#engine#ManageFile(a:buffer, l:output_file)
 
     return ale#Var(a:buffer, 'erlang_erlc_env_vars')
-    \   . ' erlc -o ' . ale#Escape(l:output_file)
-    \   . ' ' . ale#Var(a:buffer, 'erlang_erlc_options')
+    \   . 'erlc -o ' . ale#Escape(l:output_file)
+    \   . ' -I'. expand('%:h') . '/include' . ' -I' . expand('%:h') . ' -I' . expand('%:h'). '/src' . ' -I' . expand('%:h') . '/../ '
+    \   . ale#Var(a:buffer, 'erlang_erlc_options')
     \   . ' %t'
 endfunction
 
-function! ale_linters#erlang#erlc#Handle(buffer, lines) abort
+function! ale_linters#erlang#kazoo_erlc#Handle(buffer, lines) abort
     " Matches patterns like the following:
     "
     " error.erl:4: variable 'B' is unbound
@@ -91,8 +92,8 @@ function! ale_linters#erlang#erlc#Handle(buffer, lines) abort
 endfunction
 
 call ale#linter#Define('erlang', {
-\   'name': 'erlc',
+\   'name': 'kazoo_erlc',
 \   'executable': 'erlc',
-\   'command_callback': 'ale_linters#erlang#erlc#GetCommand',
-\   'callback': 'ale_linters#erlang#erlc#Handle',
+\   'command_callback': 'ale_linters#erlang#kazoo_erlc#GetCommand',
+\   'callback': 'ale_linters#erlang#kazoo_erlc#Handle',
 \})
