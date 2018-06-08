@@ -522,6 +522,16 @@ highlight link markdownCode Delimiter
 highlight link markdownCodeBlock Delimiter
 highlight link markdownListMarker Todo
 
+highlight link erlangLocalFuncCall Statement
+highlight link erlangLocalFuncRef Statement
+highlight link erlangGlobalFuncCall Statement
+highlight link erlangGlobalFuncRef Statement
+
+highlight link erlangKeyword Constant
+"highlight link erlangVariable Normal
+highlight link erlangQuotedAtom Special
+highlight link erlangAtom Function
+
 " disable background color earse to to fix issue with background
 set t_ut=
 
