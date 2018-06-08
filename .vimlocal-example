@@ -1,0 +1,7 @@
+let g:ale_linters = {
+\   'erlang': ['hess_erlc'],
+\}
+
+let g:ale_erlang_erlc_env_vars = 'ERL_LIBS=/mnt/c/Users/hesaam/work/2600hz/kazoo/master/deps:/mnt/c/Users/hesaam/work/2600hz/kazoo/master/core:/mnt/c/Users/hesaam/work/2600hz/kazoo/master/applications'
+
+let g:ale_erlang_erlc_env_vars = '+debug_info += -Iinclude -Isrc -I../ +''{parse_transform, lager_transform}'' -Werror +warn_export_all +warn_unused_import +warn_unused_vars +warn_missing_spec +determ'
