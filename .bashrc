@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 if [[ $- != *i* ]] ; then
-   export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-   export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+    [ -d /usr/local/sbin ] && export PATH="/usr/local/sbin:$PATH"
+    [ -d /usr/local/bin ] && export PATH="/usr/local/bin:$PATH"
    return
 fi
 
@@ -69,7 +69,8 @@ PS4='+ '
 
 export EDITOR="vim"
 
-[ -r /usr/bin/mate-terminal ] && export TERMINAL="mate-terminal"
+#[ -r /usr/bin/mate-terminal ] && export TERMINAL="mate-terminal"
+[ -r /usr/bin/termite ] && export TERMINAL="xterm-termite"
 [ -r /usr/bin/ksshaskpass ] && export SSH_ASKPASS="/usr/bin/ksshaskpass"
 [ -r $XDG_RUNTIME_DIR/ssh-agent.socket ] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
@@ -80,9 +81,9 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias work="cd $HOME/work"
 alias 2222="cd $HOME/work/2600hz"
 alias kazoo="cd $HOME/work/2600hz/kazoo"
-alias kz="cd $HOME/work/2600hz/kazoo/master; export KAZOO_SRC=/work/2600hz/kazoo/master"
-alias kz2="cd $HOME/work/2600hz/kazoo/4.2; export KAZOO_SRC=/work/2600hz/kazoo/4.2"
-alias kz1="cd $HOME/work/2600hz/kazoo/4.1; export KAZOO_SRC=/work/2600hz/kazoo/4.1"
+alias kz="cd $HOME/work/2600hz/kazoo/master; export KAZOO_SRC=/work/2600hz/kazoo/master; export KAZOO_PATH=/work/2600hz/kazoo/master"
+alias kz2="cd $HOME/work/2600hz/kazoo/4.2; export KAZOO_SRC=/work/2600hz/kazoo/4.2; export KAZOO_PATH=/work/2600hz/kazoo/4.2"
+alias kz1="cd $HOME/work/2600hz/kazoo/4.1; export KAZOO_SRC=/work/2600hz/kazoo/4.1; export KAZOO_PATH=/work/2600hz/kazoo/4.1"
 
 if [ -e ~/.bashlocal ]; then
     . ~/.bashlocal
