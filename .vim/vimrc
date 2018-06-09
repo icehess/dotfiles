@@ -5,6 +5,8 @@
 " |_|  \_/ |_|_| |_| |_|_|  \___|
 "
 " Icehess .vimrc file
+" (Based on Ian's vimrc - https://github.com/statico/dotfiles)
+" (https://statico.github.io/vim3.html)
 "
 
 set encoding=utf-8
@@ -61,12 +63,12 @@ Plugin 'sheerun/vim-polyglot'
 
 " Look and feel
 Plugin 'cocopon/iceberg.vim'
-Plugin 'arcticicestudio/nord-vim'
-Plugin 'felixhummel/setcolors.vim'
+"Plugin 'arcticicestudio/nord-vim'
+"Plugin 'felixhummel/setcolors.vim'
 Plugin 'altercation/vim-colors-solarized'
 
 Plugin 'itchyny/lightline.vim'
-Plugin 'chreekat/vim-paren-crosshairs'
+"Plugin 'chreekat/vim-paren-crosshairs'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -100,14 +102,15 @@ set cino=                                        " See :h cinoptions-values
 set clipboard=unnamed                            " Share system clipboard
 set commentstring=\ \ #%s                        " When folds are created, add them to this
 set copyindent                                   " Make autoindent use the same chars as prev autoindented line
-set directory-=/tmp                                 " Don't store temp files in cwd
+set cursorline                                   " Highlight current line
+set directory-=/tmp                              " Don't store temp files in cwd
 set expandtab                                    " No tabs
 set fileformats=unix,dos,mac                     " Prefer Unix
 set fillchars=vert:\ ,stl:\ ,stlnc:\ ,fold:-,diff:┄
                                                  " Unicode chars for diffs/folds, and rely on
                                                  " Colors for window borders
 silent! set foldmethod=marker                    " Use braces by default
-set formatoptions=tcqn1                          " t - autowrap normal text
+set formatoptions=cqn1                           " t - autowrap normal text
                                                  " c - autowrap comments
                                                  " q - gq formats comments
                                                  " n - autowrap lists
@@ -132,7 +135,7 @@ set number                                       " Always show line numbers
 set printoptions=paper:letter                    " US paper
 set ruler                                        " Show row/col and percentage
 set scroll=4                                     " Number of lines to scroll with ^U/^D
-set scrolloff=15                                 " Keep cursor away from this many chars top/bot
+set scrolloff=5                                  " Keep cursor away from this many chars top/bot
 set sessionoptions-=options                      " Don't save runtimepath in Vim session (see tpope/vim-pathogen docs)
 set shiftround                                   " Shift to certain columns, not just n spaces
 set shiftwidth=4                                 " Number of spaces to shift for autoindent or >,<
@@ -145,7 +148,7 @@ set smarttab                                     " Insert tabs on the start of a
 set softtabstop=4                                " Spaces 'feel' like tabs
 set suffixes+=.pyc,.beam                         " Ignore these files when tab-completing
 set tabstop=2                                    " The One True Tab
-set textwidth=100                                " 100 is the new 80
+set textwidth=120                                " 100 is the new 80
 set thesaurus+=~/.vim/mthes10/mthesaur.txt
 set title                                        " Change the terminal's title
 set undolevels=10000                             " Use many muchos levels of undo
@@ -191,26 +194,22 @@ let g:mapleader = ","
 
 " Useful macros I use the most
 nmap \A :set formatoptions+=a<CR>:echo "autowrap enabled"<CR>     " Turn-on Autowarp
-nmap \T :set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4<CR> " Turn-off use space instead of Tab
+nmap \T :set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4<CR> " Use Tab instead of space
 nmap \a :set formatoptions-=a<CR>:echo "autowrap disabled"<CR>    " Turn-on Autowarp
-nmap \b :set nocin tw=80<CR>:set formatoptions+=a<CR>
 nmap \d :ALEToggleBuffer<CR>                                      " Toggle ALE (require ale plug-in)
 nmap \e :NERDTreeToggle<CR>                                       " Toggle nerdtree (require nerdtree plug-in)
 nmap \f mt:Goyo<CR>'tzz                                           " Toggle distraction free (require goyo plug-in)
 nmap \F :NERDTreeFind<CR>                                         " Find in nerdtree (require nerdtree plug-in)
 nmap \g :GitGutterToggle<CR>                                      " Toggle gitgutter (require gitgutter plug-in)
-nmap \i vip:sort<CR>
+nmap \i vip:sort<CR>                                              " Sort a block of lines
 nmap \l :setlocal number!<CR>:setlocal number?<CR>
-" nmap \o :set paste!<CR>:set paste?<CR>
 nmap \p :ProseMode<CR>                                            " ProseMode (see function section) distraction free (require goyo plug-in)
 nnoremap <silent> <leader>/ :nohlsearch<CR>                       " Get rid of search highlighting with ,/
 nmap \s :setlocal invspell<CR>                                    " Spell check
 nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>   " Use space instead of Tab
-nmap \x :cclose<CR>
-nmap \z :w<CR>:!open %<CR><CR>
 
 
-nmap <C-e> :e#<CR>                                                " You don't know what you're missing if you don't use this.
+nmap <C-e> :e#<CR>                                                " Replace the current buffer with previously edited file
 
 " Move between open buffers.
 nmap <C-n> :bnext<CR>
@@ -296,7 +295,6 @@ let mapleader = ","
 let maplocalleader = ","
 
 " FZF (Fuzzy search)
-set rtp+=/usr/bin/fzf
 set rtp+=~/.fzf
 nmap ; :Buffers<CR>
 nmap <Leader>r :Tags<CR>
@@ -428,11 +426,10 @@ let g:sparkupNextMapping = '<c-k>'
 
 " Make sure colored syntax mode is on, and make it Just Work with 256-color terminals.
 set background=dark
-let g:rehash256 = 1 " Something to do with Molokai?
 colorscheme iceberg
 if !has('gui_running')
   let g:solarized_termcolors=256
-  if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+  if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal" || $TERM == "xterm-termite" || $TERM == "mate-terminal"
     set t_Co=256
   elseif has("terminfo")
     colorscheme default
@@ -448,16 +445,9 @@ if !has('gui_running')
   " Disable Background Color Erase when within tmux - https://stackoverflow.com/q/6427650/102704
   if $TMUX != ""
     set t_ut=
-  endif
+ endif
 endif
 syntax on
-
-" Window splits & ruler are too bright, so change to white on grey (non-GUI)
-highlight StatusLine       cterm=NONE ctermbg=blue ctermfg=white
-highlight StatusLineTerm   cterm=NONE ctermbg=blue ctermfg=white
-highlight StatusLineNC     cterm=NONE ctermbg=black ctermfg=white
-highlight StatusLineTermNC cterm=NONE ctermbg=black ctermfg=white
-highlight VertSplit        cterm=NONE ctermbg=black ctermfg=white
 
 " taglist.vim's filenames is linked to LineNr by default, which is too dark
 highlight def link MyTagListFileName Statement
@@ -479,11 +469,12 @@ highlight def link FoldColumn Ignore
 highlight clear Folded
 highlight link Folded Ignore
 highlight clear LineNr
-highlight! def link LineNr Ignore
+highlight LineNr ctermfg=239 guifg=#444b71
+"highlight! def link LineNr Ignore
 
 " Custom search colors
-highlight clear Search
-highlight Search term=NONE cterm=NONE ctermfg=white ctermbg=black
+"highlight clear Search
+"highlight Search term=NONE cterm=NONE ctermfg=white ctermbg=black
 
 " Make hilighted matching parents less annoying
 highlight clear MatchParen
@@ -496,14 +487,14 @@ highlight def link NERDTreeRO NERDTreeFile
 highlight SpecialKey ctermbg=Yellow guibg=Yellow
 
 " Previous approach for trailing white spaces
-" autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
 
 " Make sure we highlight extra whitespace in the most annoying way possible.
-" highlight ExtraWhitespace ctermbg=red guibg=red
-" match ExtraWhitespace /\s\+$/
-" autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Make menu selections visible
 highlight PmenuSel ctermfg=black ctermbg=magenta
