@@ -1,0 +1,41 @@
+syntax "Erlang" "\.(erl|hrl|escript)(\.src)?$"
+header "^#!\s*/.*\b(escript)$\n?"
+
+## Default
+color brightwhite "^.+$"
+
+## Function Call
+color yellow "([A-Za-z_][A-Za-z0-9_]*[[:space:]]*):[[A-Za-z_][A-Za-z0-9_]*[[:space:]]*[(]"
+color brightblue "([A-Za-z_][A-Za-z0-9_]*[[:space:]]*)[(]"
+
+## Keywords
+color magenta "\<(after|begin|case|catch|cond|end|fun|if|let|of|query|try|receive|when)\>"
+color brightcyan "\<(andalso|band|and|bxor|xor|bor|orelse|or|bnot|not|bsl|bsr|div|rem))\>"
+
+## Module directive
+color yellow "^\s*+-\s*+module\s*+\(\s*+([a-z][a-zA-Z\d@_]*+)\s*+\)\s*+\."
+
+## Directive
+color magenta   "\<(define|include|include_lib|export|export_type|compile|mode|record|module)\>"
+#color magenta   "(\$)((\\)([bdefnrstv\\''"]|(\^)[@-_]|[0-7]{1,3}))"
+color brightgreen "^\s*+-\s*+(type|spec)"
+
+## Macros
+color brightblue "\?[A-Za-z0-9_]+"
+color brightblue "[A-Z]+[^a-z]"
+
+## Operator
+color brightcyan "(\+\+|\+|--|-|\*|/=|/|=/=|=:=|==|=<|=|<-|<|>=|>|!|\[|\]|\(|\)|:|\?|\{|\}|\.|,|\|)"
+
+## String
+color green "L?\"(\\"|[^"])*\""
+color brightgreen "L?'(\'|[^'])*'"
+
+color yellow "[0-9]+"
+
+# Comments
+color brightblack "%.*"
+
+## Trailing spaces
+color ,green "[[:space:]]+$"
+
