@@ -17,7 +17,7 @@ if [ -n "`xrandr | grep 'DP-2 connected'`" ] ; then
     fi
 fi
 
-
+/usr/lib/pam_kwallet_init
 kwalletd5 &
 #dbus-update-activation-environment --systemd DISPLAY
 #eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
