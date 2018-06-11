@@ -19,6 +19,9 @@ fi
 
 
 kwalletd5 &
+#dbus-update-activation-environment --systemd DISPLAY
+#eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+#export SSH_AUTH_SOCK
 ~/.config/autostart-scripts/ssh-add.sh
 
 pasystray &
@@ -27,3 +30,5 @@ dropbox &
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 
 exec i3
+
+# vim: ft=sh
