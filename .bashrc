@@ -70,7 +70,7 @@ PS4='+ '
 export EDITOR="vim"
 
 #[ -r /usr/bin/mate-terminal ] && export TERMINAL="mate-terminal"
-[ -r /usr/bin/termite ] && export TERMINAL="xterm-termite"
+[ -r /usr/bin/termite ] && export TERMINAL="termite"
 [ -r /usr/bin/ksshaskpass ] && export SSH_ASKPASS="/usr/bin/ksshaskpass"
 [ -r $XDG_RUNTIME_DIR/ssh-agent.socket ] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
