@@ -31,10 +31,9 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 #xrandr | grep VGA1 && xrandr --output VGA1 --auto --right-of LVDS1 --mode 1920x1200
-if [ -n "`xrandr | grep 'DP-2 connected'`" ] ; then
-    if [ -n "`xrandr | grep 'DP-4 connected'`" ] ; then
-        echo hello
-        xrandr --output DP-2 --auto --left-of DP-4 --auto
+if [ -n "`xrandr | grep 'HDMI2 connected'`" ] ; then
+    if [ -n "`xrandr | grep 'HDMI3 connected'`" ] ; then
+        xrandr --output HDMI2 --primary --auto --right-of HDMI3 --auto
     fi
 fi
 
@@ -47,8 +46,8 @@ kwalletd5 &
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 
 greenclip daemon &
-#pa-applet &
-pasystray &
+pa-applet &
+#pasystray &
 
 dropbox &
 
