@@ -46,7 +46,7 @@ kwalletd5 &
 ~/.config/autostart-scripts/ssh-add.sh
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 
-greenclip daemon
+greenclip daemon &
 pa-applet &
 #pasystray &
 
