@@ -47,8 +47,8 @@ kwalletd5 &
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 
 greenclip daemon &
-pa-applet &
-#pasystray &
+#pa-applet &
+pasystray &
 
 dropbox &
 
