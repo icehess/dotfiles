@@ -45,8 +45,7 @@ scrollbar = right
 #cursor_foreground = #c6c8d1
 
 foreground = #c6c8d1
-foreground_bold = #d2d4de
-#background = #141414
+#foreground_bold = #d2d4de
 background = #1c1c1c
 
 # 20% background transparency (requires a compositor)
@@ -56,22 +55,58 @@ background = #1c1c1c
 #highlight = #2f2f2f
 
 # Colors from color0 to color254 can be set
-color0 = #3f3f3f
-color1 = #705050
-color2 = #60b48a
-color3 = #dfaf8f
-color4 = #506070
-color5 = #dc8cc3
-color6 = #8cd0d3
-color7 = #dcdccc
-color8 = #709080
-color9 = #dca3a3
-color10 = #c3bf9f
-color11 = #f0dfaf
-color12 = #94bff3
-color13 = #ec93d3
-color14 = #93e0e3
-color15 = #ffffff
+
+## iceberg vim color scheme (ANSI color code)
+#color0 = #3f3f3f
+#color1 = #705050
+#color2 = #60b48a
+#color3 = #dfaf8f
+#color4 = #506070
+#color5 = #dc8cc3
+#color6 = #8cd0d3
+#color7 = #dcdccc
+#color8 = #709080
+#color9 = #dca3a3
+#color10 = #c3bf9f
+#color11 = #f0dfaf
+#color12 = #94bff3
+#color13 = #ec93d3
+#color14 = #93e0e3
+#color15 = #ffffff
+
+
+## iceberg vim color scheme
+# black
+color0 = #161821
+color8 = #6b7089
+
+# red
+color1 = #e27878
+color9 = #e98989
+
+# green
+color2 = #b4be82
+color10 = #c0ca8e
+
+# yellow
+color3 = #e2a478
+color11 = #e9b189
+
+# blue
+color4 = #84a0c6
+color12 = #91acd1
+
+# magenta
+color5 = #a093c7
+color13 = #ada0d3
+
+# cyan
+color6 = #89b8c2
+color14 = #95c4ce
+
+# white
+color7 = #c6c8d1
+color15 = #d2d4de
 
 [hints]
 #font = Monospace 12

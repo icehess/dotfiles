@@ -2,6 +2,8 @@
 	"installed_packages":
 	[
 		"Babel",
+		"Color Highlighter",
+		"ColorHelper",
 		"ColorSchemeEditor",
 		"Dockerfile Syntax Highlighting",
 		"Duotones Colorschemes",

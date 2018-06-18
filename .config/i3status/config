@@ -10,72 +10,91 @@ general {
     output_format = "i3bar"
     colors = true
     interval = 5
-    color_good = "#afff00"
-    color_bad = "#ff5f5f"
-    color_degraded = "#ffaf87"
+    # color_good = "#2AA198"
+    color_good = "#F9FAF9"
+    color_bad = "#586E75"
+    color_degraded = "#DC322F"
 }
 
-#order += "ipv6"
-order += "ethernet _first_"
-order += "disk /"
-#order += "wireless _first_"
-#order += "battery all"
 order += "cpu_usage"
 order += "load"
+order += "disk /"
+order += "ethernet _first_"
+
+#order += "wireless _first_"
+#order += "ipv6"
+#order += "battery all"
+
 order += "tztime local"
 order += "volume master"
+
 #order += "cpu_temperature 0"
 
-#cpu_temperature "0" {
-#        format = "%degrees °C"
-#}
 
 cpu_usage {
-    format = "⚙️ %usage"
+    format = " cpu  %usage "
     max_threshold = 60
     degraded_threshold = 25
 }
 
-volume master {
-#    format = "🔊 %volume"
-#    format_muted = "🔈 (%volume)"
-    device = "pulse"
-}
-
-#ipv6 {
-#        format_up = "ipv6: %ip"
-#        format_down = "ipv6: down"
-#}
-
-#wireless _first_ {
-#        format_up = "W: (%quality at %essid) %ip"
-#        format_down = "W: down"
-#}
-
-ethernet _first_ {
-        # if you use %speed, i3status requires root privileges
-        format_up = "🌎 %ip"
-        format_down = "🌎 down"
-}
-
-#battery all {
-#        format = "%status %percentage %remaining"
-#}
-
-tztime local {
-        format = "📆 %a %b %d %m/%d/%Y 🕗 %I:%M %p"
-}
-
 load {
-        format = "📈 %1min %5min"
-        max_threshold = "60"
-#        format_above_threshold = "Warning: %1min %5min %15min"
+    format = " load %1min %5min "
+    max_threshold = "60"
+    # format_above_threshold = "Warning: %1min %5min %15min"
 }
 
 disk "/" {
-        format = "💽 %percentage_used %avail"
-        prefix_type = decimal
-        low_threshold = 4
-        threshold_type = gbytes_free
+    format = " ⛁ %avail "
 
+}
+
+ethernet _first_ {
+    # if you use %speed, i3status requires root privileges
+    format_up = " lan: %ip "
+    format_down = " no lan "
+
+}
+
+wireless _first_ {
+   format_up = " wifi (%quality at %essid) %ip "
+   format_down = " no wifi "
+}
+
+ipv6 {
+   format_up = " ipv6 %ip "
+   format_down = " ipv6 down "
+}
+
+battery all {
+    # format = "%status %percentage %remaining %emptytime"
+    format = " %status %percentage"
+    format_down = "No battery"
+    last_full_capacity = true
+    integer_battery_capacity = true
+    # status_chr = ""
+    status_chr = "⚡"
+    # status_bat = "bat"
+    # status_bat = "☉"
+    status_bat = ""
+    # status_unk = "?"
+    status_unk = ""
+    # status_full = ""
+    status_full = "☻"
+    low_threshold = 15
+    threshold_type = time
+}
+
+tztime local {
+    format = " %d.%m. %H:%M "
+    format = " date: %a %b %d %m/%d/%Y time: %I:%M %p"
+}
+
+volume master {
+    format = " vol %volume "
+    format_muted = " vol (%volume) "
+    device = "pulse"
+}
+
+cpu_temperature "0" {
+    format = "%degrees °C"
 }
