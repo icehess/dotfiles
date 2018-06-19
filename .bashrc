@@ -74,6 +74,8 @@ export EDITOR="vim"
 [ -r /usr/bin/ksshaskpass ] && export SSH_ASKPASS="/usr/bin/ksshaskpass"
 [ -r $XDG_RUNTIME_DIR/ssh-agent.socket ] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
+export PAGER="less"
+
 PLATFORM=`uname -s`
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
