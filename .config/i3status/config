@@ -32,7 +32,7 @@ order += "volume master"
 
 
 cpu_usage {
-    format = " cpu  %usage "
+    format = " cpu %usage "
     max_threshold = 60
     degraded_threshold = 25
 }
@@ -44,7 +44,7 @@ load {
 }
 
 disk "/" {
-    format = " ⛁ %avail "
+    format = " ⛁  %avail "
 
 }
 
@@ -85,16 +85,16 @@ battery all {
 }
 
 tztime local {
-    format = " %d.%m. %H:%M "
-    format = " date: %a %b %d %m/%d/%Y time: %I:%M %p"
+    # format = " %d.%m. %H:%M "
+    format = " date: %a %b %d %m/%d/%Y  time: %I:%M %p "
 }
 
 volume master {
     format = " vol %volume "
-    format_muted = " vol (%volume) "
+    format_muted = " vol (%volume)"
     device = "pulse"
 }
 
 cpu_temperature "0" {
-    format = "%degrees °C"
+    format = " %degrees °C"
 }
