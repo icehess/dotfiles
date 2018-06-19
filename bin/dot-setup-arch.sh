@@ -89,6 +89,12 @@ vim +PluginInstall +qall
 cp ~/.dotfiles-site/files/vim/plugins/kazoo_erlc.vim ~/.vim/bundle/ale/ale_linters/erlang/
 echo
 
+_info "Setting up Sublime Text 3 Package Conrtol"
+echo
+mkdir -p "$HOME/.config/sublime-text-3/Installed Packages/"
+curl "https://packagecontrol.io/Package%20Control.sublime-package" > "$HOME/.config/sublime-text-3/Installed Packages/Package Control.sublime-package"
+echo
+
 # _info "Setting up VS Code Insider"
 # CODE_PLUGINS=""
 # CODE_PLUGINS="Equinusocio.vsc-material-theme $CODE_PLUGINS"
