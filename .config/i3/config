@@ -116,7 +116,7 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+x reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
@@ -125,15 +125,6 @@ bindsym $mod+Shift+r restart
 # Set exit i3 features (new way)
 bindsym $mod+Shift+e mode "$mode_system"
 set $mode_system Do you really want to exit i3? This will end your X session: (y)es or Escap/Return to cancel
-mode "$mode_system" {
-    bindsym y exec --no-startup-id i3-msg exit, mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-# Set exit i3 features
-bindsym $mod+0 mode "$mode_system"
-set $mode_system (y)es
 mode "$mode_system" {
     bindsym y exec --no-startup-id i3-msg exit, mode "default"
     bindsym Return mode "default"
@@ -240,3 +231,13 @@ client.background       #2B2C2B
 for_window [class="Nitrogen"] floating enable sticky enable
 for_window [class="Pavucontrol"] floating enable sticky enable
 for_window [class="vlc"] floating enable
+
+# Keybinding to show a list of all window from all workspaces
+bindsym $mod+Shift+d exec rofi -theme /usr/share/rofi/themes/android_notification.rasi -show-icons -show window -modi "window#windowcd"
+
+# Keybinding to show a list of all window from current workspace
+bindsym $mod+Shift+f exec rofi -theme /usr/share/rofi/themes/android_notification.rasi -show-icons -show windowcd -modi "windowcd#window"
+
+# Clipboard using rofi-greenclip
+bindsym $mod+Shift+c exec rofi -theme /usr/share/rofi/themes/android_notification.rasi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+
