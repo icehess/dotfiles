@@ -46,6 +46,9 @@ kwalletd5 &
 ~/.config/autostart-scripts/ssh-add.sh
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 
+gnome-screensaver &
+xautolock -time 30 -locker "gnome-screensaver-command --lock" &
+
 greenclip daemon &
 #pa-applet &
 pasystray &
