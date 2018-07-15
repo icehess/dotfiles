@@ -230,6 +230,7 @@ client.background       #2B2C2B
 
 for_window [class="Nitrogen"] floating enable sticky enable
 for_window [class="Pavucontrol"] floating enable sticky enable
+for_window [class="gpick"] floating enable sticky enable
 for_window [class="vlc"] floating enable
 
 # Keybinding to show a list of all window from all workspaces
