@@ -422,7 +422,7 @@ let g:sparkupNextMapping = '<c-k>'
 
 " Make sure colored syntax mode is on, and make it Just Work with 256-color terminals.
 set background=dark
-colorscheme iceberg
+silent! colorscheme iceberg
 if !has('gui_running')
   let g:solarized_termcolors=256
   if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal" || $TERM == "xterm-termite" || $TERM == "mate-terminal"
