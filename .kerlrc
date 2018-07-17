@@ -2,5 +2,5 @@
 #export CC=clang CXX=clang CFLAGS="-g -O3 -fstack-protector" LDFLAGS="-fstack-protector"
 # compilation options
 #KERL_CONFIGURE_OPTIONS="--enable-darwin-64bit --enable-vm-probes --with-dynamic-trace=dtrace --enable-dynamic-ssl-lib --with-ssl=/usr/local/opt/openssl/ --without-javac --enable-hipe --enable-kernel-poll --with-wx --with-odbc --enable-threads --enable-sctp --enable-smp-support"
-KERL_CONFIGURE_OPTIONS="$KERL_CONFIGURE_OPTIONS --enable-hipe --enable-kernel-poll --with-wx --with-odbc --enable-threads --enable-sctp --enable-smp-support"
+KERL_CONFIGURE_OPTIONS="$KERL_CONFIGURE_OPTIONS --enable-hipe --enable-kernel-poll --without-wx --without-odbc --enable-threads --enable-sctp --enable-smp-support"
 KERL_BUILD_DOCS=true

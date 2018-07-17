@@ -36,13 +36,9 @@ fi
 
 ## Prompt
 if [[ ${EUID} == 0 ]] ; then
-   PS1='\[\033[01;30m\]\h\[\033[01;34m\] \W \[\033[01;31m\]\$\[\033[00m\] '
-   #PS1='\[\033[01;30m\]\u@\h\[\033[01;34m\] \W \$\[\033[00m\] '
-   #PS1="\[\e[01;31m\]┌─[\[\e[01;35m\u\e[01;31m\]]──[\[\e[00;37m\]${HOSTNAME%%.*}\[\e[01;32m\]]:\w$\[\e[01;31m\]\n\[\e[01;31m\]└──\[\e[01;36m\]>>\[\e[0m\]"
+   PS1='\[\033[01;30m\]\h\[\033[01;31m\] \W \[\033[01;31m\]\$\[\033[00m\] '
 else
-   #PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \W \$\[\033[00m\] '
-   PS1='\[\033[01;37m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
-   #PS1="\[\e[01;31m\]┌─[\[\e[01;35m\u\e[01;31m\]]──[\[\e[00;37m\]${HOSTNAME%%.*}\[\e[01;32m\]]:\w$\[\e[01;31m\]\n\[\e[01;31m\]└──\[\e[01;36m\]>>\[\e[0m\]"
+   PS1='\[\033[01;35m\]\h\[\033[01;32m\] \W \$\[\033[00m\] '
 fi
 
 #Use color for ls and grep
@@ -69,25 +65,7 @@ PS4='+ '
 
 export EDITOR="vim"
 
-#[ -r /usr/bin/mate-terminal ] && export TERMINAL="mate-terminal"
-[ -r /usr/bin/termite ] && export TERMINAL="termite"
-[ -r /usr/bin/ksshaskpass ] && export SSH_ASKPASS="/usr/bin/ksshaskpass"
-[ -r $XDG_RUNTIME_DIR/ssh-agent.socket ] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-
 export PAGER="less"
 
 PLATFORM=`uname -s`
-
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
-alias work="cd $HOME/work"
-alias 2222="cd $HOME/work/2600hz"
-alias kazoo="cd $HOME/work/2600hz/kazoo"
-alias kz="cd $HOME/work/2600hz/kazoo/master; export KAZOO_SRC=$HOME/work/2600hz/kazoo/master"
-alias kz2="cd $HOME/work/2600hz/kazoo/4.2; export KAZOO_SRC=$HOME/work/2600hz/kazoo/4.2"
-alias kz1="cd $HOME/work/2600hz/kazoo/4.1; export KAZOO_SRC=$HOME/work/2600hz/kazoo/4.1"
-
-if [ -e ~/.bashlocal ]; then
-    . ~/.bashlocal
-fi
 
