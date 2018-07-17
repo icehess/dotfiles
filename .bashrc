@@ -69,3 +69,4 @@ export PAGER="less"
 
 PLATFORM=`uname -s`
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
