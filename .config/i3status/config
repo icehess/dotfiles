@@ -10,7 +10,6 @@ general {
     output_format = "i3bar"
     colors = true
     interval = 5
-    # color_good = "#2AA198"
     color_good = "#F9FAF9"
     color_bad = "#586E75"
     color_degraded = "#DC322F"
@@ -21,8 +20,8 @@ order += "load"
 order += "disk /"
 order += "ethernet _first_"
 
-#order += "wireless _first_"
-#order += "ipv6"
+order += "wireless _first_"
+order += "ipv6"
 order += "battery all"
 
 order += "tztime local"
@@ -32,7 +31,7 @@ order += "volume master"
 
 
 cpu_usage {
-    format = " cpu  %usage "
+    format = " cpu %usage "
     max_threshold = 30
     degraded_threshold = 60
 }
@@ -72,14 +71,15 @@ battery all {
     last_full_capacity = true
     integer_battery_capacity = true
     # status_chr = ""
-    status_chr = "⚡"
-    # status_bat = "bat"
+    # status_chr = "⚡"
+    status_chr = "charging"
+    status_bat = "bat"
     # status_bat = "☉"
-    status_bat = ""
+    # status_bat = ""
     # status_unk = "?"
-    status_unk = ""
-    # status_full = ""
-    status_full = "☻"
+    status_unk = "unk"
+    status_full = "full"
+    # status_full = "☻"
     low_threshold = 15
     threshold_type = time
 }
@@ -90,11 +90,11 @@ tztime local {
 }
 
 volume master {
-    format = " vol %volume "
+    format = " vol %volume  "
     format_muted = " vol (%volume)"
     device = "pulse"
 }
 
 cpu_temperature "0" {
-    format = " %degrees °C"
+    format = " %degrees °C "
 }

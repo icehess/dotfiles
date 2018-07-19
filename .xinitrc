@@ -31,12 +31,18 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 #xrandr | grep VGA1 && xrandr --output VGA1 --auto --right-of LVDS1 --mode 1920x1200
-if [ -n "`xrandr | grep 'HDMI2 connected'`" ] ; then
-    if [ -n "`xrandr | grep 'HDMI3 connected'`" ] ; then
-        xrandr --output HDMI2 --primary --auto --right-of HDMI3 --auto
-    fi
-fi
+
+# office monitors
+[ `xrandr | egrep 'HDMI(2|3) connected' | wc -l` == 2 ] && xrandr --output HDMI2 --primary --auto --right-of HDMI3 --auto
+# home monitors
+[ `xrandr | egrep 'DP(2|4) connected' | wc -l` == 2 ] && xrandr --output DP-2 --primary --auto --left-of DP-4 --auto
+
+# if this is Thinkpad
+type dockd > /dev/null 2>&1 && dockd --daemon
+
+[ -f ~/.xinitrc-local ] && source ~/.xinitrc-local
 
 exec dbus-launch --sh-syntax --exit-with-session i3 --shmlog-size 0
 
 # vim: ft=sh
+
