@@ -38,15 +38,15 @@ filter_unmatched_urls = true
 # "off", "left" or "right"
 scrollbar = right
 
-[colors]
+# [colors]
 # If both of these are unset, cursor falls back to the foreground color,
 # and cursor_foreground falls back to the background color.
 #cursor = #c6c8d1
 #cursor_foreground = #c6c8d1
 
-foreground = #c6c8d1
+# foreground = #c6c8d1
 #foreground_bold = #d2d4de
-background = #1c1c1c
+# background = #1c1c1c
 
 # 20% background transparency (requires a compositor)
 #background = rgba(63, 63, 63, 0.8)
@@ -77,36 +77,84 @@ background = #1c1c1c
 
 ## iceberg vim color scheme
 # black
-color0 = #161821
-color8 = #6b7089
+# color0 = #161821
+# color8 = #6b7089
 
-# red
-color1 = #e27878
-color9 = #e98989
+# # red
+# color1 = #e27878
+# color9 = #e98989
 
-# green
-color2 = #b4be82
-color10 = #c0ca8e
+# # green
+# color2 = #b4be82
+# color10 = #c0ca8e
 
-# yellow
-color3 = #e2a478
-color11 = #e9b189
+# # yellow
+# color3 = #e2a478
+# color11 = #e9b189
 
-# blue
-color4 = #84a0c6
-color12 = #91acd1
+# # blue
+# color4 = #84a0c6
+# color12 = #91acd1
 
-# magenta
-color5 = #a093c7
-color13 = #ada0d3
+# # magenta
+# color5 = #a093c7
+# color13 = #ada0d3
 
-# cyan
-color6 = #89b8c2
-color14 = #95c4ce
+# # cyan
+# color6 = #89b8c2
+# color14 = #95c4ce
 
-# white
-color7 = #c6c8d1
-color15 = #d2d4de
+# # white
+# color7 = #c6c8d1
+# color15 = #d2d4de
+
+[colors]
+# Base16 Bright
+# Author: Chris Kempson (http://chriskempson.com)
+foreground      = #e0e0e0
+foreground_bold = #f5f5f5
+#cursor          = #f5f5f5
+background      = rgba(28,28,28,0.8)
+
+# 16 color space
+
+# Black, Gray, Silver, White
+color0  = #000000
+color8  = #b0b0b0
+color7  = #e0e0e0
+color15 = #ffffff
+
+# Red
+color1  = #fb0120
+color9  = #fb0120
+
+# Green
+color2  = #a1c659
+color10 = #a1c659
+
+# Yellow
+color3  = #fda331
+color11 = #fda331
+
+# Blue
+color4  = #6fb3d2
+color12 = #6fb3d2
+
+# Purple
+color5  = #d381c3
+color13 = #d381c3
+
+# Teal
+color6  = #76c7b7
+color14 = #76c7b7
+
+# Extra colors
+color16 = #fc6d24  # orange
+color17 = #be643c  # burnt orange??
+color18 = #303030  # g
+color19 = #505050  # r
+color20 = #d0d0d0  # a
+color21 = #f5f5f5  # y
 
 [hints]
 #font = Monospace 12
