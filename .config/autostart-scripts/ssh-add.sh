@@ -1,10 +1,10 @@
 #!/bin/sh
 
 if type ssh-add > /dev/null 2>&1 ; then
-    if [ -f $HOME/.ssh/hesaam_github ] ; then
-        ssh-add $HOME/.ssh/hesaam_github </dev/null
+    if [ -f $HOME/.ssh/2600hz_hesaam ] ; then
+        ssh-add $HOME/.ssh/2600hz_hesaam </dev/null
     else
-        echo "no github keys were found."
+        echo "no 2600Hz keys were found."
         exit 1
     fi
 else

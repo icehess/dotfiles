@@ -37,23 +37,6 @@ if [ -n "`xrandr | grep 'HDMI2 connected'`" ] ; then
     fi
 fi
 
-nitrogen --restore; sleep 1
-compton -b
-
-/usr/lib/pam_kwallet_init
-kwalletd5 &
-~/.config/autostart-scripts/ssh-add.sh
-/usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
-
-gnome-screensaver &
-xautolock -time 30 -locker "gnome-screensaver-command --lock" &
-
-greenclip daemon &
-pa-applet &
-#pasystray &
-
-dropbox &
-
 exec dbus-launch --sh-syntax --exit-with-session i3 --shmlog-size 0
 
 # vim: ft=sh
