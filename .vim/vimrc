@@ -524,9 +524,6 @@ highlight link markdownListMarker Todo
 highlight link erlangQuotedAtom Special
 highlight link erlangAtom Function
 
-" disable background color earse to to fix issue with background
-set t_ut=
-
 " Custom mode for distraction-free editing
 function! ProseMode()
   call goyo#execute(0, [])
@@ -537,9 +534,11 @@ function! ProseMode()
 endfunction
 command! ProseMode call ProseMode()
 
-
 " transparent background
 hi Normal guibg=NONE ctermbg=NONE
+
+" disable background color earse to to fix issue with background
+set t_ut=
 
 " ----------------------------------------------------------------------------
 " FILE TYPE TRIGGERS
