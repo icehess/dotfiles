@@ -35,7 +35,7 @@ fi
 # office monitors
 [ `xrandr | egrep 'HDMI(2|3) connected' | wc -l` == 2 ] && xrandr --output HDMI2 --primary --auto --right-of HDMI3 --auto
 # home monitors
-[ `xrandr | egrep 'DP(2|4) connected' | wc -l` == 2 ] && xrandr --output DP-2 --primary --auto --left-of DP-4 --auto
+[ `xrandr | egrep 'DP-(2|4) connected' | wc -l` == 2 ] && xrandr --output DP-2 --primary --auto --left-of DP-4 --auto
 
 # if this is Thinkpad
 type dockd > /dev/null 2>&1 && dockd --daemon
