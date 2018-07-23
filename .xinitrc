@@ -38,7 +38,7 @@ fi
 [ `xrandr | egrep 'DP-(2|4) connected' | wc -l` == 2 ] && xrandr --output DP-2 --primary --auto --left-of DP-4 --auto
 
 # if this is Thinkpad
-type dockd > /dev/null 2>&1 && dockd --daemon
+#type dockd > /dev/null 2>&1 && dockd --daemon
 
 [ -f ~/.xinitrc-local ] && source ~/.xinitrc-local
 
