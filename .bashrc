@@ -53,7 +53,6 @@ PS4='+ '
 
 # Common junk
 [[ -s "$HOME/.dotfiles-site/bash_alias" ]] && source "$HOME/.dotfiles-site/bash_alias"
-#[[ -s "$HOME/.dotfiles-site/functions" ]] && source "$HOME/.dotfiles-site/functions"
 
 ## setting bash_completion
 [ -r /etc/bash_completion   ] && . /etc/bash_completion

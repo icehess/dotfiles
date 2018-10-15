@@ -25,46 +25,31 @@ call plug#begin('~/.vim/bundle')
 " VCS
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-rhubarb'
 
 " Dev Utilities
-Plug 'vim-scripts/Gist.vim' " Gist
 Plug 'mileszs/ack.vim' " First configure to us ag
 Plug 'w0rp/ale' " linter
-Plug 'Raimondi/delimitMate' " auto closing qoutes, parenthesis, brackets
 Plug 'junegunn/fzf' " file, command, history fuzzy searcher
 Plug 'junegunn/fzf.vim' " file, command, history fuzzy searcher (required both plug-ins)
-Plug 'junegunn/goyo.vim' " distraction free
 Plug 'haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches unlike default 'incsearch'
-Plug 'scrooloose/nerdcommenter' " in command mode use ,cc ,cu
-Plug 'rstacruz/sparkup' " css style HTML extender
 Plug 'ervandew/supertab' " Use Tab to completion in insert mode
 Plug 'majutsushi/tagbar' " Show tags (functions, ...) Use :TagbarToggle
 Plug 'qpkorr/vim-bufkill' " Kill buffer withou closing win: :BUN :BD :BW and :BB
 Plug 'tpope/vim-commentary' " in command mode use gcc
-Plug 'tpope/vim-endwise' " end for,if, etc.. for most langs
-Plug 'tpope/vim-eunuch' " helper for some UNIX command, :Move :Rename :Chmod
-Plug 'terryma/vim-multiple-cursors' " sublime
 Plug 'tpope/vim-surround' " add: ysw' remove: ds' change: cs}]
 
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'valloric/vim-indent-guides'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 
 " Syntaxes and such.
-Plug 'ap/vim-css-color'
 Plug 'sheerun/vim-polyglot'
 
 " Look and feel
 Plug 'cocopon/iceberg.vim'
-"Plug 'arcticicestudio/nord-vim'
-"Plug 'felixhummel/setcolors.vim'
-Plug 'altercation/vim-colors-solarized'
 
 Plug 'itchyny/lightline.vim'
-"Plug 'chreekat/vim-paren-crosshairs'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -90,7 +75,6 @@ set background=dark
 
 set autoindent                                   " Carry over indenting from previous line
 set autoread                                     " Don't bother me hen a file changes
-set autowrite                                    " Write on :next/:prev/^Z
 set backspace=indent,eol,start                   " Allow backspace beyond insertion point
 set cindent                                      " Automatic program indenting
 set cinkeys-=0#                                  " Comments don't fiddle with indenting
@@ -194,12 +178,10 @@ nmap \T :set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4<CR> " Use Tab inst
 nmap \a :set formatoptions-=a<CR>:echo "autowrap disabled"<CR>    " Turn-on Autowarp
 nmap \d :ALEToggleBuffer<CR>                                      " Toggle ALE (require ale plug-in)
 nmap \e :NERDTreeToggle<CR>                                       " Toggle nerdtree (require nerdtree plug-in)
-nmap \f mt:Goyo<CR>'tzz                                           " Toggle distraction free (require goyo plug-in)
 nmap \F :NERDTreeFind<CR>                                         " Find in nerdtree (require nerdtree plug-in)
 nmap \g :GitGutterToggle<CR>                                      " Toggle gitgutter (require gitgutter plug-in)
 nmap \i vip:sort<CR>                                              " Sort a block of lines
 nmap \l :setlocal number!<CR>:setlocal number?<CR>
-nmap \p :ProseMode<CR>                                            " ProseMode (see function section) distraction free (require goyo plug-in)
 nnoremap <silent> <leader>/ :nohlsearch<CR>                       " Get rid of search highlighting with ,/
 nmap \s :setlocal invspell<CR>                                    " Spell check
 nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>   " Use space instead of Tab
@@ -518,17 +500,6 @@ highlight link markdownListMarker Todo
 " highlight link erlangVariable Normal
 highlight link erlangQuotedAtom Special
 highlight link erlangAtom Function
-
-" Custom mode for distraction-free editing
-function! ProseMode()
-  call goyo#execute(0, [])
-  set spell noci nosi noai nolist noshowmode noshowcmd
-  set complete+=s
-  set bg=light
-  colors solarized
-endfunction
-command! ProseMode call ProseMode()
-
 
 " transparent background
 hi Normal guibg=NONE ctermbg=NONE
