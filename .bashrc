@@ -68,4 +68,7 @@ export PAGER="less"
 
 PLATFORM=`uname -s`
 
+# sorry, but I need my colors in vim
+export XTERM="xterm-256color"
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
