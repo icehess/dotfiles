@@ -17,61 +17,68 @@ filetype off                   " required!
 "  Plug-ins
 " ----------------------------------------------------------------------------
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" set the runtime path to include Vundle and initialize
+" set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin('~/.vim/bundle')
+
+" let Plug manage Plug
+Plug 'junegunn/vim-plug'
 
 " VCS
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-rhubarb'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-rhubarb'
 
 " Dev Utilities
-Plugin 'vim-scripts/Gist.vim' " Gist
-Plugin 'mileszs/ack.vim' " First configure to us ag
-Plugin 'w0rp/ale' " linter
-Plugin 'Raimondi/delimitMate' " auto closing qoutes, parenthesis, brackets
-Plugin 'junegunn/fzf' " file, command, history fuzzy searcher
-Plugin 'junegunn/fzf.vim' " file, command, history fuzzy searcher (required both plug-ins)
-Plugin 'junegunn/goyo.vim' " distraction free
-Plugin 'haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches unlike default 'incsearch'
-Plugin 'scrooloose/nerdcommenter' " in command mode use ,cc ,cu
-Plugin 'rstacruz/sparkup' " css style HTML extender
-Plugin 'ervandew/supertab' " Use Tab to completion in insert mode
-Plugin 'majutsushi/tagbar' " Show tags (functions, ...) Use :TagbarToggle
-Plugin 'qpkorr/vim-bufkill' " Kill buffer withou closing win: :BUN :BD :BW and :BB
-Plugin 'tpope/vim-commentary' " in command mode use gcc
-Plugin 'tpope/vim-endwise' " end for,if, etc.. for most langs
-Plugin 'tpope/vim-eunuch' " helper for some UNIX command, :Move :Rename :Chmod
-Plugin 'terryma/vim-multiple-cursors' " sublime
-Plugin 'tpope/vim-surround' " add: ysw' remove: ds' change: cs}]
+Plug 'vim-scripts/Gist.vim' " Gist
+Plug 'mileszs/ack.vim' " First configure to us ag
+Plug 'w0rp/ale' " linter
+Plug 'Raimondi/delimitMate' " auto closing qoutes, parenthesis, brackets
+Plug 'junegunn/fzf' " file, command, history fuzzy searcher
+Plug 'junegunn/fzf.vim' " file, command, history fuzzy searcher (required both plug-ins)
+Plug 'junegunn/goyo.vim' " distraction free
+Plug 'haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches unlike default 'incsearch'
+Plug 'scrooloose/nerdcommenter' " in command mode use ,cc ,cu
+Plug 'rstacruz/sparkup' " css style HTML extender
+Plug 'ervandew/supertab' " Use Tab to completion in insert mode
+Plug 'majutsushi/tagbar' " Show tags (functions, ...) Use :TagbarToggle
+Plug 'qpkorr/vim-bufkill' " Kill buffer withou closing win: :BUN :BD :BW and :BB
+Plug 'tpope/vim-commentary' " in command mode use gcc
+Plug 'tpope/vim-endwise' " end for,if, etc.. for most langs
+Plug 'tpope/vim-eunuch' " helper for some UNIX command, :Move :Rename :Chmod
+Plug 'terryma/vim-multiple-cursors' " sublime
+Plug 'tpope/vim-surround' " add: ysw' remove: ds' change: cs}]
+Plug 'vim-erlang/vim-erlang-tags'
+Plug 'liuchengxu/vim-which-key'
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'valloric/vim-indent-guides'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-unimpaired'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'valloric/vim-indent-guides'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
 
 " Syntaxes and such.
-Plugin 'ap/vim-css-color'
-Plugin 'sheerun/vim-polyglot'
+Plug 'ap/vim-css-color'
+Plug 'sheerun/vim-polyglot'
+" Plug 'editorconfig/editorconfig-vim'
 
 " Look and feel
-Plugin 'cocopon/iceberg.vim'
-"Plugin 'arcticicestudio/nord-vim'
-"Plugin 'felixhummel/setcolors.vim'
-Plugin 'altercation/vim-colors-solarized'
+Plug 'cocopon/iceberg.vim'
+"Plug 'arcticicestudio/nord-vim'
+"Plug 'felixhummel/setcolors.vim'
+Plug 'altercation/vim-colors-solarized'
 
-Plugin 'itchyny/lightline.vim'
-"Plugin 'chreekat/vim-paren-crosshairs'
+Plug 'itchyny/lightline.vim'
+"Plug 'chreekat/vim-paren-crosshairs'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
 "filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 filetype plugin on
@@ -207,7 +214,7 @@ nmap \p :ProseMode<CR>                                            " ProseMode (s
 nnoremap <silent> <leader>/ :nohlsearch<CR>                       " Get rid of search highlighting with ,/
 nmap \s :setlocal invspell<CR>                                    " Spell check
 nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>   " Use space instead of Tab
-
+nnoremap <silent> <leader> :WhichKey ','<CR>
 
 nmap <C-e> :e#<CR>                                                " Replace the current buffer with previously edited file
 
@@ -296,7 +303,7 @@ let maplocalleader = ","
 
 " FZF (Fuzzy search)
 set rtp+=~/.fzf
-nmap ; :Buffers<CR>
+nmap \\ :Buffers<CR>
 nmap <Leader>r :Tags<CR>
 nmap <Leader>t :Files<CR>
 nmap <Leader>a :Ag<CR>
