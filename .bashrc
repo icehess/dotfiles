@@ -84,6 +84,7 @@ alias work="cd $HOME/work"
 alias 2222="cd $HOME/work/2600hz"
 alias kazoo="cd $HOME/work/2600hz/kazoo"
 alias kz="cd $HOME/work/2600hz/kazoo/master; export KAZOO_SRC=$HOME/work/2600hz/kazoo/master"
+alias kz3="cd $HOME/work/2600hz/kazoo/4.3; export KAZOO_SRC=$HOME/work/2600hz/kazoo/4.3"
 alias kz2="cd $HOME/work/2600hz/kazoo/4.2; export KAZOO_SRC=$HOME/work/2600hz/kazoo/4.2"
 alias kz1="cd $HOME/work/2600hz/kazoo/4.1; export KAZOO_SRC=$HOME/work/2600hz/kazoo/4.1"
 
@@ -98,35 +99,5 @@ function _info() {
 function _die() {
     printf "\e[1;37m::\e[1;31m $1 \e[00m \n"
     exit 1
-}
-
-function just_kazoo() {
-    _info "Starting 'just' Kazoo Docker stack..."
-    docker stack ls | grep -q just
-    if [ `echo $?` = 0 ]; then
-        _info "'just' kazoo docker stack is already started"
-        return
-    fi
-    local just_path="/home/hesaam/work/2600hz/kazoo/docker/kazoo/stacks/just-kazoo"
-    if [ -d $just_kazoo/data ] ; then
-        mkdir $just_path/data
-        if [ `echo $?` != 0 ]; then
-            _info "failed to create CouchDB data directory"
-            return
-        fi
-    fi
-    docker stack deploy --prune --compose-file $just_path/docker-stack.yml just
-}
-
-function just_kazoo_rm() {
-    _info "Stopping 'just' Kazoo Docker stack..."
-    docker stack ls | grep -q just
-    if [ `echo $?` != 0 ]; then
-        _info "'just' kazoo docker stack is already stopped"
-        return
-    fi
-    local just_path="/home/hesaam/work/2600hz/kazoo/docker/kazoo/stacks/just-kazoo"
-    docker stack rm just
-    sudo chown hesaam:hesaam "$just_path/data" "$just_path/data/.keep" "$just_path/couchdb_cluster.ini"
 }
 
