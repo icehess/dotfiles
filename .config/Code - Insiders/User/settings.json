@@ -60,7 +60,6 @@
     },
     "scm.alwaysShowProviders": false,
     "window.restoreWindows": "all",
-    "window.menuBarVisibility": "toggle",
     "window.zoomLevel": 0,
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
@@ -70,12 +69,14 @@
         "editor.findMatchBorder": "#F8E71C80",
         "editor.findMatchHighlightBackground": "#496d80"
     },
-    "workbench.colorTheme": "Material Theme",
+    "workbench.colorTheme": "Material Theme Darker High Contrast",
     "workbench.editor.closeOnFileDelete": false,
-    "workbench.iconTheme": "eq-material-theme-icons",
     "workbench.sideBar.location": "left",
     "workbench.statusBar.feedback.visible": false,
     "cSpell.userWords": [
         "Erlang"
     ],
+    "window.titleBarStyle": "custom",
+    "workbench.iconTheme": "eq-material-theme-icons-darker",
+    "vim.easymotion": true,
 }
