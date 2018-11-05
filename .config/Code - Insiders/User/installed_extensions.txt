@@ -1,0 +1,13 @@
+EditorConfig.EditorConfig
+Equinusocio.vsc-material-theme
+gerane.Theme-azure
+kumar-harsh.graphql-for-vscode
+mermade.openapi-lint
+ms-python.python
+PeterJausovec.vscode-docker
+pgourlain.erlang
+PKief.material-icon-theme
+redhat.vscode-yaml
+streetsidesoftware.code-spell-checker
+Valentin.beamdasm
+vncz.vscode-apielements
