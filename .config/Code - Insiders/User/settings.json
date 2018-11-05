@@ -1,22 +1,20 @@
-// Place your settings in this file to overwrite the default settings
 {
-    "editor.fontFamily": "Fantasque Sans Mono, 'Ubuntu Mono', Consolas, 'Courier New', monospace",
-    "editor.fontLigatures": true,
-    "editor.fontSize": 15,
-    "editor.fontWeight": "100",
-    "editor.formatOnPaste": false,
-    "editor.minimap.enabled": true,
-    "editor.minimap.renderCharacters": false,
-    "editor.occurrencesHighlight": false,
+    "files.exclude": {
+        "**/.beam": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/ebin": true
+    },
+    "cSpell.userWords": [
+        "Erlang"
+    ],
     "editor.quickSuggestions": {
         "other": true,
         "comments": true,
         "strings": true
     },
-    "editor.renderControlCharacters": true,
-    "editor.renderIndentGuides": true,
-    "editor.renderWhitespace": "boundary",
-    "editor.smoothScrolling": false,
     "editor.tokenColorCustomizations": {
         "[Material Theme]": {
             "keywords": "#C792EA",
@@ -35,48 +33,51 @@
             ]
         }
     },
-    "erlang.enableExperimentalAutoComplete": true,
-    "extensions.autoUpdate": true,
-    "explorer.autoReveal": false,
-    "diffEditor.ignoreTrimWhitespace": false,
+    "breadcrumbs.enabled": true,
     "diffEditor.renderSideBySide": false,
-    "files.insertFinalNewline": true,
+    "editor.dragAndDrop": false,
+    "editor.fontFamily": "Fantasque Sans Mono, 'Ubuntu Mono', Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 13,
+    "editor.formatOnPaste": false,
+    "editor.hover.enabled": false,
+    "editor.minimap.renderCharacters": false,
+    "editor.occurrencesHighlight": false,
+    "editor.renderControlCharacters": true,
+    "editor.renderIndentGuides": true,
+    "editor.renderLineHighlight": "all",
+    "editor.smoothScrolling": false,
+    "explorer.autoReveal": false,
+    "extensions.autoUpdate": true,
+    "files.hotExit": "onExitAndWindowClose",
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "git.autofetch": false,
     "git.autorefresh": false,
-    "materialTheme.cache.workbench.settings": {},
+    "git.fetchOnPull": true,
+    "python.pythonPath": "python",
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "terminal.external.linuxExec": "mate-terminal",
+    "terminal.external.osxExec": "iTerm2.app",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.enableBell": true,
+    "terminal.integrated.experimentalBufferImpl": "TypedArray",
+    "terminal.integrated.scrollback": 100000,
     "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\bash.exe",
-    "search.exclude": {
-        "**/node_modules": true,
-        "**/bower_components": true,
-        "**/ebin": true
-    },
-    "scm.alwaysShowProviders": false,
+    "window.nativeFullScreen": false,
+    "window.nativeTabs": true,
     "window.restoreWindows": "all",
+    "window.titleBarStyle": "custom",
     "window.zoomLevel": 0,
-    "workbench.activityBar.visible": true,
-    "workbench.colorCustomizations": {
-        "editor.selectionHighlightBackground": "#263238",
-        "editor.selectionHighlightBorder": "#F8E71C",
-        "editor.findMatchBackground": "#496d80",
-        "editor.findMatchBorder": "#F8E71C80",
-        "editor.findMatchHighlightBackground": "#496d80"
-    },
     "workbench.colorTheme": "Material Theme Darker High Contrast",
     "workbench.editor.closeOnFileDelete": false,
-    "workbench.sideBar.location": "left",
-    "workbench.statusBar.feedback.visible": false,
-    "cSpell.userWords": [
-        "Erlang"
-    ],
-    "window.titleBarStyle": "custom",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.swipeToNavigate": true,
+    "workbench.enableExperiments": false,
     "workbench.iconTheme": "eq-material-theme-icons-darker",
-    "vim.easymotion": true,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.tree.horizontalScrolling": true
 }
