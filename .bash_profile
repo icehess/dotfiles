@@ -11,4 +11,4 @@ fi
 # sorry, but I need my colors in vim
 export XTERM="xterm-256color"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.fzf-key-bindings.bash ] && source ~/.fzf-key-bindings.bash
