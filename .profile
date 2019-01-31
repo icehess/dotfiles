@@ -23,7 +23,7 @@ alias lt='ll -rt'                   # sort by date
 
 type vim  > /dev/null 2>&1 && export EDITOR=vim
 if type nvim  > /dev/null 2>&1 ; then
-    export vim=nvim
+    alias vim=nvim
     export EDITOR=nvim
 fi
 type less > /dev/null 2>&1 && export PAGER=less
