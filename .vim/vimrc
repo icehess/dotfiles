@@ -33,7 +33,6 @@ Plug 'junegunn/fzf' " file, command, history fuzzy searcher
 Plug 'junegunn/fzf.vim' " file, command, history fuzzy searcher (required both plug-ins)
 Plug 'haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches unlike default 'incsearch'
 Plug 'ervandew/supertab' " Use Tab to completion in insert mode
-Plug 'majutsushi/tagbar' " Show tags (functions, ...) Use :TagbarToggle
 Plug 'qpkorr/vim-bufkill' " Kill buffer withou closing win: :BUN :BD :BW and :BB
 Plug 'tpope/vim-commentary' " in command mode use gcc
 Plug 'tpope/vim-surround' " add: ysw' remove: ds' change: cs}]
