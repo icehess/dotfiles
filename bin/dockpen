@@ -1,0 +1,145 @@
+#!/bin/sh
+
+con_name="$1"
+con_port="$2"
+
+_id=
+_port=
+_ip=
+_ip_port=
+
+usage() {
+    echo "Find published port of a container and open it in browser or print it"
+    echo "Usage: $0 container_name published_port [print]"
+}
+
+[ -z "$con_name" -o -z "$con_port" ] && usage && exit 1
+
+if [ x"$3" = x"p" ]; then
+    _print=y
+elif [ x"$3" = x"print" ]; then
+    _print=y
+else
+    _print=n
+fi
+
+print_container_list() {
+    echo "      ID            Name"
+    echo "     ------------  ------------------"
+    con_count=1
+    OLD_IFS="$IFS"
+    IFS=$'\n'
+    for line in `echo "$1"`; do
+        echo "$con_count)  $line"
+        con_count=$((con_count + 1))
+    done
+    IFS="$OLD_IFS"
+}
+
+find_container() {
+    search_for="$con_name"
+    all_containers="`docker ps --format '{{.ID}} {{.Names}}'`"
+    if [ -z "$all_containers" ]; then
+        echo "No container is running"
+        exit 0
+    fi
+
+    result="`echo "$all_containers" | grep "$search_for"`"
+
+    if [ -z "$result" ]; then
+        echo "Container '$search_for' not found!"
+        exit 1
+    fi
+
+    if [ `echo -n "$result" | wc -l` -eq 0 ]; then
+        _id="`echo "$result" | cut -d' ' -f1`"
+        return
+    fi
+
+    print_container_list "$result"
+    echo
+    echo -n "Please choose the right container ID: "
+    read choice
+
+    _id="`echo "$result" | cut -d' ' -f1 | grep -Eo "^$choice$"`"
+
+    if [ -z "$_id" ]; then
+        echo 'Wrong choice :('
+        exit 1
+    fi
+}
+
+select_published_ports() {
+    ports="$1"
+    echo
+    echo "container_port:published_ip:published_port"
+    echo "------------------------------------------"
+    echo "$ports"
+    echo
+    echo -n "Published port:"
+    read choice
+
+    selected="`echo -n "$ports" | grep ":$choice$"`"
+    if [ -z "$selected" ]; then
+        echo "Unknown port $choice"
+        exit 1
+    fi
+
+    _port="`echo -n "$selected" | cut -d':' -f3`"
+    _ip="`echo -n "$selected" | cut -d':' -f2`"
+}
+
+find_published_port() {
+    inspect="`docker inspect $_id --format '{{json .NetworkSettings.Ports}}'`"
+    if [ ! `echo $?` -eq 0 ]; then
+        echo "Failed to inspect the container '$_id'"
+        echo "$inspect"
+        exit 1
+    fi
+
+    ## old command jq: jq -r 'map(.[]? | [.HostIp, .HostPort] | join(" ")) | join("\n")'
+    ## above command output is like 0.0.0.0:32779 per line
+
+    ## jq below output is like: ${container_port}:"${exposed_ip}:${published_port}
+    ports="`echo $inspect | jq -r '. as $in | keys[] | . as $key | $in[$key][]? | [$key[:-4], ."HostIp", ."HostPort"] | join(":")'`"
+    published_ports="`echo -n "$ports" | grep "^$con_port:"`"
+    if [ -z "ports" ]; then
+        echo "No published ports found"
+        exit 1
+    fi
+
+    if [ -z "$published_ports" ]; then
+        echo "Port $con_port not found, select another port if want:"
+        select_published_ports "$ports"
+        return
+    fi
+
+    if [ ! `echo -n "$ports" | wc -l` -eq 0 ]; then
+        echo "Multiple published port for $con_port, select appropiate one:"
+        select_published_ports "$published_ports"
+        return
+    fi
+
+    _port="`echo -n "$published_ports" | cut -d':' -f3`"
+    _ip="`echo -n "$published_ports" | cut -d':' -f2`"
+}
+
+find_container
+echo "Container ID: $_id"
+find_published_port
+
+if [ -z "$_port" ]; then
+    echo "Port not found :("
+    exit 1
+fi
+
+if [ x"$_ip" = x"0.0.0.0" ]; then
+    _ip="localhost"
+fi
+
+if [ "$_print" = "y" ]; then
+    echo "$_ip:$_port"
+else
+    echo "Opening: 'http://$_ip:$_port'"
+    xdg-open "http://$_ip:$_port"
+fi
