@@ -8,6 +8,8 @@ _port=
 _ip=
 _ip_port=
 
+_is_couch=n
+
 usage() {
     echo "Find published port of a container and open it in browser or print it"
     echo "Usage: $0 container_name published_port [print]"
@@ -53,6 +55,7 @@ find_container() {
 
     if [ `echo -n "$result" | wc -l` -eq 0 ]; then
         _id="`echo "$result" | cut -d' ' -f1`"
+        [ ! "`echo "$result" | grep -c couch`" -eq 0 ] && _is_couch=y
         return
     fi
 
@@ -67,6 +70,8 @@ find_container() {
         echo 'Wrong choice :('
         exit 1
     fi
+
+    [ ! "`echo "$result" | grep "$_id" | grep -c couch`" -eq 0 ] && _is_couch=y
 }
 
 select_published_ports() {
@@ -76,7 +81,7 @@ select_published_ports() {
     echo "------------------------------------------"
     echo "$ports"
     echo
-    echo -n "Published port:"
+    echo -n "Published port: "
     read choice
 
     selected="`echo -n "$ports" | grep ":$choice$"`"
@@ -114,8 +119,8 @@ find_published_port() {
         return
     fi
 
-    if [ ! `echo -n "$ports" | wc -l` -eq 0 ]; then
-        echo "Multiple published port for $con_port, select appropiate one:"
+    if [ ! "`echo "$published_ports" | wc -l`" -eq 1 ]; then
+        echo "Multiple published port for $con_port, select appropriate one:"
         select_published_ports "$published_ports"
         return
     fi
@@ -137,9 +142,15 @@ if [ x"$_ip" = x"0.0.0.0" ]; then
     _ip="localhost"
 fi
 
+if [ "$_is_couch" = "y" ]; then
+    _url="http://$_ip:$_port/_utils"
+else
+    _url="http://$_ip:$_port"
+fi
+
 if [ "$_print" = "y" ]; then
     echo "$_ip:$_port"
 else
-    echo "Opening: 'http://$_ip:$_port'"
-    xdg-open "http://$_ip:$_port"
+    echo "Opening: '$_url'"
+    xdg-open "$_url"
 fi
