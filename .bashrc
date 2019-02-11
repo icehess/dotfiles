@@ -77,27 +77,29 @@ export EDITOR="vim"
 export PAGER="less"
 
 PLATFORM=`uname -s`
+if [ x"`uname -a | grep -o Microsoft | uniq`" = x"Microsoft" ]; then
+    PLATFORM="Microsoft"
+elif [ x"`uname -a | grep -o Darwin | uniq`" = x"Darwin" ]; then
+    PLATFORM="Darwin"
+fi
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
-alias work="cd $HOME/work"
-alias 2222="cd $HOME/work/2600hz"
-alias kazoo="cd $HOME/work/2600hz/kazoo"
-alias kz="cd $HOME/work/2600hz/kazoo/master; export KAZOO_SRC=$HOME/work/2600hz/kazoo/master"
-alias kz3="cd $HOME/work/2600hz/kazoo/4.3; export KAZOO_SRC=$HOME/work/2600hz/kazoo/4.3"
-alias kz2="cd $HOME/work/2600hz/kazoo/4.2; export KAZOO_SRC=$HOME/work/2600hz/kazoo/4.2"
-alias kz1="cd $HOME/work/2600hz/kazoo/4.1; export KAZOO_SRC=$HOME/work/2600hz/kazoo/4.1"
 
 if [ -e ~/.bashlocal ]; then
     . ~/.bashlocal
 fi
 
-function _info() {
-    printf "\e[1;36m::\e[1;37m $1 \e[00m \n"
+_info () {
+    msg="$1"
+    printf "\e[1;36m::\e[1;37m $msg \e[00m \n"
 }
 
-function _die() {
-    printf "\e[1;37m::\e[1;31m $1 \e[00m \n"
+_error () {
+    msg="$1"
+    printf "\e[1;37m::\e[1;31m $msg \e[00m \n"
+}
+
+_die () {
+    _error "$1"
     exit 1
 }
-

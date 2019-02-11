@@ -54,6 +54,11 @@ Plug 'tpope/vim-endwise' " end for,if, etc.. for most langs
 Plug 'tpope/vim-eunuch' " helper for some UNIX command, :Move :Rename :Chmod
 Plug 'terryma/vim-multiple-cursors' " sublime
 Plug 'tpope/vim-surround' " add: ysw' remove: ds' change: cs}]
+
+" Peekaboo will show you the contents of the registers on the sidebar
+" when you hit " or @ in normal mode or <CTRL-R> in insert mode.
+Plug 'junegunn/vim-peekaboo'
+
 Plug 'vim-erlang/vim-erlang-tags'
 Plug 'liuchengxu/vim-which-key'
 
