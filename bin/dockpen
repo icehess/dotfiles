@@ -17,12 +17,18 @@ usage() {
 
 [ -z "$con_name" -o -z "$con_port" ] && usage && exit 1
 
-if [ x"$3" = x"p" ]; then
-    _print=y
-elif [ x"$3" = x"print" ]; then
-    _print=y
+if [ x"$3" = x"id" ]; then
+    _print="id"
+elif [ x"$3" = x"port" ]; then
+    _print="port"
+elif [ x"$3" = x"ip" ]; then
+    _print="ip"
+elif [ x"$3" = x"url" ]; then
+    _print="url"
+elif [ x"$3" = x"info" ]; then
+    _print="info"
 else
-    _print=n
+    _print="lol"
 fi
 
 print_container_list() {
@@ -130,7 +136,7 @@ find_published_port() {
 }
 
 find_container
-echo "Container ID: $_id"
+[ "$_print" = "info" ] && echo "ContainerId: $_id"
 find_published_port
 
 if [ -z "$_port" ]; then
@@ -139,7 +145,7 @@ if [ -z "$_port" ]; then
 fi
 
 if [ x"$_ip" = x"0.0.0.0" ]; then
-    _ip="localhost"
+    _ip="127.0.0.1"
 fi
 
 if [ "$_is_couch" = "y" ]; then
@@ -148,9 +154,25 @@ else
     _url="http://$_ip:$_port"
 fi
 
-if [ "$_print" = "y" ]; then
-    echo "$_ip:$_port"
+if [ "$_print" = "id" ]; then
+    echo "$_id"
+elif [ "$_print" = "port" ]; then
+    echo "$_port"
+elif [ "$_print" = "ip" ]; then
+    echo "$_ip"
+elif [ "$_print" = "url" ]; then
+    echo "$_url"
+elif [ "$_print" = "info" ]; then
+    ## _id is already printed
+    echo "IP: $_ip"
+    echo "Port: $_port"
+    echo "URL: $_url"
 else
+    echo "ContainerId: $_id"
+    echo "IP: $_ip"
+    echo "Port: $_port"
+    echo "URL: $_url"
+    echo
     echo "Opening: '$_url'"
     xdg-open "$_url"
 fi
