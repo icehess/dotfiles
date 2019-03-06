@@ -4,11 +4,36 @@
 if [ -z "$(pgrep ssh-agent)" ]; then
     rm -rf /tmp/ssh-*
     eval $(ssh-agent -s) > /dev/null
-    ssh-add ~/.ssh/hesaam_github
 else
     export SSH_AGENT_PID=$(pgrep ssh-agent)
     export SSH_AUTH_SOCK=$(find /tmp/ssh-* -name agent.*)
 fi
 
-sudo mount --bind /mnt/c /c
-export DOCKER_HOST=tcp://0.0.0.0:2375
+if [ -f ~/.ssh/hesaam_github -a `ssh-add -l | grep -c hesaam_github` -eq 0 ]; then
+    ssh-add ~/.ssh/hesaam_github
+fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+iceWork="$HOME/work"
+wWork="$iceWork"
+
+if [ x"$PLATFORM" = x"Microsoft" ]; then
+    wHomeWinPath=$(cmd.exe /c 'echo %HOMEDRIVE%%HOMEPATH%' 2>&1 | tr -d '\r')
+    wHome=$(wslpath -u "${wHomeWinPath}")
+    wDocument="$wHome/Documents"
+    wWork="$wDocument/work"
+fi
+
+w2222="$wWork/2600hz"
+wKazoo="$w2222/kazoo"
+
+alias icedock="cd $wWork/dockerfiles"
+alias icework="cd $iceWork"
+alias work="cd $wWork"
+alias 2222="cd $w2222"
+alias kazoo="cd $wKazoo"
+alias kz="cd $wKazoo/master; export KAZOO_SRC=$wKazoo/master"
+alias kz41="cd $wKazoo/4.1; export KAZOO_SRC=$wKazoo/4.1"
+alias kz42="cd $wKazoo/4.2; export KAZOO_SRC=$wKazoo/4.2"
+alias kz43="cd $wKazoo/4.3; export KAZOO_SRC=$wKazoo/4.3"
