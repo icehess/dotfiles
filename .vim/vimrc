@@ -380,7 +380,7 @@ let g:vim_markdown_frontmatter = 1
 let g:lightline = {
 \ 'colorscheme': 'wombat',
 \ 'active': {
-\   'left': [['mode', 'paste'], ['filename', 'modified']],
+\   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
 \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
 \ },
 \ 'component_expand': {
@@ -393,6 +393,9 @@ let g:lightline = {
 \   'linter_warnings': 'warning',
 \   'linter_errors': 'error'
 \ },
+\ 'component_function': {
+\   'gitbranch': 'fugitive#head'
+\ }
 \ }
 function! LightlineLinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
@@ -431,6 +434,7 @@ let g:sparkupNextMapping = '<c-k>'
 " COLORS
 " ----------------------------------------------------------------------------
 
+" set termguicolors
 " Make sure colored syntax mode is on, and make it Just Work with 256-color terminals.
 set background=dark
 colorscheme iceberg
@@ -439,6 +443,7 @@ if !has('gui_running')
   let g:solarized_termcolors=256
   if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal" || $TERM == "xterm-termite" || $TERM == "mate-terminal"
     set t_Co=256
+
   elseif has("terminfo")
     colorscheme default
     set t_Co=8
