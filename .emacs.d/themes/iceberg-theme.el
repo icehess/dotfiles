@@ -2,8 +2,7 @@
 
 (custom-theme-set-faces
   'iceberg
-  '(default ((t (:family "DejaVu Sans Mono"
-                 :foundry "unknown"
+  '(default ((t (:foundry "unknown"
                  :width normal
                  :height 113
                  :weight normal
@@ -62,4 +61,3 @@
 )
 
 (provide-theme 'iceberg )
-

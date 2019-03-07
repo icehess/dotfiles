@@ -68,7 +68,10 @@
     :config
     (powerline-center-theme))
 
-(powerline-current-separator)
+(use-package dockerfile-mode
+    :ensure t
+    :config
+    (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
 ;;(use-package xclip
 ;;    :config (xclip-mode 1))
@@ -188,23 +191,36 @@
 
 (defalias 'list-buffers 'ibuffer)
 
+(defconst icehess-otp_root
+    (if (= (length (getenv "OTP_ROOT")) 0)
+        "/usr/lib/erlang"
+        (getenv "OTP_ROOT")))
 (use-package erlang
     :ensure t
     :config
-    (setq load-path (cons (expand-file-name (concat (if (= (length (getenv "OTP_ROOT")) 0)
-                                                        "/usr/lib/erlang"
-                                                        (getenv "OTP_ROOT"))
-                                                "/lib/tools-*/emacs"))
-			            load-path))
-    (setq erlang-root-dir (if (= (length (getenv "OTP_ROOT")) 0)
-                              "/usr/lib/erlang"
-                              (getenv "OTP_ROOT")))
-    (setq exec-path (cons (concat (if (= (length (getenv "OTP_ROOT")) 0)
-                                      "/usr/lib/erlang"
-                                      (getenv "OTP_ROOT"))
-                              "/bin")
-                        exec-path))
-    (require 'erlang-start))
+    (progn
+        (setq load-path (cons (expand-file-name (concat icehess-otp_root "/lib/tools-*/emacs"))
+			                load-path))
+        (setq erlang-root-dir icehess-otp_root)
+        (setq exec-path (cons (concat icehess-otp_root "/bin")
+                            exec-path))
+        (require 'erlang-start)
+        (add-hook 'erlang-mode-hook
+            (lambda ()
+                (setq mode-name "erl"
+                    erlang-compile-extra-opts '("-I./"
+                                                   "-I../include"
+                                                   (concat "-I" icehess-otp_root "/deps")
+                                                   (concat "-I" icehess-otp_root "/core")
+                                                   (concat "-I" icehess-otp_root "/applications")
+                                                   ))))))
+
+(use-package edts
+    :ensure t
+    :init
+    (setq edts-inhibit-package-check t)
+    :config
+    (require 'edts-start))
 
 ;; Web-mode: Initialize web-mode and recognize extensions. Also
 ;; consider the possibility of JSX files with a .js extension istead
@@ -259,9 +275,17 @@
 (use-package flycheck
     :ensure t
     :init
-    (setq flycheck-indication-mode nil)
-    (setq flycheck-display-errors-delay nil)
-    (setq flycheck-idle-change-delay 2)
+    ;; (setq flycheck-indication-mode nil)
+    ;; (setq flycheck-display-errors-delay nil)
+    ;; (setq flycheck-idle-change-delay 2)
+    (setq flycheck-erlang-include-path '("../include"
+                                            (concat icehess-otp_root "/deps")
+                                            (concat icehess-otp_root "/core")
+                                            (concat icehess-otp_root "/applications")
+                                            ))
+    (setq flycheck-erlang-library-path '((concat icehess-otp_root "/deps")
+                                            (concat icehess-otp_root "/core")
+                                            (concat icehess-otp_root "/applications")))
     (global-flycheck-mode))
 
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
@@ -276,7 +300,7 @@
              ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
     '(package-selected-packages
          (quote
-             (smart-mode-line counsel ace-window editorconfig erlang try which-key use-package))))
+             (edts dockerfile-mode smart-mode-line counsel ace-window editorconfig erlang try which-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
