@@ -439,8 +439,8 @@ let g:sparkupNextMapping = '<c-k>'
 " COLORS
 " ----------------------------------------------------------------------------
 
-" set termguicolors
 " Make sure colored syntax mode is on, and make it Just Work with 256-color terminals.
+set termguicolors
 set background=dark
 colorscheme iceberg
 
