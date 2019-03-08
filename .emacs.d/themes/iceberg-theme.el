@@ -13,7 +13,7 @@
                  :box nil
                  :inverse-video nil
                  :foreground "#BDD6DB"
-                 :background "#1c1c1ccc"
+                 :background "#242424"
                  :stipple nil
                  :inherit nil))))
 '(cursor ((t (:background "#f8f8f0"))))
