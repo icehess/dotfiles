@@ -54,6 +54,7 @@ Plug 'tpope/vim-endwise' " end for,if, etc.. for most langs
 Plug 'tpope/vim-eunuch' " helper for some UNIX command, :Move :Rename :Chmod
 Plug 'terryma/vim-multiple-cursors' " sublime
 Plug 'tpope/vim-surround' " add: ysw' remove: ds' change: cs}]
+Plug 'MarcWeber/vim-addon-local-vimrc'
 
 " Peekaboo will show you the contents of the registers on the sidebar
 " when you hit " or @ in normal mode or <CTRL-R> in insert mode.
@@ -71,7 +72,7 @@ Plug 'tpope/vim-unimpaired'
 " Syntaxes and such.
 Plug 'ap/vim-css-color'
 Plug 'sheerun/vim-polyglot'
-" Plug 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 
 " Look and feel
 Plug 'cocopon/iceberg.vim'
@@ -80,7 +81,6 @@ Plug 'cocopon/iceberg.vim'
 Plug 'altercation/vim-colors-solarized'
 
 Plug 'itchyny/lightline.vim'
-"Plug 'chreekat/vim-paren-crosshairs'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -103,6 +103,11 @@ filetype plugin on
 
 syntax enable
 set background=dark
+
+" enable project specific config file in secure way(?)
+" (use vim-addon-local-vimrc plugin and put .settings in tour project folder instead)
+" set exrc
+" set secure
 
 set autoindent                                   " Carry over indenting from previous line
 set autoread                                     " Don't bother me hen a file changes
@@ -277,6 +282,8 @@ autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
 " CUSTOM COMMANDS AND FUNCTIONS
 " ----------------------------------------------------------------------------
 
+let g:local_vimrc = {'names':['.settings'],'hash_fun':'LVRHashOfFile'}
+
 " Trim spaces at EOL and retab. I run `:CLEAN` a lot to clean up files.
 command! TEOL %s/\s\+$//
 command! CLEAN retab | TEOL
@@ -440,7 +447,7 @@ let g:sparkupNextMapping = '<c-k>'
 " ----------------------------------------------------------------------------
 
 " Make sure colored syntax mode is on, and make it Just Work with 256-color terminals.
-set termguicolors
+" set termguicolors
 set background=dark
 colorscheme iceberg
 
