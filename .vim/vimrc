@@ -200,9 +200,9 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " ------------------------------
 
 " Mouse support
-silent! set mouse=nvc                            " Use the mouse, but not in insert mode
+" silent! set mouse=nvc                          " Use the mouse, but not in insert mode
+silent! set mouse=a                              " Enable mouse use in all modes
 " set ttyfast                                    " Send more characters for redraws
-" set mouse=a                                    " Enable mouse use in all modes
 " set ttymouse=xterm2                            " Set this to the name of your terminal that supports mouse codes.
                                                  " - Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
 
