@@ -7,11 +7,15 @@ function! ale_linters#erlang#kazoo_erlc#GetCommand(buffer) abort
     let l:output_file = tempname()
     call ale#engine#ManageFile(a:buffer, l:output_file)
 
-    return ale#Var(a:buffer, 'erlang_erlc_env_vars')
+    let l:cmd = ale#Var(a:buffer, 'erlang_erlc_env_vars')
     \   . 'erlc -o ' . ale#Escape(l:output_file)
-    \   . ' -I'. expand('%:h') . '/include' . ' -I' . expand('%:h') . ' -I' . expand('%:h'). '/src' . ' -I' . expand('%:h') . '/../ '
+    \   . ' -I' . expand('%:p:h')
+    \   . ' -I' . expand('%:p:h') . '/../include'
+    \   . ' -I' . expand('%:p:h') . '/../ '
     \   . ale#Var(a:buffer, 'erlang_erlc_options')
     \   . ' %t'
+
+    return l:cmd
 endfunction
 
 function! ale_linters#erlang#kazoo_erlc#Handle(buffer, lines) abort
