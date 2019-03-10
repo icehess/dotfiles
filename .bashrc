@@ -71,7 +71,12 @@ PS4='+ '
 [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 
-export EDITOR="vim"
+if type -P dircolors >/dev/null ; then
+    alias vim="nvim"
+    export EDITOR="nvim"
+else
+    export EDITOR="vim"
+fi
 
 #[ -r /usr/bin/mate-terminal ] && export TERMINAL="mate-terminal"
 [ -r /usr/bin/termite ] && export TERMINAL="termite"
