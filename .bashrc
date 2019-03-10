@@ -2,6 +2,7 @@
 if [[ $- != *i* ]] ; then
     [ -d /usr/local/sbin ] && export PATH="/usr/local/sbin:$PATH"
     [ -d /usr/local/bin ] && export PATH="/usr/local/bin:$PATH"
+    [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
    return
 fi
 
@@ -66,6 +67,9 @@ PS4='+ '
 [ -r /usr/share/bash_completion/bash_completion ] && . /usr/share/bash_completion/bash_completion
 
 [[ -d "$HOME/bin" ]] && PATH="$PATH:$HOME/bin"
+# Linuxbrew
+[ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
 
 export EDITOR="vim"
 

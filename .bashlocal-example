@@ -15,18 +15,19 @@ fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-iceWork="$HOME/work"
-wWork="$iceWork"
+export iceWork="$HOME/work"
+export wWork="$iceWork"
 
 if [ x"$PLATFORM" = x"Microsoft" ]; then
-    wHomeWinPath=$(cmd.exe /c 'echo %HOMEDRIVE%%HOMEPATH%' 2>&1 | tr -d '\r')
-    wHome=$(wslpath -u "${wHomeWinPath}")
-    wDocument="$wHome/Documents"
-    wWork="$wDocument/work"
+    export wHomeWinPath=$(cmd.exe /c 'echo %HOMEDRIVE%%HOMEPATH%' 2>&1 | tr -d '\r')
+    export wHome=$(wslpath -u "${wHomeWinPath}")
+    export wDocument="$wHome/Documents"
+    export wWork="$wDocument/work"
 fi
 
-w2222="$wWork/2600hz"
-wKazoo="$w2222/kazoo"
+export w2222="$wWork/2600hz"
+export wKazoo="$w2222/kazoo"
+export KAZOO_SRC="$wKazoo/master"
 
 alias icedock="cd $wWork/dockerfiles"
 alias icework="cd $iceWork"
