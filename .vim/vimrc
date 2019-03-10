@@ -10,7 +10,8 @@
 "
 
 set encoding=utf-8
-set nocompatible               " be iMproved
+" nvim is always nocompatible
+" set nocompatible               " be iMproved
 filetype off                   " required!
 
 " ----------------------------------------------------------------------------
@@ -20,7 +21,9 @@ filetype off                   " required!
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  augroup PLUG_INSTALL
+      autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  augroup END
 endif
 
 " set the runtime path to include Vundle and initialize
@@ -115,7 +118,7 @@ set autowrite                                    " Write on :next/:prev/^Z
 set backspace=indent,eol,start                   " Allow backspace beyond insertion point
 set cindent                                      " Automatic program indenting
 set cinkeys-=0#                                  " Comments don't fiddle with indenting
-set cino=                                        " See :h cinoptions-values
+set cinoptions=                                  " See :h cinoptions-values
 set clipboard=unnamed                            " Share system clipboard
 set commentstring=\ \ #%s                        " When folds are created, add them to this
 set copyindent                                   " Make autoindent use the same chars as prev autoindented line
@@ -207,7 +210,7 @@ silent! set mouse=nvc                            " Use the mouse, but not in ins
 " ----------------------------------------------------------------------------
 
 let mapleader = ','
-let g:mapleader = ","
+let g:mapleader = ','
 
 " Useful macros I use the most
 nmap \A :set formatoptions+=a<CR>:echo "autowrap enabled"<CR>     " Turn-on Autowarp
@@ -260,7 +263,9 @@ cnoremap <C-g>  <C-c>
 
 
 " Resize split (panes) when window/terminal gets resize
-autocmd VimResized * :wincmd =
+augroup VIM_PLANE_RESIZE
+    autocmd VimResized * :wincmd =
+augroup END
 
 
 " Search for the word under the cursor in the current directory
@@ -274,8 +279,10 @@ nmap <M-w>  :BD<CR>
 
 
 " Fix annoyances in the QuickFix window, like scrolling too much
-autocmd FileType qf setlocal number nolist scrolloff=0
-autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
+augroup FIX_ANNOYANCE
+    autocmd FileType qf setlocal number nolist scrolloff=0
+    autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
+augroup END
 
 
 " ----------------------------------------------------------------------------
@@ -293,7 +300,7 @@ command! BufCloseOthers %bd|e#
 
 " Enter to buffer in the same position it was opened before (if previously was opened at all)
 function! ResCur()
-    if line("'\"") <= line("$")
+    if line("'\"") <= line('$')
         normal! g`"
         return 1
     endif
@@ -310,11 +317,11 @@ augroup END
 " ----------------------------------------------------------------------------
 
 " For any plugins that use this, make their keymappings use comma
-let mapleader = ","
-let maplocalleader = ","
+let mapleader = ','
+let maplocalleader = ','
 
 " FZF (Fuzzy search)
-set rtp+=~/.fzf
+set runtimepath+=~/.fzf
 nmap \\ :Buffers<CR>
 nmap <Leader>r :Tags<CR>
 nmap <Leader>t :Files<CR>
@@ -340,7 +347,7 @@ function! s:update_fzf_colors()
   for [name, pairs] in items(rules)
     for pair in pairs
       let code = synIDattr(synIDtrans(hlID(pair[0])), pair[1])
-      if !empty(name) && code != ''
+      if !empty(name) && code !=# ''
         call add(cols, name.':'.code)
         break
       endif
@@ -378,37 +385,16 @@ let g:vim_markdown_frontmatter = 1
 " ALE
 " let g:ale_sign_warning = '▲'
 " let g:ale_sign_error = '✗'
-" highlight link ALEWarningSign String
+"highlight link ALEWarningSign String
 " highlight link ALEErrorSign Title
-" nmap ]l :ALENextWrap<CR>
-" nmap [l :ALEPreviousWrap<CR>
-" augroup VimDiff
-"   autocmd!
-"   autocmd VimEnter,FilterWritePre * if &diff | ALEDisable | endif
-" augroup END
-
+nmap ]l :ALENextWrap<CR>
+nmap [l :ALEPreviousWrap<CR>
+augroup VimDiff
+    autocmd!
+    autocmd VimEnter,FilterWritePre * if &diff | ALEDisable | endif
+augroup END
 
 " Lightline
-let g:lightline = {
-\ 'colorscheme': 'wombat',
-\ 'active': {
-\   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
-\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
-\ },
-\ 'component_expand': {
-\   'linter_warnings': 'LightlineLinterWarnings',
-\   'linter_errors': 'LightlineLinterErrors',
-\   'linter_ok': 'LightlineLinterOK'
-\ },
-\ 'component_type': {
-\   'readonly': 'error',
-\   'linter_warnings': 'warning',
-\   'linter_errors': 'error'
-\ },
-\ 'component_function': {
-\   'gitbranch': 'fugitive#head'
-\ }
-\ }
 function! LightlineLinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:all_errors = l:counts.error + l:counts.style_error
@@ -429,13 +415,35 @@ function! LightlineLinterOK() abort
 endfunction
 
 " Update and show lightline but only if it's visible (e.g., not in Goyo)
-autocmd User ALELint call s:MaybeUpdateLightline()
+augroup UPDATE_LIGHTLINE_ALE
+    autocmd User ALELint call s:MaybeUpdateLightline()
+augroup END
 function! s:MaybeUpdateLightline()
   if exists('#lightline')
     call lightline#update()
   end
 endfunction
 
+let g:lightline = {
+\ 'colorscheme': 'wombat',
+\ 'active': {
+\   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
+\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\ },
+\ 'component_expand': {
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'linter_ok': 'LightlineLinterOK'
+\ },
+\ 'component_type': {
+\   'readonly': 'error',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error'
+\ },
+\ 'component_function': {
+\   'gitbranch': 'fugitive#head'
+\ }
+\ }
 
 " Sparkup
 let g:sparkupExecuteMapping = '<c-y>'
@@ -453,10 +461,10 @@ colorscheme iceberg
 
 if !has('gui_running')
   let g:solarized_termcolors=256
-  if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal" || $TERM == "xterm-termite" || $TERM == "mate-terminal"
+  if $TERM ==# 'xterm-256color' || $TERM ==# 'screen-256color' || $COLORTERM ==# 'gnome-terminal' || $TERM ==# 'xterm-termite' || $TERM ==# 'mate-terminal'
     set t_Co=256
 
-  elseif has("terminfo")
+  elseif has('terminfo')
     colorscheme default
     set t_Co=8
     set t_Sf=[3%p1%dm
@@ -468,7 +476,7 @@ if !has('gui_running')
     set t_Sb=[4%dm
   endif
   " Disable Background Color Erase when within tmux - https://stackoverflow.com/q/6427650/102704
-  if $TMUX != ""
+  if $TMUX !=# ''
     set t_ut=
  endif
 endif
@@ -511,15 +519,18 @@ highlight def link NERDTreeRO NERDTreeFile
 " Make trailing spaces very visible
 highlight SpecialKey ctermbg=Yellow guibg=Yellow
 
-" Previous approach for trailing white spaces
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
-
 " Make sure we highlight extra whitespace in the most annoying way possible.
 highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
 match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+augroup ColorWhiteAnnoying
+    " Previous approach for trailing white spaces
+    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
+
+    " new way?
+    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+augroup END
 
 " Make menu selections visible
 highlight PmenuSel ctermfg=black ctermbg=magenta
@@ -553,7 +564,7 @@ function! ProseMode()
   call goyo#execute(0, [])
   set spell noci nosi noai nolist noshowmode noshowcmd
   set complete+=s
-  set bg=light
+  set background=light
   colors solarized
 endfunction
 command! ProseMode call ProseMode()
@@ -610,7 +621,7 @@ augroup END
 " ----------------------------------------------------------------------------
 
 " Now load specifics to this host
-if filereadable(expand("~/.vimlocal"))
+if filereadable(expand('~/.vimlocal'))
   source ~/.vimlocal
 endif
 
