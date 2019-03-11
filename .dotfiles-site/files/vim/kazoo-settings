@@ -4,9 +4,22 @@ let g:ale_linters = {
 \   'erlang': ['kazoo_erlc'],
 \}
 
+let s:cur_dir = expand('<sfile>:h')
+
+if empty($KAZOO_SRC)
+    if s:cur_dir =~ '\/2600hz\/kazoo\/[-_a-zA-Z0-9]+$'
+        let s:kz_src = s:cur_dir . '/master'
+    else
+        let s:kz_src = s:cur_dir
+    endif
+else
+    let s:kz_src = $KAZOO_SRC
+endif
+
+
 let g:ale_erlang_erlc_env_vars = 'export ERL_LIBS='
-            \ . expand('<sfile>:h') . '/deps'
-            \ . ':' . expand('<sfile>:h') . '/core'
-            \ . ':' . expand('<sfile>:h') . '/applications'
+            \ . s:kz_src . '/deps'
+            \ . ':' . s:kz_src . '/core'
+            \ . ':' . s:kz_src . '/applications'
             \ . ';'
 let g:ale_erlang_erlc_options = '+debug_info +''{parse_transform, lager_transform}'' -Werror +warn_export_all +warn_unused_import +warn_unused_vars +warn_missing_spec +determ'
