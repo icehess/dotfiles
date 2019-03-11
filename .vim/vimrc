@@ -10,7 +10,9 @@
 "
 
 set encoding=utf-8
-set nocompatible               " be iMproved
+scriptencoding utf-8
+" nvim is always nocompatible
+" set nocompatible               " be iMproved
 filetype off                   " required!
 
 " ----------------------------------------------------------------------------
@@ -19,34 +21,52 @@ filetype off                   " required!
 
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/bundle')
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " VCS
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-rhubarb'
 
 " Dev Utilities
+Plug 'vim-scripts/Gist.vim' " Gist
 Plug 'mileszs/ack.vim' " First configure to us ag
 Plug 'w0rp/ale' " linter
+Plug 'Raimondi/delimitMate' " auto closing qoutes, parenthesis, brackets
 Plug 'junegunn/fzf' " file, command, history fuzzy searcher
 Plug 'junegunn/fzf.vim' " file, command, history fuzzy searcher (required both plug-ins)
 Plug 'haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches unlike default 'incsearch'
+Plug 'scrooloose/nerdcommenter' " in command mode use ,cc ,cu
 Plug 'ervandew/supertab' " Use Tab to completion in insert mode
+Plug 'majutsushi/tagbar' " Show tags (functions, ...) Use :TagbarToggle
 Plug 'qpkorr/vim-bufkill' " Kill buffer withou closing win: :BUN :BD :BW and :BB
 Plug 'tpope/vim-commentary' " in command mode use gcc
+Plug 'tpope/vim-endwise' " end for,if, etc.. for most langs
+Plug 'tpope/vim-eunuch' " helper for some UNIX command, :Move :Rename :Chmod
 Plug 'tpope/vim-surround' " add: ysw' remove: ds' change: cs}]
+Plug 'MarcWeber/vim-addon-local-vimrc'
+
+" Peekaboo will show you the contents of the registers on the sidebar
+" when you hit " or @ in normal mode or <CTRL-R> in insert mode.
+Plug 'junegunn/vim-peekaboo'
+
+Plug 'vim-erlang/vim-erlang-tags'
+Plug 'liuchengxu/vim-which-key'
 
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'valloric/vim-indent-guides'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 
 " Syntaxes and such.
+Plug 'ap/vim-css-color'
 Plug 'sheerun/vim-polyglot'
+Plug 'editorconfig/editorconfig-vim'
 
 " Look and feel
 Plug 'cocopon/iceberg.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'altercation/vim-colors-solarized'
 
 Plug 'itchyny/lightline.vim'
 
@@ -72,12 +92,17 @@ filetype plugin on
 syntax enable
 set background=dark
 
+" enable project specific config file in secure way(?)
+" (use vim-addon-local-vimrc plugin and put .settings in tour project folder instead)
+" set exrc
+" set secure
+
 set autoindent                                   " Carry over indenting from previous line
 set autoread                                     " Don't bother me hen a file changes
 set backspace=indent,eol,start                   " Allow backspace beyond insertion point
 set cindent                                      " Automatic program indenting
 set cinkeys-=0#                                  " Comments don't fiddle with indenting
-set cino=                                        " See :h cinoptions-values
+set cinoptions=                                  " See :h cinoptions-values
 set clipboard=unnamed                            " Share system clipboard
 set commentstring=\ \ #%s                        " When folds are created, add them to this
 set copyindent                                   " Make autoindent use the same chars as prev autoindented line
@@ -158,23 +183,20 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " ------------------------------
 
 " Mouse support
-silent! set mouse=nvc                            " Use the mouse, but not in insert mode
-" set ttyfast                                    " Send more characters for redraws
-" set mouse=a                                    " Enable mouse use in all modes
-" set ttymouse=xterm2                            " Set this to the name of your terminal that supports mouse codes.
-                                                 " - Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
+" silent! set mouse=nvc                          " Use the mouse, but not in insert mode
+silent! set mouse=a                              " Enable mouse use in all modes
 
 " ----------------------------------------------------------------------------
 "  Some Key Maps
 " ----------------------------------------------------------------------------
 
 let mapleader = ','
-let g:mapleader = ","
+let g:mapleader = ','
 
 " Useful macros I use the most
 nmap \A :set formatoptions+=a<CR>:echo "autowrap enabled"<CR>     " Turn-on Autowarp
 nmap \T :set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4<CR> " Use Tab instead of space
-nmap \a :set formatoptions-=a<CR>:echo "autowrap disabled"<CR>    " Turn-on Autowarp
+nmap \a :set formatoptions-=a<CR>:echo "autowrap disabled"<CR>    " Turn-off Autowarp
 nmap \d :ALEToggleBuffer<CR>                                      " Toggle ALE (require ale plug-in)
 nmap \e :NERDTreeToggle<CR>                                       " Toggle nerdtree (require nerdtree plug-in)
 nmap \F :NERDTreeFind<CR>                                         " Find in nerdtree (require nerdtree plug-in)
@@ -184,7 +206,7 @@ nmap \l :setlocal number!<CR>:setlocal number?<CR>
 nnoremap <silent> <leader>/ :nohlsearch<CR>                       " Get rid of search highlighting with ,/
 nmap \s :setlocal invspell<CR>                                    " Spell check
 nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>   " Use space instead of Tab
-
+nnoremap <silent> <leader> :WhichKey ','<CR>
 
 nmap <C-e> :e#<CR>                                                " Replace the current buffer with previously edited file
 
@@ -220,7 +242,9 @@ cnoremap <C-g>  <C-c>
 
 
 " Resize split (panes) when window/terminal gets resize
-autocmd VimResized * :wincmd =
+augroup VIM_PLANE_RESIZE
+    autocmd VimResized * :wincmd =
+augroup END
 
 
 " Search for the word under the cursor in the current directory
@@ -234,13 +258,17 @@ nmap <M-w>  :BD<CR>
 
 
 " Fix annoyances in the QuickFix window, like scrolling too much
-autocmd FileType qf setlocal number nolist scrolloff=0
-autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
+augroup FIX_ANNOYANCE
+    autocmd FileType qf setlocal number nolist scrolloff=0
+    autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
+augroup END
 
 
 " ----------------------------------------------------------------------------
 " CUSTOM COMMANDS AND FUNCTIONS
 " ----------------------------------------------------------------------------
+
+let g:local_vimrc = {'names':['.settings'],'hash_fun':'LVRHashOfFile'}
 
 " Trim spaces at EOL and retab. I run `:CLEAN` a lot to clean up files.
 command! TEOL %s/\s\+$//
@@ -251,7 +279,7 @@ command! BufCloseOthers %bd|e#
 
 " Enter to buffer in the same position it was opened before (if previously was opened at all)
 function! ResCur()
-    if line("'\"") <= line("$")
+    if line("'\"") <= line('$')
         normal! g`"
         return 1
     endif
@@ -268,12 +296,12 @@ augroup END
 " ----------------------------------------------------------------------------
 
 " For any plugins that use this, make their keymappings use comma
-let mapleader = ","
-let maplocalleader = ","
+let mapleader = ','
+let maplocalleader = ','
 
 " FZF (Fuzzy search)
-set rtp+=~/.fzf
-nmap ; :Buffers<CR>
+set runtimepath+=~/.fzf
+nmap \\ :Buffers<CR>
 nmap <Leader>r :Tags<CR>
 nmap <Leader>t :Files<CR>
 nmap <Leader>a :Ag<CR>
@@ -298,7 +326,7 @@ function! s:update_fzf_colors()
   for [name, pairs] in items(rules)
     for pair in pairs
       let code = synIDattr(synIDtrans(hlID(pair[0])), pair[1])
-      if !empty(name) && code != ''
+      if !empty(name) && code !=# ''
         call add(cols, name.':'.code)
         break
       endif
@@ -336,34 +364,17 @@ let g:vim_markdown_frontmatter = 1
 " ALE
 " let g:ale_sign_warning = '▲'
 " let g:ale_sign_error = '✗'
-" highlight link ALEWarningSign String
-" highlight link ALEErrorSign Title
-" nmap ]l :ALENextWrap<CR>
-" nmap [l :ALEPreviousWrap<CR>
-" augroup VimDiff
-"   autocmd!
-"   autocmd VimEnter,FilterWritePre * if &diff | ALEDisable | endif
-" augroup END
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
+nmap ]l :ALENextWrap<CR>
+nmap [l :ALEPreviousWrap<CR>
+augroup VimDiff
+    autocmd!
+    autocmd VimEnter,FilterWritePre * if &diff | ALEDisable | endif
+augroup END
 
 
 " Lightline
-let g:lightline = {
-\ 'colorscheme': 'wombat',
-\ 'active': {
-\   'left': [['mode', 'paste'], ['filename', 'modified']],
-\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
-\ },
-\ 'component_expand': {
-\   'linter_warnings': 'LightlineLinterWarnings',
-\   'linter_errors': 'LightlineLinterErrors',
-\   'linter_ok': 'LightlineLinterOK'
-\ },
-\ 'component_type': {
-\   'readonly': 'error',
-\   'linter_warnings': 'warning',
-\   'linter_errors': 'error'
-\ },
-\ }
 function! LightlineLinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:all_errors = l:counts.error + l:counts.style_error
@@ -384,13 +395,36 @@ function! LightlineLinterOK() abort
 endfunction
 
 " Update and show lightline but only if it's visible (e.g., not in Goyo)
-autocmd User ALELint call s:MaybeUpdateLightline()
+augroup UPDATE_LIGHTLINE_ALE
+    autocmd User ALELint call s:MaybeUpdateLightline()
+augroup END
+
 function! s:MaybeUpdateLightline()
   if exists('#lightline')
     call lightline#update()
   end
 endfunction
 
+let g:lightline = {
+\ 'colorscheme': 'wombat',
+\ 'active': {
+\   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
+\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\ },
+\ 'component_expand': {
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'linter_ok': 'LightlineLinterOK'
+\ },
+\ 'component_type': {
+\   'readonly': 'error',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error'
+\ },
+\ 'component_function': {
+\   'gitbranch': 'fugitive#head'
+\ }
+\ }
 
 " Sparkup
 let g:sparkupExecuteMapping = '<c-y>'
@@ -402,13 +436,14 @@ let g:sparkupNextMapping = '<c-k>'
 " ----------------------------------------------------------------------------
 
 " Make sure colored syntax mode is on, and make it Just Work with 256-color terminals.
+" set termguicolors
 set background=dark
 silent! colorscheme iceberg
 if !has('gui_running')
   let g:solarized_termcolors=256
-  if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal" || $TERM == "xterm-termite" || $TERM == "mate-terminal"
+  if $TERM ==# 'xterm-256color' || $TERM ==# 'screen-256color' || $COLORTERM ==# 'gnome-terminal' || $TERM ==# 'xterm-termite' || $TERM ==# 'mate-terminal'
     set t_Co=256
-  elseif has("terminfo")
+  elseif has('terminfo')
     colorscheme default
     set t_Co=8
     set t_Sf=[3%p1%dm
@@ -420,7 +455,7 @@ if !has('gui_running')
     set t_Sb=[4%dm
   endif
   " Disable Background Color Erase when within tmux - https://stackoverflow.com/q/6427650/102704
-  if $TMUX != ""
+  if $TMUX !=# ''
     set t_ut=
  endif
 endif
@@ -463,15 +498,19 @@ highlight def link NERDTreeRO NERDTreeFile
 " Make trailing spaces very visible
 highlight SpecialKey ctermbg=Yellow guibg=Yellow
 
-" Previous approach for trailing white spaces
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
-
 " Make sure we highlight extra whitespace in the most annoying way possible.
 highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
 match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+augroup ColorWhiteAnnoying
+    " Previous approach for trailing white spaces
+    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
+
+    " new way?
+    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+augroup END
+
 
 " Make menu selections visible
 highlight PmenuSel ctermfg=black ctermbg=magenta
@@ -552,7 +591,7 @@ augroup END
 " ----------------------------------------------------------------------------
 
 " Now load specifics to this host
-if filereadable(expand("~/.vimlocal"))
+if filereadable(expand('~/.vimlocal'))
   source ~/.vimlocal
 endif
 
