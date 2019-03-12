@@ -8,6 +8,27 @@ if [ -n "$BASH_VERSION" -a -n "$PS1" -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
     [ -r /usr/share/bash_completion/bash_completion ] && . /usr/share/bash_completion/bash_completion
 fi
 
+if [ -f /usr/share/git/git-prompt.sh ]; then
+    source ~/.git-prompt.sh
+else
+    __git_ps1() {
+        return $?
+    }
+fi
+# GIT_PS1_SHOWDIRTYSTATE=1
+# GIT_PS1_SHOWSTASHSTATE=1
+# GIT_PS1_SHOWUNTRACKEDFILES=1
+# GIT_PS1_SHOWUPSTREAM="auto"
+# GIT_PS1_SHOWCOLORHINTS=1
+
+## Prompt
+if [[ ${EUID} == 0 ]] ; then
+   PS1='\[\033[01;30m\][\h]\[\033[01;34m\] \W \[\033[01;31m\]\$\[\033[00m\] '
+else
+   #PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \W \$\[\033[00m\] '
+   PS1='\[\033[01;37m\][\h]\[\033[01;34m\] \W\[\033[0;36m\]$(__git_ps1 " ⑂ %s")\[\033[0;34m\] \$\[\033[00m\] '
+fi
+
 # Setup fzf
 # ---------
 if [ -d ~/.fzf/ ]; then
