@@ -35,6 +35,19 @@ if type -P dircolors >/dev/null ; then
    fi
 fi
 
+if [ -f /usr/share/git/git-prompt.sh ]; then
+    source ~/.git-prompt.sh
+else
+    __git_ps1() {
+        return $?
+    }
+fi
+# GIT_PS1_SHOWDIRTYSTATE=1
+# GIT_PS1_SHOWSTASHSTATE=1
+# GIT_PS1_SHOWUNTRACKEDFILES=1
+# GIT_PS1_SHOWUPSTREAM="auto"
+# GIT_PS1_SHOWCOLORHINTS=1
+
 ## Prompt
 if [[ ${EUID} == 0 ]] ; then
    PS1='\[\033[01;30m\]\h\[\033[01;34m\] \W \[\033[01;31m\]\$\[\033[00m\] '
@@ -42,7 +55,7 @@ if [[ ${EUID} == 0 ]] ; then
    #PS1="\[\e[01;31m\]┌─[\[\e[01;35m\u\e[01;31m\]]──[\[\e[00;37m\]${HOSTNAME%%.*}\[\e[01;32m\]]:\w$\[\e[01;31m\]\n\[\e[01;31m\]└──\[\e[01;36m\]>>\[\e[0m\]"
 else
    #PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \W \$\[\033[00m\] '
-   PS1='\[\033[01;37m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
+   PS1='\[\033[01;37m\]\h\[\033[01;34m\] \W\[\033[0;36m\]$(__git_ps1 " ⑂ %s")\[\033[0;34m\] \$\[\033[00m\] '
    #PS1="\[\e[01;31m\]┌─[\[\e[01;35m\u\e[01;31m\]]──[\[\e[00;37m\]${HOSTNAME%%.*}\[\e[01;32m\]]:\w$\[\e[01;31m\]\n\[\e[01;31m\]└──\[\e[01;36m\]>>\[\e[0m\]"
 fi
 
