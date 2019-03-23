@@ -64,7 +64,6 @@ Plug 'MarcWeber/vim-addon-local-vimrc'
 " when you hit " or @ in normal mode or <CTRL-R> in insert mode.
 Plug 'junegunn/vim-peekaboo'
 
-Plug 'vim-erlang/vim-erlang-tags'
 Plug 'liuchengxu/vim-which-key'
 
 Plug 'scrooloose/nerdtree'
@@ -78,8 +77,17 @@ Plug 'ap/vim-css-color'
 Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
 
+" languages
+Plug 'vim-erlang/vim-erlang-tags'
+Plug 'vim-erlang/vim-erlang-omnicomplete'
+Plug 'vim-erlang/erlang-motions.vim'
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+
 " Look and feel
 Plug 'cocopon/iceberg.vim'
+Plug 'vim-erlang/vim-compot'
 "Plug 'arcticicestudio/nord-vim'
 "Plug 'felixhummel/setcolors.vim'
 Plug 'altercation/vim-colors-solarized'
@@ -285,6 +293,9 @@ augroup FIX_ANNOYANCE
     autocmd Filetype qf wincmd J " Makes sure it's at the bottom of the vim window
 augroup END
 
+" autocompletion (omni completion)
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 
 " ----------------------------------------------------------------------------
 " CUSTOM COMMANDS AND FUNCTIONS
@@ -459,6 +470,7 @@ let g:sparkupNextMapping = '<c-k>'
 " set termguicolors
 set background=dark
 colorscheme iceberg
+" colorscheme compot
 
 if !has('gui_running')
   let g:solarized_termcolors=256
