@@ -6,10 +6,12 @@ if [ -n "$BASH_VERSION" -a -n "$PS1" -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
     [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
     [ -r /usr/share/bash_completion/bash_completion ] && . /usr/share/bash_completion/bash_completion
+    # gaywd damn it centos
+    [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash_completion/bash_completion
 fi
 
 if [ -f /usr/share/git/git-prompt.sh ]; then
-    source ~/.git-prompt.sh
+    source /usr/share/git/.git-prompt.sh
 else
     __git_ps1() {
         return $?
@@ -26,7 +28,7 @@ if [[ ${EUID} == 0 ]] ; then
    PS1='\[\033[01;30m\][\h]\[\033[01;34m\] \W \[\033[01;31m\]\$\[\033[00m\] '
 else
    #PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \W \$\[\033[00m\] '
-   PS1='\[\033[01;37m\][\h]\[\033[01;34m\] \W\[\033[0;36m\]$(__git_ps1 " ⑂ %s")\[\033[0;34m\] \$\[\033[00m\] '
+   PS1='\[\033[01;37m\][\h]\[\033[01;34m\] \W\[\033[0;36m\]$(__git_ps1 " (%s)")\[\033[0;34m\] \$\[\033[00m\] '
 fi
 
 # Setup fzf
