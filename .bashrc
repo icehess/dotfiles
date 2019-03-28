@@ -7,7 +7,9 @@ if [ -n "$BASH_VERSION" -a -n "$PS1" -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
 
     [ -r /usr/share/bash_completion/bash_completion ] && . /usr/share/bash_completion/bash_completion
     # gaywd damn it centos
-    [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash_completion/bash_completion
+    [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
+    [ -f ~/.fzf/shell/completion.bash ] && . "~/.fzf/shell/completion.bash" 2> /dev/null
 fi
 
 if [ -f /usr/share/git/git-prompt.sh ]; then
@@ -32,11 +34,9 @@ else
 fi
 
 # Setup fzf
-# ---------
-if [ -d ~/.fzf/ ]; then
+if [ -r ~/.fzf/bin/fzf ]; then
     export PATH="$PATH:~/.fzf/bin"
-    [ $- == *i* ] && source "~/.fzf/shell/completion.bash" 2> /dev/null
-    [ -f ~/.fzf-key-bindings.bash ] && . ~/.fzf-key-bindings.bash
+    [ -f ~/.fzf/shell/key-bindings.bash] && . ~/.fzf/shell/key-bindings.bash
 fi
 
 _info () {
