@@ -53,3 +53,7 @@ _die () {
     _error "$1"
     exit 1
 }
+
+export wKazoo="/opt/kazoo"
+export KAZOO_SRC="$wKazoo"
+alias kz="cd $wKazoo"
