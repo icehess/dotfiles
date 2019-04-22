@@ -66,6 +66,7 @@ Plug 'junegunn/vim-peekaboo'
 
 Plug 'liuchengxu/vim-which-key'
 
+Plug 'troydm/zoomwintab.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'valloric/vim-indent-guides'
@@ -87,6 +88,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Look and feel
 Plug 'cocopon/iceberg.vim'
+Plug 'haishanh/night-owl.vim'
 Plug 'vim-erlang/vim-compot'
 "Plug 'arcticicestudio/nord-vim'
 "Plug 'felixhummel/setcolors.vim'
@@ -112,9 +114,6 @@ filetype plugin on
 " ----------------------------------------------------------------------------
 "  General Configurations
 " ----------------------------------------------------------------------------
-
-syntax enable
-set background=dark
 
 " enable project specific config file in secure way(?)
 " (use vim-addon-local-vimrc plugin and put .settings in tour project folder instead)
@@ -466,10 +465,13 @@ let g:sparkupNextMapping = '<c-k>'
 " COLORS
 " ----------------------------------------------------------------------------
 
+syntax enable
+" set background=dark
+
 " Make sure colored syntax mode is on, and make it Just Work with 256-color terminals.
 " set termguicolors
-set background=dark
 colorscheme iceberg
+" colorscheme night-owl
 " colorscheme compot
 
 if !has('gui_running')
@@ -493,46 +495,45 @@ if !has('gui_running')
     set t_ut=
  endif
 endif
-syntax on
 
-" taglist.vim's filenames is linked to LineNr by default, which is too dark
-highlight def link MyTagListFileName Statement
-highlight def link MyTagListTagName Question
+"" taglist.vim's filenames is linked to LineNr by default, which is too dark
+" highlight def link MyTagListFileName Statement
+" highlight def link MyTagListTagName Question
 
-" Turn off horrible coloring for CDATA in XML
-highlight def link xmlCdata NONE
+"" Turn off horrible coloring for CDATA in XML
+" highlight def link xmlCdata NONE
 
-" Some custom spell-checking colors
-highlight SpellBad     term=underline cterm=underline ctermbg=NONE ctermfg=205
-highlight SpellCap     term=underline cterm=underline ctermbg=NONE ctermfg=33
-highlight SpellRare    term=underline cterm=underline ctermbg=NONE ctermfg=217
-highlight SpellLocal   term=underline cterm=underline ctermbg=NONE ctermfg=72
+"" Some custom spell-checking colors
+" highlight SpellBad     term=underline cterm=underline ctermbg=NONE ctermfg=205
+" highlight SpellCap     term=underline cterm=underline ctermbg=NONE ctermfg=33
+" highlight SpellRare    term=underline cterm=underline ctermbg=NONE ctermfg=217
+" highlight SpellLocal   term=underline cterm=underline ctermbg=NONE ctermfg=72
 
-" The Ignore color should be... ignorable
-silent! highlight Ignore cterm=bold ctermfg=black ctermbg=bg
-highlight clear FoldColumn
-highlight def link FoldColumn Ignore
-highlight clear Folded
-highlight link Folded Ignore
-highlight clear LineNr
-highlight LineNr ctermfg=239 guifg=#444b71
-"highlight! def link LineNr Ignore
+"" The Ignore color should be... ignorable
+" silent! highlight Ignore cterm=bold ctermfg=black ctermbg=bg
+" highlight clear FoldColumn
+" highlight def link FoldColumn Ignore
+" highlight clear Folded
+" highlight link Folded Ignore
+" highlight clear LineNr
+" highlight LineNr ctermfg=239 guifg=#444b71
+" highlight! def link LineNr Ignore
 
-" Custom search colors
-"highlight clear Search
-"highlight Search term=NONE cterm=NONE ctermfg=white ctermbg=black
+"" Custom search colors
+" highlight clear Search
+" highlight Search term=NONE cterm=NONE ctermfg=white ctermbg=black
 
-" Make hilighted matching parents less annoying
-highlight clear MatchParen
-highlight link MatchParen Search
+"" Make hilighted matching parents less annoying
+" highlight clear MatchParen
+" highlight link MatchParen Search
 
-" Custom colors for NERDTree
-highlight def link NERDTreeRO NERDTreeFile
+"" Custom colors for NERDTree
+" highlight def link NERDTreeRO NERDTreeFile
 
-" Make trailing spaces very visible
+"" Make trailing spaces very visible
 highlight SpecialKey ctermbg=Yellow guibg=Yellow
 
-" Make sure we highlight extra whitespace in the most annoying way possible.
+"" Make sure we highlight extra whitespace in the most annoying way possible.
 highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
 match ExtraWhitespace /\s\+$/
 augroup ColorWhiteAnnoying
@@ -545,23 +546,24 @@ augroup ColorWhiteAnnoying
     autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 augroup END
 
-" Make menu selections visible
-highlight PmenuSel ctermfg=black ctermbg=magenta
+"" Make menu selections visible
+" highlight PmenuSel ctermfg=black ctermbg=magenta
 
-" The sign column slows down remote terminals
+"" The sign column slows down remote terminals
 highlight clear SignColumn
 highlight link SignColumn Ignore
 
-" Markdown could be more fruit salady
-highlight link markdownH1 PreProc
-highlight link markdownH2 PreProc
-highlight link markdownLink Character
-highlight link markdownBold String
-highlight link markdownItalic Statement
-highlight link markdownCode Delimiter
-highlight link markdownCodeBlock Delimiter
-highlight link markdownListMarker Todo
+"" Markdown could be more fruit salady
+" highlight link markdownH1 PreProc
+" highlight link markdownH2 PreProc
+" highlight link markdownLink Character
+" highlight link markdownBold String
+" highlight link markdownItalic Statement
+" highlight link markdownCode Delimiter
+" highlight link markdownCodeBlock Delimiter
+" highlight link markdownListMarker Todo
 
+"" Erlang my-luv
 " highlight link erlangLocalFuncCall Statement
 " highlight link erlangLocalFuncRef Statement
 " highlight link erlangGlobalFuncCall Statement
@@ -572,7 +574,7 @@ highlight link markdownListMarker Todo
 highlight link erlangQuotedAtom Special
 highlight link erlangAtom Function
 
-" Custom mode for distraction-free editing
+"" Custom mode for distraction-free editing
 function! ProseMode()
   call goyo#execute(0, [])
   set spell noci nosi noai nolist noshowmode noshowcmd
@@ -582,11 +584,11 @@ function! ProseMode()
 endfunction
 command! ProseMode call ProseMode()
 
-" transparent background
-hi Normal guibg=NONE ctermbg=NONE
+"" transparent background
+" hi Normal guibg=NONE ctermbg=NONE
 
-" disable background color earse to to fix issue with background
-set t_ut=
+"" disable background color earse to to fix issue with background
+"set t_ut=
 
 " ----------------------------------------------------------------------------
 " FILE TYPE TRIGGERS

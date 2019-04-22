@@ -82,7 +82,7 @@
 	"scroll_speed": 0.9,
 	"show_definitions": false,
 	"soda_folder_icons": true,
-	"spell_check": true,
+	"spell_check": false,
 	"theme": "Material-Theme.sublime-theme",
 	"trim_trailing_white_space_on_save": true
 }
