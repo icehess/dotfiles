@@ -25,31 +25,18 @@ call plug#begin('~/.vim/bundle')
 " VCS
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-rhubarb'
 
 " Dev Utilities
-Plug 'vim-scripts/Gist.vim' " Gist
 Plug 'mileszs/ack.vim' " First configure to us ag
-Plug 'w0rp/ale' " linter
-Plug 'Raimondi/delimitMate' " auto closing qoutes, parenthesis, brackets
 Plug 'junegunn/fzf' " file, command, history fuzzy searcher
 Plug 'junegunn/fzf.vim' " file, command, history fuzzy searcher (required both plug-ins)
 Plug 'haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches unlike default 'incsearch'
 Plug 'scrooloose/nerdcommenter' " in command mode use ,cc ,cu
 Plug 'ervandew/supertab' " Use Tab to completion in insert mode
-Plug 'majutsushi/tagbar' " Show tags (functions, ...) Use :TagbarToggle
 Plug 'qpkorr/vim-bufkill' " Kill buffer withou closing win: :BUN :BD :BW and :BB
 Plug 'tpope/vim-commentary' " in command mode use gcc
-Plug 'tpope/vim-endwise' " end for,if, etc.. for most langs
-Plug 'tpope/vim-eunuch' " helper for some UNIX command, :Move :Rename :Chmod
 Plug 'tpope/vim-surround' " add: ysw' remove: ds' change: cs}]
-Plug 'MarcWeber/vim-addon-local-vimrc'
 
-" Peekaboo will show you the contents of the registers on the sidebar
-" when you hit " or @ in normal mode or <CTRL-R> in insert mode.
-Plug 'junegunn/vim-peekaboo'
-
-Plug 'vim-erlang/vim-erlang-tags'
 Plug 'liuchengxu/vim-which-key'
 
 Plug 'scrooloose/nerdtree'
@@ -59,14 +46,10 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 
 " Syntaxes and such.
-Plug 'ap/vim-css-color'
 Plug 'sheerun/vim-polyglot'
-Plug 'editorconfig/editorconfig-vim'
 
 " Look and feel
 Plug 'cocopon/iceberg.vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'altercation/vim-colors-solarized'
 
 Plug 'itchyny/lightline.vim'
 
@@ -103,7 +86,6 @@ set backspace=indent,eol,start                   " Allow backspace beyond insert
 set cindent                                      " Automatic program indenting
 set cinkeys-=0#                                  " Comments don't fiddle with indenting
 set cinoptions=                                  " See :h cinoptions-values
-set clipboard=unnamed                            " Share system clipboard
 set commentstring=\ \ #%s                        " When folds are created, add them to this
 set copyindent                                   " Make autoindent use the same chars as prev autoindented line
 set cursorline                                   " Highlight current line
@@ -194,10 +176,6 @@ let mapleader = ','
 let g:mapleader = ','
 
 " Useful macros I use the most
-nmap \A :set formatoptions+=a<CR>:echo "autowrap enabled"<CR>     " Turn-on Autowarp
-nmap \T :set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4<CR> " Use Tab instead of space
-nmap \a :set formatoptions-=a<CR>:echo "autowrap disabled"<CR>    " Turn-off Autowarp
-nmap \d :ALEToggleBuffer<CR>                                      " Toggle ALE (require ale plug-in)
 nmap \e :NERDTreeToggle<CR>                                       " Toggle nerdtree (require nerdtree plug-in)
 nmap \F :NERDTreeFind<CR>                                         " Find in nerdtree (require nerdtree plug-in)
 nmap \g :GitGutterToggle<CR>                                      " Toggle gitgutter (require gitgutter plug-in)
@@ -205,10 +183,7 @@ nmap \i vip:sort<CR>                                              " Sort a block
 nmap \l :setlocal number!<CR>:setlocal number?<CR>
 nnoremap <silent> <leader>/ :nohlsearch<CR>                       " Get rid of search highlighting with ,/
 nmap \s :setlocal invspell<CR>                                    " Spell check
-nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>   " Use space instead of Tab
 nnoremap <silent> <leader> :WhichKey ','<CR>
-
-nmap <C-e> :e#<CR>                                                " Replace the current buffer with previously edited file
 
 " Move between open buffers.
 nmap <C-n> :bnext<CR>
@@ -268,8 +243,6 @@ augroup END
 " CUSTOM COMMANDS AND FUNCTIONS
 " ----------------------------------------------------------------------------
 
-let g:local_vimrc = {'names':['.settings'],'hash_fun':'LVRHashOfFile'}
-
 " Trim spaces at EOL and retab. I run `:CLEAN` a lot to clean up files.
 command! TEOL %s/\s\+$//
 command! CLEAN retab | TEOL
@@ -302,10 +275,8 @@ let maplocalleader = ','
 " FZF (Fuzzy search)
 set runtimepath+=~/.fzf
 nmap \\ :Buffers<CR>
-nmap <Leader>r :Tags<CR>
 nmap <Leader>t :Files<CR>
 nmap <Leader>a :Ag<CR>
-nmap <Leader>c :Colors<CR>
 
 " FZF color scheme updater from https://github.com/junegunn/fzf.vim/issues/59
 function! s:update_fzf_colors()
@@ -361,74 +332,19 @@ map g/ <Plug>(incsearch-stay)
 " Highlight YAML frontmatter in Markdown files
 let g:vim_markdown_frontmatter = 1
 
-" ALE
-" let g:ale_sign_warning = '▲'
-" let g:ale_sign_error = '✗'
-highlight link ALEWarningSign String
-highlight link ALEErrorSign Title
-nmap ]l :ALENextWrap<CR>
-nmap [l :ALEPreviousWrap<CR>
-augroup VimDiff
-    autocmd!
-    autocmd VimEnter,FilterWritePre * if &diff | ALEDisable | endif
-augroup END
-
-
-" Lightline
-function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
-endfunction
-function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
-endfunction
-function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '✓ ' : ''
-endfunction
-
-" Update and show lightline but only if it's visible (e.g., not in Goyo)
-augroup UPDATE_LIGHTLINE_ALE
-    autocmd User ALELint call s:MaybeUpdateLightline()
-augroup END
-
-function! s:MaybeUpdateLightline()
-  if exists('#lightline')
-    call lightline#update()
-  end
-endfunction
-
 let g:lightline = {
 \ 'colorscheme': 'wombat',
 \ 'active': {
 \   'left': [['mode', 'paste'], ['gitbranch', 'filename', 'modified']],
-\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
-\ },
-\ 'component_expand': {
-\   'linter_warnings': 'LightlineLinterWarnings',
-\   'linter_errors': 'LightlineLinterErrors',
-\   'linter_ok': 'LightlineLinterOK'
+\   'right': [['lineinfo'], ['percent'], ['readonly']]
 \ },
 \ 'component_type': {
 \   'readonly': 'error',
-\   'linter_warnings': 'warning',
-\   'linter_errors': 'error'
 \ },
 \ 'component_function': {
 \   'gitbranch': 'fugitive#head'
 \ }
 \ }
-
-" Sparkup
-let g:sparkupExecuteMapping = '<c-y>'
-let g:sparkupNextMapping = '<c-k>'
 
 
 " ----------------------------------------------------------------------------
