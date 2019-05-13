@@ -13,7 +13,9 @@ if [ -n "$BASH_VERSION" -a -n "$PS1" -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
 fi
 
 if [ -f /usr/share/git/git-prompt.sh ]; then
-    source /usr/share/git/.git-prompt.sh
+    . /usr/share/git/.git-prompt.sh
+elif [ -f /usr/lib/git-core/git-sh-prompt ]; then
+    . /usr/lib/git-core/git-sh-prompt
 else
     __git_ps1() {
         return $?
