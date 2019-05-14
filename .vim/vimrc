@@ -23,35 +23,35 @@ filetype off                   " required!
 call plug#begin('~/.vim/bundle')
 
 " VCS
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+" Plug 'tpope/vim-fugitive'
+" Plug 'airblade/vim-gitgutter'
 
-" Dev Utilities
-Plug 'mileszs/ack.vim' " First configure to us ag
-Plug 'junegunn/fzf' " file, command, history fuzzy searcher
-Plug 'junegunn/fzf.vim' " file, command, history fuzzy searcher (required both plug-ins)
-Plug 'haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches unlike default 'incsearch'
-Plug 'scrooloose/nerdcommenter' " in command mode use ,cc ,cu
-Plug 'ervandew/supertab' " Use Tab to completion in insert mode
-Plug 'qpkorr/vim-bufkill' " Kill buffer withou closing win: :BUN :BD :BW and :BB
-Plug 'tpope/vim-commentary' " in command mode use gcc
-Plug 'tpope/vim-surround' " add: ysw' remove: ds' change: cs}]
+ " Dev Utilities
+" Plug 'mileszs/ack.vim' " First configure to us ag
+" Plug 'junegunn/fzf' " file, command, history fuzzy searcher
+" Plug 'junegunn/fzf.vim' " file, command, history fuzzy searcher (required both plug-ins)
+" Plug 'haya14busa/incsearch.vim' " incrementally highlights ALL pattern matches unlike default 'incsearch'
+" Plug 'scrooloose/nerdcommenter' " in command mode use ,cc ,cu
+" Plug 'ervandew/supertab' " Use Tab to completion in insert mode
+" Plug 'qpkorr/vim-bufkill' " Kill buffer withou closing win: :BUN :BD :BW and :BB
+" Plug 'tpope/vim-commentary' " in command mode use gcc
+" Plug 'tpope/vim-surround' " add: ysw' remove: ds' change: cs}]
 
-Plug 'liuchengxu/vim-which-key'
+" Plug 'liuchengxu/vim-which-key'
 
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'valloric/vim-indent-guides'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
+" Plug 'scrooloose/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'valloric/vim-indent-guides'
+" Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-unimpaired'
 
-" Syntaxes and such.
-Plug 'sheerun/vim-polyglot'
+" " Syntaxes and such.
+" Plug 'sheerun/vim-polyglot'
 
-" Look and feel
+" " Look and feel
 Plug 'cocopon/iceberg.vim'
 
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -176,14 +176,14 @@ let mapleader = ','
 let g:mapleader = ','
 
 " Useful macros I use the most
-nmap \e :NERDTreeToggle<CR>                                       " Toggle nerdtree (require nerdtree plug-in)
-nmap \F :NERDTreeFind<CR>                                         " Find in nerdtree (require nerdtree plug-in)
-nmap \g :GitGutterToggle<CR>                                      " Toggle gitgutter (require gitgutter plug-in)
+" nmap \e :NERDTreeToggle<CR>                                       " Toggle nerdtree (require nerdtree plug-in)
+" nmap \F :NERDTreeFind<CR>                                         " Find in nerdtree (require nerdtree plug-in)
+" nmap \g :GitGutterToggle<CR>                                      " Toggle gitgutter (require gitgutter plug-in)
 nmap \i vip:sort<CR>                                              " Sort a block of lines
 nmap \l :setlocal number!<CR>:setlocal number?<CR>
 nnoremap <silent> <leader>/ :nohlsearch<CR>                       " Get rid of search highlighting with ,/
 nmap \s :setlocal invspell<CR>                                    " Spell check
-nnoremap <silent> <leader> :WhichKey ','<CR>
+" nnoremap <silent> <leader> :WhichKey ','<CR>
 
 " Move between open buffers.
 nmap <C-n> :bnext<CR>
@@ -220,17 +220,6 @@ cnoremap <C-g>  <C-c>
 augroup VIM_PLANE_RESIZE
     autocmd VimResized * :wincmd =
 augroup END
-
-
-" Search for the word under the cursor in the current directory
-nmap <M-k>    mo:Ack! "\b<cword>\b" <CR>
-nmap <Esc>k   mo:Ack! "\b<cword>\b" <CR>
-
-
-" Alt-W to delete a buffer and remove it from the list but keep the window via bufkill.vim
-nmap <Esc>w :BD<CR>
-nmap <M-w>  :BD<CR>
-
 
 " Fix annoyances in the QuickFix window, like scrolling too much
 augroup FIX_ANNOYANCE
@@ -273,63 +262,63 @@ let mapleader = ','
 let maplocalleader = ','
 
 " FZF (Fuzzy search)
-set runtimepath+=~/.fzf
-nmap \\ :Buffers<CR>
-nmap <Leader>t :Files<CR>
-nmap <Leader>a :Ag<CR>
+" set runtimepath+=~/.fzf
+" nmap \\ :Buffers<CR>
+" nmap <Leader>t :Files<CR>
+" nmap <Leader>a :Ag<CR>
 
 " FZF color scheme updater from https://github.com/junegunn/fzf.vim/issues/59
-function! s:update_fzf_colors()
-  let rules =
-  \ { 'fg':      [['Normal',       'fg']],
-    \ 'bg':      [['Normal',       'bg']],
-    \ 'hl':      [['String',       'fg']],
-    \ 'fg+':     [['CursorColumn', 'fg'], ['Normal', 'fg']],
-    \ 'bg+':     [['CursorColumn', 'bg']],
-    \ 'hl+':     [['String',       'fg']],
-    \ 'info':    [['PreProc',      'fg']],
-    \ 'prompt':  [['Conditional',  'fg']],
-    \ 'pointer': [['Exception',    'fg']],
-    \ 'marker':  [['Keyword',      'fg']],
-    \ 'spinner': [['Label',        'fg']],
-    \ 'header':  [['Comment',      'fg']] }
-  let cols = []
-  for [name, pairs] in items(rules)
-    for pair in pairs
-      let code = synIDattr(synIDtrans(hlID(pair[0])), pair[1])
-      if !empty(name) && code !=# ''
-        call add(cols, name.':'.code)
-        break
-      endif
-    endfor
-  endfor
-  let s:orig_fzf_default_opts = get(s:, 'orig_fzf_default_opts', $FZF_DEFAULT_OPTS)
-  let $FZF_DEFAULT_OPTS = s:orig_fzf_default_opts .
-        \ (empty(cols) ? '' : (' --color='.join(cols, ',')))
-endfunction
+" function! s:update_fzf_colors()
+"   let rules =
+"   \ { 'fg':      [['Normal',       'fg']],
+"     \ 'bg':      [['Normal',       'bg']],
+"     \ 'hl':      [['String',       'fg']],
+"     \ 'fg+':     [['CursorColumn', 'fg'], ['Normal', 'fg']],
+"     \ 'bg+':     [['CursorColumn', 'bg']],
+"     \ 'hl+':     [['String',       'fg']],
+"     \ 'info':    [['PreProc',      'fg']],
+"     \ 'prompt':  [['Conditional',  'fg']],
+"     \ 'pointer': [['Exception',    'fg']],
+"     \ 'marker':  [['Keyword',      'fg']],
+"     \ 'spinner': [['Label',        'fg']],
+"     \ 'header':  [['Comment',      'fg']] }
+"   let cols = []
+"   for [name, pairs] in items(rules)
+"     for pair in pairs
+"       let code = synIDattr(synIDtrans(hlID(pair[0])), pair[1])
+"       if !empty(name) && code !=# ''
+"         call add(cols, name.':'.code)
+"         break
+"       endif
+"     endfor
+"   endfor
+"   let s:orig_fzf_default_opts = get(s:, 'orig_fzf_default_opts', $FZF_DEFAULT_OPTS)
+"   let $FZF_DEFAULT_OPTS = s:orig_fzf_default_opts .
+"         \ (empty(cols) ? '' : (' --color='.join(cols, ',')))
+" endfunction
 
-augroup _fzf
-  autocmd!
-  autocmd VimEnter,ColorScheme * call <sid>update_fzf_colors()
-augroup END
+" augroup _fzf
+"   autocmd!
+"   autocmd VimEnter,ColorScheme * call <sid>update_fzf_colors()
+" augroup END
 
-" Tell ack.vim to use ag (the Silver Searcher) instead
-let g:ackprg = 'ag --vimgrep'
+" " Tell ack.vim to use ag (the Silver Searcher) instead
+" let g:ackprg = 'ag --vimgrep'
 
-" GitGutter
-nmap ]g :GitGutterNextHunk<CR>
-nmap [g :GitGutterPrevHunk<CR>
-augroup VimDiff
-  autocmd!
-  autocmd VimEnter,FilterWritePre * if &diff | GitGutterDisable | endif
-augroup END
+" " GitGutter
+" nmap ]g :GitGutterNextHunk<CR>
+" nmap [g :GitGutterPrevHunk<CR>
+" augroup VimDiff
+"   autocmd!
+"   autocmd VimEnter,FilterWritePre * if &diff | GitGutterDisable | endif
+" augroup END
 
-" Use incsearch.vim to highlight as I search
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" " Use incsearch.vim to highlight as I search
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
 
-" Highlight YAML frontmatter in Markdown files
+" " Highlight YAML frontmatter in Markdown files
 let g:vim_markdown_frontmatter = 1
 
 let g:lightline = {
