@@ -38,6 +38,7 @@ Plug 'junegunn/vim-plug'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
+Plug 'junegunn/gv.vim'
 
 " Dev Utilities
 Plug 'vim-scripts/Gist.vim' " Gist
