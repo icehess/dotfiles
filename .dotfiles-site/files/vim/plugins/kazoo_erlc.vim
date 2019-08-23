@@ -98,6 +98,6 @@ endfunction
 call ale#linter#Define('erlang', {
 \   'name': 'kazoo_erlc',
 \   'executable': 'erlc',
-\   'command_callback': function('ale_linters#erlang#kazoo_erlc#GetCommand'),
+\   'command': function('ale_linters#erlang#kazoo_erlc#GetCommand'),
 \   'callback': 'ale_linters#erlang#kazoo_erlc#Handle',
 \})
