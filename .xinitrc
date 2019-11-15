@@ -34,15 +34,20 @@ fi
 
 # office monitors
 [ `xrandr | egrep 'HDMI(2|3) connected' | wc -l` == 2 ] && xrandr --output HDMI2 --primary --auto --right-of HDMI3 --auto
-# home monitors
-[ `xrandr | egrep 'DP-(2|4) connected' | wc -l` == 2 ] && xrandr --output DP-2 --primary --auto --left-of DP-4 --auto
+# home monitors (nvidia official driver)
+#[ `xrandr | egrep 'DP-(2|4) connected' | wc -l` == 2 ] && xrandr --output DP-2 --primary --auto --left-of DP-4 --auto
+# home monitors (nouveo driver)
+if [ `xrandr | egrep 'DP-(1|2) connected' | wc -l` == 2 ] ; then
+    ## xrandr --output DP-1 --primary --auto --right-of DP-2 --auto
+    xrandr --output DP-2 --primary --auto --output DP-1 --off
+fi
 
 # if this is Thinkpad
 #type dockd > /dev/null 2>&1 && dockd --daemon
 
 [ -f ~/.xinitrc-local ] && source ~/.xinitrc-local
 
-exec dbus-launch --sh-syntax --exit-with-session i3 --shmlog-size 0
+exec dbus-launch --sh-syntax --exit-with-session i3 --shmlog-size=26214400
 
 # vim: ft=sh
 
