@@ -120,7 +120,6 @@ filetype plugin on
 " (use vim-addon-local-vimrc plugin and put .settings in tour project folder instead)
 " set exrc
 " set secure
-
 set autoindent                                   " Carry over indenting from previous line
 set autoread                                     " Don't bother me hen a file changes
 set autowrite                                    " Write on :next/:prev/^Z
@@ -600,7 +599,7 @@ augroup vimrc
 autocmd!
 
 au BufNewFile,BufRead *.glsl    setf glsl
-au BufNewFile,BufRead *.html    setlocal nocindent smartindent
+au BufNewFile,BufRead *.html    setlocal nocindent smartindent nowrap
 au BufNewFile,BufRead *.ini     setf conf
 au BufNewFile,BufRead *.json    set ft=json tw=0
 au BufNewFile,BufRead *.less    setlocal ft=less nocindent smartindent
