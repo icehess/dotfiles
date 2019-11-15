@@ -9,6 +9,16 @@ case "$1" in
 -f) force=true;;
 esac
 
+## ===============================================================
+## You have to run this before this script and `gone` script below
+## ===============================================================
+##
+## prune refs which their origin is gone:
+# git remote prune origin --dry-run
+
+## remove any branches that are gone:
+# git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }' | xargs git branch -D
+
 for branch in $(git for-each-ref --format='%(refname:short)' refs/heads); do
     # find configured upstream, if any
     remote=$(git config --get branch.$branch.remote) || continue
