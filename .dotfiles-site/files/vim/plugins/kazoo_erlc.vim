@@ -4,8 +4,8 @@ let g:ale_erlang_erlc_options = get(g:, 'ale_erlang_erlc_options', '')
 let g:ale_erlang_erlc_env_vars = get(g:, 'ale_erlang_erlc_env_vars', '')
 
 function! ale_linters#erlang#kazoo_erlc#GetCommand(buffer) abort
-    let l:output_file = tempname()
-    call ale#engine#ManageFile(a:buffer, l:output_file)
+    let l:output_file = ale#util#Tempname()
+    call ale#command#ManageFile(a:buffer, l:output_file)
 
     let l:cmd = ale#Var(a:buffer, 'erlang_erlc_env_vars')
     \   . 'erlc -o ' . ale#Escape(l:output_file)
@@ -98,6 +98,6 @@ endfunction
 call ale#linter#Define('erlang', {
 \   'name': 'kazoo_erlc',
 \   'executable': 'erlc',
-\   'command_callback': 'ale_linters#erlang#kazoo_erlc#GetCommand',
+\   'command': function('ale_linters#erlang#kazoo_erlc#GetCommand'),
 \   'callback': 'ale_linters#erlang#kazoo_erlc#Handle',
 \})

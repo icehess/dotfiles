@@ -16,10 +16,50 @@ else
     let s:kz_src = $KAZOO_SRC
 endif
 
+let s:need_extra_ = 0
+let s:path_parts_ = []
+let s:is_kz_ = 0
+let s:is_kz_opt_app_ = 0
+let s:is_test_module_ = 0
+let s:is_deps_ = 0
+for s:dir_ in split(expand('%:p'), '/')
+    if s:dir_ == 'test' && s:is_kz_opt_app_
+        let s:is_test_module_ = 1
+        break
+    endif
+
+    if s:dir_ == 'deps'
+        let s:is_deps_ = 1
+        break
+    endif
+
+    if s:is_kz_
+        if isdirectory('/' . join(s:path_parts_, '/'))
+            let s:is_kz_opt_app_ = 1
+            let g:kazoo_app_name = s:dir_
+        endif
+    endif
+
+    if s:dir_ =~ '\(applications\|core\)'
+        let s:is_kz_ = 1
+    endif
+
+    call add(s:path_parts_, s:dir_)
+endfor
+
+if s:is_test_module_
+    let s:extra_opts = ''
+else
+    let s:extra_opts = ' +warn_missing_spec'
+endif
 
 let g:ale_erlang_erlc_env_vars = 'export ERL_LIBS='
             \ . s:kz_src . '/deps'
             \ . ':' . s:kz_src . '/core'
             \ . ':' . s:kz_src . '/applications'
             \ . ';'
-let g:ale_erlang_erlc_options = '+debug_info +''{parse_transform, lager_transform}'' -Werror +warn_export_all +warn_unused_import +warn_unused_vars +warn_missing_spec +determ'
+
+if !s:is_deps_
+" +''{parse_transform, lager_transform}''
+    let g:ale_erlang_erlc_options = '-Werror +warn_export_all +warn_unused_import +warn_unused_vars' . s:extra_opts
+endif

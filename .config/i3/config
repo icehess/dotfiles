@@ -244,7 +244,8 @@ bindsym $mod+Shift+c exec rofi -theme /usr/share/rofi/themes/android_notificatio
 
 # Autostart applications
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id nitrogen --restore; sleep 1
+#; compton -b
 
 exec --no-startup-id /usr/lib/pam_kwallet_init
 exec --no-startup-id kwalletd5
