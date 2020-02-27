@@ -34,12 +34,11 @@
         }
     },
     "diffEditor.renderSideBySide": false,
-    "editor.dragAndDrop": false,
     "editor.fontFamily": "Fantasque Sans Mono, 'Ubuntu Mono', Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
-    "editor.fontSize": 13,
+    "editor.fontSize": 14,
     "editor.formatOnPaste": false,
-    "editor.hover.enabled": true,
+    "editor.hover.enabled": false,
     "editor.minimap.renderCharacters": false,
     "editor.occurrencesHighlight": false,
     "editor.renderControlCharacters": true,
@@ -70,7 +69,6 @@
     "window.restoreWindows": "all",
     "window.titleBarStyle": "custom",
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Material Theme Darker High Contrast",
     "workbench.editor.closeOnFileDelete": false,
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.swipeToNavigate": true,
@@ -79,5 +77,10 @@
     "workbench.settings.enableNaturalLanguageSearch": false,
     "workbench.statusBar.feedback.visible": false,
     "workbench.tree.horizontalScrolling": true,
-    "workbench.activityBar.visible": true
+    "editor.codeLens": false,
+    "editor.dragAndDrop": false,
+    "editor.cursorBlinking": "solid",
+    "workbench.preferredHighContrastColorTheme": "Default Dark+",
+    "workbench.preferredDarkColorTheme": "Default High Contrast",
+    "workbench.colorTheme": "Community Material Theme Darker High Contrast"
 }
