@@ -204,41 +204,24 @@
 
 (defalias 'list-buffers 'ibuffer)
 
-(defconst icehess-otp_root
-    (if (= (length (getenv "OTP_ROOT")) 0)
-        "/usr/lib/erlang"
-        (getenv "OTP_ROOT")))
-(defconst icehess-kazoo-root
-    (if (= (length (getenv "KAZOO_SRC")) 0)
-        "~/work/2600hz/kazoo/master"
-        (getenv "KAZOO_SRC")))
 (use-package erlang
     :ensure t
-    :config
-    (progn
-        (setq load-path (cons (expand-file-name (concat icehess-otp_root "/lib/tools-*/emacs"))
-			                load-path))
-        (setq erlang-root-dir icehess-otp_root)
-        (setq exec-path (cons (concat icehess-otp_root "/bin")
-                            exec-path))
-        (require 'erlang-start)
-        (add-hook 'erlang-mode-hook
-            (lambda ()
-                (setq mode-name "erl")
-                (setq erlang-compile-extra-opts
-                    (list
-                        "-I./"
-                        "-I../include"
-                        (concat "-I" (expand-file-name (concat icehess-kazoo-root "/deps")))
-                        (concat "-I" (expand-file-name (concat icehess-kazoo-root "/core")))
-                        (concat "-I" (expand-file-name (concat icehess-kazoo-root "/applications")))
-                        ))))))
+    )
 
-(use-package edts
+;; Enable LSP for Erlang files
+(use-package lsp-mode
+    :ensure t
+    :init
+    (setq lsp-log-io t)
+    :config
+    (add-hook 'erlang-mode-hook #'lsp))
+
+;; Require and enable the Yasnippet templating system
+(use-package yasnippet
     :ensure t
     :init
     :config
-    (require 'edts-start))
+    (yas-global-mode t))
 
 ;; Web-mode: Initialize web-mode and recognize extensions. Also
 ;; consider the possibility of JSX files with a .js extension istead
@@ -293,21 +276,7 @@
 (use-package flycheck
     :ensure t
     :init
-    ;; (setq flycheck-indication-mode nil)
-    ;; (setq flycheck-display-errors-delay nil)
-    ;; (setq flycheck-idle-change-delay 2)
-    (setq flycheck-erlang-include-path
-        (list "../include"
-            (expand-file-name (concat icehess-kazoo-root "/deps"))
-            (expand-file-name (concat icehess-kazoo-root "/core"))
-            (expand-file-name (concat icehess-kazoo-root "/applications"))))
-    (setq flycheck-erlang-library-path
-        (list
-            (expand-file-name (concat icehess-kazoo-root "/deps"))
-            (expand-file-name (concat icehess-kazoo-root "/core"))
-            (expand-file-name (concat icehess-kazoo-root "/applications"))
-            ))
-    (global-flycheck-mode))
+    )
 
 (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
 
