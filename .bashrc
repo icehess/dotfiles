@@ -60,7 +60,8 @@ else
 fi
 
 #Use color for ls and grep
-[[ "$OSTYPE" == "darwin"* || "$OSTYPE" == "freebsd"* ]] && alias ls='ls -G' || alias ls='ls --color=auto'
+# [[ "$OSTYPE" =~ linux* ]] && alias ls='ls -G' || alias ls='ls --color=auto'
+alias ls='ls --color=auto'
 [[ "$OSTYPE" == "darwin"* || "$OSTYPE" == "freebsd"* ]] && alias grep='grep --colour=auto' || grep='grep --color=auto'
 type colordiff > /dev/null 2>&1 && alias diff='colordiff'              # requires colordiff package
 alias less='less -R'

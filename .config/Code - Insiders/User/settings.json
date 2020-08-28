@@ -73,14 +73,24 @@
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.swipeToNavigate": true,
     "workbench.enableExperiments": false,
-    "workbench.iconTheme": "eq-material-theme-icons-darker",
     "workbench.settings.enableNaturalLanguageSearch": false,
     "workbench.statusBar.feedback.visible": false,
     "workbench.tree.horizontalScrolling": true,
     "editor.codeLens": false,
     "editor.dragAndDrop": false,
-    "editor.cursorBlinking": "solid",
     "workbench.preferredHighContrastColorTheme": "Default Dark+",
     "workbench.preferredDarkColorTheme": "Default High Contrast",
-    "workbench.colorTheme": "Community Material Theme Darker High Contrast"
+    "explorer.confirmDelete": false,
+    "editor.minimap.enabled": false,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.columnSelection": false,
+    "search.useIgnoreFiles": false,
+    "editor.cursorBlinking": "smooth",
+    "workbench.colorTheme": "Derwish Theme13 Dark",
+    "gitlens.advanced.telemetry.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "workbench.iconTheme": "chalice-icon-theme",
+    "[markdown]": {
+        "editor.defaultFormatter": "fcrespo82.markdown-table-formatter"
+    }
 }

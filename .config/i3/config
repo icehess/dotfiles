@@ -26,7 +26,8 @@ new_float normal
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+# bindsym $mod+Return exec termite
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -84,6 +85,12 @@ bindsym $mod+space focus mode_toggle
 
 # toggle sticky
 bindsym $mod+Shift+s sticky toggle
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
 
 # focus the parent container
 bindsym $mod+a focus parent
