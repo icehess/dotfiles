@@ -37,6 +37,11 @@ fi
 
 if [ -f /usr/share/git/git-prompt.sh ]; then
     source /usr/share/git/git-prompt.sh
+elif [ -f ~/.git-prompt.sh ]; then
+    source ~/.git-prompt.sh
+elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+    # CentOS
+    source /usr/share/git-core/contrib/completion/git-prompt.sh
 else
     __git_ps1() {
         return $?
