@@ -1,31 +1,24 @@
 #! /bin/sh
 #
-# rm-if-gone: remove branches that have a configured upstream
-# where the configured upstream no longer exists.  Run with
-# -f to make it work, otherwise it just prints what it would
-# remove.
+
 force=false
 case "$1" in
 -f) force=true;;
 esac
 
-## ===============================================================
-## You have to run this before this script and `gone` script below
-## ===============================================================
-##
 ## prune refs which their origin is gone:
-# git remote prune origin --dry-run
-
-## remove any branches that are gone:
-# git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }' | xargs git branch -D
-
-for branch in $(git for-each-ref --format='%(refname:short)' refs/heads); do
-    # find configured upstream, if any
-    remote=$(git config --get branch.$branch.remote) || continue
-    # if tracking local branch, skip
-    if [ "$remote" = . ]; then continue; fi
-    # if the upstream commit resolves, skip
-    ucommit=$(git rev-parse "${branch}@{u}" 2>/dev/null) && continue
-    # upstream is invalid - remove local branch, or print removal
-    $force && git branch -D $branch || echo "git branch -D $branch"
-done
+if $force ; then
+    git remote prune origin
+    to_delete="$(git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }')"
+    to_delete="$(echo "${to_delete}" | sed -e 's/^\s*//' | sed -e 's/\s*$//')"
+    if [ -n "$to_delete" ]; then
+        for branch in $to_delete ; do
+            git branch -D $branch
+        done
+    else
+        echo All clean
+    fi
+else
+    git remote prune origin --dry-run
+    git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }'
+fi
