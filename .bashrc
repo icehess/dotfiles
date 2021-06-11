@@ -187,4 +187,3 @@ function do_in_dir() {
     popd > /dev/null
     return $ret
 }
-
