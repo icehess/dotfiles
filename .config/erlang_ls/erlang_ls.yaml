@@ -1,0 +1,19 @@
+runtime:
+    use_long_names: true
+otp_path: "/home/hesaam/kerl/23.2.4/lib"
+plt_path: "/home/hesaam/2600hz/kazoo-master/.kazoo.plt"
+include_dirs:
+    - "/home/hesaam/2600hz/kazoo-master/core"
+    - "/home/hesaam/2600hz/kazoo-master/applications"
+    - "/home/hesaam/2600hz/kazoo-master/deps"
+    - "/home/hesaam/2600hz/kazoo-master/core/*/include"
+    - "/home/hesaam/2600hz/kazoo-master/core/*/src"
+    - "/home/hesaam/2600hz/kazoo-master/applications/*/include"
+    - "/home/hesaam/2600hz/kazoo-master/applications/*/src"
+    - "/home/hesaam/2600hz/kazoo-master/deps/*/include"
+    - "/home/hesaam/2600hz/kazoo-master/deps/*/src"
+apps_dirs:
+    - "/home/hesaam/2600hz/kazoo-master/core/*"
+    - "/home/hesaam/2600hz/kazoo-master/applications/*"
+deps_dirs:
+    - "/home/hesaam/2600hz/kazoo-master/deps/*"
