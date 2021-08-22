@@ -8,21 +8,25 @@ fi
 
 shopt -s checkwinsize
 
-# Write to history whenever the prompt is displayed
-PROMPT_COMMAND='history -a'
+
+# append new history items to .bash_history
 shopt -s histappend
-history -a
-HISTSIZE=1100000
-HISTFILESIZE=1100000
+# don't put duplicate lines or lines starting with space in the history
 HISTCONTROL="ignoredups:erasedups"
+# increase history file size
+HISTFILESIZE=1000000
+# increase history size
+HISTSIZE=${HISTFILESIZE}
+# append new entries from memory to .bash_history, and vice-versa
+PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 
 # Change the window title of X terminals
 case ${TERM} in
   xterm*|rxvt*|Eterm|aterm|kterm|gnome*|terminator*)
-    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "$USER" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+    PROMPT_COMMAND=${PROMPT_COMMAND}'printf "\033]0;%s@%s:%s\007" "$USER" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
     ;;
   screen)
-    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "$USER" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+    PROMPT_COMMAND=${PROMPT_COMMAND}'printf "\033_%s@%s:%s\033\\" "$USER" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
     ;;
 esac
 
@@ -85,7 +89,9 @@ PS4='+ '
 
 [ -r /usr/share/bash_completion/bash_completion ] && . /usr/share/bash_completion/bash_completion
 
-[[ -d "$HOME/bin" ]] && PATH="$PATH:$HOME/bin"
+[ -d "/usr/local/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+[ -d /usr/local/opt/findutils/libexec/gnubin ] && export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 # Linuxbrew
 [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
