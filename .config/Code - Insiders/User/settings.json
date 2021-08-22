@@ -34,13 +34,11 @@
         }
     },
     "diffEditor.renderSideBySide": false,
-    "editor.fontFamily": "Fantasque Sans Mono, 'Ubuntu Mono', Consolas, 'Courier New', monospace",
+    "editor.fontFamily": "Fantasque Sans Mono,'Rec Mono Doutone', 'Ubuntu Mono', Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.fontSize": 14,
     "editor.formatOnPaste": false,
-    "editor.hover.enabled": false,
     "editor.minimap.renderCharacters": false,
-    "editor.occurrencesHighlight": false,
     "editor.renderControlCharacters": true,
     "editor.renderIndentGuides": true,
     "editor.renderLineHighlight": "all",
@@ -53,7 +51,7 @@
     "git.autofetch": false,
     "git.autorefresh": false,
     "git.fetchOnPull": true,
-    "python.pythonPath": "python",
+    "python.pythonPath": "/usr/local/bin/python3",
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "terminal.external.linuxExec": "mate-terminal",
@@ -76,25 +74,37 @@
     "workbench.settings.enableNaturalLanguageSearch": false,
     "workbench.statusBar.feedback.visible": false,
     "workbench.tree.horizontalScrolling": true,
-    "editor.codeLens": false,
     "editor.dragAndDrop": false,
     "workbench.preferredHighContrastColorTheme": "Default Dark+",
     "workbench.preferredDarkColorTheme": "Default High Contrast",
-    "explorer.confirmDelete": false,
-    "editor.minimap.enabled": false,
-    "editor.multiCursorModifier": "ctrlCmd",
-    "editor.columnSelection": false,
-    "search.useIgnoreFiles": false,
-    "editor.cursorBlinking": "smooth",
-    "workbench.colorTheme": "Derwish Theme13 Dark",
-    "gitlens.advanced.telemetry.enabled": false,
-    "gitlens.currentLine.enabled": false,
-    "workbench.iconTheme": "chalice-icon-theme",
-    "[markdown]": {
-        "editor.defaultFormatter": "fcrespo82.markdown-table-formatter"
+    "[erlang]": {
+        "editor.defaultFormatter": "szTheory.erlang-formatter"
     },
-    "erlang_ls.logLevel": "debug",
-    "erlang_ls.logPath": "/home/hesaam/work/2600hz/kazoo/erlang_ls/log",
-    "mjml.minifyHtmlOutput": false,
-    "mjml.beautifyHtmlOutput": true
+    "editor.minimap.enabled": false,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "workbench.iconTheme": "chalice-icon-theme",
+    "workbench.tips.enabled": false,
+    "breadcrumbs.enabled": false,
+    "editor.lightbulb.enabled": false,
+    "editor.occurrencesHighlight": false,
+    "editor.cursorBlinking": "smooth",
+    "gitlens.currentLine.enabled": false,
+    "erlang.includePaths": [
+        "/home/hesaam/work/2600hz/kazoo/master/core",
+        "/home/hesaam/work/2600hz/kazoo/master/applications",
+        "/home/hesaam/work/2600hz/kazoo/master/deps"
+    ],
+    "search.useIgnoreFiles": false,
+    "erlangFormatter.formatter": "erlfmt",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "python.languageServer": "Pylance",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "erlang_ls.dapPath": "/home/hesaam/work/erlang_ls/_build/dap/bin/els_dap",
+    "redhat.telemetry.enabled": false,
+    "workbench.colorTheme": "GitHub Dark Dimmed"
 }
