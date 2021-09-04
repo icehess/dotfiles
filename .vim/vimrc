@@ -27,6 +27,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   augroup END
 endif
 
+let g:ale_disable_lsp = 1
+
 " set the runtime path to include Vundle and initialize
 " set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin('~/.vim/bundle')
@@ -339,7 +341,9 @@ augroup END
 
 " autocompletion (omni completion)
 filetype plugin on
+" vim-polyglot?
 set omnifunc=syntaxcomplete#Complete
+" set omnifunc=ale#completion#OmniFunc
 
 " ----------------------------------------------------------------------------
 " CUSTOM COMMANDS AND FUNCTIONS
@@ -449,6 +453,15 @@ augroup VimDiff
     autocmd!
     autocmd VimEnter,FilterWritePre * if &diff | ALEDisable | endif
 augroup END
+
+
+" Ale
+let g:ale_linters = {
+        \ 'json': ['jsonlint'],
+        \ 'javascript': ['tsserver'],
+      \ }
+
+let g:ale_hover_to_floating_preview= 1
 
 " Lightline
 function! LightlineLinterWarnings() abort
