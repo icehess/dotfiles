@@ -454,15 +454,6 @@ augroup VimDiff
     autocmd VimEnter,FilterWritePre * if &diff | ALEDisable | endif
 augroup END
 
-
-" Ale
-let g:ale_linters = {
-        \ 'json': ['jsonlint'],
-        \ 'javascript': ['tsserver'],
-      \ }
-
-let g:ale_hover_to_floating_preview= 1
-
 " Lightline
 function! LightlineLinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
@@ -927,6 +918,20 @@ nmap  -  <Plug>(choosewin)
 " "  %    :  saves and restores the buffer list
 " "  n... :  where to save the viminfo files
 " set viminfo='10,\"100,:20,%,n~/.viminfo"'
+
+" Ale
+let g:ale_linters = {
+            \ 'json': ['jsonlint'],
+            \   'javascript': ['eslint'],
+            \   'typescript': ['tsserver', 'eslint']
+            \}
+
+let g:ale_fixers = {
+        \ 'javascript': ['prettier', 'eslint'],
+        \ 'typescript': ['prettier', 'eslint'],
+      \ }
+
+let g:ale_hover_to_floating_preview= 1
 
 
 " ----------------------------------------------------------------------------

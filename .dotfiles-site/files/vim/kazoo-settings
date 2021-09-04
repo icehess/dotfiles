@@ -1,8 +1,6 @@
 " vim: set ft=vim:
 
-let g:ale_linters = {
-\   'erlang': ['kazoo_erlc'],
-\}
+let g:ale_linters['erlang'] = ['kazoo_erlc']
 
 let s:cur_dir = expand('<sfile>:h')
 
