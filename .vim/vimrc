@@ -49,7 +49,7 @@ endif
 " Dev Utilities
 Plug 'vim-scripts/Gist.vim' " Gist
 Plug 'mileszs/ack.vim' " First configure to us ag
-Plug 'w0rp/ale' " linter
+Plug 'dense-analysis/ale' " linter
 Plug 'Raimondi/delimitMate' " auto closing qoutes, parenthesis, brackets
 Plug 'junegunn/fzf' " file, command, history fuzzy searcher
 Plug 'junegunn/fzf.vim' " file, command, history fuzzy searcher (required both plug-ins)
