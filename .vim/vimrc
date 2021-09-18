@@ -266,12 +266,14 @@ nmap \T :set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4<CR> " Use Tab inst
 nmap \a :set formatoptions-=a<CR>:echo "autowrap disabled"<CR>    " Turn-on Autowarp
 nmap \d :ALEToggleBuffer<CR>                                      " Toggle ALE (require ale plug-in)
 nmap \e :NERDTreeToggle<CR>                                       " Toggle nerdtree (require nerdtree plug-in)
-nmap \f mt:Goyo<CR>'tzz                                           " Toggle distraction free (require goyo plug-in)
+" nmap \f mt:Goyo<CR>'tzz                                           " Toggle distraction free (require goyo plug-in)
+nmap \f :call CocAction('format')<CR>
 nmap \F :NERDTreeFind<CR>                                         " Find in nerdtree (require nerdtree plug-in)
 nmap \g :GitGutterToggle<CR>                                      " Toggle gitgutter (require gitgutter plug-in)
 nmap \i vip:sort<CR>                                              " Sort a block of lines
 nmap \l :setlocal number!<CR>:setlocal number?<CR>
-nmap \p :ProseMode<CR>                                            " ProseMode (see function section) distraction free (require goyo plug-in)
+nmap \p mt:Goyo<CR>'tzz                                           " Toggle distraction free (require goyo plug-in)
+" nmap \p :ProseMode<CR>                                            " ProseMode (see function section) distraction free (require goyo plug-in)
 nnoremap <silent> <leader>/ :nohlsearch<CR>                       " Get rid of search highlighting with ,/
 nmap \s :setlocal invspell<CR>                                    " Spell check
 nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>   " Use space instead of Tab
