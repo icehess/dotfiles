@@ -91,13 +91,19 @@ Plug 'folke/which-key.nvim'
 " Plug 'troydm/zoomwintab.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'valloric/vim-indent-guides'
+" Plug 'valloric/vim-indent-guides'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
+
+" Plug 'lukas-reineke/indent-blankline.nvim'
+" Plug 'kyazdani42/nvim-web-devicons' " for file icons
+" Plug 'kyazdani42/nvim-tree.lua'
 
 if has("nvim-0.5.0")
     " LSP
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
     " Debugger
     Plug 'puremourning/vimspector'
@@ -106,7 +112,7 @@ endif
 " Syntaxes and such.
 Plug 'ap/vim-css-color'
 Plug 'sheerun/vim-polyglot'
-" Plug 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 
 " languages
 Plug 'vim-erlang/vim-erlang-tags'
@@ -124,6 +130,8 @@ Plug 'cocopon/iceberg.vim'
 Plug 'haishanh/night-owl.vim'
 Plug 'vim-erlang/vim-compot'
 Plug 'altercation/vim-colors-solarized'
+Plug 'projekt0n/github-nvim-theme'
+Plug 'lourenci/github-colors'
 
 Plug 'shaunsingh/nord.nvim'
 
@@ -516,11 +524,11 @@ let g:sparkupNextMapping = '<c-k>'
 " ----------------------------------------------------------------------------
 
 syntax enable
-" set background=dark
+set background=dark
 
 " Make sure colored syntax mode is on, and make it Just Work with 256-color terminals.
 if has('termguicolors')
-    " set termguicolors
+" set termguicolors
 endif
 colorscheme iceberg
 " colorscheme night-owl
@@ -552,6 +560,49 @@ if !has('gui_running')
     set t_ut=
  endif
 endif
+
+" lua  << EOF
+" require('github-theme').setup {
+"     themeStyle = 'dimmed',
+"     darkSidebar = true,
+"     darkFloat = true,
+"     sidebars = {
+"         "qf",
+"         "vista_kind",
+"         "terminal",
+"         "nerdtree",
+"         "packer"
+"     },
+"     hideInactiveStatusline = true,
+"
+" }
+" EOF
+
+" lua << EOF
+"   require("indent_blankline").setup {
+"     char = "|",
+"     buftype_exclude = {"terminal"},
+"     show_current_context = true,
+"     space_char_blankline = " ",
+"   }
+" EOF
+
+" lua << EOF
+" require'nvim-web-devicons'.setup {
+"  -- your personnal icons can go here (to override)
+"  -- DevIcon will be appended to `name`
+"  -- override = {
+"  --  zsh = {
+"  --    icon = "",
+"  --    color = "#428850",
+"  --    name = "Zsh"
+"  --  }
+"  -- };
+"  -- globally enable default icons (default to false)
+"  -- will get overriden by `get_icons` option
+"  default = true;
+" }
+" EOF
 
 "" taglist.vim's filenames is linked to LineNr by default, which is too dark
 " highlight def link MyTagListFileName Statement
