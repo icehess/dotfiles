@@ -335,7 +335,7 @@ augroup END
 nmap <M-k>    mo:Ack! "\b<cword>\b"
 nmap <Esc>k   mo:Ack! "\b<cword>\b" <CR>
 
-nmap <TAB>  :wincmd w<CR>
+" nmap <TAB>  :wincmd w<CR>
 
 
 " Alt-W to delete a buffer and remove it from the list but keep the window via bufkill.vim
