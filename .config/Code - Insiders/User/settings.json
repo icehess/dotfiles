@@ -106,5 +106,15 @@
     },
     "erlang_ls.dapPath": "/home/hesaam/work/erlang_ls/_build/dap/bin/els_dap",
     "redhat.telemetry.enabled": false,
-    "workbench.colorTheme": "GitHub Dark Dimmed"
+    "workbench.colorTheme": "GitHub Dark Dimmed",
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.emptyWindow": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
