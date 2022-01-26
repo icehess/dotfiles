@@ -2,10 +2,11 @@
 if [[ $- != *i* ]] ; then
     [ -d /usr/local/sbin ] && export PATH="/usr/local/sbin:$PATH"
     [ -d /usr/local/bin ] && export PATH="/usr/local/bin:$PATH"
-    [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    [ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
    return
 fi
 
+[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 shopt -s checkwinsize
 
 
@@ -46,6 +47,9 @@ elif [ -f ~/.git-prompt.sh ]; then
 elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
     # CentOS
     source /usr/share/git-core/contrib/completion/git-prompt.sh
+# elif [ -f "/opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+#     __GIT_PROMPT_DIR="/opt/homebrew/opt/bash-git-prompt/share"
+#     source "/opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh"
 else
     __git_ps1() {
         return $?
@@ -88,12 +92,14 @@ PS4='+ '
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 [ -r /usr/share/bash_completion/bash_completion ] && . /usr/share/bash_completion/bash_completion
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
 [ -d "/usr/local/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 [ -d /usr/local/opt/findutils/libexec/gnubin ] && export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+[ -d "/opt/homebrew/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+[ -d /opt/homebrew/opt/findutils/libexec/gnubin ] && export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
+[ -d /opt/homebrew/opt/gnu-sed/libexec/gnubin ] && export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 [[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
-# Linuxbrew
-[ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 
 if type -P dircolors >/dev/null ; then
@@ -117,7 +123,7 @@ elif [ x"`uname -a | grep -o Darwin | uniq`" = x"Darwin" ]; then
     PLATFORM="Darwin"
 fi
 
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 if [ -e ~/.bashlocal ]; then
     . ~/.bashlocal
