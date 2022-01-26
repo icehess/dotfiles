@@ -976,8 +976,10 @@ nmap  -  <Plug>(choosewin)
 let g:ale_linters = {
             \ 'json': ['jsonlint'],
             \   'javascript': ['eslint'],
-            \   'typescript': ['tsserver', 'eslint']
+            \   'typescript': ['tsserver', 'eslint'],
+            \   'erlang': ['dialyzer', 'elvis']
             \}
+            " \   'erlang': ['dialyzer', 'elvis', 'kazoo_erlc']
 
 let g:ale_fixers = {
         \ 'javascript': ['prettier', 'eslint'],
@@ -985,6 +987,11 @@ let g:ale_fixers = {
       \ }
 
 let g:ale_hover_to_floating_preview= 1
+
+
+" let g:ale_erlc_extra_opts = ' +warn_missing_spec'
+" let g:ale_erlang_erlc_options = '-Werror +warn_export_all +warn_unused_import +warn_unused_vars' . g:ale_erlc_extra_opts
+" let g:ale_erlang_erlc_options = '-Isrc'
 
 
 " ----------------------------------------------------------------------------

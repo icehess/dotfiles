@@ -116,5 +116,6 @@
     },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "telemetry.telemetryLevel": "off"
 }
