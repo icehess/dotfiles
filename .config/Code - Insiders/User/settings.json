@@ -106,7 +106,7 @@
     },
     "erlang_ls.dapPath": "/home/hesaam/work/erlang_ls/_build/dap/bin/els_dap",
     "redhat.telemetry.enabled": false,
-    "workbench.colorTheme": "GitHub Dark Dimmed",
+    "workbench.colorTheme": "Subliminal",
     "security.workspace.trust.enabled": false,
     "security.workspace.trust.emptyWindow": false,
     "editor.suggestSelection": "first",
@@ -117,5 +117,8 @@
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "telemetry.telemetryLevel": "off"
+    "telemetry.telemetryLevel": "off",
+    "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "/opt/homebrew/bin/nvim"
 }
