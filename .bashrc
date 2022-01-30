@@ -9,6 +9,9 @@ fi
 [ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 shopt -s checkwinsize
 
+update_terminal_cwdprintf() {
+ echo -n
+}
 
 # append new history items to .bash_history
 shopt -s histappend
@@ -102,7 +105,7 @@ PS4='+ '
 [[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 
 
-if type -P dircolors >/dev/null ; then
+if type -P nvim >/dev/null ; then
     alias vim="nvim"
     export EDITOR="nvim"
 else
