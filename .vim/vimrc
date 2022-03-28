@@ -521,12 +521,18 @@ let g:sparkupExecuteMapping = '<c-y>'
 let g:sparkupNextMapping = '<c-k>'
 
 
+
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+"autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+"    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
 " ----------------------------------------------------------------------------
 " COLORS
 " ----------------------------------------------------------------------------
 
 syntax enable
 set background=dark
+" set background=light
 
 " Make sure colored syntax mode is on, and make it Just Work with 256-color terminals.
 if has('termguicolors')
@@ -700,6 +706,10 @@ command! ProseMode call ProseMode()
 "" disable background color earse to to fix issue with background
 "set t_ut=
 
+" keep me transparent
+" highlight Normal ctermbg=none guibg=none
+" highlight NonText ctermbg=none guibg=none
+
 " ----------------------------------------------------------------------------
 " FILE TYPE TRIGGERS
 " ----------------------------------------------------------------------------
@@ -763,17 +773,28 @@ if has("nvim-0.5.0")
 
     " Use tab for trigger completion with characters ahead and navigate.
     " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+    "
     " other plugin before putting this into your config.
-    inoremap <silent><expr> <TAB>
-                \ pumvisible() ? "\<C-n>" :
-                \ <SID>check_back_space() ? "\<TAB>" :
-                \ coc#refresh()
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    " inoremap <silent><expr> <TAB>
+    "             \ pumvisible() ? "\<C-n>" :
+    "             \ <SID>check_back_space() ? "\<TAB>" :
+    "             \ coc#refresh()
+    " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+    " Map <tab> for trigger completion, completion confirm, snippet expand and jump like VSCode.
+    inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ?
+      \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
     function! s:check_back_space() abort
         let col = col('.') - 1
         return !col || getline('.')[col - 1]  =~# '\s'
     endfunction
+
+    " Note: the `coc-snippets` extension is required for this to work.
+    let g:coc_snippet_next = '<tab>'
 
     " Use <c-space> to trigger completion.
     if has('nvim')
@@ -988,6 +1009,10 @@ let g:ale_fixers = {
 
 let g:ale_hover_to_floating_preview= 1
 
+" set to one to fold erlang codes
+let g:erlang_folding = 0
+" set this to not auto fold files on open
+" set foldlevel=99
 
 " let g:ale_erlc_extra_opts = ' +warn_missing_spec'
 " let g:ale_erlang_erlc_options = '-Werror +warn_export_all +warn_unused_import +warn_unused_vars' . g:ale_erlc_extra_opts

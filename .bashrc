@@ -102,7 +102,8 @@ PS4='+ '
 [ -d "/opt/homebrew/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 [ -d /opt/homebrew/opt/findutils/libexec/gnubin ] && export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
 [ -d /opt/homebrew/opt/gnu-sed/libexec/gnubin ] && export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
-[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
+[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
 
 if type -P nvim >/dev/null ; then
