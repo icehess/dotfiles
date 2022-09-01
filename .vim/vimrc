@@ -759,6 +759,10 @@ if has("nvim-0.5.0")
     " delays and poor user experience.
     set updatetime=300
 
+    " Always show the signcolumn, otherwise it would shift the text each time
+    " diagnostics appear/become resolved.
+    set signcolumn=yes
+
     " Don't pass messages to |ins-completion-menu|.
     set shortmess+=c
 
@@ -771,10 +775,14 @@ if has("nvim-0.5.0")
         set signcolumn=yes
     endif
 
+    " Note: the `coc-snippets` extension is required for this to work.
+    " Use <C-j> (orig, config tab) for jump to next placeholder, it's default of coc.nvim
+    let g:coc_snippet_next = '<tab>'
+
     " Use tab for trigger completion with characters ahead and navigate.
     " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-    "
     " other plugin before putting this into your config.
+    " {HESAAM_OLD_COC}
     " inoremap <silent><expr> <TAB>
     "             \ pumvisible() ? "\<C-n>" :
     "             \ <SID>check_back_space() ? "\<TAB>" :
@@ -782,19 +790,41 @@ if has("nvim-0.5.0")
     " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
     " Map <tab> for trigger completion, completion confirm, snippet expand and jump like VSCode.
+    " inoremap <silent><expr> <TAB>
+    "   \ pumvisible() ? coc#_select_confirm() :
+    "   \ coc#expandableOrJumpable() ?
+    "   \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    "   \ <SID>check_back_space() ? "\<TAB>" :
+    "   \ coc#refresh()
+    " function! s:check_back_space() abort
+    "     let col = col('.') - 1
+    "     return !col || getline('.')[col - 1]  =~# '\s'
+    " endfunction
+    " {/HESAAM_OLD_CO}
+    " {COC_ORIG}
+    " inoremap <silent><expr> <TAB>
+    "             \ coc#pum#visible() ? coc#pum#next(1):
+    "             \ CheckBackspace() ? "\<Tab>" :
+    "             \ coc#refresh()
+    " {/COC_ORIG}
+    "
+    " trigger completion and take care of coc-snippets
     inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ?
-      \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-    function! s:check_back_space() abort
+                \ coc#pum#visible() ? coc#_select_confirm() :
+                \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+                \ CheckBackSpace() ? "\<TAB>" :
+                \ coc#refresh()
+    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+    " Make <CR> to accept selected completion item or notify coc.nvim to format
+    " <C-g>u breaks current undo, please make your own choice.
+    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+    function! CheckBackSpace() abort
         let col = col('.') - 1
         return !col || getline('.')[col - 1]  =~# '\s'
     endfunction
-
-    " Note: the `coc-snippets` extension is required for this to work.
-    let g:coc_snippet_next = '<tab>'
 
     " Use <c-space> to trigger completion.
     if has('nvim')
@@ -803,12 +833,8 @@ if has("nvim-0.5.0")
         inoremap <silent><expr> <c-@> coc#refresh()
     endif
 
-    " Make <CR> auto-select the first completion item and notify coc.nvim to
-    " format on enter, <cr> could be remapped by other vim plugin
-    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-    " " Use `[h` and `]h` to navigate diagnostics
+    " Use `[h` and `]h` to navigate diagnostics (HESAAM uses []g for GitGutter)
+    " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
     nmap <silent> [h <Plug>(coc-diagnostic-prev)
     nmap <silent> ]h <Plug>(coc-diagnostic-next)
 
@@ -819,16 +845,14 @@ if has("nvim-0.5.0")
     nmap <silent> gr <Plug>(coc-references)
 
     " Use K to show documentation in preview window.
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    nnoremap <silent> K :call ShowDocumentation()<CR>
 
-    function! s:show_documentation()
-        if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-        elseif (coc#rpc#ready())
-            call CocActionAsync('doHover')
-        else
-            execute '!' . &keywordprg . " " . expand('<cword>')
-        endif
+    function! ShowDocumentation()
+      if CocAction('hasProvider', 'hover')
+        call CocActionAsync('doHover')
+      else
+        call feedkeys('K', 'in')
+      endif
     endfunction
 
     " Highlight the symbol and its references when holding the cursor.
@@ -849,7 +873,7 @@ if has("nvim-0.5.0")
         autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     augroup end
 
-    " Applying codeAction to the selected region.
+    " Applying codeAction to the selected region. (<leader>a is for Ag)
     " Example: `<leader>aap` for current paragraph
     xmap <leader>as  <Plug>(coc-codeaction-selected)
     nmap <leader>as  <Plug>(coc-codeaction-selected)
@@ -858,6 +882,9 @@ if has("nvim-0.5.0")
     nmap <leader>ac  <Plug>(coc-codeaction)
     " Apply AutoFix to problem on the current line.
     nmap <leader>qf  <Plug>(coc-fix-current)
+
+    " Run the Code Lens action on the current line.
+    nmap <leader>cl  <Plug>(coc-codelens-action)
 
     " Map function and class text objects
     " NOTE: Requires 'textDocument.documentSymbol' support from the language server.

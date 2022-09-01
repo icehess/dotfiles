@@ -40,7 +40,6 @@
     "editor.formatOnPaste": false,
     "editor.minimap.renderCharacters": false,
     "editor.renderControlCharacters": true,
-    "editor.renderIndentGuides": true,
     "editor.renderLineHighlight": "all",
     "editor.smoothScrolling": false,
     "explorer.autoReveal": false,
@@ -112,7 +111,7 @@
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -120,5 +119,13 @@
     "telemetry.telemetryLevel": "off",
     "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
     "vim.enableNeovim": true,
-    "vim.neovimPath": "/opt/homebrew/bin/nvim"
+    "vim.neovimPath": "/opt/homebrew/bin/nvim",
+    "editor.guides.indentation": true,
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "xml.server.binary.trustedHashes": [
+        "df9d4e4bb37d291396983519e0fc0115e7dfef3ed755e359a2480e3e86b1ed4d"
+    ],
+    "editor.largeFileOptimizations": false
 }
