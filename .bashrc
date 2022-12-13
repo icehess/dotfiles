@@ -56,6 +56,5 @@ _die () {
     exit 1
 }
 
-export wKazoo="/opt/kazoo"
-export KAZOO_SRC="$wKazoo"
-alias kz="cd $wKazoo"
+export KAZOO_SRC="${KAZOO_SRC:-$HOME/kazoo}"
+alias kz="cd $KAZOO_SRC"
