@@ -64,17 +64,18 @@ HISTFILESIZE=1000000
 # increase history size
 HISTSIZE=${HISTFILESIZE}
 # append new entries from memory to .bash_history, and vice-versa
-PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+PROMPT_COMMAND="history -a; history -n;" ## ${PROMPT_COMMAND}"
 
 # Change the window title of X terminals
-case ${TERM} in
-  xterm*|rxvt*|Eterm|aterm|kterm|gnome*|terminator*)
-    PROMPT_COMMAND=${PROMPT_COMMAND}'printf "\033]0;%s@%s:%s\007" "$USER" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
-    ;;
-  screen)
-    PROMPT_COMMAND=${PROMPT_COMMAND}'printf "\033_%s@%s:%s\033\\" "$USER" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
-    ;;
-esac
+# if something adds to PROMPT_COMMAND later, there would be no space between that and printf
+# case ${TERM} in
+#   xterm*|rxvt*|Eterm|aterm|kterm|gnome*|terminator*)
+#     PROMPT_COMMAND=${PROMPT_COMMAND}'printf "\033]0;%s@%s:%s\007" "$USER" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+#     ;;
+#   screen)
+#     PROMPT_COMMAND=${PROMPT_COMMAND}'printf "\033_%s@%s:%s\033\\" "$USER" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+#     ;;
+# esac
 
 # Use my colors
 if type -P dircolors >/dev/null ; then
@@ -94,12 +95,10 @@ elif [ -f "~/.git-prompt.sh" ]; then
 elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
     # CentOS
     source /usr/share/git-core/contrib/completion/git-prompt.sh
-elif [ -f /usr/local/opt/bash-git-prompt/share/gitprompt.sh ]; then
-    __GIT_PROMPT_DIR=/usr/local/opt/bash-git-prompt/share
-    source /usr/local/opt/bash-git-prompt/share/gitprompt.sh
-elif [ -f /opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh ]; then
-    __GIT_PROMPT_DIR=/opt/homebrew/opt/bash-git-prompt/share
-    source /opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh
+elif [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+    source /usr/local/etc/bash_completion.d/git-prompt.sh
+elif [ -f /opt/homebrew/etc/bash_completion.d/git-prompt.sh ]; then
+    source /opt/homebrew/etc/bash_completion.d/git-prompt.sh
 else
     __git_ps1() {
         return $?
@@ -130,6 +129,7 @@ PS4='+ '
 # Setting bash_completion {{{
 ## Common (Ubuntu? Debian?)
 [ -r /etc/bash_completion ] && . /etc/bash_completion
+
 ## Arch (it is already being source by /etc/bash.bashrc)
 # [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
@@ -180,8 +180,13 @@ alias config="git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}"
 if [ -f /usr/share/bash-completion/completions/git ]; then
     source /usr/share/bash-completion/completions/git
     __git_complete config __git_main
+elif [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+    source /usr/local/etc/bash_completion.d/git-completion.bash
+    __git_complete config __git_main
+elif [ -f /opt/homebrew/etc/bash_completion.d/git-completion.bash ]; then
+    source /opt/homebrew/etc/bash_completion.d/git-completion.bash
+    __git_complete config __git_main
 fi
-
 # }}}
 
 [ -s "${HOME}/.dotfiles-site/functions" ] && source "${HOME}/.dotfiles-site/functions"
@@ -226,7 +231,6 @@ export ERL_AFLAGS="-kernel shell_history enabled ${ERL_AFLAGS}"
 if [ -e ~/.bashlocal ]; then
     . ~/.bashlocal
 fi
-
 
 ## Here goes garbage forking stupid apps shitting their shits here:
 #
