@@ -12,6 +12,7 @@
 
 [ -d /opt/ruby/bin ] && export PATH="/usr/local/opt/ruby/bin:${PATH}"
 [ -d /opt/homebrew/opt/ruby/bin ] && export PATH="/opt/homebrew/opt/ruby/bin:${PATH}"
+[ -r "${HOME}/.cargo/env" ] && . "${HOME}/.cargo/env"
 
 [ -d "$HOME/bin" ] && export PATH="$HOME/bin:${PATH}"
 
