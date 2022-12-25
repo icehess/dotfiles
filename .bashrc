@@ -239,4 +239,3 @@ if test -n "$KITTY_INSTALLATION_DIR" -a -e "${KITTY_INSTALLATION_DIR}/shell-inte
 # END_KITTY_SHELL_INTEGRATION
 
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
-. "${HOME}/.cargo/env"
