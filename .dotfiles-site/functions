@@ -1,155 +1,110 @@
-# Test if HTTP compression (RFC 2616 + SDCH) is enabled for a given URL.
-# Send a fake UA string for sites that sniff it instead of using the Accept-Encoding header. (Looking at you, ajax.googleapis.com!)
-httpcompression() {
-  encoding="$(curl -LIs -H 'User-Agent: Mozilla/5 Gecko' -H 'Accept-Encoding: gzip,deflate,compress,sdch' "$1" | grep '^Content-Encoding:')" && echo "$1 is encoded using ${encoding#* }" || echo "$1 is not using any encoding"
-}
-
-# All the dig info
-digga() {
-  dig +nocmd "$1" any +multiline +noall +answer
-}
-
-# Show a one-line process tree of the given process, defaulting to the current shell.
-process-tree () {
-	pid="${1:-$$}";
-	orig_pid="$pid";
-	local commands=();
-	while [ "$pid" != "$ppid" ]; do
-		# Read the parent's process ID and the current process's command line.
-		{ read -d ' ' ppid; read command; } < <(ps c -p "$pid" -o ppid= -o command= | sed 's/^ *//');
-
-		# Stop when we have reached the first process, or an sshd/login process.
-		[ "$ppid" -eq 0 -o "$ppid" -eq 1 -o "$command" = 'login' -o "$command" = 'sshd' ] && break;
-
-		# Insert the command in the front of the process array.
-		commands=("$command" "${commands[@]}");
-
-		# Prepare for the next iteration.
-		pid="$ppid";
-		ppid=;
-	done;
-
-	# Hide the first bash process.
-	set -- "${commands[@]}";
-	if [ "$1" = '-bash' -o "$1" = 'bash' ]; then
-		shift;
-		commands=("$@");
-	fi;
-
-	# Print the tree with the specified separator.
-	separator='→';
-	output="$(IFS="$separator"; echo "${commands[*]}")";
-	echo "${output//$separator/ $separator }";
-}
-
 # Convert the parameters or STDIN to lowercase.
 lc () {
-	if [ $# -eq 0 ]; then
-		tr '[:upper:]' '[:lower:]';
-	else
-		tr '[:upper:]' '[:lower:]' <<< "$@";
-	fi;
+    if [ $# -eq 0 ]; then
+        tr '[:upper:]' '[:lower:]';
+    else
+        tr '[:upper:]' '[:lower:]' <<< "$@";
+    fi;
 }
 
 # Convert the parameters or STDIN to uppercase.
 uc () {
-	if [ $# -eq 0 ]; then
-		tr '[:lower:]' '[:upper:]';
-	else
-		tr '[:lower:]' '[:upper:]' <<< "$@";
-	fi;
-}
-
-# Open the man page for the previous command.
-lman () { set -- $(fc -nl -1); while [ "$#" -gt 0 -a '(' "sudo" = "$1" -o "-" = "${1:0:1}" ')' ]; do shift; done; man "$1" || help "$1"; }
-
-function line {
-	width=$(tput cols);
-	str=${1--};
-	len=${#str};
-	for ((i = 0; i < $width; i += $len)); do
-		echo -n "${str:0:$(($width - $i))}";
-	done;
-	echo;
+    if [ $# -eq 0 ]; then
+        tr '[:lower:]' '[:upper:]';
+    else
+        tr '[:lower:]' '[:upper:]' <<< "$@";
+    fi;
 }
 
 # Print the given text in the center of the screen.
 function center {
-	width=$(tput cols);
-	str="$@";
-	len=${#str};
-	[ $len -ge $width ] && echo "$str" && return;
-	for ((i = 0; i < $(((($width - $len)) / 2)); i++)); do
-		echo -n " ";
-	done;
-	echo "$str";
+    width=$(tput cols);
+    str="$@";
+    len=${#str};
+    [ $len -ge $width ] && echo "$str" && return;
+    for ((i = 0; i < $(((($width - $len)) / 2)); i++)); do
+        echo -n " ";
+    done;
+    echo "$str";
 }
 
-# Try to make sense of the date. It supports everything GNU date knows how to
-# parse, as well as UNIX timestamps. It formats the given date using the
-# default GNU date format, which you can override using "--format='%x %y %z'.
-#
-# Examples of input and output:
-#
-#   $ whenis 1234567890            # UNIX timestamps
-#   Sat Feb 14 00:31:30 CET 2009
-#
-#   $ whenis +1 year -3 months     # relative dates
-#   Fri Jul 20 21:51:27 CEST 2012
-#
-#   $ whenis 2011-10-09 08:07:06   # MySQL DATETIME strings
-#   Sun Oct  9 08:07:06 CEST 2011
-#
-#   $ whenis 1979-10-14T12:00:00.001-04:00 # HTML5 global date and time
-#   Sun Oct 14 17:00:00 CET 1979
-#
-#   $ (TZ=America/Vancouver whenis) # Current time in Vancouver
-#   Thu Oct 20 13:04:20 PDT 2011
-#
-# When requesting a different timezone like in the last example, make sure to
-# execute the command in a subshell to avoid changing your timezone for the
-# rest of the session.
-#
-# For more info, check out http://kak.be/gnudateformats.
-function whenis {
-	local error='Unable to parse that using http://kak.be/gnudateformats';
-
-	# Default GNU date format as seen in date.c from GNU coreutils.
-	local format='%a %b %e %H:%M:%S %Z %Y';
-	if [[ "$1" =~ ^--format= ]]; then
-		format="${1#--format=}";
-		shift;
-	fi;
-
-	# Concatenate all arguments as one string specifying the date.
-	local date="$*";
-	[[ "$date"  =~ ^[[:space:]]*$ ]] && date='now';
-
-	if [[ "$OSTYPE" =~ ^darwin ]]; then
-		# Use PHP on OS X, where "date" is not GNU's.
-		php -r '
-			error_reporting(-1);
-			$format = $_SERVER["argv"][1];
-			$date = $_SERVER["argv"][2];
-			if (!is_numeric($date)) {
-				$date = strtotime($date);
-				if ($date === false) {
-					fputs(STDERR, $_SERVER["argv"][3] . PHP_EOL);
-					exit(1);
-				}
-			}
-			echo strftime($format, $date), PHP_EOL;
-		' -- "$format" "$date" "$error";
-	else
-		# Use GNU date in all other situations.
-		[[ "$date" =~ ^[0-9]+$ ]] && date="@$date";
-		date -d "$date" +"$format";
-	fi;
+function line {
+    width=$(tput cols);
+    str=${1--};
+    len=${#str};
+    for ((i = 0; i < $width; i += $len)); do
+        echo -n "${str:0:$(($width - $i))}";
+    done;
+    echo;
 }
 
+_info () {
+    printf "\e[1;36m::\e[1;37m $* \e[00m \n" >&2;
+}
 
-genpasswd() {
-	local l=$1
-       	[ "$l" == "" ] && l=16
-      	tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+_error () {
+    printf "\e[1;37m::\e[1;31m $* \e[00m \n" >&2;
+}
+
+_die () {
+    _error "$1"
+    exit 1
+}
+
+# use it like `loop_do "$SOME_DIRS" 'do your thing;'`.
+# don't be evil though, eval is dangerous.
+# I like `fn` from https://github.com/spencertipping/bash-lambda
+#
+# Also there are some other variation:
+# (1) if no lazy evaluation, no need for eval
+# function x()      { echo "Hello world";          }
+# function around() { echo before; $1; echo after; }
+# around x
+#
+# (2) same as above with args for x
+# function x()      { echo "x(): Passed $1 and $2";  }
+# function around() { echo before; "$@"; echo after; }
+# around x 1st 2nd
+#
+# (3) using sub-shell; "x" must be a command or function
+# function x() { pushd $1 ; git branch -vv | grep ": gone]" |  grep -v "\*" | awk '{ print $1; }' | xargs git branch -D ; popd; }
+# for dir in $COMMIO ; do ("x" $dir) ; done
+#
+#
+# Usage:
+# loop_do "applications/*/" "do_in_dir \$loop_i 'git status --branch -s'"
+# loop_do "applications/*/" "do_in_dir \$loop_i 'rm-if-gone'"
+# loop_do "$COMMIO_APPS" "do_in_dir \$loop_i 'git commit -a -m \"setting base_branch to 1.0\"'"
+# loop_do "$COMMIO_APPS" "do_in_dir \$loop_i 'nvim .circleci/config.yml'"
+function loop_do() {
+    local loop_i= stop= ret=
+    case $1 in
+        -stop)
+            stop=1
+            shift
+            ;;
+        *)
+            ;;
+    esac
+    for loop_i in $1 ; do
+        _info "doing $loop_i"
+        eval $2
+        ret=$?
+        [ -n "$stop" ] && [ $ret -ne 0 ] && _error "command failed" && return
+    done
+
+    return $ret
+}
+
+function do_in_dir() {
+    local ret=
+    if [ ! -d "$1" ]; then
+        echo "$1 does not exists"
+        return 1
+    fi
+    pushd "$1" > /dev/null
+    eval "$2"
+    ret=$?
+    popd > /dev/null
+    return $ret
 }

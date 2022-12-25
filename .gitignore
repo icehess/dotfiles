@@ -5,3 +5,5 @@
 .~lock.*
 elrang_ls.config
 *erlang_ls.config*
+./.bashlocal
+./.ssh

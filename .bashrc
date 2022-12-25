@@ -1,17 +1,58 @@
+# Init Path {{{
+[ -d /usr/local/sbin ] && export PATH="/usr/local/sbin:${PATH}"
+[ -d /usr/local/bin ] && export PATH="/usr/local/bin:${PATH}"
+
+[ -d /usr/local/opt/coreutils/libexec/gnubin ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
+[ -d /usr/local/opt/findutils/libexec/gnubin ] && export PATH="/usr/local/opt/findutils/libexec/gnubin:${PATH}"
+[ -d /usr/local/opt/gnu-sed/libexec/gnubin ] && export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:${PATH}"
+
+[ -d /opt/homebrew/opt/coreutils/libexec/gnubin ] && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
+[ -d /opt/homebrew/opt/findutils/libexec/gnubin ] && export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:${PATH}"
+[ -d /opt/homebrew/opt/gnu-sed/libexec/gnubin ] && export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:${PATH}"
+
+[ -d /opt/ruby/bin ] && export PATH="/usr/local/opt/ruby/bin:${PATH}"
+[ -d /opt/homebrew/opt/ruby/bin ] && export PATH="/opt/homebrew/opt/ruby/bin:${PATH}"
+
+[ -d "$HOME/bin" ] && export PATH="$HOME/bin:${PATH}"
+
+if [ -f /opt/homebrew/bin/brew ]; then
+    # this is slow, that is why we export directly
+    # eval "$(/opt/homebrew/bin/brew shellenv)"
+    export HOMEBREW_PREFIX="/usr/local";
+    export HOMEBREW_CELLAR="/usr/local/Cellar";
+    export HOMEBREW_REPOSITORY="/usr/local/Homebrew";
+    export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}";
+    export MANPATH="/usr/local/share/man${MANPATH+:$MANPATH}:";
+    export INFOPATH="/usr/local/share/info:${INFOPATH:-}";
+elif [ -f /usr/local/bin/brew ]; then
+    # this is slow, that is why we export directly
+    # eval "$(/usr/local/bin/brew shellenv)"
+    export HOMEBREW_PREFIX="/opt/homebrew";
+    export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+    export HOMEBREW_REPOSITORY="/opt/homebrew";
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+fi
+# }}}
+
 # If not running interactively, don't do anything
 if [[ $- != *i* ]] ; then
-    [ -d /usr/local/sbin ] && export PATH="/usr/local/sbin:$PATH"
-    [ -d /usr/local/bin ] && export PATH="/usr/local/bin:$PATH"
-    [ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
    return
 fi
 
-[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Good Shell {{{
+# If set, bash checks the window size after each external (non-builtin) command and, if necessary, updates the values of LINES
+# and COLUMNS.  This option is enabled by default.
 shopt -s checkwinsize
 
+# shut up macOS cwd echo (in Terminal app, iTerm is okay):
+# > It updates the prompt to echo the Current Working Directory (CWD) and is defined in /etc/bashrc
 update_terminal_cwdprintf() {
  echo -n
 }
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # append new history items to .bash_history
 shopt -s histappend
@@ -42,17 +83,22 @@ if type -P dircolors >/dev/null ; then
       eval $(dircolors -b /etc/DIR_COLORS)
    fi
 fi
+# }}}
 
+# Shell Prompt {{{
 if [ -f /usr/share/git/git-prompt.sh ]; then
     source /usr/share/git/git-prompt.sh
-elif [ -f ~/.git-prompt.sh ]; then
-    source ~/.git-prompt.sh
+elif [ -f "~/.git-prompt.sh" ]; then
+    source "~/.git-prompt.sh"
 elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
     # CentOS
     source /usr/share/git-core/contrib/completion/git-prompt.sh
-# elif [ -f "/opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-#     __GIT_PROMPT_DIR="/opt/homebrew/opt/bash-git-prompt/share"
-#     source "/opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh"
+elif [ -f /usr/local/opt/bash-git-prompt/share/gitprompt.sh ]; then
+    __GIT_PROMPT_DIR=/usr/local/opt/bash-git-prompt/share
+    source /usr/local/opt/bash-git-prompt/share/gitprompt.sh
+elif [ -f /opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh ]; then
+    __GIT_PROMPT_DIR=/opt/homebrew/opt/bash-git-prompt/share
+    source /opt/homebrew/opt/bash-git-prompt/share/gitprompt.sh
 else
     __git_ps1() {
         return $?
@@ -75,137 +121,117 @@ else
    #PS1="\[\e[01;31m\]┌─[\[\e[01;35m\u\e[01;31m\]]──[\[\e[00;37m\]${HOSTNAME%%.*}\[\e[01;32m\]]:\w$\[\e[01;31m\]\n\[\e[01;31m\]└──\[\e[01;36m\]>>\[\e[0m\]"
 fi
 
-#Use color for ls and grep
-# [[ "$OSTYPE" =~ linux* ]] && alias ls='ls -G' || alias ls='ls --color=auto'
-alias ls='ls --color=auto'
-[[ "$OSTYPE" == "darwin"* || "$OSTYPE" == "freebsd"* ]] && alias grep='grep --colour=auto' || grep='grep --color=auto'
-type colordiff > /dev/null 2>&1 && alias diff='colordiff'              # requires colordiff package
-alias less='less -R'
-
 PS2='> '
 PS3='> '
 PS4='+ '
+# }}}
 
-# Common junk
-[[ -s "$HOME/.dotfiles-site/bash_alias" ]] && source "$HOME/.dotfiles-site/bash_alias"
-#[[ -s "$HOME/.dotfiles-site/functions" ]] && source "$HOME/.dotfiles-site/functions"
+# Setting bash_completion {{{
+## Common (Ubuntu? Debian?)
+[ -r /etc/bash_completion ] && . /etc/bash_completion
+## Arch (it is already being source by /etc/bash.bashrc)
+# [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
-## setting bash_completion
-[ -r /etc/bash_completion   ] && . /etc/bash_completion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+# macOS
+[ -r /usr/local/etc/profile.d/bash_completion.sh ] && . /usr/local/etc/profile.d/bash_completion.sh
+[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
+# }}}
 
-[ -r /usr/share/bash_completion/bash_completion ] && . /usr/share/bash_completion/bash_completion
-[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+# Aliases {{{
+alias ..='cd ..'
+alias ...='cd ../..'
 
-[ -d "/usr/local/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-[ -d /usr/local/opt/findutils/libexec/gnubin ] && export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
-[ -d "/opt/homebrew/opt/coreutils/libexec/gnubin" ] && export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-[ -d /opt/homebrew/opt/findutils/libexec/gnubin ] && export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
-[ -d /opt/homebrew/opt/gnu-sed/libexec/gnubin ] && export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
-[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
-[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
+alias ll='ls -lAF'
 
+alias simplehttpd='python3 -m http.server';
+alias simplehttpd2='python -m SimpleHTTPServer';
+alias jsonformat='python -m json.tool'
 
 if type -P nvim >/dev/null ; then
-    alias vim="nvim"
-    export EDITOR="nvim"
-else
-    export EDITOR="vim"
+    alias vim='nvim'
+    export EDITOR='nvim'
+elif type -P vim >/dev/null ; then
+    export EDITOR='vim'
+elif type -P vi >/dev/null ; then
+    alias vim='vi'
+    export EDITOR='vi'
+fi
+alias emacs='emacs --no-window-system'
+
+# [[ "$OSTYPE" == "darwin"* || "$OSTYPE" == "freebsd"* ]] && alias grep='grep --colour=auto' || grep='grep --color=auto'
+if [ -n "${OSTYPE}" ]; then
+    if [ "${OSTYPE}" == 'linux-gnu' ]; then
+        alias grep='grep --color=auto'
+    else
+        alias grep='grep --colour=auto'
+    fi
 fi
 
-#[ -r /usr/bin/mate-terminal ] && export TERMINAL="mate-terminal"
-[ -r /usr/bin/termite ] && export TERMINAL="termite"
-[ -r /usr/bin/ksshaskpass ] && export SSH_ASKPASS="/usr/bin/ksshaskpass"
-[ -r $XDG_RUNTIME_DIR/ssh-agent.socket ] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# [[ "$OSTYPE" =~ linux* ]] && alias ls='ls -G' || alias ls='ls --color=auto'
+alias ls='ls --color=auto'
 
-export PAGER="less"
+type colordiff > /dev/null 2>&1 && alias diff='colordiff'
 
-PLATFORM=`uname -s`
-if [ x"`uname -a | grep -o Microsoft | uniq`" = x"Microsoft" ]; then
-    PLATFORM="Microsoft"
-elif [ x"`uname -a | grep -o Darwin | uniq`" = x"Darwin" ]; then
-    PLATFORM="Darwin"
+type less >/dev/null 2>&1 && alias less='less -R'
+type less >/dev/null 2>&1 && export PAGER='less'
+
+alias config="git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}"
+if [ -f /usr/share/bash-completion/completions/git ]; then
+    source /usr/share/bash-completion/completions/git
+    __git_complete config __git_main
 fi
 
-alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# }}}
+
+[ -s "${HOME}/.dotfiles-site/functions" ] && source "${HOME}/.dotfiles-site/functions"
+
+# PLATFORM=`uname -s`
+# if [ x"`uname -a | grep -o Microsoft | uniq`" = x"Microsoft" ]; then
+#     PLATFORM="Microsoft"
+# elif [ x"`uname -a | grep -o Darwin | uniq`" = x"Darwin" ]; then
+#     PLATFORM="Darwin"
+# fi
+
+# fzf {{{
+[ -f /usr/share/fzf/key-bindings.bash ] && . /usr/share/fzf/key-bindings.bash
+[ -f /usr/share/fzf/completion.bash ] && . /usr/share/fzf/completion.bash
+[ -f /usr/local/opt/fzf/shell/completion.bash ] && . /usr/local/opt/fzf/shell/completion.bash
+[ -f /opt/homebrew/opt/fzf/shell/completion.bash ] && . /opt/homebrew/opt/fzf/shell/completion.bash
+# }}}
+
+# Work Dirs {{{
+export wWork="${HOME}/work"
+export iceDockerRoot="${wWork}/dockerfiles/kazoo/composer/docker"
+
+alias icedock="cd ${wWork}/dockerfiles"
+alias work="cd $wWork"
+# }}}
+
+# WSL Dirs {{{
+if [ -d /mnt/c/hesaam ]; then
+    export wslHome="/mnt/c/Users/hesaam"
+    export wslDocument="${wHome}/Documents"
+    export wslWork="${wDocument}/work"
+
+    alias wslHome="cd ${wslHome}"
+    alias wslWork="cd ${wslWork}"
+fi
+# }}}
+
+# Progamming Lang Settings {{{
+export ERL_AFLAGS="-kernel shell_history enabled ${ERL_AFLAGS}"
+# }}}
 
 if [ -e ~/.bashlocal ]; then
     . ~/.bashlocal
 fi
 
-_info () {
-    printf "\e[1;36m::\e[1;37m $* \e[00m \n" >&2;
-}
 
-_error () {
-    printf "\e[1;37m::\e[1;31m $* \e[00m \n" >&2;
-}
-
-_die () {
-    _error "$1"
-    exit 1
-}
-
-# use it like `loop_do "$SOME_DIRS" 'do your thing;'`.
-# don't be evil though, eval is dangerous.
-# I like `fn` from https://github.com/spencertipping/bash-lambda
+## Here goes garbage forking stupid apps shitting their shits here:
 #
-# Also there are some other variation:
-# (1) if no lazy evaluation, no need for eval
-# function x()      { echo "Hello world";          }
-# function around() { echo before; $1; echo after; }
-# around x
-#
-# (2) same as above with args for x
-# function x()      { echo "x(): Passed $1 and $2";  }
-# function around() { echo before; "$@"; echo after; }
-# around x 1st 2nd
-#
-# (3) using sub-shell; "x" must be a command or function
-# function x() { pushd $1 ; git branch -vv | grep ": gone]" |  grep -v "\*" | awk '{ print $1; }' | xargs git branch -D ; popd; }
-# for dir in $COMMIO ; do ("x" $dir) ; done
-#
-#
-# Usage:
-# loop_do "applications/*/" "do_in_dir \$loop_i 'git status --branch -s'"
-# loop_do "applications/*/" "do_in_dir \$loop_i 'rm-if-gone'"
-# loop_do "$COMMIO_APPS" "do_in_dir \$loop_i 'git commit -a -m \"setting base_branch to 1.0\"'"
-# loop_do "$COMMIO_APPS" "do_in_dir \$loop_i 'nvim .circleci/config.yml'"
-function loop_do() {
-    local loop_i= stop= ret=
-    case $1 in
-        -stop)
-            stop=1
-            shift
-            ;;
-        *)
-            ;;
-    esac
-    for loop_i in $1 ; do
-        _info "doing $loop_i"
-        eval $2
-        ret=$?
-        [ -n "$stop" ] && [ $ret -ne 0 ] && _error "command failed" && return
-    done
-
-    return $ret
-}
-
-function do_in_dir() {
-    local ret=
-    if [ ! -d "$1" ]; then
-        echo "$1 does not exists"
-        return 1
-    fi
-    pushd "$1" > /dev/null
-    eval "$2"
-    ret=$?
-    popd > /dev/null
-    return $ret
-}
-
 # BEGIN_KITTY_SHELL_INTEGRATION
-if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+if test -n "$KITTY_INSTALLATION_DIR" -a -e "${KITTY_INSTALLATION_DIR}/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
 
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+. "${HOME}/.cargo/env"

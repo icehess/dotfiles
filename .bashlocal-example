@@ -1,6 +1,6 @@
-#! /bin/bash
+# -*- mode: sh-script; -*-
 
-# Set up ssh-agent
+# SSH Option 1: Vanilla ssh-agent {{{
 if [ -z "$(pgrep ssh-agent)" ]; then
     rm -rf /tmp/ssh-*
     eval $(ssh-agent -s) > /dev/null
@@ -9,32 +9,43 @@ else
     export SSH_AUTH_SOCK=$(find /tmp/ssh-* -name agent.*)
 fi
 
-if [ -f ~/.ssh/hesaam_github -a `ssh-add -l | grep -c hesaam_github` -eq 0 ]; then
-    ssh-add ~/.ssh/hesaam_github
+# if ssh into this machine, and you don't have ssh-agent this prints garbage warn
+if [ -f ~/.ssh/id_ed25519 -a `ssh-add -l | grep -c id_ed25519` -eq 0 ]; then
+    ssh-add ~/.ssh/id_ed25519
 fi
+# }}}
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# SSH Option 2: Keychain {{{
+eval $(keychain --eval --agents ssh id_ed25519 2>/dev/null)
+# }}}
 
-export iceWork="$HOME/work"
-export wWork="$iceWork"
+# 2600Hz Dirs {{{
+export wKazoo="${wWork}/2600hz"
+export KAZOO_SRC="${wKazoo}/kazoo-master"
+export DOCKER_ROOT="${wWork}/dockerfiles/kazoo/composer/docker"
+export KZ_DOCKER_ROOT="${wWork}/dockerfiles/kazoo/composer/docker"
 
-if [ x"$PLATFORM" = x"Microsoft" ]; then
-    export wHomeWinPath=$(cmd.exe /c 'echo %HOMEDRIVE%%HOMEPATH%' 2>&1 | tr -d '\r')
-    export wHome=$(wslpath -u "${wHomeWinPath}")
-    export wDocument="$wHome/Documents"
-    export wWork="$wDocument/work"
-fi
+alias kazoo="cd ${wKazoo}"
+alias kz="cd ${wKazoo}/kazoo-master; export KAZOO_SRC=${wKazoo}/kazoo-master"
+alias kz3="cd ${wKazoo}/kazoo-4.3; export KAZOO_SRC=${wKazoo}/kazoo-4.3"
+alias kz5="cd ${wKazoo}/kazoo-5.0; export KAZOO_SRC=${wKazoo}/kazoo-5.0"
+# }}}
 
-export w2222="$wWork/2600hz"
-export wKazoo="$w2222/kazoo"
-export KAZOO_SRC="$wKazoo/master"
+# Lang and tools setup {{{
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-alias icedock="cd $wWork/dockerfiles"
-alias icework="cd $iceWork"
-alias work="cd $wWork"
-alias 2222="cd $w2222"
-alias kazoo="cd $wKazoo"
-alias kz="cd $wKazoo/master; export KAZOO_SRC=$wKazoo/master"
-alias kz1="cd $wKazoo/4.1; export KAZOO_SRC=$wKazoo/4.1"
-alias kz2="cd $wKazoo/4.2; export KAZOO_SRC=$wKazoo/4.2"
-alias kz3="cd $wKazoo/4.3; export KAZOO_SRC=$wKazoo/4.3"
+# export PATH=$PATH:$(go env GOPATH)/bin
+# }}}
+
+# Kazoo Stuff {{{
+[ -f ${wKazoo}/kgit-completion.bash ] && . ${wKazoo}/kgit-completion.bash
+[ -f ${wKazoo}/kgit ] && alias kgit="${wKazoo}/kgit"
+
+# alias kzdoc="docker compose -f $DOCKER_ROOT/../kazoo-mac-docker/kazoo5-icehess/docker-compose.yml"
+alias kzdoc="COMPOSE_FILE=${DOCKER_ROOT}/../kazoo-mac-docker/kazoo5-icehess/docker-compose.yml docker"
+complete -F _docker kzdoc
+# }}}
