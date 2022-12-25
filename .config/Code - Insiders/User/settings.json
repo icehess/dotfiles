@@ -127,5 +127,10 @@
     "xml.server.binary.trustedHashes": [
         "df9d4e4bb37d291396983519e0fc0115e7dfef3ed755e359a2480e3e86b1ed4d"
     ],
-    "editor.largeFileOptimizations": false
+    "editor.largeFileOptimizations": false,
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
+    },
+    "workbench.startupEditor": "none",
+    "editor.wordWrap": "on"
 }

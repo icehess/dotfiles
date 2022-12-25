@@ -119,7 +119,7 @@ Plug 'vim-erlang/vim-erlang-tags'
 Plug 'vim-erlang/vim-erlang-omnicomplete'
 Plug 'vim-erlang/erlang-motions.vim'
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Use release branch (Recommend)
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
