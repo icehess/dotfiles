@@ -1,4 +1,5 @@
 # -*- mode: sh-script; -*-
+# vim: set ft=sh:
 
 # SSH Option 1: Vanilla ssh-agent {{{
 if [ -z "$(pgrep ssh-agent)" ]; then
@@ -39,6 +40,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # export PATH=$PATH:$(go env GOPATH)/bin
+
+# . ${HOME}/.asdf/asdf.sh
+# . ${HOME}/.asdf/completions/asdf.bash
+
+# # Hook direnv into your shell.
+# eval "$(asdf exec direnv hook bash)"
+
+# # A shortcut for asdf managed direnv.
+# direnv() { asdf exec direnv "$@"; }
 # }}}
 
 # Kazoo Stuff {{{
