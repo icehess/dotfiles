@@ -187,6 +187,9 @@ elif [ -f /opt/homebrew/etc/bash_completion.d/git-completion.bash ]; then
     source /opt/homebrew/etc/bash_completion.d/git-completion.bash
     __git_complete config __git_main
 fi
+
+alias gitAuthorMe='git config user.email "icehess@gmail.com"; git config user.name "Hesaam Farhang"'
+alias configAuthorMe='config config user.email "icehess@gmail.com"; config config user.name "Hesaam Farhang"'
 # }}}
 
 [ -s "${HOME}/.dotfiles-site/functions" ] && source "${HOME}/.dotfiles-site/functions"
