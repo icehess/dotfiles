@@ -214,7 +214,7 @@ alias work="cd $wWork"
 # }}}
 
 # WSL Dirs {{{
-if [ -d /mnt/c/hesaam ]; then
+if [ -d /mnt/c/Users/hesaam ]; then
     export wslHome="/mnt/c/Users/hesaam"
     export wslDocument="${wHome}/Documents"
     export wslWork="${wDocument}/work"
