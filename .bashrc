@@ -206,21 +206,48 @@ fi
 # }}}
 
 # Work Dirs {{{
-export wWork="${HOME}/work"
-export iceDockerRoot="${wWork}/dockerfiles/kazoo/composer/docker"
+export iceWork="${wWork:-${HOME}/work}"
+export iceDock="${wWork}/dockerfiles"
 
-alias icedock="cd ${wWork}/dockerfiles"
-alias work="cd $wWork"
+alias icework="cd ${iceWork}"
+alias icedock="cd ${iceDock}"
 # }}}
 
 # WSL Dirs {{{
-if [ -d /mnt/c/Users/hesaam ]; then
-    export wslHome="/mnt/c/Users/hesaam"
+export wslHome="${wslHome:-/mnt/c/Users/hesaam}"
+if [ -d "${wslHome}" ]; then
     export wslDocument="${wHome}/Documents"
     export wslWork="${wDocument}/work"
 
     alias wslHome="cd ${wslHome}"
     alias wslWork="cd ${wslWork}"
+fi
+# }}}
+
+# Kazoo Stuff {{{
+export wKazoo="${wKazoo:-${iceWork}/2600hz}"
+export KAZOO_SRC="${KAZOO_SRC:-${wKazoo}/kazoo-master}"
+export KZ_DOCKER_DIR="${KZ_DOCKER_DIR:-${iceDock}/kazoo}"
+export KZ_COMPOSE_DIR="${KZ_DOCKER_DIR}/compose"
+export KZ_DOCKER_DESKTOP="${KZ_DOCKER_DIR}/docker-desktop"
+export KZ_DOCKER_DESKTOP_FILE="${KZ_DOCKER_DESKTOP}/docker-compose.yml"
+
+alias kazoo="cd ${wKazoo}"
+alias kz="cd ${wKazoo}/kazoo-master; export KAZOO_SRC=${wKazoo}/kazoo-master"
+alias kz3="cd ${wKazoo}/kazoo-4.3; export KAZOO_SRC=${wKazoo}/kazoo-4.3"
+alias kz5="cd ${wKazoo}/kazoo-5.0; export KAZOO_SRC=${wKazoo}/kazoo-5.0"
+
+export APPEX_PATH="${wKazoo}/appex"
+alias appex="cd ${APPEX_PATH}"
+alias appexx="cd ${APPEX_PATH}/appex-marketplace"
+alias strapi="cd ${APPEX_PATH}/appex-strapi"
+
+alias kgit="${wKazoo}/kgit"
+[ -f ${wKazoo}/kgit-completion.bash ] && . ${wKazoo}/kgit-completion.bash
+
+if [ -f "$KZ_DOCKER_DESKTOP_FILE" ]; then
+    alias kzdoc="COMPOSE_FILE=${KZ_DOCKER_DESKTOP_FILE} docker"
+    complete -F _docker kzdoc
 fi
 # }}}
 

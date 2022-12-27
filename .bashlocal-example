@@ -20,18 +20,6 @@ fi
 eval $(keychain --eval --agents ssh id_ed25519 2>/dev/null)
 # }}}
 
-# 2600Hz Dirs {{{
-export wKazoo="${wWork}/2600hz"
-export KAZOO_SRC="${wKazoo}/kazoo-master"
-export DOCKER_ROOT="${wWork}/dockerfiles/kazoo/composer/docker"
-export KZ_DOCKER_ROOT="${wWork}/dockerfiles/kazoo/composer/docker"
-
-alias kazoo="cd ${wKazoo}"
-alias kz="cd ${wKazoo}/kazoo-master; export KAZOO_SRC=${wKazoo}/kazoo-master"
-alias kz3="cd ${wKazoo}/kazoo-4.3; export KAZOO_SRC=${wKazoo}/kazoo-4.3"
-alias kz5="cd ${wKazoo}/kazoo-5.0; export KAZOO_SRC=${wKazoo}/kazoo-5.0"
-# }}}
-
 # Lang and tools setup {{{
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
@@ -49,13 +37,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # # A shortcut for asdf managed direnv.
 # direnv() { asdf exec direnv "$@"; }
-# }}}
-
-# Kazoo Stuff {{{
-[ -f ${wKazoo}/kgit-completion.bash ] && . ${wKazoo}/kgit-completion.bash
-[ -f ${wKazoo}/kgit ] && alias kgit="${wKazoo}/kgit"
-
-# alias kzdoc="docker compose -f $DOCKER_ROOT/../kazoo-mac-docker/kazoo5-icehess/docker-compose.yml"
-alias kzdoc="COMPOSE_FILE=${DOCKER_ROOT}/../kazoo-mac-docker/kazoo5-icehess/docker-compose.yml docker"
-complete -F _docker kzdoc
 # }}}
