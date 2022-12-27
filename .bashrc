@@ -206,8 +206,8 @@ fi
 # }}}
 
 # Work Dirs {{{
-export iceWork="${wWork:-${HOME}/work}"
-export iceDock="${wWork}/dockerfiles"
+export iceWork="${iceWork:-${HOME}/work}"
+export iceDock="${iceWork}/dockerfiles"
 
 alias icework="cd ${iceWork}"
 alias icedock="cd ${iceDock}"
@@ -242,8 +242,8 @@ alias appex="cd ${APPEX_PATH}"
 alias appexx="cd ${APPEX_PATH}/appex-marketplace"
 alias strapi="cd ${APPEX_PATH}/appex-strapi"
 
-alias kgit="${wKazoo}/kgit"
-[ -f ${wKazoo}/kgit-completion.bash ] && . ${wKazoo}/kgit-completion.bash
+alias kgit="${wKazoo}/kazoo-master/kgit"
+[ -f ${wKazoo}/kazoo-master/kgit-completion.bash ] && . ${wKazoo}/kazoo-master/kgit-completion.bash
 
 if [ -f "$KZ_DOCKER_DESKTOP_FILE" ]; then
     alias kzdoc="COMPOSE_FILE=${KZ_DOCKER_DESKTOP_FILE} docker"
