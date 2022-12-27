@@ -19,12 +19,12 @@
 if [ -f /opt/homebrew/bin/brew ]; then
     # this is slow, that is why we export directly
     # eval "$(/opt/homebrew/bin/brew shellenv)"
-    export HOMEBREW_PREFIX="/usr/local";
-    export HOMEBREW_CELLAR="/usr/local/Cellar";
-    export HOMEBREW_REPOSITORY="/usr/local/Homebrew";
-    export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}";
-    export MANPATH="/usr/local/share/man${MANPATH+:$MANPATH}:";
-    export INFOPATH="/usr/local/share/info:${INFOPATH:-}";
+    export HOMEBREW_PREFIX="/opt/homebrew";
+    export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+    export HOMEBREW_REPOSITORY="/opt/homebrew";
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 elif [ -f /usr/local/bin/brew ]; then
     # this is slow, that is why we export directly
     # eval "$(/usr/local/bin/brew shellenv)"
