@@ -1,6 +1,6 @@
 [user]
-	name = Hesaam Farhang
-	email = icehess@gmail.com
+	; name = Hesaam Farhang
+	; email = icehess@gmail.com
 [core]
 	excludesfile = "$HOME/.gitignore_global"
 [push]
