@@ -1,0 +1,27 @@
+#!/bin/sh
+
+case "$(uname -a | tr '[:upper:]' '[:lower:]')" in
+    *microsoft*) _os="linux";;
+    *wsl*)       _os="linux";;
+    linux*)      _os="linux";;
+    darwin*)     _os="linux";;
+    freebsd*)    _os="linux";;
+    *)
+        echo "can not detect os, assuming linux"
+        _os="linux"
+esac
+
+if [ "${_os}" = "linux" ]; then
+    _has_xsel="$(type xsel 2>/dev/null)
+    _has_xclip="$(type xclip 2>/dev/null)
+    if [ -n "${_has_xsel}" ]; then
+        xsel --clipboard --input <&0;;
+    elif [ -n "${_has_xclip}" ]; then
+        xclip -selection clipboard -i <&0 ;;
+    else
+        echo "install xsel or xclip"
+        exit 1
+    fi
+elif [ "${_os}" = "darwin" ]; then
+    pbcopy <&0 ;;
+fi
