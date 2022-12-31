@@ -1,0 +1,13 @@
+[user]
+    name = Hesaam Farhang
+    email = hesaam@2600hz.com
+    ;
+    ; To force setting author/email per repo
+    ; but weirdly id causes global gitignore to not work
+    ; useConfigOnly = true
+[core]
+    excludesfile = "$HOME/.gitignore_global"
+[push]
+    default = simple
+[pull]
+    rebase = true
