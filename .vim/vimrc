@@ -44,6 +44,7 @@ Plug 'junegunn/gv.vim'
 
 if has("nvim-0.5.0")
     Plug 'nvim-lua/plenary.nvim'
+    Plug 'dstein64/vim-startuptime'
 endif
 
 " Dev Utilities

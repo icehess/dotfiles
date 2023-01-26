@@ -1,76 +1,117 @@
 -- Automatically install packer
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = vim.fn.system({
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
     "git",
     "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
   })
-  print("Installing packer close and reopen Neovim...")
-  vim.cmd([[packadd packer.nvim]])
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
-
--- Have packer use a popup window
-packer.init({
-  display = {
-    open_fn = function()
-      return require("packer.util").float({ border = "rounded" })
-    end,
+local opts = {
+  install = {
+    missing = true,
+    -- colorscheme = { lvim.colorscheme, "lunar", "habamax" },
   },
-})
+  ui = {
+    border = "rounded",
+  },
+  git = {
+    timeout = 120,
+  },
+  performance = {
+    rtp = {
+      reset = false,
+    },
+  }
+}
 
--- Install your plugins here
-return packer.startup(function(use)
-  -- Have packer manage itself
-  use { "wbthomason/packer.nvim" }
+local plugins = {
+  -- Have package manager manage itself
+  { "folke/lazy.nvim" },
+  { "dstein64/vim-startuptime" },
+
   -- Useful lua functions used by lots of plugins
-  use { "nvim-lua/plenary.nvim" }
+  { "nvim-lua/plenary.nvim" },
 
   -- Telescope
-  use { "nvim-telescope/telescope.nvim" }
+  {
+    "nvim-telescope/telescope.nvim",
+    config = function()
+      require("hesaam.core.telescope").setup()
+    end,
+    lazy = true,
+    event = "VeryLazy",
+    cmd = "Telescope"
+  },
 
   -- Theme
-  use({
+  {
     'rose-pine/neovim',
-    as = 'rose-pine',
-    config = function()
-      vim.cmd('colorscheme rose-pine')
-    end
-  })
-  use({ 'cocopon/iceberg.vim' })
+    name = 'rose-pine',
+    -- see hesaam/colors.lua
+    -- config = function()
+    --   vim.cmd('colorscheme rose-pine')
+    -- end
+  },
+  { 'cocopon/iceberg.vim' },
+  { 'kvrohit/rasmus.nvim' },
+  {
+    'rockyzhang24/arctic.nvim',
+    dependencies = {
+      { "rktjmp/lush.nvim" },
+    }
+  },
 
   -- Treesitter
-  use { 'nvim-treesitter/nvim-treesitter' }
-  use { 'nvim-treesitter/playground' }
+  { 'nvim-treesitter/nvim-treesitter' },
+  {
+    'nvim-treesitter/playground',
+    lazy = true,
+    event = "VeryLazy",
+  },
 
   -- Whichkey
-  use { "folke/which-key.nvim" }
+  {
+    "folke/which-key.nvim",
+    lazy = true,
+    event = "VeryLazy",
+    config = function()
+      require("hesaam.core.which-key").setup()
+    end,
+  },
 
-  use { "lewis6991/gitsigns.nvim" }
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("hesaam.core.gitsigns").setup()
+    end,
+    event = "BufRead",
+  },
 
-  use {
+  {
     'VonHeikemen/lsp-zero.nvim',
-    requires = {
+    lazy = true,
+    event = "VeryLazy",
+    config = function()
+      require("hesaam.core.lsp").setup()
+    end,
+    dependencies = {
       -- LSP Support
-      { 'neovim/nvim-lspconfig' },
-      { 'williamboman/mason.nvim' },
+      {
+        'neovim/nvim-lspconfig',
+      },
+      {
+        'williamboman/mason.nvim',
+        config = function()
+          require("hesaam.core.mason").setup()
+        end,
+      },
       { 'williamboman/mason-lspconfig.nvim' },
 
       -- for formatters and linters
@@ -88,11 +129,15 @@ return packer.startup(function(use)
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
     }
-  }
+  },
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
-end)
+  {
+    "kyazdani42/nvim-tree.lua",
+    -- event = "BufWinOpen",
+    -- cmd = "NvimTreeToggle",
+    config = function()
+      require("hesaam.core.nvimtree").setup()
+    end,
+  }
+}
+require("lazy").setup(plugins, opts)

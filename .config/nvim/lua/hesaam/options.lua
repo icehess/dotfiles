@@ -122,3 +122,7 @@ vim.opt.formatoptions:remove({ "c", "r", "o" })
 
 -- separate vim plugins from neovim in case vim still in use
 vim.opt.runtimepath:remove("/usr/share/vim/vimfiles")
+
+-- vim.opt.foldmethod = 'expr'
+-- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+-- vim.cmd [[set nofoldenable]]
