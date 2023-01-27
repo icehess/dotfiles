@@ -122,6 +122,27 @@ local plugins = {
     }
   },
 
+  -- Debugging
+  {
+    "mfussenegger/nvim-dap",
+    -- event = "BufWinEnter",
+    lazy = true,
+    event = "VeryLazy",
+    config = function()
+      require("hesaam.core.dap").setup()
+    end,
+  },
+
+  -- Debugger user interface
+  {
+    "rcarriga/nvim-dap-ui",
+    lazy = true,
+    event = "VeryLazy",
+    config = function()
+      require("hesaam.core.dap").setup_ui()
+    end,
+  },
+
   {
     "nvim-tree/nvim-tree.lua",
     -- event = "BufWinOpen",
@@ -155,8 +176,32 @@ local plugins = {
     branch = "main",
     enabled = true,
   },
-  { 'kdheepak/lazygit.nvim', lazy=true, event="VeryLazy" },
-  { 'tpope/vim-fugitive', lazy=true, event="VeryLazy" },
+  { 'kdheepak/lazygit.nvim', lazy = true, event = "VeryLazy" },
+  { 'tpope/vim-fugitive', lazy = true, event = "VeryLazy" },
   { "nvim-tree/nvim-web-devicons" },
+
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("hesaam.core.illuminate").setup()
+    end,
+    event = "VeryLazy",
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("hesaam.core.indentlines").setup()
+    end,
+  },
+
+  {
+    "lunarvim/bigfile.nvim",
+    -- config = function()
+    --   pcall(function()
+    --     require("bigfile").config(hesaam.bigfile.config)
+    --   end)
+    -- end,
+  },
 }
 require("lazy").setup(plugins, opts)
