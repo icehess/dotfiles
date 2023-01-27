@@ -29,16 +29,16 @@ vim.opt.mouse = "a"
 vim.opt.pumheight = 10
 
 -- we don't need to see things like -- INSERT -- anymore
-vim.opt.showmode = false
+-- vim.opt.showmode = false
 
 -- always show tabs
-vim.opt.showtabline = 0
+-- vim.opt.showtabline = 1
 
--- smart case
+-- Ignore case if search pattern is all lowercase, case-sensitive otherwise
 vim.opt.smartcase = true
 
 -- make indenting smarter again
-vim.opt.smartindent = true
+-- vim.opt.smartindent = true
 
 -- force all horizontal splits to go below current window
 vim.opt.splitbelow = true
@@ -56,7 +56,7 @@ vim.opt.termguicolors = true
 vim.opt.timeoutlen = 300
 
 -- enable persistent undo
-vim.opt.undofile = true
+-- vim.opt.undofile = true
 
 -- faster completion (4000ms default)
 vim.opt.updatetime = 300
@@ -66,6 +66,9 @@ vim.opt.writebackup = false
 
 -- convert tabs to spaces
 vim.opt.expandtab = true
+
+-- Prefer Unix
+vim.opt.fileformats = 'unix,dos,mac'
 
 -- the number of spaces inserted for each indentation
 vim.opt.shiftwidth = 2
@@ -94,8 +97,14 @@ vim.opt.wrap = true
 -- companion to wrap, don't split words
 vim.opt.linebreak = true
 
+-- No backups left after done editing
+-- vim.opt.nobackup = true
+
 -- minimal number of screen lines to keep above and below the cursor
 vim.opt.scrolloff = 8
+
+--  Change the terminal's title
+vim.opt.title = true
 
 -- minimal number of screen columns either side of cursor if wrap is `false`
 vim.opt.sidescrolloff = 8
@@ -104,7 +113,7 @@ vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17"
 
 -- which "horizontal" keys are allowed to travel to prev/next line
-vim.opt.whichwrap = "bs<>[]hl"
+-- vim.opt.whichwrap = "bs<>[]hl"
 
 -- flags to shorten vim messages, see :help 'shortmess'
 -- vim.opt.shortmess = "ilmnrx"
@@ -126,3 +135,4 @@ vim.opt.runtimepath:remove("/usr/share/vim/vimfiles")
 -- vim.opt.foldmethod = 'expr'
 -- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 -- vim.cmd [[set nofoldenable]]
+--

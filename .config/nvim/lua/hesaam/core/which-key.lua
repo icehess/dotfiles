@@ -105,6 +105,11 @@ M.config = {
     ["f"] = { "<cmd>Telescope find_files<CR>", "Find File" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     ["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
+    ["\\"] = {
+      name = "Useful Macros",
+      A = { "<cmd>set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>", "Use Tab instead of space" },
+      s = { "<cmd>setlocal invspell<CR>", "Highlight pell Check" },
+    },
     b = {
       name = "Buffers",
       -- j = { "<cmd>BufferLinePick<cr>", "Jump" },
