@@ -45,20 +45,20 @@ M.config = {
     theme = bubbles_theme,
     -- theme = 'ayu_dark',
     component_separators = '|',
-    -- section_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
-    globalstatus = false,
+    section_separators = { left = '', right = '' },
+    -- section_separators = { left = '', right = '' },
+    globalstatus = true,
   },
   sections = {
     lualine_a = {
-      { 'mode', separator = { left = '' }, right_padding = 2 },
+      { 'mode', right_padding = 2 } -- separator = { left = '' }, right_padding = 2 },
     },
     lualine_b = { 'filename', 'branch', 'diff' },
     lualine_c = { 'diagnostics' },
     lualine_x = {},
     lualine_y = { search_result, 'filetype', 'progress' },
     lualine_z = {
-      { 'location', separator = { right = '' }, left_padding = 2 },
+      { 'location', left_padding = 2 } -- separator = { right = '' }, left_padding = 2 },
     },
   },
   -- inactive_sections = {

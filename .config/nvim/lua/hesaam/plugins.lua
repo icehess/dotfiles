@@ -165,5 +165,14 @@ local plugins = {
       require("hesaam.core.lualine").setup()
     end,
   },
+
+  {
+    "akinsho/bufferline.nvim",
+    config = function()
+      require("hesaam.core.bufferline").setup()
+    end,
+    branch = "main",
+    enabled = false,
+  },
 }
 require("lazy").setup(plugins, opts)
