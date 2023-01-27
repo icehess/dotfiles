@@ -49,6 +49,7 @@ M.config = {
   pickers = {
     find_files = {
       hidden = true,
+      no_ignore = true,
     },
     live_grep = {
       --@usage don't include the filename in the search results

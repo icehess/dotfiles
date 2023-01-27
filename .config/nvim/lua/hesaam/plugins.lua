@@ -34,7 +34,7 @@ local opts = {
 local plugins = {
   -- Have package manager manage itself
   { "folke/lazy.nvim" },
-  { "dstein64/vim-startuptime" },
+  -- { "dstein64/vim-startuptime" },
 
   -- Useful lua functions used by lots of plugins
   { "nvim-lua/plenary.nvim" },

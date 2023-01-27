@@ -124,6 +124,8 @@ M.config = {
       l = { "<cmd>BufferLineCloseRight<cr>", "Close all to the right" },
       D = { "<cmd>BufferLineSortByDirectory<cr>", "Sort by directory" },
       L = { "<cmd>BufferLineSortByExtension<cr>", "Sort by language" },
+      s = { "<cmd>lua require('telescope.builtin').live_grep({grep_open_files = true})<cr>", "Grep Open Files" },
+      S = { "<cmd>lua require('telescope.builtin').grep_string({grep_open_files = true})<cr>", "Grep current string in open files" },
     },
 
     -- " Available Debug Adapters:
@@ -200,9 +202,12 @@ M.config = {
     },
     s = {
       name = "Search",
-      f = { "<cmd>Telescope find_files<cr>", "Find File" },
+      b = { "<cmd>lua require('telescope.builtin').live_grep({grep_open_files = true})<cr>", "Grep Open Files" },
+      B = { "<cmd>lua require('telescope.builtin').grep_string({grep_open_files = true})<cr>", "Grep current string in open files" },
+      f = { "<cmd>Telescope find_files<cr>", "Fuzzy Open File" },
       F = { "<cmd>Telescope filetypes<cr>", "Set filetype" },
       g = { "<cmd>Telescope grep_string<cr>", "Grep current string" },
+      G = { "<cmd>Telescope grep_string<cr>", "Grep current string" },
       h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
       H = { "<cmd>Telescope highlights<cr>", "Find highlight groups" },
       m = { "<cmd>Telescope marks<cr>", "Marks" },
@@ -210,6 +215,7 @@ M.config = {
       r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
       R = { "<cmd>Telescope registers<cr>", "Registers" },
       s = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
+      S = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       C = { "<cmd>Telescope commands<cr>", "Commands" },
       c = { "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", "Colorscheme" },
