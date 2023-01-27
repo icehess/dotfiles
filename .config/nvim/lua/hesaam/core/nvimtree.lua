@@ -1,7 +1,7 @@
 local M = {}
 
 M.config = {
-      auto_reload_on_write = false,
+      auto_reload_on_write = true,
       disable_netrw = false,
       hijack_cursor = false,
       hijack_netrw = true,
@@ -113,7 +113,7 @@ M.config = {
       actions = {
         use_system_clipboard = true,
         change_dir = {
-          enable = true,
+          enable = false,
           global = false,
           restrict_above_cwd = false,
         },
@@ -144,7 +144,7 @@ M.config = {
           },
         },
         remove_file = {
-          close_window = true,
+          close_window = false,
         },
       },
       trash = {

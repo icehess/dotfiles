@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 local opts = {
   install = {
     missing = true,
-    -- colorscheme = { lvim.colorscheme, "lunar", "habamax" },
+    colorscheme = { "rasmus", "habamax", "lunar" },
   },
   ui = {
     border = "rounded",
@@ -47,7 +47,13 @@ local plugins = {
     end,
     lazy = true,
     event = "VeryLazy",
-    cmd = "Telescope"
+    cmd = "Telescope",
+    dependencies = {
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+      }
+    }
   },
 
   -- Theme
