@@ -49,9 +49,6 @@ vim.opt.splitright = true
 -- creates a swapfile
 vim.opt.swapfile = false
 
--- set term gui colors (most terminals support this)
-vim.opt.termguicolors = true
-
 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.timeoutlen = 300
 

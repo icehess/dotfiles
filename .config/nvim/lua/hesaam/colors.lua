@@ -3,6 +3,9 @@ require('rose-pine').setup({
   dark_variant = 'main',
 })
 
+-- set term gui colors (most terminals support this)
+vim.opt.termguicolors = true
+
 function ColorMyPencils(color, background, nobg)
   color = color or "rasmus"
   background = background or "dark"
