@@ -7,7 +7,6 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   group = "restorCursor",
   pattern = "*",
   callback = function ()
-    print 'hello'
     if vim.fn.line("'\"") <= vim.fn.line("$") then
       vim.cmd[[normal! g`"]]
     end

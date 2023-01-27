@@ -29,7 +29,7 @@ vim.opt.mouse = "a"
 vim.opt.pumheight = 10
 
 -- we don't need to see things like -- INSERT -- anymore
--- vim.opt.showmode = false
+vim.opt.showmode = false
 
 -- always show tabs
 -- vim.opt.showtabline = 1

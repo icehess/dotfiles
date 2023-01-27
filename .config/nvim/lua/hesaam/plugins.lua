@@ -38,6 +38,7 @@ local plugins = {
 
   -- Useful lua functions used by lots of plugins
   { "nvim-lua/plenary.nvim" },
+  { "nvim-lua/popup.nvim" },
 
   -- Telescope
   {
@@ -144,6 +145,25 @@ local plugins = {
     config = function()
       require("hesaam.core.nvimtree").setup()
     end,
-  }
+  },
+
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    event = "VeryLazy",
+  },
+  {
+    "numToStr/Comment.nvim",
+    event = "BufRead",
+    config = function()
+      require("hesaam.core.comment").setup()
+    end,
+  },
+
+  {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("hesaam.core.lualine").setup()
+    end,
+  },
 }
 require("lazy").setup(plugins, opts)
