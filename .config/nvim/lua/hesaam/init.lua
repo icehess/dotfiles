@@ -1,4 +1,5 @@
 require "hesaam.options"
 require "hesaam.keymaps"
 require "hesaam.plugins"
+require "hesaam.commands"
 require "hesaam.colors"
