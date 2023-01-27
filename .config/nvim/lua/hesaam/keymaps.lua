@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
 
---  vim.keymap.set('n', '<leader>t', builtin.find_files, {})
 -- Emacs-like bindings in insert mode
 vim.keymap.set('i', '<C-e>', '<C-o>$')
 vim.keymap.set('i', '<C-a>', '<C-o>^')

@@ -110,10 +110,6 @@ function M.setup()
 
   telescope.setup(M.config)
 
-  local builtin = require('telescope.builtin')
-  vim.keymap.set('n', '<leader>t', builtin.find_files, {})
-  vim.keymap.set('n', '\\\\', builtin.buffers, {})
-
   if M.config.extensions and M.config.extensions.fzf then
     pcall(function()
       require("telescope").load_extension "fzf"

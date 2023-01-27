@@ -7,7 +7,7 @@ require('rose-pine').setup({
 vim.opt.termguicolors = true
 
 function ColorMyPencils(color, background, nobg)
-  color = color or "rasmus"
+  color = color or "habamax"
   background = background or "dark"
   nobg = nobg or true
   vim.cmd.colorscheme(color)

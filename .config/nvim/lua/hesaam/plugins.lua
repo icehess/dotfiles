@@ -58,30 +58,14 @@ local plugins = {
   },
 
   -- Theme
-  {
-    'rose-pine/neovim',
-    name = 'rose-pine',
-    -- see hesaam/colors.lua
-    -- config = function()
-    --   vim.cmd('colorscheme rose-pine')
-    -- end
-  },
+  { 'rose-pine/neovim', name = 'rose-pine' },
   { 'cocopon/iceberg.vim' },
   { 'kvrohit/rasmus.nvim' },
-  {
-    'rockyzhang24/arctic.nvim',
-    dependencies = {
-      { "rktjmp/lush.nvim" },
-    }
-  },
+  { 'rockyzhang24/arctic.nvim', dependencies = { { "rktjmp/lush.nvim" } } },
 
   -- Treesitter
   { 'nvim-treesitter/nvim-treesitter' },
-  {
-    'nvim-treesitter/playground',
-    lazy = true,
-    event = "VeryLazy",
-  },
+  { 'nvim-treesitter/playground', lazy = true, event = "VeryLazy", },
 
   -- Whichkey
   {
@@ -139,7 +123,7 @@ local plugins = {
   },
 
   {
-    "kyazdani42/nvim-tree.lua",
+    "nvim-tree/nvim-tree.lua",
     -- event = "BufWinOpen",
     -- cmd = "NvimTreeToggle",
     config = function()
@@ -147,10 +131,7 @@ local plugins = {
     end,
   },
 
-  {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    event = "VeryLazy",
-  },
+  { "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
   {
     "numToStr/Comment.nvim",
     event = "BufRead",
@@ -172,7 +153,10 @@ local plugins = {
       require("hesaam.core.bufferline").setup()
     end,
     branch = "main",
-    enabled = false,
+    enabled = true,
   },
+  { 'kdheepak/lazygit.nvim', lazy=true, event="VeryLazy" },
+  { 'tpope/vim-fugitive', lazy=true, event="VeryLazy" },
+  { "nvim-tree/nvim-web-devicons" },
 }
 require("lazy").setup(plugins, opts)
