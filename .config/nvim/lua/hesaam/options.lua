@@ -44,6 +44,8 @@ vim.opt.smartcase = true
 -- force all horizontal splits to go below current window
 vim.opt.splitbelow = true
 
+vim.opt.textwidth = 90
+
 -- force all vertical splits to go to the right of current window
 vim.opt.splitright = true
 
