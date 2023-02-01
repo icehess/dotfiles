@@ -180,20 +180,20 @@ local plugins = {
   { 'tpope/vim-fugitive', lazy = true, event = "VeryLazy" },
   { "nvim-tree/nvim-web-devicons" },
 
-  {
-    "RRethy/vim-illuminate",
-    config = function()
-      require("hesaam.core.illuminate").setup()
-    end,
-    event = "VeryLazy",
-  },
+  -- {
+  --   "RRethy/vim-illuminate",
+  --   config = function()
+  --     require("hesaam.core.illuminate").setup()
+  --   end,
+  --   event = "VeryLazy",
+  -- },
 
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("hesaam.core.indentlines").setup()
-    end,
-  },
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   config = function()
+  --     require("hesaam.core.indentlines").setup()
+  --   end,
+  -- },
 
   {
     "lunarvim/bigfile.nvim",

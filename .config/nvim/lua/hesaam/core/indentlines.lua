@@ -3,7 +3,7 @@ local M = {}
 local icons = require "hesaam.icons"
 
 M.config = {
-  enabled = true,
+  enabled = false,
   buftype_exclude = { "terminal", "nofile" },
   filetype_exclude = {
     "help",
@@ -29,6 +29,8 @@ function M.setup()
     return
   end
 
+  vim.g.indent_blankline_enabled = false
+  vim.cmd[[set g:indent_blankline_enabled = false]]
   indentlines.setup(M.config)
 end
 
