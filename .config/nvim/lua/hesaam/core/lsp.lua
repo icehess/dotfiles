@@ -86,8 +86,10 @@ function M.setup()
   lsp_zero.setup()
 
   vim.diagnostic.config({
-    virtual_text = true,
-    float = false,
+    virtual_text = false,
+    float = {
+      border = "single",
+    },
   })
 end
 
