@@ -6,9 +6,6 @@ M.config = {
       hijack_cursor = false,
       hijack_netrw = true,
       hijack_unnamed_buffer_when_opening = false,
-      ignore_buffer_on_setup = false,
-      open_on_setup = false,
-      open_on_setup_file = false,
       sort_by = "name",
       root_dirs = {},
       prefer_startup_root = false,
@@ -80,11 +77,6 @@ M.config = {
         debounce_delay = 15,
         update_root = true,
         ignore_list = {},
-      },
-      ignore_ft_on_setup = {
-        "startify",
-        "dashboard",
-        "alpha",
       },
       diagnostics = {
         show_on_dirs = false,

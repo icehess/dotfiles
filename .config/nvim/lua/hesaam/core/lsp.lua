@@ -22,7 +22,7 @@ M.config = {
     }
   },
   set_preferences = {
-    suggest_lsp_servers = true,
+    suggest_lsp_servers = false,
     sign_icons = {
       error = 'E',
       warn = 'W',

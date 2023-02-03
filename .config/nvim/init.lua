@@ -7,8 +7,8 @@ function _G.join_paths(...)
   return result
 end
 
--- if vim.fn.has "nvim-0.8" ~= 1 then
-if os.getenv "GIVE_ME_SHINY_NVIM" ~= 'true' then
+if vim.fn.has "nvim-0.8" ~= 1 then
+-- if os.getenv "GIVE_ME_SHINY_NVIM" ~= 'true' then
   vim.opt.rtp:remove(join_paths(vim.call("stdpath", "config")))
   vim.opt.rtp:remove(join_paths(vim.call("stdpath", "config"), "plugin"))
   vim.opt.rtp:remove(join_paths(vim.call("stdpath", "config"), "after"))
