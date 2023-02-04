@@ -57,6 +57,21 @@ local plugins = {
     }
   },
 
+  { "ibhagwan/fzf-lua", lazy = true },
+  {
+    "junegunn/fzf.vim",
+    lazy = true,
+    event = "VeryLazy",
+    dependencies = {
+      {
+        "junegunn/fzf",
+        -- config = function()
+        --   vim.exec("fzf#install()")
+        -- end
+      },
+    }
+  },
+
   -- Theme
   { 'rose-pine/neovim', name = 'rose-pine' },
   { 'cocopon/iceberg.vim' },
