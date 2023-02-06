@@ -29,6 +29,12 @@ vim.opt.mousemoveevent = true
 -- pop up menu height
 vim.opt.pumheight = 10
 
+-- Show whitespace as special chars - see listchars
+vim.opt.list = true
+
+-- Unicode characters for various things
+vim.opt.listchars = "tab:» ,extends:›,precedes:‹,nbsp:·,trail:·"
+
 -- we don't need to see things like -- INSERT -- anymore
 vim.opt.showmode = false
 

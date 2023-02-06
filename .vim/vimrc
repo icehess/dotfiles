@@ -653,15 +653,15 @@ highlight SpecialKey ctermbg=Yellow guibg=Yellow
 "" Make sure we highlight extra whitespace in the most annoying way possible.
 highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
 match ExtraWhitespace /\s\+$/
-augroup ColorWhiteAnnoying
-    " Previous approach for trailing white spaces
-    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
+" augroup ColorWhiteAnnoying
+"     " Previous approach for trailing white spaces
+"     autocmd ColorScheme * highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
 
-    " new way?
-    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-augroup END
+"     " new way?
+"     autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+"     autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+"     autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+" augroup END
 
 "" Make menu selections visible
 " highlight PmenuSel ctermfg=black ctermbg=magenta

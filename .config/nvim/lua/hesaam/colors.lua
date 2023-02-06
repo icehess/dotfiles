@@ -21,3 +21,10 @@ function ColorMyPencils(color, background, nobg)
 end
 
 ColorMyPencils()
+
+-- Make sure we highlight extra whitespace in the most annoying way possible.
+vim.cmd [[highlight SpecialKey ctermbg=Yellow guibg=Yellow]]
+
+-- Make trailing spaces very visible
+vim.cmd [[highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow]]
+vim.cmd [[match ExtraWhitespace /\s\+$/]]
