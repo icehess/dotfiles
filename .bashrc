@@ -202,6 +202,7 @@ alias configAuthorMe='config config user.email "icehess@gmail.com"; config confi
 # fi
 
 # fzf {{{
+[ -f ~/.fzf.bash ] && . ~/.fzf.bash
 [ -f /usr/share/fzf/key-bindings.bash ] && . /usr/share/fzf/key-bindings.bash
 [ -f /usr/share/fzf/completion.bash ] && . /usr/share/fzf/completion.bash
 [ -f /usr/local/opt/fzf/shell/key-bindings.bash ] && . /usr/local/opt/fzf/shell/key-bindings.bash
