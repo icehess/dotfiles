@@ -102,6 +102,7 @@ local plugins = {
 
   {
     'VonHeikemen/lsp-zero.nvim',
+    commit = 'aba5026d25694851ad74e9e6d1439063bfcb88b8',
     lazy = true,
     event = "VeryLazy",
     config = function()
@@ -125,10 +126,10 @@ local plugins = {
 
       -- Autocompletion
       { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-buffer' },
       { 'hrsh7th/cmp-path' },
       { 'saadparwaiz1/cmp_luasnip' },
-      { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-nvim-lua' },
 
       -- Snippets

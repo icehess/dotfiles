@@ -5,21 +5,29 @@ M.config = {
     'erlangls',
     'eslint',
     'rust_analyzer',
-    'sumneko_lua',
+    'lua_ls',
     'tsserver',
     'vimls',
   },
-  opts = {
-    border = "rounded",
-  },
-  sumneko_lua = {
+  lua_ls = {
     settings = {
       Lua = {
         diagnostics = {
+          -- Get the language server to recognize the `vim` global
           globals = { 'vim' }
         }
       }
     }
+  },
+  erlangls = {
+    cmd = {
+      "erlang_ls",
+      "--log-level",
+      "info",
+    }
+  },
+  opts = {
+    border = "rounded",
   },
   set_preferences = {
     suggest_lsp_servers = false,
@@ -41,8 +49,8 @@ function M.setup()
   lsp_zero.preset("recommended")
   lsp_zero.ensure_installed(M.config.ensure_installed)
 
-  -- Fix Undefined global 'vim'
-  lsp_zero.configure('sumneko_lua', M.config.sumneko_lua)
+  lsp_zero.configure('lua_ls', M.config.lua_ls)
+  lsp_zero.configure('erlangls', M.config.erlangls)
 
   -- local cmp_select = {behavior = cmp.SelectBehavior.Select}
   -- local cmp_mappings = lsp.defaults.cmp_mappings({
