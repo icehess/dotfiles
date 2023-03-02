@@ -22,8 +22,8 @@ M.config = {
   erlangls = {
     cmd = {
       "erlang_ls",
-      "--log-level",
-      "info",
+      -- "--log-level",
+      -- "debug",
     }
   },
   opts = {
