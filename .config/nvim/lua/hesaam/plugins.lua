@@ -79,7 +79,12 @@ local plugins = {
   { 'rockyzhang24/arctic.nvim', dependencies = { { "rktjmp/lush.nvim" } } },
 
   -- Treesitter
-  { 'nvim-treesitter/nvim-treesitter' },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    config = function ()
+      require("hesaam.core.treesitter").setup()
+    end
+  },
   { 'nvim-treesitter/playground', lazy = true, event = "VeryLazy", },
 
   -- Whichkey

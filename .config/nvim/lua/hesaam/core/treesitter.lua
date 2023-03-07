@@ -10,6 +10,7 @@ M.config = {
     "lua",
     "rust",
     "erlang",
+    "elixir",
     "python",
     "tsx",
     "css",
@@ -101,12 +102,13 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, treesitter_configs = pcall(require, "lsp_zero")
+  local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
   if not status_ok then
     return
   end
 
-  treesitter_configs.setup(M.config)
+  local opts = vim.deepcopy(M.config)
+  treesitter_configs.setup(opts)
 end
 
 return M
