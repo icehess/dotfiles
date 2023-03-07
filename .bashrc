@@ -15,6 +15,7 @@
 [ -r "${HOME}/.cargo/env" ] && . "${HOME}/.cargo/env"
 
 [ -d "$HOME/bin" ] && export PATH="$HOME/bin:${PATH}"
+[ -d "$HOME/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
 
 if [ -f /opt/homebrew/bin/brew ]; then
     # this is slow, that is why we export directly
