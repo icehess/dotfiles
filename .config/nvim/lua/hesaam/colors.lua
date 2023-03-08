@@ -7,7 +7,7 @@ require('rose-pine').setup({
 vim.opt.termguicolors = true
 
 function ColorMyPencils(color, background, nobg)
-  color = color or "habamax"
+  color = color or "blue" -- or "habamax"
   background = background or "dark"
   nobg = nobg or true
   vim.cmd.colorscheme(color)
@@ -16,6 +16,7 @@ function ColorMyPencils(color, background, nobg)
   if nobg then
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
   end
 
 end
