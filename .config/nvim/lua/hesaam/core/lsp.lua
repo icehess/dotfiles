@@ -99,6 +99,28 @@ function M.setup()
       border = "single",
     },
   })
+
+  local null_status_ok, null_ls = pcall(require, "null-ls")
+  if not null_status_ok then
+    return
+  end
+
+  local null_opts = lsp_zero.build_options('null-ls', {})
+
+  null_ls.setup({
+    on_attach = function(client, bufnr)
+      null_opts.on_attach(client, bufnr)
+      ---
+      -- you can add other stuff here....
+      ---
+    end,
+    sources = {
+      -- Replace these with the tools you have installed
+      null_ls.builtins.formatting.prettier,
+      null_ls.builtins.diagnostics.eslint,
+      null_ls.builtins.formatting.stylua,
+    }
+  })
 end
 
 return M

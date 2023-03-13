@@ -87,7 +87,8 @@ M.config = {
         dotfiles = false,
         git_clean = false,
         no_buffer = false,
-        custom = { "node_modules", "\\.cache" },
+        -- custom = { "node_modules", "\\.cache" },
+        custom = {},
         exclude = {},
       },
       filesystem_watchers = {

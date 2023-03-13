@@ -217,6 +217,15 @@ local plugins = {
   -- },
 
   {
+    "Darazaki/indent-o-matic",
+    lazy = true,
+    event = "VeryLazy",
+    confg = function ()
+      require("hesaam.core.indent-o-matic").setup()
+    end
+  },
+
+  {
     "lunarvim/bigfile.nvim",
     -- config = function()
     --   pcall(function()
