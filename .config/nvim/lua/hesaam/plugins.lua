@@ -217,6 +217,8 @@ local plugins = {
   -- },
 
   {
+    -- other options:
+    -- * https://github.com/NMAC427/guess-indent.nvim
     "Darazaki/indent-o-matic",
     lazy = true,
     event = "VeryLazy",
