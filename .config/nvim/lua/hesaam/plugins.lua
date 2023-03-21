@@ -57,7 +57,7 @@ local plugins = {
     }
   },
 
-  { "ibhagwan/fzf-lua", lazy = true },
+  { "ibhagwan/fzf-lua",         lazy = true },
   {
     "junegunn/fzf.vim",
     lazy = true,
@@ -73,7 +73,7 @@ local plugins = {
   },
 
   -- Theme
-  { 'rose-pine/neovim', name = 'rose-pine' },
+  { 'rose-pine/neovim',         name = 'rose-pine' },
   { 'cocopon/iceberg.vim' },
   { 'kvrohit/rasmus.nvim' },
   { 'rockyzhang24/arctic.nvim', dependencies = { { "rktjmp/lush.nvim" } } },
@@ -81,11 +81,11 @@ local plugins = {
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
-    config = function ()
+    config = function()
       require("hesaam.core.treesitter").setup()
     end
   },
-  { 'nvim-treesitter/playground', lazy = true, event = "VeryLazy", },
+  { 'nvim-treesitter/playground',                  lazy = true,       event = "VeryLazy", },
 
   -- Whichkey
   {
@@ -197,8 +197,8 @@ local plugins = {
     branch = "main",
     enabled = true,
   },
-  { 'kdheepak/lazygit.nvim', lazy = true, event = "VeryLazy" },
-  { 'tpope/vim-fugitive', lazy = true, event = "VeryLazy" },
+  { 'kdheepak/lazygit.nvim',      lazy = true, event = "VeryLazy" },
+  { 'tpope/vim-fugitive',         lazy = true, event = "VeryLazy" },
   { "nvim-tree/nvim-web-devicons" },
 
   -- {
@@ -222,11 +222,13 @@ local plugins = {
     "Darazaki/indent-o-matic",
     lazy = true,
     event = "VeryLazy",
-    confg = function ()
+    confg = function()
       require("hesaam.core.indent-o-matic").setup()
     end
   },
 
+  -- This plugin disables certain features if the opened file is big. File size and features to disable are configurable.
+  -- Automatic features/integrations include: LSP, treesitter, indent_blankline, illuminate.vim NoMatchParen, syntax off, ... (full list at the end)
   {
     "lunarvim/bigfile.nvim",
     -- config = function()
@@ -234,6 +236,21 @@ local plugins = {
     --     require("bigfile").config(hesaam.bigfile.config)
     --   end)
     -- end,
+  },
+
+  -- winbar that shows file path and LSP context
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    lazy = true,
+    event = "VeryLazy",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+    },
+    opts = {
+      -- configurations go here
+      show_navic = true,
+    },
   },
 }
 require("lazy").setup(plugins, opts)
