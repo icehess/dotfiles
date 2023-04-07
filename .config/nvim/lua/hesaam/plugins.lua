@@ -252,5 +252,13 @@ local plugins = {
       show_navic = true,
     },
   },
+
+  {
+    'andymass/vim-matchup',
+    config = function()
+      -- may set any options here
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end
+  },
 }
 require("lazy").setup(plugins, opts)

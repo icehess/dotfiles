@@ -1,3 +1,4 @@
+vim.cmd [[let g:loaded_matchit = 1]]
 -- creates a backup file
 vim.opt.backup = false
 
@@ -141,7 +142,8 @@ vim.opt.runtimepath:remove("/usr/share/vim/vimfiles")
 -- for lsp-zerom signle column
 vim.opt.signcolumn = "yes"
 
--- vim.opt.foldmethod = 'expr'
--- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 -- vim.cmd [[set nofoldenable]]
+vim.opt.foldlevelstart = 99
 --
