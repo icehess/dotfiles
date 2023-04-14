@@ -8,7 +8,13 @@ vim.opt.termguicolors = true
 
 vim.g.gruvbox_material_background = 'hard'
 vim.g.gruvbox_material_better_performance = 1
-vim.g.gruvbox_material_foreground = 'material' -- or mix, original
+vim.g.gruvbox_material_foreground = 'original' -- material or mix, original
+vim.g.gruvbox_material_diagnostic_text_highlight = 1
+vim.g.gruvbox_material_current_word = 'bold' -- or bold, underline, italic
+vim.g.gruvbox_material_enable_bold = 1
+vim.g.gruvbox_material_diagnostic_text_highlight = 1
+vim.g.gruvbox_material_diagnostic_line_highlight = 1
+vim.g.gruvbox_material_transparent_background = 2
 
 function ColorMyPencils(color, background, nobg)
   color = color or "gruvbox-material" -- "blue" -- or "habamax"
