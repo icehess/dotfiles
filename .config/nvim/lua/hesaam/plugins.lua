@@ -77,6 +77,8 @@ local plugins = {
   { 'cocopon/iceberg.vim' },
   { 'kvrohit/rasmus.nvim' },
   { 'rockyzhang24/arctic.nvim', dependencies = { { "rktjmp/lush.nvim" } } },
+  { 'kyazdani42/blue-moon' },
+  { 'sainnhe/gruvbox-material' },
 
   -- Treesitter
   {

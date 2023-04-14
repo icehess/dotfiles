@@ -6,12 +6,16 @@ require('rose-pine').setup({
 -- set term gui colors (most terminals support this)
 vim.opt.termguicolors = true
 
+vim.g.gruvbox_material_background = 'hard'
+vim.g.gruvbox_material_better_performance = 1
+vim.g.gruvbox_material_foreground = 'material' -- or mix, original
+
 function ColorMyPencils(color, background, nobg)
-  color = color or "blue" -- or "habamax"
+  color = color or "gruvbox-material" -- "blue" -- or "habamax"
   background = background or "dark"
   nobg = nobg or true
-  vim.cmd.colorscheme(color)
   vim.o.background = background
+  vim.cmd.colorscheme(color)
 
   if nobg then
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
