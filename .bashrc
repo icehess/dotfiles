@@ -248,6 +248,7 @@ export APPEX_PATH="${wKazoo}/appex"
 alias appex="cd ${APPEX_PATH}"
 alias appexx="cd ${APPEX_PATH}/appex-marketplace"
 alias strapi="cd ${APPEX_PATH}/appex-strapi"
+alias market="cd ${APPEX_PATH}/market-ecommerce-server"
 
 alias kgit="${wKazoo}/kazoo-master/kgit"
 [ -f ${wKazoo}/kazoo-master/kgit-completion.bash ] && . ${wKazoo}/kazoo-master/kgit-completion.bash
