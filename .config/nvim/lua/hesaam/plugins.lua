@@ -262,5 +262,7 @@ local plugins = {
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end
   },
+
+{ 'duane9/nvim-rg' },
 }
 require("lazy").setup(plugins, opts)

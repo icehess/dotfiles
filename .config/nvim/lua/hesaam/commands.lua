@@ -16,11 +16,11 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   end
 })
 
-vim.api.nvim_create_user_command('Rg', function(opts)
-  local search_dirs = opts.fargs
-  require('telescope.builtin').live_grep({ search_dirs = search_dirs })
-end, {
-  nargs = "*",
-  force = true,
-  desc = "Search using riprep via Telescope in these paths"
-})
+-- vim.api.nvim_create_user_command('Rg', function(opts)
+--   local search_dirs = opts.fargs
+--   require('telescope.builtin').live_grep({ search_dirs = search_dirs })
+-- end, {
+--   nargs = "*",
+--   force = true,
+--   desc = "Search using riprep via Telescope in these paths"
+-- })
