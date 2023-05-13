@@ -109,9 +109,7 @@ local plugins = {
 
   {
     'VonHeikemen/lsp-zero.nvim',
-    commit = 'aba5026d25694851ad74e9e6d1439063bfcb88b8',
-    lazy = true,
-    event = "VeryLazy",
+    branch = 'v2.x',
     config = function()
       require("hesaam.core.lsp").setup()
     end,
