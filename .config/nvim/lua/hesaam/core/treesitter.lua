@@ -3,7 +3,7 @@ local M = {}
 M.config = {
   -- A list of parser names, or "all"
   ensure_installed = {
-    "help",
+    "vimdoc",
     "javascript",
     "typescript",
     "c",
