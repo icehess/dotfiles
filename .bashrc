@@ -244,11 +244,9 @@ alias kz="cd ${wKazoo}/kazoo-master; export KAZOO_SRC=${wKazoo}/kazoo-master"
 alias kz3="cd ${wKazoo}/kazoo-4.3; export KAZOO_SRC=${wKazoo}/kazoo-4.3"
 alias kz5="cd ${wKazoo}/kazoo-5.0; export KAZOO_SRC=${wKazoo}/kazoo-5.0"
 
-export APPEX_PATH="${wKazoo}/appex"
-alias appex="cd ${APPEX_PATH}"
-alias appexx="cd ${APPEX_PATH}/appex-marketplace"
-alias strapi="cd ${APPEX_PATH}/appex-strapi"
-alias market="cd ${APPEX_PATH}/market-ecommerce-server"
+alias appex="cd ${wKazoo}/appex-server"
+alias appexx="cd ${wKazoo}/appex-marketplace"
+alias market="cd ${wKazoo}/market-ecommerce-server"
 
 alias kgit="${wKazoo}/kazoo-master/kgit"
 [ -f ${wKazoo}/kazoo-master/kgit-completion.bash ] && . ${wKazoo}/kazoo-master/kgit-completion.bash
