@@ -36,6 +36,19 @@ elif [ -f /usr/local/bin/brew ]; then
     export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
     export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 fi
+
+if [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
+    . /usr/local/opt/asdf/libexec/asdf.sh
+elif [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+    . /opt/homebrew/opt/asdf/libexec/asdf.sh
+    [ -f /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash ] && . /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+elif [ -f /opt/asdf-vm/asdf.sh ]; then
+    . /opt/asdf-vm/asdf.sh
+elif [ -f ${HOME}/.asdf/asdf.sh ]; then
+    . ${HOME}/.asdf/asdf.sh
+    . ${HOME}/.asdf/completions/asdf.bash
+fi
+
 # }}}
 
 # If not running interactively, don't do anything
@@ -66,6 +79,10 @@ HISTFILESIZE=1000000
 HISTSIZE=${HISTFILESIZE}
 # append new entries from memory to .bash_history, and vice-versa
 PROMPT_COMMAND="history -a; history -n;" ## ${PROMPT_COMMAND}"
+
+if type -P direnv >/dev/null ; then
+    eval "$(direnv hook bash)"
+fi
 
 # Change the window title of X terminals
 # if something adds to PROMPT_COMMAND later, there would be no space between that and printf
@@ -270,6 +287,5 @@ fi
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "${KITTY_INSTALLATION_DIR}/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
 
-HOMEBREW_NO_ANALYTICS=yes
+export HOMEBREW_NO_ANALYTICS=yes
