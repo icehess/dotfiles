@@ -13,6 +13,7 @@
 		"Dockerfile Syntax Highlighting",
 		"Duotones Colorschemes",
 		"EditorConfig",
+		"Elixir",
 		"Erlyman",
 		"FileBrowser",
 		"Game of Life",
@@ -21,11 +22,13 @@
 		"GraphQL",
 		"HexViewer",
 		"HTML-CSS-JS Prettify",
+		"LSP",
+		"LSP-elixir",
 		"Material Theme",
 		"Package Control",
 		"SCSS",
 		"SideBarEnhancements",
 		"SublimeLinter",
-		"SublimeLinter-eslint"
-	]
+		"SublimeLinter-eslint",
+	],
 }
