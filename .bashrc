@@ -35,18 +35,24 @@ elif [ -f /usr/local/bin/brew ]; then
     export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
     export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
     export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+# Instead of add ~/.dotfiles-site/linuxbrew.sh to /etc/bash.bashrc
+# elif [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+#     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
+#     export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
+#     export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
+#     export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
+#     export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
+#     export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
 fi
 
 if [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
     . /usr/local/opt/asdf/libexec/asdf.sh
 elif [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
     . /opt/homebrew/opt/asdf/libexec/asdf.sh
-    [ -f /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash ] && . /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
 elif [ -f /opt/asdf-vm/asdf.sh ]; then
     . /opt/asdf-vm/asdf.sh
 elif [ -f ${HOME}/.asdf/asdf.sh ]; then
     . ${HOME}/.asdf/asdf.sh
-    . ${HOME}/.asdf/completions/asdf.bash
 fi
 
 # }}}
@@ -145,8 +151,22 @@ PS4='+ '
 # }}}
 
 # Setting bash_completion {{{
+
 ## Common (Ubuntu? Debian?)
-[ -r /etc/bash_completion ] && . /etc/bash_completion
+if [ -r /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# Instead of add ~/.dotfiles-site/linuxbrew.sh to /etc/bash.bashrc
+# if [ -d /home/linuxbrew/.linuxbrew/etc/bash_completion.d ]; then
+#     # if [ -n "$BASH_COMPLETION_USER_DIR" ]; then
+#     #     export BASH_COMPLETION_USER_DIR="/home/linuxbrew/.linuxbrew/etc/bash_completion.d:$BASH_COMPLETION_USER_DIR"
+#     # else
+#     #     export BASH_COMPLETION_USER_DIR="/home/linuxbrew/.linuxbrew/etc/bash_completion.d"
+#     # fi
+#     . /home/linuxbrew/.linuxbrew/etc/bash_completion.d/brew
+# fi
+
 
 ## Arch (it is already being source by /etc/bash.bashrc)
 # [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
@@ -154,6 +174,10 @@ PS4='+ '
 # macOS
 [ -r /usr/local/etc/profile.d/bash_completion.sh ] && . /usr/local/etc/profile.d/bash_completion.sh
 [ -r /opt/homebrew/etc/profile.d/bash_completion.sh ] && . /opt/homebrew/etc/profile.d/bash_completion.sh
+
+
+[ -f /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash ] && . /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+[ -f ${HOME}/.asdf/completions/asdf.bash ] && . ${HOME}/.asdf/completions/asdf.bash
 # }}}
 
 # Aliases {{{
@@ -175,7 +199,7 @@ elif type -P vi >/dev/null ; then
     alias vim='vi'
     export EDITOR='vi'
 fi
-alias emacs='emacs --no-window-system'
+# alias emacs='emacs --no-window-system'
 
 # [[ "$OSTYPE" == "darwin"* || "$OSTYPE" == "freebsd"* ]] && alias grep='grep --colour=auto' || grep='grep --color=auto'
 if [ -n "${OSTYPE}" ]; then
@@ -288,4 +312,13 @@ fi
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "${KITTY_INSTALLATION_DIR}/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
 
-export HOMEBREW_NO_ANALYTICS=yes
+# Instead of add ~/.dotfiles-site/linuxbrew.sh to /etc/bash.bashrc
+# if [ -d /home/linuxbrew/.linuxbrew/share/applications ]; then
+#     if [ -n "${XDG_DATA_DIRS}" ]; then
+#         export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:${XDG_DATA_DIRS}"
+#     else
+#         export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share"
+#     fi
+# fi
+
+export HOMEBREW_NO_ANALYTICS=1
