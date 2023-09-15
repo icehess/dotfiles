@@ -24,12 +24,12 @@
     "caret_extra_width": 2,
     "caret_style": "phase",
     "ensure_newline_at_eof_on_save": true,
-    "font_face": "Fantasque Sans Mono",
+    "font_face": "FantasqueSansM Nerd Font Mono",
     "font_options":
     [
         "gray_antialias"
     ],
-    "font_size": 11,
+    "font_size": 12,
     "gutter": true,
     "highlight_line": true,
     "highlight_modified_tabs": true,
