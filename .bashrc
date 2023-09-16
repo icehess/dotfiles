@@ -16,6 +16,7 @@
 
 [ -d "$HOME/bin" ] && export PATH="$HOME/bin:${PATH}"
 [ -d "$HOME/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
+[ -d "/home/hesaam/.local/share/nvim/mason/bin" ] && export PATH="/home/hesaam/.local/share/nvim/mason/bin:${PATH}"
 
 if [ -f /opt/homebrew/bin/brew ]; then
     # this is slow, that is why we export directly
