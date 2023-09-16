@@ -190,7 +190,9 @@ alias simplehttpd='python3 -m http.server';
 alias simplehttpd2='python -m SimpleHTTPServer';
 alias jsonformat='python -m json.tool'
 
-if type -P nvim >/dev/null ; then
+if type -P hx >/dev/null ; then
+    export EDITOR="hx"
+elif type -P nvim >/dev/null ; then
     alias vim='nvim'
     export EDITOR='nvim'
 elif type -P vim >/dev/null ; then
@@ -200,6 +202,8 @@ elif type -P vi >/dev/null ; then
     export EDITOR='vi'
 fi
 # alias emacs='emacs --no-window-system'
+
+type broot > /dev/null 2>&1 && source /home/hesaam/.config/broot/launcher/bash/br
 
 # [[ "$OSTYPE" == "darwin"* || "$OSTYPE" == "freebsd"* ]] && alias grep='grep --colour=auto' || grep='grep --color=auto'
 if [ -n "${OSTYPE}" ]; then

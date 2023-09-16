@@ -1,0 +1,12 @@
+theme = "gruvbox_icehess"
+
+[editor]
+cursorline = true
+cursorcolumn = true
+bufferline = "always"
+
+[editor.cursor-shape]
+insert = "bar"
+
+[keys.normal]
+"\\" = { "\\" = "buffer_picker" }
