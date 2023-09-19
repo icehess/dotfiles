@@ -206,7 +206,7 @@ fi
 
 if type broot > /dev/null 2>&1; then
     if [ -f ~/.config/broot/launcher/bash/br ]; then
-        source "~/.config/broot/launcher/bash/br"
+        source ~/.config/broot/launcher/bash/br
     fi
 fi
 
