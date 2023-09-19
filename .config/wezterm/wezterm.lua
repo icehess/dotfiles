@@ -15,7 +15,7 @@ end
 -- For example, changing the color scheme:
 config.color_scheme = 'GruvboxDarkHard'
 
-config.font = wezterm.font 'FantasqueSansM Nerd Font'
+config.font = wezterm.font 'Fantasque Sans Mono'
 config.font_size = 15
 config.freetype_load_target = 'HorizontalLcd'
 
