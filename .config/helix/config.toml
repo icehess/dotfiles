@@ -2,7 +2,7 @@ theme = "gruvbox_icehess"
 
 [editor]
 cursorline = true
-cursorcolumn = true
+cursorcolumn = false
 bufferline = "always"
 
 [editor.cursor-shape]
