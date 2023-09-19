@@ -204,7 +204,11 @@ elif type -P vi >/dev/null ; then
 fi
 # alias emacs='emacs --no-window-system'
 
-type broot > /dev/null 2>&1 && source /home/hesaam/.config/broot/launcher/bash/br
+if type broot > /dev/null 2>&1; then
+    if [ -f ~/.config/broot/launcher/bash/br ]; then
+        source "~/.config/broot/launcher/bash/br"
+    fi
+fi
 
 # [[ "$OSTYPE" == "darwin"* || "$OSTYPE" == "freebsd"* ]] && alias grep='grep --colour=auto' || grep='grep --color=auto'
 if [ -n "${OSTYPE}" ]; then
