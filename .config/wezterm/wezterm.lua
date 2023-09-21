@@ -9,6 +9,7 @@ local config = {}
 if wezterm.config_builder then
   config = wezterm.config_builder()
 end
+local act = wezterm.action
 
 -- This is where you actually apply your config choices
 
@@ -20,6 +21,19 @@ config.font_size = 15
 config.freetype_load_target = 'HorizontalLcd'
 
 config.window_background_opacity = 0.9
+
+config.keys = {
+  -- Clears the scrollback and viewport, and then sends CTRL-L to ask the
+  -- shell to redraw its prompt
+  {
+    key = 'K',
+    mods = 'CTRL|SHIFT',
+    action = act.Multiple {
+      act.ClearScrollback 'ScrollbackAndViewport',
+      act.SendKey { key = 'L', mods = 'CTRL' },
+    },
+  },
+}
 
 -- and finally, return the configuration to wezterm
 return config
