@@ -8,5 +8,16 @@ bufferline = "always"
 [editor.cursor-shape]
 insert = "bar"
 
+# [editor.whitespace.render]
+# # space = "all"
+# # nbsp = "all"
+# # tab = "all"
+# newline = "all"
+
+[editor.indent-guides]
+render = false
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+# skip-levels = 1
+
 [keys.normal]
 "\\" = { "\\" = "buffer_picker" }
