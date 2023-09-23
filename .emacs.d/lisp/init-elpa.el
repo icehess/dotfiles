@@ -87,18 +87,18 @@ locate PACKAGE."
 
 (defvar sanityinc/required-packages nil)
 
-(defun sanityinc/note-selected-package (oldfun package &rest args)
-  "If OLDFUN reports PACKAGE was successfully installed, note that fact.
-The package name is noted by adding it to
-`sanityinc/required-packages'.  This function is used as an
-advice for `require-package', to which ARGS are passed."
-  (let ((available (apply oldfun package args)))
-    (prog1
-        available
-      (when available
-        (add-to-list 'sanityinc/required-packages package)))))
+;; (defun sanityinc/note-selected-package (oldfun package &rest args)
+;;   "If OLDFUN reports PACKAGE was successfully installed, note that fact.
+;; The package name is noted by adding it to
+;; `sanityinc/required-packages'.  This function is used as an
+;; advice for `require-package', to which ARGS are passed."
+;;   (let ((available (apply oldfun package args)))
+;;     (prog1
+;;         available
+;;       (when available
+;;         (add-to-list 'sanityinc/required-packages package)))))
 
-(advice-add 'require-package :around 'sanityinc/note-selected-package)
+;; (advice-add 'require-package :around 'sanityinc/note-selected-package)
 
 (when (fboundp 'package--save-selected-packages)
   (require-package 'seq)
@@ -108,13 +108,14 @@ advice for `require-package', to which ARGS are passed."
                (seq-uniq (append sanityinc/required-packages package-selected-packages))))))
 
 
-(require-package 'fullframe)
-(fullframe list-packages quit-window)
+;; not compatible with emacs 24.3 on centos7
+;; (require-package 'fullframe)
+;; (fullframe list-packages quit-window)
 
 
 ;; Update GPG keyring for GNU ELPA
-(let ((package-check-signature nil))
-  (require-package 'gnu-elpa-keyring-update))
+;; (let ((package-check-signature nil))
+;;   (require-package 'gnu-elpa-keyring-update))
 
 
 (defun sanityinc/set-tabulated-list-column-width (col-name width)

@@ -27,7 +27,7 @@
 ;;
 ;; Usage:
 ;;  (require 'nano-splash)
-(require 'subr-x)
+;; (require 'subr-x)
 (require 'cl-lib)
 
 (defface nano-face-strong nil
@@ -140,7 +140,7 @@ abused anyway)."
     (apply-partially 'mac-animation-fade-out duration))
   (if (get-buffer "*splash*")
       (progn (if (and (display-graphic-p) (fboundp 'mac-start-animation))
-                 (advice-add 'set-window-buffer
+                 (add-function 'set-window-buffer
                              :before 'mac-animation-fade-out-local))
              (message nil)
              (kill-buffer "*splash*")
