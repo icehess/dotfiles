@@ -72,10 +72,10 @@ locate PACKAGE."
   (package-install 'use-package))
 
 ;; Should set before loading `use-package'
-(setq use-package-always-ensure t
-      use-package-always-defer t
-      use-package-expand-minimally t
-      use-package-enable-imenu-support t)
+;; (setq use-package-always-ensure t
+;;       use-package-always-defer t
+;;       use-package-expand-minimally t
+;;       use-package-enable-imenu-support t)
 
 ;; Required by `use-package'
 (use-package diminish :ensure t)
