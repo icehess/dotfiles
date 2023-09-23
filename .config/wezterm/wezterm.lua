@@ -16,7 +16,10 @@ local act = wezterm.action
 -- For example, changing the color scheme:
 config.color_scheme = 'GruvboxDarkHard'
 
-config.font = wezterm.font 'Fantasque Sans Mono'
+config.font = wezterm.font_with_fallback {
+	    'FantasqueSansM Nerd Font Mono',
+	    'FantasqueSansM Nerd Font',
+	   }
 config.font_size = 15
 config.freetype_load_target = 'HorizontalLcd'
 
@@ -26,8 +29,9 @@ config.keys = {
   -- Clears the scrollback and viewport, and then sends CTRL-L to ask the
   -- shell to redraw its prompt
   {
-    key = 'K',
-    mods = 'CTRL|SHIFT',
+    key = 'k',
+    -- mods = 'CTRL|SHIFT',
+    mods = 'CMD',
     action = act.Multiple {
       act.ClearScrollback 'ScrollbackAndViewport',
       act.SendKey { key = 'L', mods = 'CTRL' },
