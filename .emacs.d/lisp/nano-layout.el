@@ -41,10 +41,20 @@
 (add-hook 'term-mode-hook
 	  (lambda () (setq buffer-display-table (make-display-table))))
 
-(tool-bar-mode 0)
 (tooltip-mode 0)
-(scroll-bar-mode 0)
-(menu-bar-mode 0)
+
+;; No scroll bars
+(if (fboundp 'scroll-bar-mode) (set-scroll-bar-mode nil))
+
+;; No toolbar
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+
+;; No menu bar
+(if (display-graphic-p)
+    (menu-bar-mode t) ;; When nil, focus problem on OSX
+  (menu-bar-mode -1))
+
+
 ;; (global-hl-line-mode 1)
 (setq x-underline-at-descent-line t)
 
