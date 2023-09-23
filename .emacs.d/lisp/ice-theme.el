@@ -1,3 +1,7 @@
+;; Don't prompt to confirm theme safety. This avoids problems with
+;; first-time startup on Emacs > 26.3.
+(setq custom-safe-themes t)
+
 (when *is-a-mac*
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
