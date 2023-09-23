@@ -16,6 +16,7 @@
 ;;; Standard package repositories
 
 (add-to-list 'package-archives '( "melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '( "nongnu" . "https://elpa.nongnu.org/nongnu/") t)
 ;; Official MELPA Mirror, in case necessary.
 ;;(add-to-list 'package-archives (cons "melpa-mirror" (concat proto "://www.mirrorservice.org/sites/melpa.org/packages/")) t)
 
@@ -61,9 +62,23 @@ locate PACKAGE."
 
 
 ;;; Fire up package.el
+(unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
+  (setq package-enable-at-startup nil)          ; To prevent initializing twice
+  (package-initialize))
 
-(setq package-enable-at-startup nil)
-(package-initialize)
+;; Setup `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; Should set before loading `use-package'
+(setq use-package-always-ensure t
+      use-package-always-defer t
+      use-package-expand-minimally t
+      use-package-enable-imenu-support t)
+
+;; Required by `use-package'
+(use-package diminish :ensure t)
 
 
 ;; package.el updates the saved version of package-selected-packages correctly only
@@ -97,6 +112,7 @@ advice for `require-package', to which ARGS are passed."
 (fullframe list-packages quit-window)
 
 
+;; Update GPG keyring for GNU ELPA
 (let ((package-check-signature nil))
   (require-package 'gnu-elpa-keyring-update))
 
