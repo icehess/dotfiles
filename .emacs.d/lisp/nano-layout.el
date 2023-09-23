@@ -41,7 +41,8 @@
 (add-hook 'term-mode-hook
 	  (lambda () (setq buffer-display-table (make-display-table))))
 
-(tooltip-mode 0)
+;; No tooltips
+(if (fboundp 'tooltip-mode) (tooltip-mode 0))
 
 ;; No scroll bars
 (if (fboundp 'scroll-bar-mode) (set-scroll-bar-mode nil))
