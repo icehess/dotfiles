@@ -175,9 +175,9 @@
          ("M-P" . symbol-overlay-switch-backward)
          ("M-C" . symbol-overlay-remove-all)
          ([M-f3] . symbol-overlay-remove-all))
-  :hook (((prog-mode yaml-mode) . symbol-overlay-mode)
-         (iedit-mode            . turn-off-symbol-overlay)
-         (iedit-mode-end        . turn-on-symbol-overlay))
+  ;; :hook (((prog-mode yaml-mode) . symbol-overlay-mode)
+  ;;        (iedit-mode            . turn-off-symbol-overlay)
+  ;;        (iedit-mode-end        . turn-on-symbol-overlay))
   :init (setq symbol-overlay-idle-time 0.1)
   :config
   (with-no-warnings
@@ -198,10 +198,10 @@
 ;; Highlight indentions
 (use-package highlight-indent-guides
   :diminish
-  :hook ((prog-mode yaml-mode) . (lambda ()
-                                   "Highlight indentations in small files for better performance."
-                                   (unless (too-long-file-p)
-                                     (highlight-indent-guides-mode 1))))
+  ;; :hook ((prog-mode yaml-mode) . (lambda ()
+  ;;                                  "Highlight indentations in small files for better performance."
+  ;;                                  (unless (too-long-file-p)
+  ;;                                    (highlight-indent-guides-mode 1))))
   :init (setq highlight-indent-guides-method 'character
               highlight-indent-guides-responsive 'top
               highlight-indent-guides-suppress-auto-error t)

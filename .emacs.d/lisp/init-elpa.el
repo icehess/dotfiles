@@ -86,7 +86,8 @@ locate PACKAGE."
 ;;       use-package-always-defer t
 ;;       use-package-expand-minimally t
 ;;       use-package-enable-imenu-support t)
-(setq use-package-verbose t
+(setq use-package-always-ensure t
+      use-package-verbose t
       use-package-expand-minimally nil
       use-package-compute-statistics t
       use-package-enable-imenu-support t
