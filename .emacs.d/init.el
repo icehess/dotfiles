@@ -81,7 +81,7 @@
 (require 'init-isearch)
 ;; (require 'init-grep)
 ;; (require 'init-uniquify)
-;; (require 'init-ibuffer)
+(require 'init-ibuffer)
 ;; (require 'init-flymake)
 ;; (require 'init-eglot)
 
@@ -97,10 +97,7 @@
 (require 'init-editing-utils)
 ;; (require 'init-whitespace)
 
-;; (require 'init-vc)
-;; (require 'init-darcs)
-;; (require 'init-git)
-;; (require 'init-github)
+(require 'init-vcs)
 
 ;; (require 'init-projectile)
 
