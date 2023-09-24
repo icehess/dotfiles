@@ -29,9 +29,8 @@
 
 ;; M-return for frame maximization toggle
 (global-set-key (kbd "<M-return>") 'toggle-frame-maximized)
-(if (>= emacs-major-version 26)
-  (with-eval-after-load 'org
-    (define-key org-mode-map (kbd "<M-return>") 'toggle-frame-maximized)))
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "<M-return>") 'toggle-frame-maximized))
 
 
 

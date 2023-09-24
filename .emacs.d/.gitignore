@@ -49,6 +49,7 @@ site-lisp/package/
 /.uptimes.el
 /rake.cache
 /plantuml.jar
+/places
 /magithub
 .cache/
 /forge-database.sqlite

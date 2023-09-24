@@ -60,6 +60,16 @@ locate PACKAGE."
      (message "Couldn't install optional package `%s': %S" package err)
      nil)))
 
+;; HACK: DO NOT save package-selected-packages to `custom-file'.
+;; https://github.com/jwiegley/use-package/issues/383#issuecomment-247801751
+(defun my-package--save-selected-packages (&optional value)
+  "Set `package-selected-packages' to VALUE but don't save to option `custom-file'."
+  (when value
+    (setq package-selected-packages value))
+  (unless after-init-time
+    (add-hook 'after-init-hook #'my-package--save-selected-packages)))
+(advice-add 'package--save-selected-packages :override #'my-package--save-selected-packages)
+
 
 ;;; Fire up package.el
 (unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
@@ -76,6 +86,11 @@ locate PACKAGE."
 ;;       use-package-always-defer t
 ;;       use-package-expand-minimally t
 ;;       use-package-enable-imenu-support t)
+(setq use-package-verbose t
+      use-package-expand-minimally nil
+      use-package-compute-statistics t
+      use-package-enable-imenu-support t
+      debug-on-error t)
 
 ;; Required by `use-package'
 (use-package diminish :ensure t)
@@ -87,19 +102,6 @@ locate PACKAGE."
 
 (defvar sanityinc/required-packages nil)
 
-;; (defun sanityinc/note-selected-package (oldfun package &rest args)
-;;   "If OLDFUN reports PACKAGE was successfully installed, note that fact.
-;; The package name is noted by adding it to
-;; `sanityinc/required-packages'.  This function is used as an
-;; advice for `require-package', to which ARGS are passed."
-;;   (let ((available (apply oldfun package args)))
-;;     (prog1
-;;         available
-;;       (when available
-;;         (add-to-list 'sanityinc/required-packages package)))))
-
-;; (advice-add 'require-package :around 'sanityinc/note-selected-package)
-
 (when (fboundp 'package--save-selected-packages)
   (require-package 'seq)
   (add-hook 'after-init-hook
@@ -108,14 +110,9 @@ locate PACKAGE."
                (seq-uniq (append sanityinc/required-packages package-selected-packages))))))
 
 
-;; not compatible with emacs 24.3 on centos7
-;; (require-package 'fullframe)
-;; (fullframe list-packages quit-window)
-
-
 ;; Update GPG keyring for GNU ELPA
-;; (let ((package-check-signature nil))
-;;   (require-package 'gnu-elpa-keyring-update))
+(let ((package-check-signature nil))
+  (require-package 'gnu-elpa-keyring-update))
 
 
 (defun sanityinc/set-tabulated-list-column-width (col-name width)

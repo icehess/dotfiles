@@ -119,14 +119,6 @@
 (when (fboundp 'so-long-enable)
   (add-hook 'after-init-hook 'so-long-enable))
 
-
-;;; A simple visible bell which works in all terminal types
-(unless (>= emacs-major-version 26)
-  (use-package mode-line-bell
-    :ensure t
-    :config
-    (add-hook 'after-init-hook 'mode-line-bell-mode)))
-
 
 
 ;;; Newline behaviour (see also electric-indent-mode, enabled above)
@@ -163,20 +155,75 @@
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 
-(when (maybe-require-package 'symbol-overlay)
-  (dolist (hook '(prog-mode-hook html-mode-hook yaml-mode-hook conf-mode-hook))
-    (add-hook hook 'symbol-overlay-mode))
-  (with-eval-after-load 'symbol-overlay
-    (diminish 'symbol-overlay-mode)
-    (define-key symbol-overlay-mode-map (kbd "M-i") 'symbol-overlay-put)
-    (define-key symbol-overlay-mode-map (kbd "M-I") 'symbol-overlay-remove-all)
-    (define-key symbol-overlay-mode-map (kbd "M-n") 'symbol-overlay-jump-next)
-    (define-key symbol-overlay-mode-map (kbd "M-p") 'symbol-overlay-jump-prev)))
+;; Highlight symbols
+(use-package symbol-overlay
+  :diminish
+  ;; :custom-face
+  ;; (symbol-overlay-default-face ((t (:inherit region :background unspecified :foreground unspecified))))
+  ;; (symbol-overlay-face-1 ((t (:inherit nerd-icons-blue :background unspecified :foreground unspecified :inverse-video t))))
+  ;; (symbol-overlay-face-2 ((t (:inherit nerd-icons-pink :background unspecified :foreground unspecified :inverse-video t))))
+  ;; (symbol-overlay-face-3 ((t (:inherit nerd-icons-yellow :background unspecified :foreground unspecified :inverse-video t))))
+  ;; (symbol-overlay-face-4 ((t (:inherit nerd-icons-purple :background unspecified :foreground unspecified :inverse-video t))))
+  ;; (symbol-overlay-face-5 ((t (:inherit nerd-icons-red :background unspecified :foreground unspecified :inverse-video t))))
+  ;; (symbol-overlay-face-6 ((t (:inherit nerd-icons-orange :background unspecified :foreground unspecified :inverse-video t))))
+  ;; (symbol-overlay-face-7 ((t (:inherit nerd-icons-green :background unspecified :foreground unspecified :inverse-video t))))
+  ;; (symbol-overlay-face-8 ((t (:inherit nerd-icons-cyan :background unspecified :foreground unspecified :inverse-video t))))
+  :bind (("M-i" . symbol-overlay-put)
+         ("M-n" . symbol-overlay-jump-next)
+         ("M-p" . symbol-overlay-jump-prev)
+         ("M-N" . symbol-overlay-switch-forward)
+         ("M-P" . symbol-overlay-switch-backward)
+         ("M-C" . symbol-overlay-remove-all)
+         ([M-f3] . symbol-overlay-remove-all))
+  :hook (((prog-mode yaml-mode) . symbol-overlay-mode)
+         (iedit-mode            . turn-off-symbol-overlay)
+         (iedit-mode-end        . turn-on-symbol-overlay))
+  :init (setq symbol-overlay-idle-time 0.1)
+  :config
+  (with-no-warnings
+    ;; Disable symbol highlighting while selecting
+    (defun turn-off-symbol-overlay (&rest _)
+      "Turn off symbol highlighting."
+      (interactive)
+      (symbol-overlay-mode -1))
+    (advice-add #'set-mark :after #'turn-off-symbol-overlay)
 
-
-;;; Zap *up* to char is a handy pair for zap-to-char
-(global-set-key (kbd "M-Z") 'zap-up-to-char)
+    (defun turn-on-symbol-overlay (&rest _)
+      "Turn on symbol highlighting."
+      (interactive)
+      (when (derived-mode-p 'prog-mode 'yaml-mode)
+        (symbol-overlay-mode 1)))
+    (advice-add #'deactivate-mark :after #'turn-on-symbol-overlay)))
 
+;; Highlight indentions
+(use-package highlight-indent-guides
+  :diminish
+  :hook ((prog-mode yaml-mode) . (lambda ()
+                                   "Highlight indentations in small files for better performance."
+                                   (unless (too-long-file-p)
+                                     (highlight-indent-guides-mode 1))))
+  :init (setq highlight-indent-guides-method 'character
+              highlight-indent-guides-responsive 'top
+              highlight-indent-guides-suppress-auto-error t)
+  :config
+  (with-no-warnings
+    ;; Don't display first level of indentation
+    (defun my-indent-guides-for-all-but-first-column (level responsive display)
+      (unless (< level 1)
+        (highlight-indent-guides--highlighter-default level responsive display)))
+    (setq highlight-indent-guides-highlighter-function
+          #'my-indent-guides-for-all-but-first-column)
+
+    ;; Disable in `macrostep' expanding
+    (with-eval-after-load 'macrostep
+      (advice-add #'macrostep-expand
+                  :after (lambda (&rest _)
+                           (when highlight-indent-guides-mode
+                             (highlight-indent-guides-mode -1))))
+      (advice-add #'macrostep-collapse
+                  :after (lambda (&rest _)
+                           (when (derived-mode-p 'prog-mode 'yaml-mode)
+                             (highlight-indent-guides-mode 1)))))))
 
 
 (require-package 'browse-kill-ring)
@@ -214,6 +261,58 @@
 
 (when (maybe-require-package 'avy)
   (global-set-key (kbd "C-;") 'avy-goto-char-timer))
+
+;; Kill text between the point and the character CHAR
+(use-package avy-zap
+  :bind (("M-z" . avy-zap-to-char-dwim)
+         ("M-Z" . avy-zap-up-to-char-dwim)))
+
+;; Quickly follow links
+;; (use-package ace-link
+;;   :defines (org-mode-map
+;;             gnus-summary-mode-map
+;;             gnus-article-mode-map
+;;             ert-results-mode-map
+;;             paradox-menu-mode-map
+;;             elfeed-show-mode-map)
+;;   :bind ("M-o" . ace-link-addr)
+;;   :hook (after-init . ace-link-setup-default)
+;;   :config
+;;   (with-eval-after-load 'org
+;;     (bind-key "M-o" #'ace-link-org org-mode-map))
+
+;;   (with-eval-after-load 'gnus
+;;     (bind-keys
+;;      :map gnus-summary-mode-map
+;;      ("M-o" . ace-link-gnus)
+;;      :map gnus-article-mode-map
+;;      ("M-o" . ace-link-gnus)))
+
+;;   (with-eval-after-load 'ert
+;;     (bind-key "o" #'ace-link-help ert-results-mode-map))
+
+;;   (bind-keys
+;;    :map package-menu-mode-map
+;;    ("o" . ace-link-help)
+;;    :map process-menu-mode-map
+;;    ("o" . ace-link-help))
+;;   (with-eval-after-load 'paradox
+;;     (bind-key "o" #'ace-link-help paradox-menu-mode-map))
+
+;;   (with-eval-after-load 'elfeed
+;;     (bind-key "o" #'ace-link elfeed-show-mode-map)))
+
+;; A comprehensive visual interface to diff & patch
+(use-package ediff
+  :ensure nil
+  :hook(;; show org ediffs unfolded
+        (ediff-prepare-buffer . outline-show-all)
+        ;; restore window layout when done
+        (ediff-quit . winner-undo))
+  :config
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain
+        ediff-split-window-function 'split-window-horizontally
+        ediff-merge-split-window-function 'split-window-horizontally))
 
 (require-package 'multiple-cursors)
 ;; multiple-cursors
@@ -317,6 +416,19 @@ ORIG is the advised function, which is called with its ARGS."
 
 (advice-add 'kmacro-call-macro :around 'sanityinc/disable-features-during-macro-call)
 
+;; On-the-fly spell checker
+(use-package flyspell
+  :ensure nil
+  :diminish
+  :if (executable-find "aspell")
+  :hook (((text-mode outline-mode) . flyspell-mode)
+         ;; (prog-mode . flyspell-prog-mode)
+         (flyspell-mode . (lambda ()
+                            (dolist (key '("C-;" "C-," "C-."))
+                              (unbind-key key flyspell-mode-map)))))
+  :init (setq flyspell-issue-message-flag nil
+              ispell-program-name "aspell"
+              ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together")))
 
 (provide 'init-editing-utils)
 ;;; init-editing-utils.el ends here

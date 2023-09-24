@@ -40,7 +40,7 @@
 
 
 ;; Bootstrap config
-
+(require 'init-funcs)
 (require 'init-elpa)      ;; Machinery for installing required packages
 ;; Theme
 (require 'ice-theme)
@@ -61,9 +61,9 @@
 (require 'nano-bindings)
 
 ;; Welcome message (optional)
-;; (let ((inhibit-message t))
-;;   (message "Welcome to GNU Emacs / N Λ N O edition")
-;;   (message (format "Initialization time: %s" (emacs-init-time))))
+(let ((inhibit-message t))
+  (message "Welcome to GNU Emacs / N Λ N O edition")
+  (message (format "Initialization time: %s" (emacs-init-time))))
 
 (require 'nano-splash)
 
@@ -77,8 +77,8 @@
 ;; (require 'init-themes)
 ;; (require 'init-osx-keys)
 ;; (require 'init-gui-frames)
-;; (require 'init-dired)
-;; (require 'init-isearch)
+(require 'init-dired)
+(require 'init-isearch)
 ;; (require 'init-grep)
 ;; (require 'init-uniquify)
 ;; (require 'init-ibuffer)
@@ -86,9 +86,10 @@
 ;; (require 'init-eglot)
 
 ;; (require 'init-recentf)
-;; (require 'init-minibuffer)
+(require 'init-completion)
 ;; (require 'init-hippie-expand)
-;; (require 'init-corfu)
+(require 'init-corfu)
+(require 'init-yasnippet)
 ;; (require 'init-windows)
 ;; (require 'init-sessions)
 ;; (require 'init-mmm)
@@ -203,7 +204,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

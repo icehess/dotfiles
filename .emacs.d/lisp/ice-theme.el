@@ -21,51 +21,73 @@
 (use-package solaire-mode
   :hook (after-load-theme . solaire-global-mode))
 
-(unless (>= emacs-major-version 26)
-  (use-package suscolors-theme
-    :ensure t
-    :config
-    (load-theme 'suscolors t)))
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-gruvbox t)
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
 
+  ;; WORKAROUND: Visual bell on 29+
+  ;; @see https://github.com/doomemacs/themes/issues/733
+  ;; (with-no-warnings
+  ;;   (defun my-doom-themes-visual-bell-fn ()
+  ;;     "Blink the mode-line red briefly. Set `ring-bell-function' to this to use it."
+  ;;     (let ((buf (current-buffer))
+  ;;           (cookies (mapcar (lambda (face)
+  ;;                              (face-remap-add-relative face 'doom-themes-visual-bell))
+  ;;                            '(mode-line mode-line-active))))
+  ;;       (force-mode-line-update)
+  ;;       (run-with-timer 0.15 nil
+  ;;                       (lambda ()
+  ;;                         (with-current-buffer buf
+  ;;                           (mapc #'face-remap-remove-relative cookies)
+  ;;                           (force-mode-line-update))))))
+  ;;   (advice-add #'doom-themes-visual-bell-fn :override #'my-doom-themes-visual-bell-fn))
 
-(if (>= emacs-major-version 26)
-  (use-package doom-themes
-    :ensure t
-    :config
-    ;; Global settings (defaults)
-    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-          doom-themes-enable-italic t) ; if nil, italics is universally disabled
-    (load-theme 'doom-gruvbox t)
-    ;; Enable flashing mode-line on errors
-    (doom-themes-visual-bell-config)
-
-    ;; WORKAROUND: Visual bell on 29+
-    ;; @see https://github.com/doomemacs/themes/issues/733
-    ;; (with-no-warnings
-    ;;   (defun my-doom-themes-visual-bell-fn ()
-    ;;     "Blink the mode-line red briefly. Set `ring-bell-function' to this to use it."
-    ;;     (let ((buf (current-buffer))
-    ;;           (cookies (mapcar (lambda (face)
-    ;;                              (face-remap-add-relative face 'doom-themes-visual-bell))
-    ;;                            '(mode-line mode-line-active))))
-    ;;       (force-mode-line-update)
-    ;;       (run-with-timer 0.15 nil
-    ;;                       (lambda ()
-    ;;                         (with-current-buffer buf
-    ;;                           (mapc #'face-remap-remove-relative cookies)
-    ;;                           (force-mode-line-update))))))
-    ;;   (advice-add #'doom-themes-visual-bell-fn :override #'my-doom-themes-visual-bell-fn))
-
-    ;; Enable custom neotree theme (all-the-icons must be installed!)
-    (doom-themes-neotree-config)
-    ;; or for treemacs users
-    (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-    (doom-themes-treemacs-config)
-    ;; Corrects (and improves) org-mode's native fontification.
-    (doom-themes-org-config)))
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 
 (set-face-attribute 'default nil
                     :family     "FantasqueSansM Nerd Font Mono"
                     :height     150)
+
+;; Easily adjust the font size in all frames
+;; which binds C-M-= and C-M-- and C-M-0 by default
+(use-package default-text-scale
+  :hook (after-init . default-text-scale-mode))
+
+;; Child frame
+(when (childframe-workable-p)
+  (use-package posframe
+    :hook (after-load-theme . posframe-delete-all)
+    :init
+    (defface posframe-border
+      `((t (:inherit region)))
+      "Face used by the `posframe' border."
+      :group 'posframe)
+    (defvar posframe-border-width 2
+      "Default posframe border width.")
+    :config
+    (with-no-warnings
+      (defun my-posframe--prettify-frame (&rest _)
+        (set-face-background 'fringe nil posframe--frame))
+      (advice-add #'posframe--create-posframe :after #'my-posframe--prettify-frame)
+
+      (defun posframe-poshandler-frame-center-near-bottom (info)
+        (cons (/ (- (plist-get info :parent-frame-width)
+                    (plist-get info :posframe-width))
+                 2)
+              (/ (+ (plist-get info :parent-frame-height)
+                    (* 2 (plist-get info :font-height)))
+                 2))))))
 
 (provide 'ice-theme)

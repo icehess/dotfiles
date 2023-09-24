@@ -1,0 +1,124 @@
+;; init-dired.el --- Initialize dired configurations.	-*- lexical-binding: t -*-
+
+;; Copyright (C) 2006-2023 Vincent Zhang
+
+;; Author: Vincent Zhang <seagle0128@gmail.com>
+;; URL: https://github.com/seagle0128/.emacs.d
+
+;; This file is not part of GNU Emacs.
+;;
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License as
+;; published by the Free Software Foundation; either version 3, or
+;; (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with this program; see the file COPYING.  If not, write to
+;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
+;; Floor, Boston, MA 02110-1301, USA.
+;;
+
+;;; Commentary:
+;;
+;; Directory configurations.
+;;
+
+;;; Code:
+
+;; (eval-when-compile
+;;   (require 'init-const))
+
+;; Directory operations
+(use-package dired
+  :ensure nil
+  :bind (:map dired-mode-map
+         ("C-c C-p" . wdired-change-to-wdired-mode))
+  :config
+  ;; Guess a default target directory
+  (setq dired-dwim-target t)
+
+  ;; Always delete and copy recursively
+  (setq dired-recursive-deletes 'always
+        dired-recursive-copies 'always)
+
+  ;; Show directory first
+  (setq dired-listing-switches "-alh --group-directories-first")
+
+  (when *is-a-mac*
+    (if (executable-find "gls")
+        (progn
+          ;; Use GNU ls as `gls' from `coreutils' if available.
+          (setq insert-directory-program "gls")
+          ;; Using `insert-directory-program'
+          (setq ls-lisp-use-insert-directory-program t))
+      (progn
+        ;; Suppress the warning: `ls does not support --dired'.
+        (setq dired-use-ls-dired nil)
+        (setq dired-listing-switches "-alh"))))
+
+  ;; Quick sort dired buffers via hydra
+  ;; (use-package dired-quick-sort
+  ;;   :bind (:map dired-mode-map
+  ;;          ("S" . hydra-dired-quick-sort/body)))
+
+  ;; Show git info in dired
+  (use-package dired-git-info
+    :bind (:map dired-mode-map
+           (")" . dired-git-info-mode)))
+
+  ;; Allow rsync from dired buffers
+  ;; (use-package dired-rsync
+  ;;   :bind (:map dired-mode-map
+  ;;          ("C-c C-r" . dired-rsync)))
+
+  ;; Colorful dired
+  (use-package diredfl
+    :hook (dired-mode . diredfl-mode))
+
+  ;; Shows icons
+  ;; (use-package nerd-icons-dired
+  ;;   :diminish
+  ;;   :when (icons-displayable-p)
+  ;;   :custom-face
+  ;;   (nerd-icons-dired-dir-face ((t (:inherit nerd-icons-dsilver :foreground unspecified))))
+  ;;   :hook (dired-mode . nerd-icons-dired-mode))
+
+  ;; ;; Extra Dired functionality
+  ;; (use-package dired-aux :ensure nil)
+  ;; (use-package dired-x
+  ;;   :ensure nil
+  ;;   :demand t
+  ;;   :config
+  ;;   (let ((cmd (cond (*is-a-mac* "open")
+  ;;                    (t "xdg-open"))))
+  ;;     (setq dired-guess-shell-alist-user
+  ;;           `(("\\.pdf\\'" ,cmd)
+  ;;             ("\\.docx\\'" ,cmd)
+  ;;             ("\\.\\(?:djvu\\|eps\\)\\'" ,cmd)
+  ;;             ("\\.\\(?:jpg\\|jpeg\\|png\\|gif\\|xpm\\)\\'" ,cmd)
+  ;;             ("\\.\\(?:xcf\\)\\'" ,cmd)
+  ;;             ("\\.csv\\'" ,cmd)
+  ;;             ("\\.tex\\'" ,cmd)
+  ;;             ("\\.\\(?:mp4\\|mkv\\|avi\\|flv\\|rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'" ,cmd)
+  ;;             ("\\.\\(?:mp3\\|flac\\)\\'" ,cmd)
+  ;;             ("\\.html?\\'" ,cmd)
+  ;;             ("\\.md\\'" ,cmd))))
+
+  ;;   (setq dired-omit-files
+  ;;         (concat dired-omit-files
+  ;;                 "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*")))
+  )
+
+;; `find-dired' alternative using `fd'
+(when (executable-find "fd")
+  (use-package fd-dired))
+
+(provide 'init-dired)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-dired.el ends here
