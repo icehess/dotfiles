@@ -38,9 +38,9 @@
 (defun nano--delete-frame-or-kill-emacs ()
   "Delete frame or kill Emacs if there is only one frame."
   (interactive)
-  (if (> (length (frame-list)) 1)
+  (condition-case nil
       (delete-frame)
-    (save-buffers-kill-terminal)))
+    (error (save-buffers-kill-terminal))))
 (global-set-key (kbd "C-x C-c") 'nano--delete-frame-or-kill-emacs)
 
 ;; Open recent files

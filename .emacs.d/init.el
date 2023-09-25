@@ -90,7 +90,7 @@
 ;; (require 'init-hippie-expand)
 (require 'init-corfu)
 (require 'init-yasnippet)
-;; (require 'init-windows)
+(require 'init-window)
 ;; (require 'init-sessions)
 ;; (require 'init-mmm)
 
