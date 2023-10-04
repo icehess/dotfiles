@@ -60,7 +60,7 @@
 (setq x-underline-at-descent-line t)
 
 ;; Vertical window divider
-(setq window-divider-default-right-width 24)
+(setq window-divider-default-right-width 4)
 ;; (setq window-divider-default-places 'right-only)
 (if (fboundp 'window-divider-mode) (window-divider-mode 1))
 

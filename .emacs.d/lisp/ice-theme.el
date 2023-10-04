@@ -1,3 +1,6 @@
+(eval-when-compile
+  (require 'init-funcs))
+
 ;; Don't prompt to confirm theme safety. This avoids problems with
 ;; first-time startup on Emacs > 26.3.
 (setq custom-safe-themes t)
@@ -47,18 +50,11 @@
   ;;                           (mapc #'face-remap-remove-relative cookies)
   ;;                           (force-mode-line-update))))))
   ;;   (advice-add #'doom-themes-visual-bell-fn :override #'my-doom-themes-visual-bell-fn))
-
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+  )
 
 (set-face-attribute 'default nil
                     :family     "FantasqueSansM Nerd Font Mono"
-                    :height     150)
+                    :height     130)
 
 ;; Easily adjust the font size in all frames
 ;; which binds C-M-= and C-M-- and C-M-0 by default
