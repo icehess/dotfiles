@@ -14,7 +14,8 @@
               docker-container-shell-file-name "/bin/bash"))
 
 ;;`tramp-container' is builtin since 29
-(use-package docker-tramp)
+(unless (>= emacs-major-version 29)
+  (use-package docker-tramp))
 
 (use-package dockerfile-mode)
 (use-package docker-compose-mode)

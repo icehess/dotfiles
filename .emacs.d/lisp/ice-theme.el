@@ -51,15 +51,27 @@
   ;;                           (force-mode-line-update))))))
   ;;   (advice-add #'doom-themes-visual-bell-fn :override #'my-doom-themes-visual-bell-fn))
   )
+(if *is-a-mac*
+    (set-face-attribute 'default nil
+        :family     "FantasqueSansM Nerd Font Mono"
+        :height     170)
+    (set-face-attribute 'default nil
+        :family     "FantasqueSansM Nerd Font Mono"
+        :height     130))
 
-(set-face-attribute 'default nil
-                    :family     "FantasqueSansM Nerd Font Mono"
-                    :height     130)
 
 ;; Easily adjust the font size in all frames
 ;; which binds C-M-= and C-M-- and C-M-0 by default
 (use-package default-text-scale
-  :hook (after-init . default-text-scale-mode))
+  :hook (after-init . default-text-scale-mode)
+  :bind (:map default-text-scale-mode-map
+         ("s-="   . default-text-scale-increase)
+         ("s--"   . default-text-scale-decrease)
+         ("s-0"   . default-text-scale-reset)
+         ("C-s-=" . default-text-scale-increase)
+         ("C-s--" . default-text-scale-decrease)
+         ("C-s-0" . default-text-scale-reset)))
+
 
 ;; Child frame
 (when (childframe-workable-p)

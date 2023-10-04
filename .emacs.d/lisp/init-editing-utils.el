@@ -406,15 +406,15 @@ With arg N, insert N newlines."
   (diminish 'which-key-mode))
 
 
-(defun sanityinc/disable-features-during-macro-call (orig &rest args)
-  "When running a macro, disable features that might be expensive.
-ORIG is the advised function, which is called with its ARGS."
-  (let (post-command-hook
-        font-lock-mode
-        (tab-always-indent (or (eq 'complete tab-always-indent) tab-always-indent)))
-    (apply orig args)))
+;; (defun sanityinc/disable-features-during-macro-call (orig &rest args)
+;;   "When running a macro, disable features that might be expensive.
+;; ORIG is the advised function, which is called with its ARGS."
+;;   (let (post-command-hook
+;;         font-lock-mode
+;;         (tab-always-indent (or (eq 'complete tab-always-indent) tab-always-indent)))
+;;     (apply orig args)))
 
-(advice-add 'kmacro-call-macro :around 'sanityinc/disable-features-during-macro-call)
+;; (advice-add 'kmacro-call-macro :around 'sanityinc/disable-features-during-macro-call)
 
 ;; On-the-fly spell checker
 (use-package flyspell
@@ -429,6 +429,13 @@ ORIG is the advised function, which is called with its ARGS."
   :init (setq flyspell-issue-message-flag nil
               ispell-program-name "aspell"
               ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together")))
+
+;; Move to the beginning/end of line or code
+(use-package mwim
+  :bind (("C-a" . mwim-beginning-of-code-or-line)
+         ("C-e" . mwim-end-of-code-or-line)
+         ("<home>" . mwim-beginning-of-line-or-code)
+         ("<end>" . mwim-end-of-line-or-code)))
 
 ;; Pulse current line
 (use-package pulse
