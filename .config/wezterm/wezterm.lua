@@ -21,7 +21,7 @@ config.font = wezterm.font_with_fallback {
 	    'FantasqueSansM Nerd Font',
 	   }
 config.font_size = 15
-config.freetype_load_target = 'HorizontalLcd'
+-- config.freetype_load_target = 'HorizontalLcd'
 
 config.window_background_opacity = 0.9
 
@@ -59,6 +59,7 @@ config.mouse_bindings = {
         action = wezterm.action.Nop,
     },
 }
+-- config.xcursor_theme = 'Bibata-Modern-Classic'
 
 -- and finally, return the configuration to wezterm
 return config
