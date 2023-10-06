@@ -191,9 +191,10 @@ alias simplehttpd='python3 -m http.server';
 alias simplehttpd2='python -m SimpleHTTPServer';
 alias jsonformat='python -m json.tool'
 
-if type -P hx >/dev/null ; then
-    export EDITOR="hx"
-elif type -P nvim >/dev/null ; then
+# if type -P hx >/dev/null ; then
+#     export EDITOR="hx"
+# elif type -P nvim >/dev/null ; then
+if type -P nvim >/dev/null ; then
     alias vim='nvim'
     export EDITOR='nvim'
 elif type -P vim >/dev/null ; then
@@ -202,7 +203,7 @@ elif type -P vi >/dev/null ; then
     alias vim='vi'
     export EDITOR='vi'
 fi
-# alias emacs='emacs --no-window-system'
+alias cemacs='emacs --no-window-system'
 
 if type broot > /dev/null 2>&1; then
     if [ -f ~/.config/broot/launcher/bash/br ]; then
