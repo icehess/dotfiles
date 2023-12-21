@@ -46,6 +46,17 @@ function M.setup()
     return
   end
 
+  local status_lsconfig_ok, lspconfig = pcall(require, "lspconfig")
+  if status_lsconfig_ok then
+    lspconfig.util.default_config = vim.tbl_extend(
+          "force",
+          lspconfig.util.default_config,
+          {
+            autostart = true,
+          }
+      )
+   end
+
   lsp_zero.preset({
     float_border = 'rounded',
     call_servers = 'local',
