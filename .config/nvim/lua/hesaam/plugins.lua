@@ -227,6 +227,21 @@ local plugins = {
     end
   },
 
+    -- {
+    --   -- other options:
+    --   -- * https://github.com/NMAC427/guess-indent.nvim
+    --   "Darazaki/indent-o-matic",
+    --   lazy = true,
+    --   event = "VeryLazy",
+    --   confg = function()
+    --     require("hesaam.core.indent-o-matic").setup()
+    --   end
+    -- },
+
+    {
+      'nmac427/guess-indent.nvim',
+         config = function() require('guess-indent').setup {} end,
+     },
   -- This plugin disables certain features if the opened file is big. File size and features to disable are configurable.
   -- Automatic features/integrations include: LSP, treesitter, indent_blankline, illuminate.vim NoMatchParen, syntax off, ... (full list at the end)
   {
