@@ -4,6 +4,8 @@ theme = "gruvbox_icehess"
 cursorline = true
 cursorcolumn = false
 bufferline = "always"
+true-color = true
+undercurl = true
 
 [editor.cursor-shape]
 insert = "bar"
