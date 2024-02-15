@@ -16,7 +16,8 @@
 
 [ -d "$HOME/bin" ] && export PATH="$HOME/bin:${PATH}"
 [ -d "$HOME/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
-[ -d "/home/hesaam/.local/share/nvim/mason/bin" ] && export PATH="/home/hesaam/.local/share/nvim/mason/bin:${PATH}"
+[ -d "${HOME}/.local/share/nvim/mason/bin" ] && export PATH="${HOME}/.local/share/nvim/mason/bin:${PATH}"
+[ -f "/Applications/WezTerm.app/Contents/MacOS/wezterm" ] && export PATH="/Applications/WezTerm.app/Contents/MacOS:${PATH}"
 
 if [ -f /opt/homebrew/bin/brew ]; then
     # this is slow, that is why we export directly
