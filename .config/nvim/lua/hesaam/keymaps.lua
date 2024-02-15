@@ -25,3 +25,6 @@ vim.keymap.set('c', '<Esc>b', '<S-Left>')
 vim.keymap.set('c', '<Esc>f', '<S-Right>')
 vim.keymap.set('c', '<Esc>d', '<S-right><Delete>')
 vim.keymap.set('c', '<C-g>', '<C-c>')
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
