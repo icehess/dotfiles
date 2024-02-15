@@ -19,5 +19,38 @@ render = false
 character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
 # skip-levels = 1
 
+[editor.file-picker]
+parents = false
+ignore = false
+git-ignore = false
+git-global = false
+git-exclude = false
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "version-control", "read-only-indicator", "file-modification-indicator"]
+right = ["diagnostics", "selections", "register", "file-type", "position-percentage", "position", "file-encoding"]
+separator = "┊"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[keys.insert]
+A-b = ["move_prev_word_start", "move_char_left"]
+A-f = ["move_next_word_end", "move_char_right"]
+C-b = "move_char_left"
+C-d = "delete_char_forward"
+C-f = "move_char_right"
+
 [keys.normal]
 "\\" = { "\\" = "buffer_picker" }
+# "*" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection",  "make_search_word_bounded", "search_next"]
+# "#" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "make_search_word_bounded", "search_prev"]
+
+[keys.normal.space]
+F = "file_picker_in_current_buffer_directory"
+c = ":buffer-close"
+g = ":pipe-to wizyterm cli split-pane -- helix-live-rg"

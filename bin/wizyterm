@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if type -d wezterm; then
+  wezterm "$@"
+fi
+
+if [ -f /Applications/WezTerm.app/Contents/MacOS/wezterm ]; then
+  /Applications/WezTerm.app/Contents/MacOS/wezterm "$@"
+fi
