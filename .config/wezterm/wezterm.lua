@@ -12,7 +12,13 @@ end
 local act = wezterm.action
 
 config.initial_cols = 150
-config.initial_rows = 50
+config.initial_rows = 40
+
+local font_size = 11
+
+if string.find(wezterm.target_triple, 'darwin') then
+  font_size = 14
+end
 
 -- This is where you actually apply your config choices
 
@@ -23,7 +29,7 @@ config.font = wezterm.font_with_fallback {
 	    'FantasqueSansM Nerd Font Mono',
 	    'FantasqueSansM Nerd Font',
 	   }
-config.font_size = 11
+config.font_size = font_size
 -- config.freetype_load_target = 'HorizontalLcd'
 
 config.window_background_opacity = 0.9
@@ -47,7 +53,7 @@ config.window_frame = {
 	    'FantasqueSansM Nerd Font Mono',
 	    'FantasqueSansM Nerd Font',
 	   },
-  font_size = 11,
+  font_size = font_size,
 }
 
 config.mouse_bindings = {
