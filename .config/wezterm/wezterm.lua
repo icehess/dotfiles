@@ -11,6 +11,9 @@ if wezterm.config_builder then
 end
 local act = wezterm.action
 
+config.initial_cols = 150
+config.initial_rows = 50
+
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
