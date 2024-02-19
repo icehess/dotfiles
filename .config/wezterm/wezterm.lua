@@ -34,6 +34,8 @@ config.font_size = font_size
 
 config.window_background_opacity = 0.9
 
+-- config.audible_bell = "SystemBeep"
+
 config.keys = {
   -- Clears the scrollback and viewport, and then sends CTRL-L to ask the
   -- shell to redraw its prompt
