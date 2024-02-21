@@ -17,7 +17,7 @@ config.initial_rows = 40
 local font_size = 11
 
 if string.find(wezterm.target_triple, 'darwin') then
-  font_size = 14
+  font_size = 15
 end
 
 -- This is where you actually apply your config choices
