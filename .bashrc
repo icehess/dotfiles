@@ -192,12 +192,11 @@ alias simplehttpd='python3 -m http.server';
 alias simplehttpd2='python -m SimpleHTTPServer';
 alias jsonformat='python -m json.tool'
 
-if type -P hx >/dev/null ; then
-    export EDITOR="hx"
-elif type -P nvim >/dev/null ; then
-# if type -P nvim >/dev/null ; then
+if type -P nvim >/dev/null ; then
     alias vim='nvim'
     export EDITOR='nvim'
+elif type -P hx >/dev/null ; then
+    export EDITOR="hx"
 elif type -P vim >/dev/null ; then
     export EDITOR='vim'
 elif type -P vi >/dev/null ; then
