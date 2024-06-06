@@ -159,6 +159,9 @@ local plugins = {
     "rcarriga/nvim-dap-ui",
     lazy = true,
     event = "VeryLazy",
+    dependencies = {
+      'nvim-neotest/nvim-nio'
+    },
     config = function()
       require("hesaam.core.dap").setup_ui()
     end,
