@@ -47,23 +47,24 @@ elif [ -f /usr/local/bin/brew ]; then
 #     export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
 fi
 
-if [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
-    . /usr/local/opt/asdf/libexec/asdf.sh
-elif [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
-    . /opt/homebrew/opt/asdf/libexec/asdf.sh
-elif [ -f /opt/asdf-vm/asdf.sh ]; then
-    . /opt/asdf-vm/asdf.sh
-elif [ -f ${HOME}/.asdf/asdf.sh ]; then
-    . ${HOME}/.asdf/asdf.sh
-fi
-
 # }}}
 
 # If not running interactively, don't do anything
 if [[ $- != *i* ]] ; then
+   if type -P mise >/dev/null ; then
+       eval "$(mise activate bash --shims)"
+   elif [ -f /usr/local/opt/asdf/libexec/asdf.sh ]; then
+       . /usr/local/opt/asdf/libexec/asdf.sh
+   elif [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+       . /opt/homebrew/opt/asdf/libexec/asdf.sh
+   elif [ -f /opt/asdf-vm/asdf.sh ]; then
+       . /opt/asdf-vm/asdf.sh
+   elif [ -f ${HOME}/.asdf/asdf.sh ]; then
+       . ${HOME}/.asdf/asdf.sh
+   fi
+
    return
 fi
-
 
 # Good Shell {{{
 # If set, bash checks the window size after each external (non-builtin) command and, if necessary, updates the values of LINES
@@ -180,6 +181,10 @@ fi
 
 [ -f /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash ] && . /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
 [ -f ${HOME}/.asdf/completions/asdf.bash ] && . ${HOME}/.asdf/completions/asdf.bash
+
+if type -P mise >/dev/null ; then
+    eval "$(mise activate bash)"
+fi
 # }}}
 
 # Aliases {{{
