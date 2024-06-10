@@ -259,13 +259,22 @@ alias configAuthorMe='config config user.email "icehess@gmail.com"; config confi
 # fi
 
 # fzf {{{
-[ -f ~/.fzf.bash ] && . ~/.fzf.bash
-[ -f /usr/share/fzf/key-bindings.bash ] && . /usr/share/fzf/key-bindings.bash
-[ -f /usr/share/fzf/completion.bash ] && . /usr/share/fzf/completion.bash
-[ -f /usr/local/opt/fzf/shell/key-bindings.bash ] && . /usr/local/opt/fzf/shell/key-bindings.bash
-[ -f /usr/local/opt/fzf/shell/completion.bash ] && . /usr/local/opt/fzf/shell/completion.bash
-[ -f /opt/homebrew/opt/fzf/shell/key-bindings.bash ] && . /opt/homebrew/opt/fzf/shell/key-bindings.bash
-[ -f /opt/homebrew/opt/fzf/shell/completion.bash ] && . /opt/homebrew/opt/fzf/shell/completion.bash
+
+if [ -d /home/linuxbrew/.linuxbrew/opt/fzf/shell ]; then
+    . /home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.bash
+    . /home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.bash
+elif [ -f /usr/share/fzf/key-bindings.bash ]; then
+    . /usr/share/fzf/key-bindings.bash
+    . /usr/share/fzf/completion.bash
+elif [ -f /usr/local/opt/fzf/shell/key-bindings.bash ]; then
+    . /usr/local/opt/fzf/shell/key-bindings.bash
+    . /usr/local/opt/fzf/shell/completion.bash
+elif [ -f /opt/homebrew/opt/fzf/shell/key-bindings.bash ]; then
+    . /opt/homebrew/opt/fzf/shell/key-bindings.bash
+    . /opt/homebrew/opt/fzf/shell/completion.bash
+elif [ -f ~/.fzf.bash ]; then
+    . ~/.fzf.bash
+fi
 # }}}
 
 # Work Dirs {{{
