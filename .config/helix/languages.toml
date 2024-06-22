@@ -1,0 +1,15 @@
+[language-server.astro-ls]
+command = "astro-ls"
+args = ["--stdio"]
+# config = { typescript = { tsdk = "~/.local/share/nvim/mason/packages/astro-language-server/node_modules/typescript/lib" }, "environment" = "node" }
+config = { typescript = { tsdk = "node_modules/typescript/lib" }, "environment" = "node" }
+
+[[language]]
+name = "astro"
+scope = "source.astro"
+injection-regex = "astro"
+file-types = ["astro"]
+language-servers = ["astro-ls"]
+roots = ["package.json", "astro.config.mjs"]
+formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-astro", "--parser", "astro"] }
+auto-format = true

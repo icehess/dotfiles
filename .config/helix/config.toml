@@ -38,7 +38,7 @@ mode.select = "SELECT"
 
 [editor.lsp]
 display-messages = true
-display-inlay-hints = true
+display-inlay-hints = false
 
 [keys.insert]
 A-b = ["move_prev_word_start", "move_char_left"]
