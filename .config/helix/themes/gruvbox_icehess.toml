@@ -2,9 +2,12 @@
 # Author : Jakub Bartodziej <kubabartodziej@gmail.com>
 # The theme uses the gruvbox dark palette with hard contrast: github.com/morhetz/gruvbox
 
-inherits = "gruvbox"
+inherits = "gruvbox_dark_hard"
 
 "ui.background" = { }
+"namespace" = "aqua1"
+"variable" = "fg1"
+"variable.parameter" = "fg2"
 
 # "ui.selection" = { bg = "bg3", modifiers = ["reversed"] }
 # "ui.selection.primary" = { bg = "bg4", modifiers = ["reversed"] }

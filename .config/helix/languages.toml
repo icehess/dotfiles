@@ -13,3 +13,18 @@ language-servers = ["astro-ls"]
 roots = ["package.json", "astro.config.mjs"]
 formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-astro", "--parser", "astro"] }
 auto-format = true
+
+# [language-server.elp]
+# command = "elp"
+# args = ["server"]
+
+# [[language]]
+# name = "erlang"
+# scope = "source.erlang"
+# injection-regex = "erl(ang)?"
+# file-types = ["erl", "hrl", "app", "app.src", "erl.src", "escript", { glob = "rebar.config" }, { glob = "rebar.lock" }, { glob = "*.app.src" }]
+# roots = ["rebar.config"]
+# shebangs = ["escript"]
+# comment-token = "%%"
+# indent = { tab-width = 4, unit = "    " }
+# language-servers = [ "elp" ]

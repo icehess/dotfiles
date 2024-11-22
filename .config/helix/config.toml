@@ -22,6 +22,7 @@ character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
 # skip-levels = 1
 
 [editor.file-picker]
+# hidden = false
 parents = false
 ignore = false
 git-ignore = false
@@ -55,4 +56,4 @@ C-f = "move_char_right"
 [keys.normal.space]
 F = "file_picker_in_current_buffer_directory"
 c = ":buffer-close"
-g = ":pipe-to wizyterm cli split-pane -- helix-live-rg"
+# g = ":pipe-to wizyterm cli split-pane -- helix-live-rg"
