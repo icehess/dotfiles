@@ -350,3 +350,7 @@ if test -n "$KITTY_INSTALLATION_DIR" -a -e "${KITTY_INSTALLATION_DIR}/shell-inte
 # fi
 
 export HOMEBREW_NO_ANALYTICS=1
+
+# >>> Scala coursier install directory >>>
+[ -d "${HOME}/.local/share/coursier/bin" ] && export PATH="$PATH:${HOME}/.local/share/coursier/bin"
+# <<< coursier install directory <<<
