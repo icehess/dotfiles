@@ -48,7 +48,6 @@ elif [ -f /usr/local/bin/brew ]; then
 #     export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
 #     export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
 fi
-
 # }}}
 
 # If not running interactively, don't do anything
@@ -162,13 +161,13 @@ if [ -r /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-# Instead of add ~/.dotfiles-site/linuxbrew.sh to /etc/bash.bashrc
+# # Instead of add ~/.dotfiles-site/linuxbrew.sh to /etc/bash.bashrc
 # if [ -d /home/linuxbrew/.linuxbrew/etc/bash_completion.d ]; then
-#     # if [ -n "$BASH_COMPLETION_USER_DIR" ]; then
-#     #     export BASH_COMPLETION_USER_DIR="/home/linuxbrew/.linuxbrew/etc/bash_completion.d:$BASH_COMPLETION_USER_DIR"
-#     # else
-#     #     export BASH_COMPLETION_USER_DIR="/home/linuxbrew/.linuxbrew/etc/bash_completion.d"
-#     # fi
+#     if [ -n "$BASH_COMPLETION_USER_DIR" ]; then
+#         export BASH_COMPLETION_USER_DIR="/home/linuxbrew/.linuxbrew/etc/bash_completion.d:$BASH_COMPLETION_USER_DIR"
+#     else
+#         export BASH_COMPLETION_USER_DIR="/home/linuxbrew/.linuxbrew/etc/bash_completion.d"
+#     fi
 #     . /home/linuxbrew/.linuxbrew/etc/bash_completion.d/brew
 # fi
 

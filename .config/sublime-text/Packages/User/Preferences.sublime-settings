@@ -37,10 +37,14 @@
     [
         // "JavaScript",
         // "SublimeLinter",
-        // "Vintage",
+        "Vintage",
 /*"ElixirSyntax",*/
 /*"LSP",*/
 /*"LSP-elixir",*/
+/*"LSP",*/
+/*"Vintage",*/
+/*"Vintage",*/
+/*"Vintage",*/
     ],
     "vintage_start_in_command_mode": true,
     "indent_guide_options":

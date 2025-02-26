@@ -34,6 +34,8 @@ config.font_size = font_size
 
 config.window_background_opacity = 0.9
 
+config.scrollback_lines = 200000
+
 -- config.audible_bell = "SystemBeep"
 
 config.keys = {
