@@ -1,3 +1,11 @@
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+# for vale use vale-ls
+
+[language-server.harper-ls.config.harper-ls]
+diagnosticSeverity = "warning"
+
 [language-server.astro-ls]
 command = "astro-ls"
 args = ["--stdio"]
@@ -14,6 +22,19 @@ roots = ["package.json", "astro.config.mjs"]
 formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-astro", "--parser", "astro"] }
 auto-format = true
 
+
+[[language]]
+name = "html"
+language-servers = [ "vscode-html-language-server" ]
+
+[[language]]
+name = "erlang"
+language-servers = [ "erlang-ls" ]
+
+
+[[language]]
+name = "markdown"
+language-servers = [ "marksman" ]
 # [language-server.elp]
 # command = "elp"
 # args = ["server"]
