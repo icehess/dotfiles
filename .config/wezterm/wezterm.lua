@@ -11,6 +11,9 @@ if wezterm.config_builder then
 end
 local act = wezterm.action
 
+-- config.debug_key_events = true
+config.use_ime = false
+
 config.initial_cols = 150
 config.initial_rows = 40
 
