@@ -6,7 +6,7 @@ M.config = {
     'eslint',
     'rust_analyzer',
     'lua_ls',
-    'tsserver',
+    'ts_ls',
     'vimls',
   },
   lua_ls = {
