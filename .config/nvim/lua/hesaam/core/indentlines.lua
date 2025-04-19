@@ -24,14 +24,16 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, indentlines = pcall(require, "indentlines")
-  if not status_ok then
-    return
-  end
+  xpcall(function()
+    local indentlines  = require("indentlines")
 
-  vim.g.indent_blankline_enabled = false
-  vim.cmd[[set g:indent_blankline_enabled = false]]
-  indentlines.setup(M.config)
+    vim.g.indent_blankline_enabled = false
+    vim.cmd[[set g:indent_blankline_enabled = false]]
+    indentlines.setup(M.config)
+  end, function()
+      print("Failed to load indentlines")
+  end
+  )
 end
 
 return M

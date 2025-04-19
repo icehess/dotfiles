@@ -74,12 +74,14 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, lualine = pcall(require, "lualine")
-  if not status_ok then
-    return
-  end
+  xpcall(function()
+    local lualine = require("lualine")
 
-  lualine.setup(M.config)
+    lualine.setup(M.config)
+  end, function()
+      print("Failed to load lualine")
+  end
+  )
 end
 
 return M

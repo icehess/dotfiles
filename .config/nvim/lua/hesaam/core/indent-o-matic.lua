@@ -12,13 +12,14 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, indent_o_matic = pcall(require, "ident-o-matic")
-  if not status_ok then
-    print "Failed to load ident-o-matic"
-    return
-  end
+  xpcall(function()
+    local indent_o_matic = require("ident-o-matic")
 
-  indent_o_matic.setup(M.config)
+    indent_o_matic.setup(M.config)
+  end, function()
+    print "Failed to load ident-o-matic"
+  end
+  )
 end
 
 return M

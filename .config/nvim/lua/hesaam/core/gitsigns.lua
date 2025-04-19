@@ -45,12 +45,14 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, gitsigns = pcall(require, "gitsigns")
-  if not status_ok then
-    return
-  end
+  xpcall(function()
+    local gitsigns = require("gitsigns")
 
-  gitsigns.setup(M.config)
+    gitsigns.setup(M.config)
+  end, function()
+    print "Failed to load gitsigns"
+  end
+  )
 end
 
 return M

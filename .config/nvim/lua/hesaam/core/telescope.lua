@@ -93,29 +93,31 @@ M.config = {
   },
 }
 function M.setup()
-  local status_ok, telescope = pcall(require, "telescope")
-  if not status_ok then
-    return
+  xpcall(function()
+    local telescope  = require("telescope")
+
+    local previewers = require "telescope.previewers"
+    local sorters = require "telescope.sorters"
+
+    M.config = vim.tbl_extend("keep", {
+      file_previewer = previewers.vim_buffer_cat.new,
+      grep_previewer = previewers.vim_buffer_vimgrep.new,
+      qflist_previewer = previewers.vim_buffer_qflist.new,
+      file_sorter = sorters.get_fuzzy_file,
+      generic_sorter = sorters.get_generic_fuzzy_sorter,
+    }, M.config)
+
+    telescope.setup(M.config)
+
+    if M.config.extensions and M.config.extensions.fzf then
+      pcall(function()
+        require("telescope").load_extension "fzf"
+      end)
+    end
+  end, function()
+      print("Failed to load telescope")
   end
-
-  local previewers = require "telescope.previewers"
-  local sorters = require "telescope.sorters"
-
-  M.config = vim.tbl_extend("keep", {
-    file_previewer = previewers.vim_buffer_cat.new,
-    grep_previewer = previewers.vim_buffer_vimgrep.new,
-    qflist_previewer = previewers.vim_buffer_qflist.new,
-    file_sorter = sorters.get_fuzzy_file,
-    generic_sorter = sorters.get_generic_fuzzy_sorter,
-  }, M.config)
-
-  telescope.setup(M.config)
-
-  if M.config.extensions and M.config.extensions.fzf then
-    pcall(function()
-      require("telescope").load_extension "fzf"
-    end)
-  end
+  )
 end
 
 return M

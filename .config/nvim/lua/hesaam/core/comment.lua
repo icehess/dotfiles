@@ -1,10 +1,14 @@
 local M = {}
 
 local pre_hook
-local loaded, ts_comment = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
-if loaded and ts_comment then
+xpcall(function()
+  local ts_comment = require("ts_context_commentstring.integrations.comment_nvim")
+
   pre_hook = ts_comment.create_pre_hook()
+end, function()
+  print "Failed to load ts_context_commentstring.integrations.comment_nvim"
 end
+)
 
 M.config = {
   ---Add a space b/w comment and the line
@@ -72,12 +76,14 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, comment = pcall(require, "Comment")
-  if not status_ok then
-    return
-  end
+  xpcall(function()
+    local comment = require("Comment")
 
-  comment.setup(M.config)
+    comment.setup(M.config)
+  end, function()
+    print "Failed to load Comment"
+  end
+  )
 end
 
 return M

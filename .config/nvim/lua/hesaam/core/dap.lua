@@ -98,76 +98,80 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, dap = pcall(require, "dap")
-  if not status_ok then
-    return
+  xpcall(function()
+    local dap = require("dap")
+
+    vim.fn.sign_define("DapBreakpoint", M.config.breakpoint)
+    vim.fn.sign_define("DapBreakpointRejected", M.config.breakpoint_rejected)
+    vim.fn.sign_define("DapStopped", M.config.stopped)
+
+    dap.set_log_level(M.config.log.level)
+  end, function()
+      print("Failed to load dap")
   end
-
-
-  vim.fn.sign_define("DapBreakpoint", M.config.breakpoint)
-  vim.fn.sign_define("DapBreakpointRejected", M.config.breakpoint_rejected)
-  vim.fn.sign_define("DapStopped", M.config.stopped)
-
-  dap.set_log_level(M.config.log.level)
+  )
 end
 
 M.setup_ui = function()
-  local status_ok, dap = pcall(require, "dap")
-  if not status_ok then
-    return
-  end
-  local dapui = require "dapui"
-  dapui.setup(M.config.ui.config)
+  xpcall(function()
+    local dap = require("dap")
 
-  if M.config.ui.auto_open then
-    dap.listeners.after.event_initialized["dapui_config"] = function()
-      dapui.open()
+    local dapui = require "dapui"
+    dapui.setup(M.config.ui.config)
+
+    if M.config.ui.auto_open then
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      -- dap.listeners.before.event_terminated["dapui_config"] = function()
+      --   dapui.close()
+      -- end
+      -- dap.listeners.before.event_exited["dapui_config"] = function()
+      --   dapui.close()
+      -- end
     end
-    -- dap.listeners.before.event_terminated["dapui_config"] = function()
-    --   dapui.close()
+
+    -- local Log = require "lvim.core.log"
+
+    -- -- until rcarriga/nvim-dap-ui#164 is fixed
+    -- local function notify_handler(msg, level, opts)
+    --   if level >= M.config.ui.notify.threshold then
+    --     return vim.notify(msg, level, opts)
+    --   end
+
+    --   opts = vim.tbl_extend("keep", opts or {}, {
+    --     title = "dap-ui",
+    --     icon = "",
+    --     on_open = function(win)
+    --       vim.api.nvim_buf_set_option(vim.api.nvim_win_get_buf(win), "filetype", "markdown")
+    --     end,
+    --   })
+
+    --   -- vim_log_level can be omitted
+    --   if level == nil then
+    --     level = 3 -- Log.levels["INFO"]
+    --   elseif type(level) == "string" then
+    --     level = 3 -- Log.levels[(level):upper()] or Log.levels["INFO"]
+    --   else
+    --     -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
+    --     level = level + 1
+    --   end
+
+    --   msg = string.format("%s: %s", opts.title, msg)
+    --   Log:add_entry(level, msg)
     -- end
-    -- dap.listeners.before.event_exited["dapui_config"] = function()
-    --   dapui.close()
+
+    -- local _, _ = xpcall(function()
+    -- -- local dapui_ok, _ = xpcall(function()
+    --   -- require("dapui.util").notify = notify_handler
+    -- end, debug.traceback)
+    -- if not dapui_ok then
+    --   Log:debug "Unable to override dap-ui logging level"
     -- end
+  end, function()
+      print("Failed to load dap ui")
   end
-
-  -- local Log = require "lvim.core.log"
-
-  -- -- until rcarriga/nvim-dap-ui#164 is fixed
-  -- local function notify_handler(msg, level, opts)
-  --   if level >= M.config.ui.notify.threshold then
-  --     return vim.notify(msg, level, opts)
-  --   end
-
-  --   opts = vim.tbl_extend("keep", opts or {}, {
-  --     title = "dap-ui",
-  --     icon = "",
-  --     on_open = function(win)
-  --       vim.api.nvim_buf_set_option(vim.api.nvim_win_get_buf(win), "filetype", "markdown")
-  --     end,
-  --   })
-
-  --   -- vim_log_level can be omitted
-  --   if level == nil then
-  --     level = 3 -- Log.levels["INFO"]
-  --   elseif type(level) == "string" then
-  --     level = 3 -- Log.levels[(level):upper()] or Log.levels["INFO"]
-  --   else
-  --     -- https://github.com/neovim/neovim/blob/685cf398130c61c158401b992a1893c2405cd7d2/runtime/lua/vim/lsp/log.lua#L5
-  --     level = level + 1
-  --   end
-
-  --   msg = string.format("%s: %s", opts.title, msg)
-  --   Log:add_entry(level, msg)
-  -- end
-
-  local _, _ = xpcall(function()
-  -- local dapui_ok, _ = xpcall(function()
-    -- require("dapui.util").notify = notify_handler
-  end, debug.traceback)
-  -- if not dapui_ok then
-  --   Log:debug "Unable to override dap-ui logging level"
-  -- end
+  )
 end
 
 return M

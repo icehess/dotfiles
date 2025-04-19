@@ -7,12 +7,14 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, mason = pcall(require, "mason")
-  if not status_ok then
-    return
-  end
+  xpcall(function()
+    local mason  = require("mason")
 
-  mason.setup(M.config)
+    mason.setup(M.config)
+  end, function()
+      print("Failed to load mason")
+  end
+  )
 end
 
 return M

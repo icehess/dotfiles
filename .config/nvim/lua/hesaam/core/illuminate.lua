@@ -48,15 +48,14 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, illuminate = pcall(require, "illuminate")
-  if not status_ok then
-    return
-  end
+  xpcall(function()
+    local illuminate = require("illuminate")
 
-  local config_ok, _ = pcall(illuminate.configure, M.config)
-  if not config_ok then
-    return
+    illuminate.configure(M.config)
+  end, function()
+    print "Failed to load illuminate"
   end
+  )
 end
 
 return M

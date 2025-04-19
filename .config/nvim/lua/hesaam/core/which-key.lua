@@ -235,12 +235,14 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, which_key = pcall(require, "which-key")
-  if not status_ok then
-    return
-  end
+  xpcall(function()
+    local which_key = require("which-key")
 
-  which_key.setup(M.config.config)
+    which_key.setup(M.config.config)
+  end, function()
+    print "Failed to load which_key "
+  end
+  )
 end
 
 return M

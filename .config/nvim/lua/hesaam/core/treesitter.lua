@@ -102,13 +102,15 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
-  if not status_ok then
-    return
-  end
+  xpcall(function()
+    local treesitter_configs = require("nvim-treesitter.configs")
 
-  local opts = vim.deepcopy(M.config)
-  treesitter_configs.setup(opts)
+    local opts = vim.deepcopy(M.config)
+    treesitter_configs.setup(opts)
+  end, function()
+      print("Failed to load nvim-treesitter")
+  end
+  )
 end
 
 return M

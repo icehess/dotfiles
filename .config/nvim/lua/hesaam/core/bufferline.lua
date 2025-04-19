@@ -141,15 +141,17 @@ M.config = {
 }
 
 function M.setup()
-  local status_ok, bufferline = pcall(require, "bufferline")
-  if not status_ok then
-    return
-  end
+  xpcall(function()
+    local bufferline  = require("bufferline")
 
-  bufferline.setup {
-    options = M.config.options,
-    highlights = M.config.highlights,
-  }
+    bufferline.setup {
+      options = M.config.options,
+      highlights = M.config.highlights,
+    }
+  end, function()
+      print("Failed to load bufferline")
+  end
+  )
 end
 
 --stylua: ignore

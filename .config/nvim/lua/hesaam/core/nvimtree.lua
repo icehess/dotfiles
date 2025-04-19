@@ -179,13 +179,14 @@ M.config = {
     }
 
 function M.setup()
-  local status_ok, nvim_tree = pcall(require, "nvim-tree")
-  if not status_ok then
-    print "Failed to load nvim-tree"
-    return
-  end
+  xpcall(function()
+    local nvim_tree = require("nvim-tree")
 
-  nvim_tree.setup(M.config)
+    nvim_tree.setup(M.config)
+  end, function()
+    print "Failed to load nvim-tree"
+  end
+  )
 end
 
 return M
