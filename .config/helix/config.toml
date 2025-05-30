@@ -6,6 +6,13 @@ cursorcolumn = false
 bufferline = "always"
 true-color = true
 undercurl = true
+text-width = 100
+
+[editor.soft-wrap]
+enable = false
+# max-wrap = 25 # increase value to reduce forced mid-word wrapping
+# max-indent-retain = 0
+# wrap-indicator = ""  # set wrap-indicator to "" to hide it
 
 [editor.cursor-shape]
 insert = "bar"
@@ -57,3 +64,10 @@ C-f = "move_char_right"
 F = "file_picker_in_current_buffer_directory"
 c = ":buffer-close"
 # g = ":pipe-to wizyterm cli split-pane -- helix-live-rg"
+
+[keys.normal.space.t]
+s = ":toggle soft-wrap.enable"
+
+[keys.normal.space.m]
+f = ":pipe prettier --parser markdown --print-width 120 --prose-wrap preserve"
+p = ":pipe prettier --parser markdown --print-width 120 --prose-wrap always"

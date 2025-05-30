@@ -12,6 +12,11 @@ args = ["--stdio"]
 # config = { typescript = { tsdk = "~/.local/share/nvim/mason/packages/astro-language-server/node_modules/typescript/lib" }, "environment" = "node" }
 config = { typescript = { tsdk = "node_modules/typescript/lib" }, "environment" = "node" }
 
+[language-server.ltex-ls-plus.config]
+ltex.diagnosticSeverity = "warning"
+ltex.disabledRules = { "en-US" = ["PROFANITY"], "en-GB" = ["PROFANITY"] }
+ltex.dictionary = { "en-US" = ["builtin"], "en-GB" = ["builtin"] }
+
 [[language]]
 name = "astro"
 scope = "source.astro"
@@ -25,7 +30,8 @@ auto-format = true
 
 [[language]]
 name = "html"
-language-servers = [ "vscode-html-language-server" ]
+language-servers = [ "vscode-html-language-server", "ltex-ls-plus" ]
+soft-wrap.enable = false
 
 [[language]]
 name = "erlang"
@@ -34,7 +40,16 @@ language-servers = [ "erlang-ls" ]
 
 [[language]]
 name = "markdown"
-language-servers = [ "marksman" ]
+language-servers = [ "marksman", "ltex-ls-plus" ]
+soft-wrap.enable = false
+formatter = { command = 'prettier', args = [
+  "--parser",
+  "markdown",
+  "--prose-wrap",
+  "preserve", # <always|never|preserve>
+] }
+auto-format = false
+
 # [language-server.elp]
 # command = "elp"
 # args = ["server"]
