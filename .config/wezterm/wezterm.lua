@@ -39,6 +39,10 @@ config.window_background_opacity = 0.9
 
 config.scrollback_lines = 200000
 
+-- config.window_decorations = "RESIZE"
+-- config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
+config.enable_wayland = false
+
 -- config.audible_bell = "SystemBeep"
 
 config.keys = {
