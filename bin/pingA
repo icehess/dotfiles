@@ -1,0 +1,13 @@
+#!/bin/sh
+
+while true; do
+    _out=$(ping -c 1 "$@")
+    _pingExit=$?
+    _result="$(echo ${_out} | sed -r 's/.*((From|[0-9]+ bytes) [^-]+).*/\1/g')"
+    if [ $_pingExit -eq 1 ]; then
+        echo "${_result}\a"
+    else
+        echo "${_result}"
+        sleep 1
+    fi
+done
