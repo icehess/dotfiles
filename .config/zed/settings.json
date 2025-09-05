@@ -81,6 +81,12 @@
     "file_icons": true,
     "include_ignored": true
   },
+  "helix_mode": true,
+  "vim": {
+    "cursor_shape": {
+      "normal": "block"
+    }
+  },
   "file_scan_exclusions": [
     "**/.git",
     "**/.svn",
