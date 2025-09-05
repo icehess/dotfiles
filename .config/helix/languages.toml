@@ -37,6 +37,13 @@ soft-wrap.enable = false
 name = "erlang"
 language-servers = [ "erlang-ls" ]
 
+[language-server.elp]
+command = "elp"
+args = ["server", "--log-file", "/Users/hesaam.farhang/elp.log"]
+
+# [language-server.erlang-ls]
+# command = "erlang_ls"
+# args = ["--log-level", "debug"]
 
 [[language]]
 name = "markdown"
@@ -49,18 +56,3 @@ formatter = { command = 'prettier', args = [
   "preserve", # <always|never|preserve>
 ] }
 auto-format = false
-
-# [language-server.elp]
-# command = "elp"
-# args = ["server"]
-
-# [[language]]
-# name = "erlang"
-# scope = "source.erlang"
-# injection-regex = "erl(ang)?"
-# file-types = ["erl", "hrl", "app", "app.src", "erl.src", "escript", { glob = "rebar.config" }, { glob = "rebar.lock" }, { glob = "*.app.src" }]
-# roots = ["rebar.config"]
-# shebangs = ["escript"]
-# comment-token = "%%"
-# indent = { tab-width = 4, unit = "    " }
-# language-servers = [ "elp" ]
