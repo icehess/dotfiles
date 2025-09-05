@@ -37,9 +37,9 @@ soft-wrap.enable = false
 name = "erlang"
 language-servers = [ "erlang-ls" ]
 
-[language-server.elp]
-command = "elp"
-args = ["server", "--log-file", "/Users/hesaam.farhang/elp.log"]
+# [language-server.elp]
+# command = "elp"
+# args = ["--log-file", "~/elp.log", "--no-log-buffering", "server"]
 
 # [language-server.erlang-ls]
 # command = "erlang_ls"
