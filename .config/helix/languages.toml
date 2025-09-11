@@ -42,6 +42,8 @@ command = "elp"
 args = ["server"]
 # [language-server.elp.config]
 # log = "debug"
+[language-server.elp.eqwalizer]
+all = false
 [language-server.elp.config.elp.diagnostics]
 disabled = [
     "old_edoc_syntax", # W0038
