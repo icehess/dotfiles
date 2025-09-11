@@ -20,6 +20,11 @@
       ]
     }
   ],
+  "languages": {
+    "Erlang": {
+      // "language_servers": ["elp", "!erlang-ls"]
+    }
+  },
   "buffer_font_family": "FantasqueSansM Nerd Font Mono",
   "ui_font_family": "FantasqueSansM Nerd Font Mono",
   "ui_font_size": 16,
@@ -79,7 +84,7 @@
   },
   "file_finder": {
     "file_icons": true,
-    "include_ignored": true
+    "include_ignored": false
   },
   "helix_mode": true,
   "vim": {
