@@ -35,11 +35,18 @@ soft-wrap.enable = false
 
 [[language]]
 name = "erlang"
-language-servers = [ "erlang-ls" ]
+language-servers = [ "elp" ]
 
-# [language-server.elp]
-# command = "elp"
-# args = ["--log-file", "~/elp.log", "--no-log-buffering", "server"]
+[language-server.elp]
+command = "elp"
+args = ["server"]
+# [language-server.elp.config]
+# log = "debug"
+[language-server.elp.config.elp.diagnostics]
+disabled = [
+    "old_edoc_syntax", # W0038
+    "binary_string_to_sigil", # W0051
+]
 
 # [language-server.erlang-ls]
 # command = "erlang_ls"
