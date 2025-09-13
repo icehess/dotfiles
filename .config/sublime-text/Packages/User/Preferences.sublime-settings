@@ -35,21 +35,7 @@
     "highlight_modified_tabs": true,
     "ignored_packages":
     [
-        // "JavaScript",
-        // "SublimeLinter",
         "Vintage",
-/*"ElixirSyntax",*/
-/*"LSP",*/
-/*"LSP-elixir",*/
-/*"LSP",*/
-/*"Vintage",*/
-/*"Vintage",*/
-/*"Vintage",*/
-/*"Vintage",*/
-/*"Vintage",*/
-/*"Vintage",*/
-/*"Vintage",*/
-/*"LSP-elixir",*/
     ],
     "vintage_start_in_command_mode": true,
     "indent_guide_options":
