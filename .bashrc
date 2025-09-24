@@ -198,9 +198,27 @@ alias simplehttpd='python3 -m http.server';
 alias simplehttpd2='python -m SimpleHTTPServer';
 alias jsonformat='python -m json.tool'
 
+if [ -f /home/linuxbrew/.linuxbrew/bin/nvim ]; then
+    alias nvim=/home/linuxbrew/.linuxbrew/bin/nvim
+    alias bnvim=/home/linuxbrew/.linuxbrew/bin/nvim
+elif [ -f /usr/local/bin/nvim ]; then
+    alias nvim=/usr/local/bin/nvim
+    alias bnvim=/usr/local/bin/nvim
+elif [ -f /opt/homebrew/bin/nvim ]; then
+    alias nvim=/opt/homebrew/bin/nvim
+    alias bnvim=/opt/homebrew/bin/nvim
+fi
+
 if type -P nvim >/dev/null ; then
     alias vim='nvim'
     export EDITOR='nvim'
+    if [ -f /home/linuxbrew/.linuxbrew/bin/nvim ]; then
+        export EDITOR=/home/linuxbrew/.linuxbrew/bin/nvim
+    elif [ -f /usr/local/bin/nvim ]; then
+        export EDITOR=/usr/local/bin/nvim
+    elif [ -f /opt/homebrew/bin/nvim ]; then
+        export EDITOR=/opt/homebrew/bin/nvim
+    fi
 elif type -P hx >/dev/null ; then
     export EDITOR="hx"
 elif type -P vim >/dev/null ; then
