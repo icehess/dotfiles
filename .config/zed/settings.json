@@ -22,7 +22,23 @@
   ],
   "languages": {
     "Erlang": {
-      // "language_servers": ["elp", "!erlang-ls"]
+      "language_servers": ["elp", "!erlang-ls"]
+    }
+  },
+  "lsp": {
+    "elp": {
+      "initialization_options": {
+        // "log": "debug",
+        "eqwalizer": {
+          "all": false
+        },
+        "diagnostics": {
+          "disabled": [
+            "old_edoc_syntax",          // W0038
+            "binary_string_to_sigil"    // W0051
+          ]
+        }
+      }
     }
   },
   // "buffer_font_family": "FantasqueSansM Nerd Font Mono",
