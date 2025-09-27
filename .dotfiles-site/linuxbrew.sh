@@ -1,10 +1,4 @@
 if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
-    # Do not double source
-    # echo "fuck profile.d"
-    # [ -n "${LINUXBREW_WAS_HERE}" ] && return
-    # export LINUXBREW_WAS_HERE=true
-    # echo "fucked profile.d"
-
     export PATH="${PATH+$PATH:}/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin";
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
     export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
@@ -13,7 +7,9 @@ if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
     # If not running interactively, don't do anything
     [ -z "$PS1" ] && return
 
+    ## no need for MANPATH, manpath(5) will detect brew from PATH
     # export MANPATH="${MANPATH+$MANPATH:}/home/linuxbrew/.linuxbrew/share/man";
+    ## I don't care about info
     # export INFOPATH="${INFOPATH+$INFOPATH:}/home/linuxbrew/.linuxbrew/share/info";
 
     if [ -d /home/linuxbrew/bash-completion ]; then
