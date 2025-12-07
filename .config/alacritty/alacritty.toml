@@ -1,0 +1,46 @@
+[cursor]
+
+[font]
+builtin_box_drawing = false
+size = 11.0
+
+[font.bold]
+family = "FantasqueSansM Nerd Font Mono"
+
+[font.bold_italic]
+family = "FantasqueSansM Nerd Font Mono"
+
+[font.italic]
+family = "FantasqueSansM Nerd Font Mono"
+
+[font.normal]
+family = "FantasqueSansM Nerd Font Mono"
+style = "Regular"
+
+[scrolling]
+history = 100000
+
+[selection]
+save_to_clipboard = true
+
+[window]
+dynamic_title = true
+opacity = 0.85
+option_as_alt = "None"
+
+[window.dimensions]
+columns = 185
+lines = 45
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[keyboard]
+bindings = [
+{ key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+{ key = "T", mods = "Control|Shift", action = "CreateNewTab" },
+{ key = "T", mods = "Control|Shift", action = "SelectNextTab" },
+{ key = "T", mods = "Control|Shift", action = "SelectPreviousTab" },
+{ key = "K", mods = "Control|Shift", action = "ClearHistory" },
+{ key = "K", mods = "Control|Shift", chars = "\u000c" },
+]
