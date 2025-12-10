@@ -1,0 +1,11 @@
+[Unit]
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+# Never run in GNOME
+Conflicts=gnome-session-initialized.target
+
+[Service]
+ExecStart=/usr/bin/swayidle -w timeout 601 'niri msg action power-off-monitors' timeout 600 'swaylock' before-sleep 'swaylock'
+Restart=on-failure

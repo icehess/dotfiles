@@ -1,7 +1,0 @@
-// Place your key bindings in this file to overwrite the defaults
-[
-    {
-        "key": "ctrl+k ctrl+b",
-        "command": "workbench.action.toggleActivityBarVisibility"
-    }
-]
