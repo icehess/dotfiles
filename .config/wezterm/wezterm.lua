@@ -43,7 +43,7 @@ config.scrollback_lines = 200000
 -- config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
 config.enable_wayland = false
 
--- config.audible_bell = "SystemBeep"
+config.audible_bell = "Disabled"
 
 config.keys = {
   -- Clears the scrollback and viewport, and then sends CTRL-L to ask the
