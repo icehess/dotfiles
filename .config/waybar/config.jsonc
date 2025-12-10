@@ -2,8 +2,10 @@
   {
     "layer": "top",
     "position": "top",
-    "height": 35,
+    // "height": 35,
     "spacing": 0,
+    "margin": 0,
+
     "modules-left": [
       "group/Utilities",
       "group/workspaces",
@@ -35,9 +37,8 @@
         "custom/openbracket",
         "custom/debian",
         "idle_inhibitor",
-        "custom/split",
         "custom/powerprofile",
-        "custom/themeswitcher",
+        "custom/wallpaper",
         "custom/closebracket"
       ]
     },
@@ -81,13 +82,11 @@
       "orientation": "horizontal",
       "modules": [
         "custom/openbracket",
-        "clock",
-        "custom/split",
         "wireplumber",
         "network",
         "custom/bluetooth",
         "custom/clipboard",
-        "battery",
+        "niri/language",
         "custom/closebracket"
       ]
     },
@@ -96,6 +95,9 @@
       "modules": [
         "custom/openbracket",
         "tray",
+        "custom/split",
+        "battery",
+        "clock",
         "custom/closebracket"
       ]
     },
@@ -107,8 +109,12 @@
         "custom/closebracket"
       ]
     },
+    "niri/language": {
+        "format-en": "🇺🇸",
+        "format-fa": "🇮🇷"
+    },
     "custom/debian": {
-      "format": "\uf306",
+      "format": "",
       "tooltip": false,
       "on-click": "fuzzel"
     },
@@ -120,12 +126,12 @@
       "exec-tooltip": "~/.config/waybar/scripts/powerprofile.sh tooltip",
       "tooltip-format": "Power Profile: {} \nClick to cycle: Efficient → Normal → Overclocked"
     },
-    "custom/themeswitcher": {
+    "custom/wallpaper": {
       "format": "",
       "tooltip": true,
       "tooltip-format": "Click to change theme",
-      "on-click": "~/.config/waybar/scripts/theme-switcher.sh next",
-      "on-click-right": "~/.config/scripts/theme-switcher.sh random"
+      "on-click": "~/bin/hswitch-wall.sh next",
+      "on-click-right": "~/bin/hswitch-wall.sh random"
     },
     "hyprland/workspaces": {
       "all-outputs": true,
@@ -157,7 +163,17 @@
       }
     },
     "mpris": {
-      "format": "[   {status_icon} | {dynamic} ]",
+      "format": "{player_icon} {status_icon} | {dynamic}",
+      "player-icons": {
+          "io.github.celluloid_player.Celluloid.instance-1": "",
+          "org.gnome.Showtime": "",
+          "org": "",
+          "mpv": "",
+          "io": "",
+          "vlc": "󰕼",
+          "firefox": "",
+          "chromium": ""
+      },
       "interval": 1,
       "dynamic-len": 40,
       "status-icons": {
@@ -166,8 +182,18 @@
         "stopped": ""
       },
       "dynamic-order": [
-        "artist"
-      ]
+        "artist",
+        "title",
+        "position",
+        "length"
+      ],
+      // "dynamic-importance-order": [
+      //   "position",
+      //   "length",
+      //   "title",
+      //   "artist"
+      // ],
+      "rotate": true
     },
     "hyprland/window": {
       "format": "{title}",
@@ -179,7 +205,9 @@
       "format": "{title}",
       "max-length": 20,
       "min-length": 0,
-      "all-outputs": true
+      "all-outputs": true,
+      "icon": true,
+      "icon-size": 16
     },
     "cpu": {
       "format": "CPU:{usage}%",
@@ -196,13 +224,13 @@
     "wireplumber": {
       "scroll-step": 5,
       "format": "{icon} {volume}%",
-      "format-bluetooth": "\udb86\udc4f : {volume}%",
-      "format-bluetooth-muted": "\udb86\udc4f",
-      "format-muted": "\uf026 : muted",
+      "format-bluetooth": "󱡏 : {volume}%",
+      "format-bluetooth-muted": "󱡐",
+      "format-muted": " : muted",
       "format-icons": {
         "headphone": "",
-        "hands-free": "\udb86\udc4f",
-        "headset": "\udb80\udece",
+        "hands-free": "󱡏",
+        "headset": "󰋎",
         "phone": "",
         "portable": "",
         "car": "",
@@ -212,6 +240,7 @@
           " :"
         ]
       },
+      "tooltip-format": "{icon} Vol: {volume}%\nNode Name: {node_name}",
       "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
       "on-click-right": "flatpak run com.saivert.pwvucontrol"
     },
@@ -225,9 +254,11 @@
       "on-click": "~/.config/waybar/scripts/brightness_slider.sh"
     },
     "clock": {
-      "format": "{:%I:%M}",
-      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-      "onclick": "gnome-calendar",
+      // "format": "{:%I:%M}",
+      "format": "{:%I:%M %A, %d}",
+      // "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+      "tooltip-format": "<big>{:%a %b %d %m/%d/%Y %I:%M %p}</big>\n<tt>{calendar}</tt>",
+      // "onclick": "gnome-calendar",
       // "tooltip-alt": "{:%a %b %d %m/%d/%Y %I:%M %p}",
       "calendar": {
         "mode": "year",
@@ -239,7 +270,7 @@
           "months": "<span color='#35b9ab'><b>{}</b></span>",
           "weeks": "<span color='#73ba25'><b>{}</b></span>",
           "weekdays": "<span color='#21a4df'><b>{}</b></span>",
-          "today": "<span color='#21a4df'><b><u>{}</u></b></span>"
+          "today": "<span color='#B05A5A'><b><u>{}</u></b></span>"
         }
       }
     },
@@ -255,7 +286,7 @@
       },
       "format": "{icon} {capacity}%",
       "format-full": "{icon} {capacity}%",
-      "format-charging": "\udb80\udc84 {capacity}%",
+      "format-charging": "󰂅  {capacity}%",
       "format-plugged": "  {capacity}%",
       "format-icons": [
         "",
@@ -264,10 +295,14 @@
         "",
         ""
       ],
+      "tooltip": true,
+      "tooltip-format": "Capacity: {capacity}%\nPower draw: {power} watts\nTime: {timeTo}\nCycles: {cycles}\nHealth: {health}",
       "on-click": "wlogout"
     },
     "idle_inhibitor": {
       "format": "{icon}",
+      "tooltip-format-activated": "Idle inhibitor {status}",
+      "tooltip-format-deactivated": "Idle inhibitor {status}",
       "format-icons": {
         "activated": "",
         "deactivated": ""

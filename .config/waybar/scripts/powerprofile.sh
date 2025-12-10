@@ -61,12 +61,29 @@ display_profile() {
     ;;
   esac
 }
+display_tooltip_profile() {
+  current=$(get_current_profile)
+  case $current in
+  "power-saver")
+    echo "Power saver mode" # Battery/efficiency icon
+    ;;
+  "balanced")
+    echo "Balance mode" # Balanced icon
+    ;;
+  "performance")
+    echo "Performance mode" # Performance/rocket icon
+    ;;
+  esac
+}
 
 # Handle arguments
 case $1 in
 "toggle")
   toggle_profile
   display_profile
+  ;;
+"tooltip")
+  display_tooltip_profile
   ;;
 "display" | *)
   display_profile

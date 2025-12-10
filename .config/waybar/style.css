@@ -1,6 +1,7 @@
 /* colors defined at top for easy configuring */
 @define-color background #2C2A24;
 @define-color second-background #3A372F;
+@define-color second-background9 rgba(58, 55, 47, 0.9);
 @define-color text #DDD5C4;
 @define-color borders #A0907A;
 @define-color focused #D08B57;
@@ -25,7 +26,7 @@
 
 /* idk what all this does */
 window#waybar {
-  background-color: transparent;
+  background-color: @second-background9;
   border-bottom: 0;
   color: @text;
   transition: background-color 0.5s;
@@ -42,25 +43,31 @@ window#waybar.empty #window {
 
 /* configuring the modules */
 .modules-left {
-  margin: 0 0 5px;
-  padding: 0 0 0 7px;
+  /* margin: 0 0 5px; */
+  margin: 0;
+  padding: 0 0 0 10px;
   background-color: @background;
-  border: 2px solid @focused;
+  /* border: 2px solid @focused; */
+  border: none;
   border-top-left-radius: 15px;
 }
 
 .modules-center {
-  margin: 0 0 5px;
+  /* margin: 0 0 5px; */
+  margin: 0;
   padding: 0 10px 0 10px;
   background-color: @background;
-  border: 2px solid @focused;
+  /* border: 2px solid @focused; */
+  border: none;
 }
 
 .modules-right {
-  margin: 0 0 5px;
+  /* margin: 0 0 5px; */
+  margin: 0;
   padding: 0 10px 0 10px;
   background-color: @background;
-  border: 2px solid @focused;
+  /* border: 2px solid @focused; */
+  border: none;
   border-top-right-radius: 15px;
 }
 
@@ -76,7 +83,7 @@ button {
 /* menu pannel */
 #custom-debian,
 #custom-powerprofile,
-#custom-themeswitcher {
+#custom-wallpaper {
   padding-right: 10px;
   padding-left: 5px;
   font-size: 15px;
@@ -91,7 +98,7 @@ button {
   color: @color1
 }
 
-#custom-themeswitcher:hover {
+#custom-wallpaper:hover {
   color: @color1;
 }
 
@@ -155,6 +162,8 @@ button {
 #memory,
 #custom-clipboard,
 #custom-bluetooth,
+#language,
+#tray,
 #network {
   padding: 0 10px;
 }
@@ -168,6 +177,7 @@ button {
 #idle_inhibitor:hover,
 #custom-swaync:hover,
 #backlight:hover,
+#language:hover,
 #wireplumber:hover {
   color: @color1;
 }
@@ -200,7 +210,7 @@ button {
 #battery.charging,
 #battery.plugged {
   background-color: @focused2 ;
-  margin: 5px;
+  /* margin: 7px; */
   padding: 0 5px;
   color: @background;
 }
@@ -208,7 +218,7 @@ button {
 #battery.critical:not(.charging) {
   background-color: @urgent;
   color: @text;
-  margin: 5px;
+  /* margin: 7px; */
   padding: 0 5px;
   animation: blink 0.5s steps(12) infinite alternate;
 }
@@ -218,4 +228,16 @@ button {
     background-color: @second-background;
     color: @text;
   }
+}
+
+/* --- Tooltip Styles --- */
+tooltip {
+  background-color: @second-background9;
+  color: #dddddd;
+  padding: 5px 12px;
+  margin: 5px 0px;
+  border-radius: 6px;
+  /* border: 1px solid rgba(255, 255, 255, 0.1); */
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); */
+  font-size: 12px;
 }
