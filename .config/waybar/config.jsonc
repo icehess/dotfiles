@@ -7,7 +7,6 @@
     "margin": 0,
 
     "modules-left": [
-      "group/Utilities",
       "group/workspaces",
       "mpris"
     ],
@@ -16,36 +15,13 @@
     ],
     "modules-right": [
       "group/cpuram",
-      "group/system",
-      "group/tray"
+      "group/system-tray",
     ],
-    "custom/openbracket": {
-      "format": "[",
-      "tooltip": false
-    },
-    "custom/closebracket": {
-      "format": "]",
-      "tooltip": false
-    },
-    "custom/split": {
-      "format": "|",
-      "tooltip": false
-    },
-    "group/Utilities": {
-      "orientation": "horizontal",
-      "modules": [
-        "custom/openbracket",
-        "custom/debian",
-        "idle_inhibitor",
-        "custom/powerprofile",
-        "custom/wallpaper",
-        "custom/closebracket"
-      ]
-    },
     "group/workspaces": {
       "orientation": "horizontal",
       "modules": [
         "custom/openbracket",
+        "custom/debian",
         "niri/workspaces",
         "custom/closebracket"
       ]
@@ -68,46 +44,38 @@
         "custom/closebracket"
       ]
     },
-    "group/brightvol": {
-      "orientation": "horizontal",
-      "modules": [
-        "custom/openbracket",
-        "backlight",
-        "custom/split",
-        "wireplumber",
-        "custom/closebracket"
-      ]
-    },
-    "group/system": {
-      "orientation": "horizontal",
-      "modules": [
-        "custom/openbracket",
-        "wireplumber",
-        "network",
-        "custom/bluetooth",
-        "custom/clipboard",
-        "niri/language",
-        "custom/closebracket"
-      ]
-    },
-    "group/tray": {
+    "group/system-tray": {
       "orientation": "horizontal",
       "modules": [
         "custom/openbracket",
         "tray",
         "custom/split",
+        "network",
+        "custom/bluetooth",
+        "custom/clipboard",
+        "custom/wallpaper",
+        "custom/split",
+        "niri/language",
+        "wireplumber",
+        "custom/split",
+        "idle_inhibitor",
+        "custom/powerprofile",
         "battery",
         "clock",
         "custom/closebracket"
       ]
     },
-    "group/clock": {
-      "orientation": "horizontal",
-      "modules": [
-        "custom/openbracket",
-        "clock",
-        "custom/closebracket"
-      ]
+    "custom/openbracket": {
+      "format": "[",
+      "tooltip": false
+    },
+    "custom/closebracket": {
+      "format": "]",
+      "tooltip": false
+    },
+    "custom/split": {
+      "format": "|",
+      "tooltip": false
     },
     "niri/language": {
         "format-en": "🇺🇸",
@@ -213,13 +181,13 @@
       "format": "CPU:{usage}%",
       "tooltip": false,
       "interval": 2,
-      "on-click": "kitty -e btop",
+      "on-click": "alacritty -e btop",
     },
     "memory": {
       "format": "RAM:{}%",
       "tooltip": false,
       "interval": 2,
-      "on-click": "kitty -e btop",
+      "on-click": "alacritty -e btop",
     },
     "wireplumber": {
       "scroll-step": 5,
