@@ -1,7 +1,7 @@
 /* colors defined at top for easy configuring */
 @define-color background #2C2A24;
 @define-color second-background #3A372F;
-@define-color second-background9 rgba(58, 55, 47, 0.9);
+@define-color second-background9 rgba(58, 55, 47, 0.85);
 @define-color text #DDD5C4;
 @define-color borders #A0907A;
 @define-color focused #D08B57;
@@ -43,13 +43,14 @@ window#waybar.empty #window {
 
 /* configuring the modules */
 .modules-left {
+  margin: 0 0 0 20px;
+  background-color: transparent;
+  border: none;
   /* margin: 0 0 5px; */
-  margin: 0 0 0 10px;
-  padding: 0 0 0 10px;
-  background-color: @background;
+  /* padding: 0 0 0 20px; */
+  /* background-color: @background; */
   /* border: 2px solid @focused; */
-  /* border: none; */
-  border-radius: 30px;
+  /* border-radius: 15px; */
 }
 
 .modules-center {
@@ -59,6 +60,7 @@ window#waybar.empty #window {
   background-color: @background;
   /* border: 2px solid @focused; */
   border: none;
+  border-radius: 15px;
 }
 
 .modules-right {
@@ -68,7 +70,8 @@ window#waybar.empty #window {
   background-color: @background;
   /* border: 2px solid @focused; */
   border: none;
-  border-top-right-radius: 15px;
+  /* border-top-right-radius: 15px; */
+  border-radius: 15px;
 }
 
 
@@ -93,15 +96,24 @@ button {
 }
 
 /* workspace pannel */
+.modules-left > widget > box#workspaces {
+  background-color: @background;
+  /* background-color: rgba(8, 8, 11, 0.9); */
+  /* background-color: @color3; */
+  border-radius: 15px;
+  margin-right: 25px;
+}
+
 #workspaces button {
-  min-width: 0;
-  padding: 0 8px 0 8px;
-  background-color: transparent;
-  color: @text;
-  border-radius: 0;
+  /* color: @text; */
+  color: #acb0d0;
+  font-size: 14px;
+  border-radius: 15px;
+  padding: 0 7px;
 }
 
 #workspaces button:hover {
+  background: transparent;
   background-color: @second-background;
 }
 
@@ -115,17 +127,17 @@ button {
 }
 
 /* no idea what this does */
-.modules-left>widget:first-child>#workspaces {
-  margin-left: 0;
-}
+/* .modules-left>widget:first-child>#workspaces { */
+  /* margin-left: 0; */
+/* } */
 
-.modules-right>widget:last-child>#workspaces {
-  margin-right: 0;
-}
+/* .modules-left>widget:last-child>#workspaces { */
+  /* margin-right: 25px; */
+/* } */
 
 /* media player */
 #mpris {
-  margin: 0 0 0 5px;
+  margin: 0;
   padding: 0 9px;
   background-color: @background;
   color: @text;
@@ -133,10 +145,9 @@ button {
 
 #mpris.playing {
   background-color: @color3;
-  border-radius: 2px;
+  border-radius: 15px;
   color: @background;
 }
-
 
 /* center module  */
 #window {
