@@ -126,6 +126,8 @@ prefer-no-csd
 window-rule {
     geometry-corner-radius 0
     clip-to-geometry true
+    draw-border-with-background false
+    opacity 0.95
 }
 
 // Work around WezTerm's initial configure bug
@@ -164,6 +166,11 @@ window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"
 }
+
+// window-rule{
+//     match app-id="helium"
+//     // is-active=false
+// }
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
@@ -225,7 +232,9 @@ binds {
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
-    Mod+O repeat=false { toggle-overview; }
+    // Mod+O repeat=false { toggle-overview; }
+
+    Mod+O repeat=false { toggle-window-rule-opacity; }
 
     Mod+Q repeat=false { close-window; }
 
