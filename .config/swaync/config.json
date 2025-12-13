@@ -88,7 +88,7 @@
                 },
                 {
                     "label": " ",
-                    "command": "~/bin/hswitch-wall.sh random"
+                    "command": "wpaperctl next"
                 },
                 {
                     "label": " ",

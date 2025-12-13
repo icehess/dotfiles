@@ -98,8 +98,10 @@
             "format": "",
             "tooltip": true,
             "tooltip-format": "Click to change theme",
-            "on-click": "~/bin/hswitch-wall.sh next",
-            "on-click-right": "~/bin/hswitch-wall.sh random"
+            "on-click": "wpaperctl next",
+            "on-click-right": "wpaperctl previous"
+            // "on-click": "~/bin/hswitch-wall.sh next",
+            // "on-click-right": "~/bin/hswitch-wall.sh random"
         },
         "hyprland/workspaces": {
             "all-outputs": true,

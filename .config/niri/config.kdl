@@ -111,7 +111,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // spawn-at-startup "awww-daemon"
 // spawn-at-startup "swaybg --mode fill -i ~/Pictures/backgrounds/20250925_010622.jpg"
 // spawn-at-startup "ibus" "start" "--type" "wayland" "--panel" "none"
-spawn-at-startup "~/.config/niri/scripts/rotate-wallpaper.sh"
+// spawn-at-startup "~/.config/niri/scripts/rotate-wallpaper.sh"
 
 
 // Make the wallpaper stationary, rather than moving with workspaces.
