@@ -68,7 +68,7 @@ display_tooltip_profile() {
     echo "Power saver mode" # Battery/efficiency icon
     ;;
   "balanced")
-    echo "Balance mode" # Balanced icon
+    echo "Balanced mode" # Balanced icon
     ;;
   "performance")
     echo "Performance mode" # Performance/rocket icon
@@ -81,6 +81,11 @@ case $1 in
 "toggle")
   toggle_profile
   display_profile
+  ;;
+"set")
+  set_profile "${2:-balanced}"
+  maybe_update_swaync "${2:-balanced}" "${3}"
+  display_tooltip_profile
   ;;
 "tooltip")
   display_tooltip_profile
