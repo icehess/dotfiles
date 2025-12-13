@@ -110,7 +110,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // spawn-at-startup "waybar"
 // spawn-at-startup "awww-daemon"
 // spawn-at-startup "swaybg --mode fill -i ~/Pictures/backgrounds/20250925_010622.jpg"
-spawn-at-startup "ibus" "start" "--type" "wayland" "--panel" "none"
+// spawn-at-startup "ibus" "start" "--type" "wayland" "--panel" "none"
 spawn-at-startup "~/.config/niri/scripts/rotate-wallpaper.sh"
 
 
@@ -200,7 +200,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -211,30 +211,30 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
     // "-l 1.0" limits the volume to 100%.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0 && notify-send -e -a ice-osd -r 12 -u low \"   Volume: $(echo \"scale=0; $(wpctl get-volume @DEFAULT_SINK@ | sed 's/Volume:\\s*//') * 100\" | bc | sed 's/\\..*$//')%\""; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1- && notify-send -e -a ice-osd -r 12 -u low \"   Volume: $(echo \"scale=0; $(wpctl get-volume @DEFAULT_SINK@ | sed 's/Volume:\\s*//') * 100\" | bc | sed 's/\\..*$//')%\""; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify-send -e -a ice-osd -r 12 -u low \"$(if wpctl get-volume @DEFAULT_SINK@ | grep -q MUTED; then echo \"   Volume muted\"; else echo \"   Volume unmuted\"; fi)\""; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause && notify-send -e -a ice-osd -r 12 -u low \"⏸   Player $(playerctl status)\""; }
+    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop && notify-send -e -a ice-osd -r 12 -u low \"▶   Player stopped\""; }
     XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
     XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "brightnessctl --class=backlight set +10% && notify-send -e -a ice-osd -r 12 -u low \"   Brightness: $(brightnessctl -m | cut -d, -f4)\""; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "brightnessctl --class=backlight set 10%- && notify-send -e -a ice-osd -r 12 -u low \"   Brightness: $(brightnessctl -m | cut -d, -f4)\""; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
-    // Mod+O repeat=false { toggle-overview; }
+    Mod+O repeat=false { toggle-overview; }
 
-    Mod+O repeat=false { toggle-window-rule-opacity; }
+    Mod+Shift+O repeat=false { toggle-window-rule-opacity; }
 
     Mod+Q repeat=false { close-window; }
 
