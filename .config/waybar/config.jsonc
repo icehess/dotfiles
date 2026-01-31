@@ -21,6 +21,7 @@
             "modules": [
                 // "custom/openbracket",
                 // "custom/debian",
+                "hyprland/workspaces",
                 "niri/workspaces"
                 // "custom/closebracket"
             ]
@@ -29,6 +30,7 @@
             "orientation": "horizontal",
             "modules": [
                 "custom/openbracket",
+                "hyprland/window",
                 "niri/window",
                 "custom/closebracket"
             ]
@@ -104,21 +106,30 @@
             // "on-click-right": "~/bin/hswitch-wall.sh random"
         },
         "hyprland/workspaces": {
-            "all-outputs": true,
-            "warp-on-scroll": false,
-            "enable-bar-scroll": true,
-            "disable-scroll-wraparound": true,
-            "active-only": false,
             "format": "{icon}",
+            "persistent-workspaces": {
+                "*": 6
+            },
+            "cursor": true,
+            // "format-icons": {
+            //   "active": "",
+            //   "default": ""
+            // }
             "format-icons": {
-                "1": "1",
-                "2": "2",
-                "3": "3",
-                "4": "4",
-                "5": "5",
-                "6": "6",
+                "active": "󰮯",
+                "persistent": "",
+                // "empty": "",
                 "default": "•"
             }
+            // "format-icons": {
+            //   "1": "1",
+            //   "2": "2",
+            //   "3": "3",
+            //   "4": "4",
+            //   "5": "5",
+            //   "6": "6",
+            //   "default": "•"
+            // }
         },
         "niri/workspaces": {
             "format": "{icon}",
@@ -183,7 +194,9 @@
             "format": "{title}",
             "max-length": 20,
             "min-length": 0,
-            "all-outputs": true
+            "all-outputs": true,
+            "icon": true,
+            "icon-size": 16
         },
         "niri/window": {
             "format": "{title}",
