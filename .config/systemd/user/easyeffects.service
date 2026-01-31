@@ -6,3 +6,6 @@ Requisite=graphical-session.target
 [Service]
 ExecStart=easyeffects --gapplication-service
 Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
