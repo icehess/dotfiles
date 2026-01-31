@@ -57,6 +57,15 @@ config.keys = {
       act.SendKey { key = 'L', mods = 'CTRL' },
     },
   },
+  {
+    key = 'k',
+    mods = 'CTRL|SHIFT',
+    -- mods = 'CMD',
+    action = act.Multiple {
+      act.ClearScrollback 'ScrollbackAndViewport',
+      act.SendKey { key = 'L', mods = 'CTRL' },
+    },
+  },
 }
 
 config.window_frame = {

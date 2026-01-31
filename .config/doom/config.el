@@ -24,8 +24,10 @@
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 
-(setq doom-font (font-spec :family "FantasqueSansM Nerd Font Mono" :size 14 :weight 'medium)
-      doom-variable-pitch-font (font-spec :family "FantasqueSansM Nerd Font Mono" :size 14))
+(setq doom-font (font-spec :family "RecMonoCasual Nerd Font" :size 13 :weight 'medium)
+      doom-variable-pitch-font (font-spec :family "RecMonoCasual Nerd Font" :size 13))
+; (setq doom-font (font-spec :family "FantasqueSansM Nerd Font" :size 16 :weight 'medium)
+;       doom-variable-pitch-font (font-spec :family "FantasqueSansM Nerd Font" :size 16))
 ; (setq doom-font (font-spec :family "Terminess Nerd Font" :size 14 :weight 'medium)
 ;       doom-variable-pitch-font (font-spec :family "Terminess Nerd Font" :size 14))
 
