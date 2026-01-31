@@ -104,13 +104,7 @@
   },
   "file_finder": {
     "file_icons": true,
-    "include_ignored": false
-  },
-  "helix_mode": true,
-  "vim": {
-    "cursor_shape": {
-      "normal": "block"
-    }
+    "include_ignored": "indexed"
   },
   "helix_mode": true,
   "vim": {
