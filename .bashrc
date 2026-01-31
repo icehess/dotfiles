@@ -347,6 +347,10 @@ fi
 export ERL_AFLAGS="-kernel shell_history enabled ${ERL_AFLAGS}"
 # }}}
 
+if [ -f ~/.foot-bash-integrations ]; then
+    . ~/.foot-bash-integrations
+fi
+
 if [ -e ~/.bashlocal ]; then
     . ~/.bashlocal
 fi
