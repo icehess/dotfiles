@@ -9,7 +9,7 @@ input {
         }
         numlock
         repeat-delay 350
-        repeat-rate 65
+        repeat-rate 70
     }
     touchpad {
         tap
@@ -21,14 +21,15 @@ input {
         accel-speed 0.6
         // accel-profile "flat"
         // scroll-method "no-scroll"
-        scroll-factor 3.0
-        // click-method "button-areas"
+        scroll-factor 2.5
+        click-method "button-areas"
         // disabled-on-external-mouse
     }
     mouse {
         // off
-        // natural-scroll
-        // accel-speed 0.2
+        natural-scroll
+        accel-speed 0.9
+        scroll-factor 3.0
         // accel-profile "flat"
         // scroll-method "no-scroll"
     }
@@ -54,14 +55,29 @@ output "Smithay Winit Unknown" {
     mode "2880x1920@120.0"
     scale 1.75
     transform "normal"
-    position x=0 y=0
+    position x=3840 y=0
 }
 output "eDP-1" {
     // off
-    mode "2880x1920@120.0"
+    mode "2880x1920"
     scale 1.75
     transform "normal"
+    position x=3840 y=0
+}
+output "DP-4" {
+    // off
+    mode "1920x1200"
+    scale 1.0
+    transform "normal"
     position x=0 y=0
+}
+output "DP-3" {
+    // off
+    mode "1920x1200"
+    scale 1.0
+    transform "normal"
+    position x=1920 y=0
+
 }
 
 layout {
@@ -91,12 +107,12 @@ layout {
         // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
-    shadow {
-        softness 30
-        spread 5
-        offset x=0 y=5
-        color "#0007"
-    }
+    // shadow {
+    //     softness 30
+    //     spread 5
+    //     offset x=0 y=5
+    //     color "#0007"
+    // }
     struts {
         // bottom 5
         // right 5
@@ -127,14 +143,16 @@ window-rule {
     geometry-corner-radius 0
     clip-to-geometry true
     draw-border-with-background false
-    opacity 0.95
+    opacity 0.97
 }
 
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
+    // default-column-width {}
+    default-column-width { proportion 0.50; }
+    default-window-height { proportion 1.0; }
 }
 
 // Open the Firefox picture-in-picture player as floating by default.
@@ -198,7 +216,8 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    // Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
@@ -211,7 +230,7 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
     // "-l 1.0" limits the volume to 100%.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0 && notify-send -e -a ice-osd -r 12 -u low \"   Volume: $(echo \"scale=0; $(wpctl get-volume @DEFAULT_SINK@ | sed 's/Volume:\\s*//') * 100\" | bc | sed 's/\\..*$//')%\""; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.5 && notify-send -e -a ice-osd -r 12 -u low \"   Volume: $(echo \"scale=0; $(wpctl get-volume @DEFAULT_SINK@ | sed 's/Volume:\\s*//') * 100\" | bc | sed 's/\\..*$//')%\""; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1- && notify-send -e -a ice-osd -r 12 -u low \"   Volume: $(echo \"scale=0; $(wpctl get-volume @DEFAULT_SINK@ | sed 's/Volume:\\s*//') * 100\" | bc | sed 's/\\..*$//')%\""; }
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify-send -e -a ice-osd -r 12 -u low \"$(if wpctl get-volume @DEFAULT_SINK@ | grep -q MUTED; then echo \"   Volume muted\"; else echo \"   Volume unmuted\"; fi)\""; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
