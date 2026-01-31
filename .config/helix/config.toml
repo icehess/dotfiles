@@ -67,6 +67,33 @@ c = ":buffer-close"
 
 [keys.normal.space.t]
 s = ":toggle soft-wrap.enable"
+l = [
+    ":write-all",
+    ":sh advise-hx-path set \"%{buffer_name}\"",
+    ":new",
+    ":insert-output lazygit -p \"$(advise-hx-path git)\"",
+    ":buffer-close!",
+    ":redraw",
+    ":reload-all"
+]
+t = [
+    ":sh advise-hx-path set \"%{buffer_name}\"",
+    ":new",
+    ":insert-output tig -C \"$(advise-hx-path git)\"",
+    ":buffer-close!",
+    ":redraw"
+]
+g = [
+    ":write-all",
+    ":sh advise-hx-path set \"%{buffer_name}\"",
+    ":new",
+    ":insert-output gitui -w \"$(advise-hx-path git)\" >/dev/tty",
+    ":set mouse false",
+    ":set mouse true",
+    ":buffer-close!",
+    ":redraw",
+    ":reload-all"
+]
 
 [keys.normal.space.m]
 f = ":pipe prettier --parser markdown --print-width 120 --prose-wrap preserve"

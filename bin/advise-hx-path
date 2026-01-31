@@ -1,0 +1,46 @@
+#!/bin/bash
+
+_advise_file=${HOME}/.cache/advise-hx-path
+
+if [ -d "${HOME}" ]; then
+    if [ ! -d "${HOME}/.cache" ]; then
+        mkdir ~/.cache
+    fi
+else
+    echo '.'
+fi
+
+_resolve_git_path() {
+    local _path
+    local _git_dir
+    _path="$(<"${_advise_file}")"
+    if [ -d "${_path}" ]; then
+        _git_dir="$(git -C "${_path}" rev-parse --git-dir 2>/dev/null)"
+        _git_dir="${_git_dir%/*}"
+    elif [ -f "${_path}" ]; then
+        _path="${_path%/*}"
+        _git_dir="$(git -C "${_path}" rev-parse --git-dir 2>/dev/null)"
+        _git_dir="${_git_dir%/*}"
+    fi
+
+    if [ -n "${_git_dir}" ]; then
+        echo "${_git_dir}"
+    else
+        echo '.'
+    fi
+}
+
+case "${1}" in
+    set)
+        if [ -n "${2}" ]; then
+            echo -n "$(realpath "${2}")" > "${_advise_file}"
+        else
+            echo "${2}" > "${_advise_file}"
+        fi
+        ;;
+    git)
+        _resolve_git_path
+        ;;
+    *)
+        ;;
+esac
