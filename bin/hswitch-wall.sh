@@ -32,7 +32,7 @@ set_current() {
     if [ -n "${index}" ]; then
         echo "${index}" >"${CURRENT_WALLPAPER_FILE_INDEX}"
     else
-        rm "${CURRENT_WALLPAPER_FILE_INDEX}"
+        rm -f "${CURRENT_WALLPAPER_FILE_INDEX}"
     fi
 }
 
@@ -41,7 +41,7 @@ apply_theme() {
     local index="$2"
 
     set_current "${wallpaper_path}" "${index}"
-    create_blur
+    create_blur "${wallpaper_path}"
 
     #### awww
     # if ! pgrep -x "awww-daemon" > /dev/null; then
@@ -62,8 +62,19 @@ apply_theme() {
 }
 
 create_blur() {
-    [ ! -f "${CURRENT_WALLPAPER_FILE}" ] && return
-    convert -scale 10% -blur 0x2.5 -resize 1000% "${wallpaper_path}" "${CURRENT_WALLPAPER_FILE_BLUR}"
+    local wallpaper_path="${1:-$CURRENT_WALLPAPER_FILE}"
+    [ -z "${wallpaper_path}" ] && return
+    [ ! -f "${wallpaper_path}" ] && return
+
+    # for apps like hyprlock that require extension
+
+    wallpaper_path="$(realpath "${wallpaper_path}")"
+    local extension="${wallpaper_path##*.}"
+    local extension="jpg"
+
+    rm -f "${CURRENT_WALLPAPER_FILE_BLUR}"
+    convert -scale 10% -blur 0x2.5 -resize 1000% "${wallpaper_path}" "${CURRENT_WALLPAPER_FILE_BLUR}.${extension:-jpg}"
+    ln -sf "${CURRENT_WALLPAPER_FILE_BLUR}.${extension:-jpg}" "${CURRENT_WALLPAPER_FILE_BLUR}"
 }
 
 update_hyprlock_wallpaper() {
@@ -86,6 +97,10 @@ case "${1:-next}" in
 "next")
     next_index=$((($(get_current_index) + 1) % ${#WALLPAPERS[@]}))
     apply_theme "${WALLPAPERS[$next_index]}" "$next_index"
+    ;;
+"get")
+    [ ! -f "${CURRENT_WALLPAPER_FILE}" ] && echo nocurrent && exit 1
+    exit 2
     ;;
 "random")
     random_index=$((RANDOM % ${#WALLPAPERS[@]}))
