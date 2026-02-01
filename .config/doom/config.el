@@ -46,12 +46,17 @@
 ;; (setq catppuccin-flavor 'macchiato) ; or 'frappe 'latte, 'macchiato, or 'mocha
 ;; (load-theme 'catppuccin t)
 ;; set transparency... I don't think this works so TODO
-; (set-frame-parameter (selected-frame) 'alpha '(85 85))
-; (add-to-list 'default-frame-alist '(alpha 85 85))
+;; (set-frame-parameter (selected-frame) 'alpha '(96 97))
+;; (add-to-list 'default-frame-alist '(alpha 96 97))
+(set-frame-parameter nil 'alpha-background 98)
+(add-to-list 'default-frame-alist '(alpha-background . 98))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
+
+;; Line wrapping
+(global-visual-line-mode t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -89,3 +94,22 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+(setq fancy-splash-image "~/.config/doom/doom-emacs-color.png")
+(add-hook! '+doom-dashboard-functions :append
+  (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Emacs is journey my ass")))
+
+;; Disable background on terminal
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+(add-hook 'window-setup-hook #'on-after-init)
+
+
+;; [[https://stackoverflow.com/questions/19054228/emacs-disable-theme-background-color-in-terminal/33298750#33298750][Emacs: disable theme background color in terminal - Stack Overflow]]
+(defun on-frame-open (&optional frame)
+  "If the FRAME created in terminal don't load background color."
+  (unless (display-graphic-p frame)
+    (set-face-background 'default "unspecified-bg" frame)))
+(add-hook 'after-make-frame-functions #'on-frame-open)
