@@ -27,11 +27,12 @@ end
 
 -- For example, changing the color scheme:
 config.color_scheme = 'GruvboxDarkHard'
-
 config.font = wezterm.font_with_fallback {
-	    'FantasqueSansM Nerd Font Mono',
-	    'FantasqueSansM Nerd Font',
-	   }
+    -- 'RecMonoDuotone Nerd Font',
+    'FantasqueSansM Nerd Font',
+    'FantasqueSansM Nerd Font Mono',
+    'Fantasque Sans MMono',
+}
 config.font_size = font_size
 -- config.freetype_load_target = 'HorizontalLcd'
 
