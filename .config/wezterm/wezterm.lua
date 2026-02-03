@@ -17,7 +17,7 @@ config.use_ime = false
 config.initial_cols = 150
 config.initial_rows = 40
 
-local font_size = 11
+local font_size = 10
 
 if string.find(wezterm.target_triple, 'darwin') then
   font_size = 15
@@ -27,6 +27,8 @@ end
 
 -- For example, changing the color scheme:
 config.color_scheme = 'GruvboxDarkHard'
+-- config.color_scheme = "Noctalia"
+
 config.font = wezterm.font_with_fallback {
     -- 'RecMonoDuotone Nerd Font',
     'FantasqueSansM Nerd Font',
