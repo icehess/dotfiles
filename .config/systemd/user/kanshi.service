@@ -1,0 +1,15 @@
+[Unit]
+Description=Dyanmic monitor setup daemon for Wayland
+Documentation=man:kanshi(1)
+PartOf=graphical-session.target
+Requires=graphical-session.target
+After=graphical-session.target
+
+# Never run in GNOME
+Conflicts=gnome-session-initialized.target
+
+[Service]
+ExecStart=kanshi
+
+[Install]
+WantedBy=graphical-session.target
