@@ -1,0 +1,34 @@
+// ────────────── Output Configuration ──────────────
+// You can run `niri msg outputs` to get the correct name for your displays.
+// You will have to remove "/-" and edit it before it takes effect.
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+
+output "Smithay Winit Unknown" {
+    // off
+    mode "2880x1920@120.0"
+    scale 1.75
+    transform "normal"
+    position x=3840 y=0
+}
+output "eDP-1" {
+    // off
+    mode "2880x1920"
+    scale 1.75
+    transform "normal"
+    position x=3840 y=0
+}
+output "DP-4" {
+    // off
+    mode "1920x1200"
+    scale 1.0
+    transform "normal"
+    position x=0 y=0
+}
+output "DP-3" {
+    // off
+    mode "1920x1200"
+    scale 1.0
+    transform "normal"
+    position x=1920 y=0
+
+}

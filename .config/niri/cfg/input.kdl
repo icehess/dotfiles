@@ -1,0 +1,45 @@
+// ────────────── Input Configuration ──────────────
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Input
+
+input {
+    keyboard {
+        xkb {
+            // For more information, see xkeyboard-config(7).
+            layout "us,ir"
+            options "grp:alt_caps_toggle"
+            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+        }
+        numlock
+        repeat-delay 350
+        repeat-rate 70
+    }
+    touchpad {
+        tap
+        dwt
+        dwtp
+        drag true
+        drag-lock
+        natural-scroll
+        accel-speed 0.6
+        // accel-profile "flat"
+        // scroll-method "no-scroll"
+        scroll-factor 2.5
+        click-method "button-areas"
+        // disabled-on-external-mouse
+    }
+    mouse {
+        // off
+        natural-scroll
+        accel-speed 0.9
+        scroll-factor 3.0
+        // accel-profile "flat"
+        // scroll-method "no-scroll"
+    }
+    trackpoint {
+        off
+    }
+    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
+    // focus-follows-mouse max-scroll-amount="10%"
+    focus-follows-mouse max-scroll-amount="10%"
+    workspace-auto-back-and-forth // Enable workspace back & forth switching
+}

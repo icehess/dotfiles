@@ -1,0 +1,72 @@
+    // layer-rule {
+    //     match namespace="^noctalia-wallpaper*"
+    //     place-within-backdrop true
+    // }
+
+    // Set the overview wallpaper on the backdrop.
+    layer-rule {
+      match namespace="^noctalia-overview*"
+      place-within-backdrop true
+    }
+
+    window-rule {
+        // geometry-corner-radius 20 // Set every window radius to 20
+        geometry-corner-radius 0
+        clip-to-geometry true
+        draw-border-with-background false
+        opacity 0.97
+    }
+
+    // Work around WezTerm's initial configure bug
+    // by setting an empty default-column-width.
+    window-rule {
+        match app-id=r#"^org\.wezfurlong\.wezterm$"#
+        // default-column-width {}
+        default-column-width { proportion 0.50; }
+        default-window-height { proportion 1.0; }
+    }
+
+    // Open the Firefox picture-in-picture player as floating by default.
+    window-rule {
+        // This app-id regular expression will work for both:
+        // - host Firefox (app-id is "firefox")
+        // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+        match app-id=r#"firefox$|zen$"# title="^Picture-in-Picture$"
+        open-floating true
+        default-floating-position x=50 y=50 relative-to="bottom-right"
+    }
+    window-rule {
+        // chrome
+        match title="^Picture in picture$"
+        open-floating true
+        default-floating-position x=20 y=20 relative-to="bottom-right"
+        default-window-height { proportion 0.30; }
+        // 80% of the screen wide.
+        default-column-width { proportion 0.30; }
+    }
+    window-rule {
+        // nautilus save dialog?
+        match app-id=r#"^org\.gnome\.Nautilus$"# title="^All Files$"
+        open-floating true
+        default-window-height { proportion 0.50; }
+        default-column-width { proportion 0.60; }
+    }
+    window-rule {
+        match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+        default-floating-position x=10 y=10 relative-to="bottom-right"
+    }
+
+    // window-rule{
+    //     match app-id="helium"
+    //     // is-active=false
+    // }
+
+    // Example: block out two password managers from screen capture.
+    // (This example rule is commented out with a "/-" in front.)
+    window-rule {
+        match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+        match app-id=r#"^org\.gnome\.World\.Secrets$"#
+        match app-id=r#"^1password$"#
+
+        block-out-from "screen-capture"
+    }
