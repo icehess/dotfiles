@@ -106,6 +106,9 @@ case "${1:-next}" in
     random_index=$((RANDOM % ${#WALLPAPERS[@]}))
     apply_theme "${WALLPAPERS[$random_index]}" "$random_index"
     ;;
+"set-current")
+    apply_theme "${2}"
+    ;;
 "restore")
     restore_theme
     ;;
