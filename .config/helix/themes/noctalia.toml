@@ -1,0 +1,159 @@
+# Syntax highlighting
+# -------------------
+"attribute" = "secondary"
+
+"type" = "primary"
+"type.enum.variant" = "secondary"
+
+"constructor" = "tertiary"
+
+"constant" = "secondary"
+"constant.character" = "secondaryContainer"
+"constant.character.escape" = "tertiaryContainer"
+
+"string" = "tertiary"
+"string.regexp" = "tertiaryContainer"
+"string.special" = "tertiary"
+"string.special.symbol" = "tertiary"
+
+"comment" = { fg = "outline", modifiers = ["italic"] }
+
+"variable" = "onSurface"
+"variable.builtin" = "secondary"
+"variable.parameter" = { fg = "onSurfaceVariant", modifiers = ["italic"] }
+"variable.other.member" = "onSurface"
+
+"label" = "secondary"
+
+"punctuation" = "onBackground"
+"punctuation.special" = "onBackground"
+
+"keyword" = "primary"
+"keyword.control.conditional" = { fg = "tertiary", modifiers = ["italic"] }
+
+"operator" = "primary"
+
+"function" = "tertiary"
+"function.macro" = "tertiary"
+
+"tag" = "secondary"
+
+"namespace" = { fg = "secondary", modifiers = ["italic"] }
+
+"special" = "secondary"
+
+"markup.heading" = "primary"
+"markup.list" = "onSurface"
+"markup.bold" = { fg = "second", modifiers = ["bold"] }
+"markup.italic" = { fg = "secondary", modifiers = ["italic"] }
+"markup.link.url" = { fg = "secondary", modifiers = ["italic", "underlined"] }
+"markup.link.label" = "primary"
+"markup.raw" = "onSurface"
+"markup.quote" = "secondary"
+
+"diff.plus" = "plus"
+"diff.minus" = "error"
+"diff.delta" = "delta"
+
+# User Interface
+# --------------
+"ui.background" = "none"
+
+"ui.cursor" = { fg = "onSecondary", bg = "secondary" }
+"ui.cursor.match" = { fg = "onTertiary", bg = "tertiary", modifiers = ["bold"] }
+"ui.cursor.primary" = { fg = "onPrimary", bg = "primary" }
+
+"ui.linenr" = { fg = "onSurfaceVariant" }
+"ui.linenr.selected" = { fg = "primary" }
+
+"ui.statusline" = { fg = "onSurface", bg = "surfaceContainerLow" }
+"ui.statusline.inactive" = { fg = "onSurface", bg = "surfaceContainerLowest" }
+"ui.statusline.normal" = { fg = "onPrimary", bg = "primary", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "onTertiary", bg = "tertiary", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "onSecondary", bg = "secondary", modifiers = ["bold"] }
+
+"ui.bufferline" = { fg = "onSurface", bg = "surfaceContainerLowest" }
+"ui.bufferline.active" = { fg = "onSurface", bg = "surfaceContainer", underline = { color = "primary", style = "line" } }
+"ui.bufferline.background" = { bg = "surfaceContainerLowest" }
+
+"ui.popup" = { fg = "onSurface", bg = "surfaceContainerLow" }
+
+"ui.window" = { fg = "onSurface" }
+"ui.help" = { fg = "onSurface", bg = "surfaceContainerLow" }
+
+"ui.text" = { fg = "onBackground" }
+"ui.text.focus" = { fg = "onSurface", bg = "surfaceContainer", modifiers = ["bold"] }
+
+"ui.virtual" = "surfaceVariant"
+"ui.virtual.ruler" = { bg = "surfaceContainerLow" }
+"ui.virtual.indent-guide" = "surfaceVariant"
+"ui.virtual.inlay-hint" = { fg = "onSurfaceVariant", bg = "surfaceContainer", modifiers = ["dim"] }
+"ui.virtual.jump-label" = { fg = "primary", modifiers = ["bold"] }
+
+"ui.menu" = { fg = "onSurface", bg = "surfaceContainer" }
+"ui.menu.selected" = { fg = "onPrimary", bg = "primary", modifiers = ["bold"] }
+
+"ui.selection" = { bg = "surfaceContainerHigh" }
+
+"ui.highlight" = { bg = "primaryContainer", modifiers = ["bold"] }
+
+"ui.cursorline" = { bg = "surfaceContainerLowest" }
+"ui.cursorline.primary" = { bg = "surfaceContainerLow" }
+"ui.cursorline.secondary" = { bg = "surfaceContainerLow" }
+
+error = "error"
+warning = "warning"
+info = "info"
+hint = "hint"
+
+"diagnostic.hint" = { underline = { color = "hint", style = "curl" } }
+"diagnostic.info" = { underline = { color = "info", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "warning", style = "curl" } }
+"diagnostic.error" = { underline = { color = "error", style = "curl" } }
+"diagnostic.unnecessary" = { modifiers = ["dim"] }
+
+[palette]
+# Constants to be used in syntax highlighting, not meant for template processor.
+warning = "#f9e2af"
+info = "#89dceb"
+hint = "#94e2d5"
+plus = "#a6e3a1"
+delta = "#89b4fa"
+
+# Template colors
+primary = "#c7a1d8"
+surfaceTint = "#c7a1d8"
+onPrimary = "#1a151f"
+primaryContainer = "#792b9b"
+onPrimaryContainer = "#eadbf0"
+
+secondary = "#a984c4"
+onSecondary = "#f3edf7"
+secondaryContainer = "#512570"
+onSecondaryContainer = "#e7ddee"
+
+tertiary = "#e0b7c9"
+onTertiary = "#20161f"
+tertiaryContainer = "#b1346b"
+onTertiaryContainer = "#f1dce5"
+
+error = "#e9899d"
+onError = "#1e1418"
+errorContainer = "#b01031"
+onErrorContainer = "#f7d4db"
+
+background = "#1c1822"
+onBackground = "#e9e4f0"
+surface = "#1c1822"
+onSurface = "#e9e4f0"
+surfaceVariant = "#262130"
+onSurfaceVariant = "#a79ab0"
+
+outline = "#6d5f89"
+outlineVariant = "#49405c"
+
+surfaceContainerLowest = "#1e1924"
+surfaceContainerLow = "#211c29"
+surfaceContainer = "#262130"
+surfaceContainerHigh = "#30293c"
+surfaceContainerHighest = "#393248"
