@@ -1,4 +1,6 @@
-theme = "gruvbox_icehess"
+# theme = "gruvbox_icehess"
+# theme = "rose_pine"
+theme = "ashen"
 
 [editor]
 cursorline = true
@@ -15,7 +17,7 @@ enable = false
 # wrap-indicator = ""  # set wrap-indicator to "" to hide it
 
 [editor.cursor-shape]
-insert = "bar"
+insert = "block"
 
 # [editor.whitespace.render]
 # # space = "all"
@@ -67,6 +69,7 @@ c = ":buffer-close"
 
 [keys.normal.space.t]
 s = ":toggle soft-wrap.enable"
+n = ':toggle gutters.layout [] ["diff", "diagnostics", "line-numbers", "spacer"]'
 l = [
     ":write-all",
     ":sh advise-hx-path set \"%{buffer_name}\"",
