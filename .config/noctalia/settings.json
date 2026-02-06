@@ -72,6 +72,7 @@
                     "id": "Workspace",
                     "labelMode": "none",
                     "occupiedColor": "secondary",
+                    "pillSize": 0.6,
                     "reverseScroll": false,
                     "showApplications": true,
                     "showBadge": true,
@@ -92,8 +93,9 @@
                     "showCpuFreq": false,
                     "showCpuTemp": true,
                     "showCpuUsage": true,
-                    "showDiskAsFree": false,
+                    "showDiskAvailable": false,
                     "showDiskUsage": false,
+                    "showDiskUsageAsPercent": false,
                     "showGpuTemp": false,
                     "showLoadAverage": false,
                     "showMemoryAsPercent": false,
@@ -161,8 +163,7 @@
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": true,
-                    "showPowerProfiles": true,
-                    "warningThreshold": 30
+                    "showPowerProfiles": true
                 },
                 {
                     "displayMode": "alwaysHide",
@@ -174,13 +175,13 @@
                     "middleClickCommand": "pwvucontrol || pavucontrol"
                 },
                 {
+                    "clockColor": "primary",
                     "customFont": "",
                     "formatHorizontal": "hh:mm AP ddd, MMM dd",
                     "formatVertical": "hh mm AP - dd MM",
                     "id": "Clock",
                     "tooltipFormat": "HH:mm ddd, MMM dd",
-                    "useCustomFont": false,
-                    "usePrimaryColor": true
+                    "useCustomFont": false
                 },
                 {
                     "colorizeDistroLogo": false,
@@ -382,6 +383,8 @@
     },
     "notifications": {
         "backgroundOpacity": 1,
+        "batteryCriticalThreshold": 5,
+        "batteryWarningThreshold": 20,
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": false,
         "enableMediaToast": false,
@@ -405,7 +408,7 @@
             "lowSoundFile": "/usr/share/cinnamon/sounds/bell.ogg",
             "normalSoundFile": "/usr/share/cinnamon/sounds/bell.ogg",
             "separateSounds": false,
-            "volume": 0.5
+            "volume": 0.64
         }
     },
     "osd": {
@@ -469,12 +472,14 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 46,
+    "settingsVersion": 47,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
-        "cpuPollingInterval": 3000,
+        "cpuPollingInterval": 1000,
         "cpuWarningThreshold": 80,
         "criticalColor": "#fb4934",
+        "diskAvailCriticalThreshold": 10,
+        "diskAvailWarningThreshold": 20,
         "diskCriticalThreshold": 90,
         "diskPollingInterval": 30000,
         "diskWarningThreshold": 80,
@@ -485,13 +490,12 @@
         "gpuWarningThreshold": 80,
         "loadAvgPollingInterval": 3000,
         "memCriticalThreshold": 90,
-        "memPollingInterval": 3000,
+        "memPollingInterval": 1000,
         "memWarningThreshold": 80,
-        "networkPollingInterval": 3000,
+        "networkPollingInterval": 1000,
         "swapCriticalThreshold": 90,
         "swapWarningThreshold": 80,
         "tempCriticalThreshold": 90,
-        "tempPollingInterval": 3000,
         "tempWarningThreshold": 80,
         "useCustomColors": false,
         "warningColor": "#83a598"
