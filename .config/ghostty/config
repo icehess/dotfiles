@@ -1,0 +1,46 @@
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+#
+# Ghostty can reload the configuration while running by using the menu
+# options or the bound key (default: Command + Shift + comma on macOS and
+# Control + Shift + comma on other platforms). Not all config options can be
+# reloaded while running; some only apply to new windows and others may require
+# a full restart to take effect.
+
+font-family = RecMonoCasual Nerd Font
+font-size = 12
+# theme = Gruvbox Material
+theme = Rose Pine
+background = #141617
+background-opacity = 0.97
+
+gtk-toolbar-style = raised-border
+gtk-wide-tabs = false
+
+cursor-style = block
+shell-integration-features = no-cursor
+
+# Enables the ability to move the cursor at prompts by using alt+click on Linux and option+click on macOS.
+cursor-click-to-move = true
+
+copy-on-select = clipboard
+
+
+scrollback-limit = 1000000
+
+keybind = ctrl+shift+arrow_down=goto_split:down
+keybind = ctrl+shift+arrow_left=goto_split:left
+keybind = ctrl+shift+arrow_right=goto_split:right
+keybind = ctrl+shift+arrow_up=goto_split:up
+
+keybind = ctrl+shift+alt+arrow_down=resize_split:down,10
+keybind = ctrl+shift+alt+arrow_left=resize_split:left,10
+keybind = ctrl+shift+alt+arrow_right=resize_split:right,10
+keybind = ctrl+shift+alt+arrow_up=resize_split:up,10
+
+keybind = ctrl+alt+j=write_screen_file:copy
+keybind = ctrl+alt+bracket_left=goto_split:previous
+keybind = ctrl+alt+bracket_right=goto_split:next
