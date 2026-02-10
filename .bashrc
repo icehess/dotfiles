@@ -351,8 +351,8 @@ if [ -f ~/.foot-bash-integrations ]; then
     . ~/.foot-bash-integrations
 fi
 
-if [ -e ~/.bashlocal ]; then
-    . ~/.bashlocal
+if [ -e ~/.local.bash ]; then
+    . ~/.local.bash
 fi
 
 ## Here goes garbage forking stupid apps shitting their shits here:
