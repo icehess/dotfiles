@@ -13,7 +13,6 @@
         "iconMode": "tabler",
         "ignoreMouseInput": false,
         "pinnedApps": [
-            "zen"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
@@ -39,6 +38,7 @@
         "autoShowDelay": 150,
         "backgroundOpacity": 0.93,
         "barType": "simple",
+        "capsuleColorKey": "none",
         "capsuleOpacity": 1,
         "density": "compact",
         "displayMode": "always_visible",
@@ -83,12 +83,13 @@
             "left": [
                 {
                     "icon": "rocket",
-                    "id": "Launcher",
-                    "usePrimaryColor": false
+                    "iconColor": "none",
+                    "id": "Launcher"
                 },
                 {
                     "compactMode": true,
                     "diskPath": "/",
+                    "iconColor": "none",
                     "id": "SystemMonitor",
                     "showCpuFreq": false,
                     "showCpuTemp": true,
@@ -102,8 +103,8 @@
                     "showMemoryUsage": true,
                     "showNetworkStats": false,
                     "showSwapUsage": false,
-                    "useMonospaceFont": true,
-                    "usePrimaryColor": false
+                    "textColor": "none",
+                    "useMonospaceFont": true
                 },
                 {
                     "colorizeIcons": false,
@@ -112,6 +113,7 @@
                     "maxWidth": 350,
                     "scrollingMode": "hover",
                     "showIcon": true,
+                    "textColor": "none",
                     "useFixedWidth": false
                 },
                 {
@@ -129,6 +131,7 @@
                     "showArtistFirst": true,
                     "showProgressRing": true,
                     "showVisualizer": false,
+                    "textColor": "none",
                     "useFixedWidth": false,
                     "visualizerType": "linear"
                 }
@@ -137,9 +140,10 @@
                 {
                     "blacklist": [
                     ],
+                    "chevronColor": "none",
                     "colorizeIcons": false,
-                    "drawerEnabled": true,
-                    "hidePassive": false,
+                    "drawerEnabled": false,
+                    "hidePassive": true,
                     "id": "Tray",
                     "pinned": [
                     ]
@@ -147,14 +151,17 @@
                 {
                     "hideWhenZero": false,
                     "hideWhenZeroUnread": false,
+                    "iconColor": "none",
                     "id": "NotificationHistory",
                     "showUnreadBadge": true,
                     "unreadBadgeColor": "primary"
                 },
                 {
                     "displayMode": "forceOpen",
+                    "iconColor": "none",
                     "id": "KeyboardLayout",
-                    "showIcon": true
+                    "showIcon": true,
+                    "textColor": "none"
                 },
                 {
                     "deviceNativePath": "__default__",
@@ -167,12 +174,16 @@
                 },
                 {
                     "displayMode": "alwaysHide",
-                    "id": "Network"
+                    "iconColor": "none",
+                    "id": "Network",
+                    "textColor": "none"
                 },
                 {
                     "displayMode": "alwaysShow",
+                    "iconColor": "none",
                     "id": "Volume",
-                    "middleClickCommand": "pwvucontrol || pavucontrol"
+                    "middleClickCommand": "pwvucontrol || pavucontrol",
+                    "textColor": "none"
                 },
                 {
                     "clockColor": "primary",
@@ -318,6 +329,8 @@
         "autoStartAuth": true,
         "avatarImage": "/home/hesaam/.face",
         "boxRadiusRatio": 1,
+        "clockFormat": "hh\\nmm",
+        "clockStyle": "custom",
         "compactLockScreen": true,
         "dimmerOpacity": 0,
         "enableLockScreenCountdown": true,
@@ -375,7 +388,7 @@
     "nightLight": {
         "autoSchedule": true,
         "dayTemp": "6500",
-        "enabled": true,
+        "enabled": false,
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
@@ -383,9 +396,8 @@
     },
     "notifications": {
         "backgroundOpacity": 1,
-        "batteryCriticalThreshold": 5,
-        "batteryWarningThreshold": 20,
         "criticalUrgencyDuration": 15,
+        "enableBatteryToast": true,
         "enableKeyboardLayoutToast": false,
         "enableMediaToast": false,
         "enabled": true,
@@ -424,6 +436,9 @@
         "monitors": [
         ],
         "overlayLayer": true
+    },
+    "plugins": {
+        "autoUpdate": false
     },
     "sessionMenu": {
         "countdownDuration": 10000,
@@ -472,8 +487,10 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 47,
+    "settingsVersion": 49,
     "systemMonitor": {
+        "batteryCriticalThreshold": 5,
+        "batteryWarningThreshold": 20,
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 1000,
         "cpuWarningThreshold": 80,
@@ -522,9 +539,9 @@
         "bluetoothHideUnnamedDevices": false,
         "boxBorderEnabled": true,
         "fontDefault": "RecMonoCasual Nerd Font",
-        "fontDefaultScale": 0.97,
+        "fontDefaultScale": 1,
         "fontFixed": "RecMonoCasual Nerd Font",
-        "fontFixedScale": 0.9700000000000001,
+        "fontFixedScale": 1,
         "networkPanelView": "wifi",
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,
