@@ -5,11 +5,16 @@ if test -f ~/.fish_profile
 end
 
 ## Path setup
-if test -f /home/linuxbrew/.linuxbrew/bin/brew;
-    or test -f /opt/homebrew/bin/brew
-
+if test -f /home/linuxbrew/.linuxbrew/bin/brew
     set -x HOMEBREW_NO_ANALYTICS 1
-    brew shellenv | source
+    /home/linuxbrew/.linuxbrew/bin/brew shellenv | source
+else if test -f /opt/homebrew/bin/brew
+    set -x HOMEBREW_NO_ANALYTICS 1
+    /opt/homebrew/bin/brew shellenv | source
+end
+
+if type -q mise
+    mise activate fish | source
 end
 
 if test -d ~/.local/share/nvim/mason/bin

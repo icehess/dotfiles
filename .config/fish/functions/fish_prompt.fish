@@ -60,9 +60,9 @@ function fish_prompt --description 'Write out the prompt'
     # If we're running via SSH, change the host color.
     set -l _login_prompt $prefix
     if set -q SSH_TTY
-        set _login_prompt "$prefix (prompt_login)"
+        set _login_prompt $prefix " " (prompt_login)
     end
 
-    # echo -n -s (set_color brmagenta) $_login_prompt (set_color normal) " " (set_color $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal " "$prompt_status " "$suffix " "
-    echo -n -s (set_color $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal " "$prompt_status $suffix " "
+    echo -n -s (set_color brmagenta) $_login_prompt (set_color normal) " " (set_color $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal " "$prompt_status " "$suffix " "
+    # echo -n -s (set_color $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal " "$prompt_status $suffix " "
 end

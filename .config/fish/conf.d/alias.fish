@@ -36,10 +36,10 @@ alias update='sudo pacman -Syu'
 alias mirror="sudo cachyos-rate-mirrors"
 
 # Help people new to Arch
-alias apt='man pacman'
-alias apt-get='man pacman'
-alias please='sudo'
-alias tb='nc termbin.com 9999'
+# alias apt='man pacman'
+# alias apt-get='man pacman'
+# alias please='sudo'
+# alias tb='nc termbin.com 9999'
 
 # Cleanup orphaned packages
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
