@@ -5,7 +5,9 @@
 .~lock.*
 elrang_ls.config
 *erlang_ls.config*
-./.bashlocal
+./.bashlocal*
+./.local.fish
+./.local.bash
 ./.ssh
 
 ./.gitconfig

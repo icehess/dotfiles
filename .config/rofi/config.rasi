@@ -1,6 +1,0 @@
-configuration {
-    sidebar-mode: true;
-    font: "Fantasque Sans Mono Regular 13";
-}
-
-@theme "/usr/share/rofi/themes/sidebar.rasi"
