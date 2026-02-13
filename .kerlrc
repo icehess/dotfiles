@@ -1,7 +1,7 @@
-# for clang
-#export CC=clang CXX=clang CFLAGS="-g -O3 -fstack-protector" LDFLAGS="-fstack-protector"
-# compilation options
-# KERL_CONFIGURE_OPTIONS="$KERL_CONFIGURE_OPTIONS --disable-hipe --enable-kernel-poll --without-odbc --enable-threads --enable-sctp --enable-smp-support"
 KERL_BUILD_DOCS=true
+
+KERL_BUILD_DOCS=true
+KERL_DOC_TARGETS="man chunks"
+
 KERL_INSTALL_HTMLDOCS=no
 KERL_INSTALL_MANPAGES=yes
