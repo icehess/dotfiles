@@ -17,7 +17,7 @@ config.use_ime = false
 config.initial_cols = 150
 config.initial_rows = 40
 
-local font_size = 10
+local font_size = 12
 
 if string.find(wezterm.target_triple, 'darwin') then
   font_size = 15
