@@ -32,6 +32,10 @@ if test -d ~/.local/bin
     end
 end
 
+if functions -q fzf_key_bindings
+    fzf_key_bindings
+end
+
 # source ~/.config/fish/functions/handy.fish
 source ~/.config/fish/conf.d/alias.fish
 
