@@ -15,8 +15,7 @@
         "iconMode": "native",
         "ignoreMouseInput": false,
         "overviewLayer": false,
-        "pinnedApps": [
-        ],
+        "pinnedApps": [],
         "position": "center",
         "screenshotAnnotationTool": "",
         "showCategories": true,
@@ -28,8 +27,7 @@
     },
     "audio": {
         "cavaFrameRate": 30,
-        "mprisBlacklist": [
-        ],
+        "mprisBlacklist": [],
         "preferredPlayer": "",
         "visualizerType": "linear",
         "volumeFeedback": true,
@@ -51,12 +49,10 @@
         "hideOnOverview": false,
         "marginHorizontal": 4,
         "marginVertical": 4,
-        "monitors": [
-        ],
+        "monitors": [],
         "outerCorners": true,
         "position": "top",
-        "screenOverrides": [
-        ],
+        "screenOverrides": [],
         "showCapsule": true,
         "showOutline": false,
         "useSeparateOpacity": false,
@@ -141,15 +137,13 @@
             ],
             "right": [
                 {
-                    "blacklist": [
-                    ],
+                    "blacklist": [],
                     "chevronColor": "none",
                     "colorizeIcons": false,
                     "drawerEnabled": false,
                     "hidePassive": true,
                     "id": "Tray",
-                    "pinned": [
-                    ]
+                    "pinned": []
                 },
                 {
                     "hideWhenZero": false,
@@ -189,8 +183,7 @@
                     "textColor": "none"
                 },
                 {
-                    "defaultSettings": {
-                    },
+                    "defaultSettings": {},
                     "id": "plugin:mangowc-layout-switcher"
                 },
                 {
@@ -308,8 +301,7 @@
     "desktopWidgets": {
         "enabled": false,
         "gridSnap": false,
-        "monitorWidgets": [
-        ]
+        "monitorWidgets": []
     },
     "dock": {
         "animationSpeed": 1,
@@ -320,11 +312,9 @@
         "enabled": false,
         "floatingRatio": 0.5,
         "inactiveIndicators": false,
-        "monitors": [
-        ],
+        "monitors": [],
         "onlySameOutput": true,
-        "pinnedApps": [
-        ],
+        "pinnedApps": [],
         "pinnedStatic": true,
         "position": "bottom",
         "size": 0.9500000000000001
@@ -370,8 +360,7 @@
         "lockScreenAnimations": true,
         "lockScreenBlur": 0,
         "lockScreenCountdownDuration": 10000,
-        "lockScreenMonitors": [
-        ],
+        "lockScreenMonitors": [],
         "lockScreenTint": 0,
         "radiusRatio": 0.2,
         "scaleRatio": 0.8,
@@ -390,7 +379,7 @@
         "enabled": true,
         "performanceModeDisabled": "",
         "performanceModeEnabled": "",
-        "screenLock": "",
+        "screenLock": "~/.config/noctalia/scripts/lock-hook.sh",
         "screenUnlock": "",
         "session": "",
         "startup": "",
@@ -436,8 +425,7 @@
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
-        "monitors": [
-        ],
+        "monitors": [],
         "normalUrgencyDuration": 8,
         "overlayLayer": true,
         "respectExpireTimeout": true,
@@ -466,8 +454,7 @@
             2
         ],
         "location": "top_right",
-        "monitors": [
-        ],
+        "monitors": [],
         "overlayLayer": true
     },
     "plugins": {
@@ -556,8 +543,7 @@
         "warningColor": "#83a598"
     },
     "templates": {
-        "activeTemplates": [
-        ],
+        "activeTemplates": [],
         "enableUserTheming": false
     },
     "ui": {
@@ -580,13 +566,11 @@
         "directory": "/home/hesaam/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
-        "favorites": [
-        ],
+        "favorites": [],
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": false,
-        "monitorDirectories": [
-        ],
+        "monitorDirectories": [],
         "overviewBlur": 0.4,
         "overviewEnabled": true,
         "overviewTint": 0.6,
