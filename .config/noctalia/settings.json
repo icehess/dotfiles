@@ -577,7 +577,7 @@
     },
     "wallpaper": {
         "automationEnabled": true,
-        "directory": "/home/hesaam/Pictures/Wallpapers",
+        "directory": "/home/hesaam/Pictures/wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
