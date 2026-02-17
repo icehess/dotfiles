@@ -1,24 +1,39 @@
 #! /bin/sh
 #
 
-force=false
-case "$1" in
--f) force=true;;
-esac
+force=
+_dir="$(pwd)"
+while [ $# -gt 0 ]; do
+    arg="$1"
+    case $arg in
+        -f)
+            force=true
+            ;;
+        -C)
+            _dir="${2:-.}"
+            shift
+            ;;
+        *)
+            ;;
+    esac
+    shift
+done
 
 ## prune refs which their origin is gone:
-if $force ; then
-    git remote prune origin
-    to_delete="$(git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }')"
+if [ -n "${force}" ] ; then
+    echo ":: pruning ${_dir}"
+    git -C "${_dir}" remote prune origin
+    to_delete="$(git -C "${_dir}" branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }')"
     to_delete="$(echo "${to_delete}" | sed -e 's/^\s*//' | sed -e 's/\s*$//')"
-    if [ -n "$to_delete" ]; then
-        for branch in $to_delete ; do
-            git branch -D $branch
+    if [ -n "${to_delete}" ]; then
+        for branch in ${to_delete} ; do
+            git -C "${_dir}" branch -D "${branch}"
         done
     else
         echo All clean
     fi
 else
-    git remote prune origin --dry-run
-    git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }'
+    echo ":: dry-running prune ${_dir}"
+    git -C "${_dir}" remote prune origin --dry-run
+    git -C "${_dir}" branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }'
 fi
