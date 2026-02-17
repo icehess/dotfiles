@@ -32,6 +32,9 @@ if test -d ~/.local/bin
     end
 end
 
+bind up history-prefix-search-backward
+set -x FZF_CTRL_R_COMMAND
+set -x FZF_ALT_C_COMMAND
 if functions -q fzf_key_bindings
     fzf_key_bindings
 end
