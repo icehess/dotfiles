@@ -1,6 +1,6 @@
-# theme = "gruvbox_icehess"
+theme = "gruvbox_icehess"
 # theme = "rose_pine"
-theme = "ashen"
+# theme = "ashen"
 
 [editor]
 cursorline = true
