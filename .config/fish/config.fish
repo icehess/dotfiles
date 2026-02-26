@@ -65,6 +65,8 @@ else if type -q vi
     set -x EDITOR vi
 end
 
+set -x ERL_AFLAGS -kernel shell_history enabled $ERL_AFLAGS
+
 # And at the end, my local per host configs
 if test -f ~/.local.fish
     source ~/.local.fish
