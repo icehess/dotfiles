@@ -17,7 +17,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term wezterm
+set $term foot
 # Your preferred application launcher
 #set $menu wmenu-run
 set $menu qs -c noctalia-shell ipc call launcher toggle
@@ -45,7 +45,40 @@ output eDP-1 resolution 2880x1920 position 3840,0 scale 1.75
 #   * pixel
 #   * none
 # default_border pixel 1
-default_border none
+# default_border none
+
+### Appearance configuration
+# Font, borders, and gaps
+    font pango:RecMonoCasual Nerd Font 11
+    # blur enable
+    default_dim_inactive 0.05
+    smart_gaps on
+    gaps inner 4
+    gaps outer 2
+    default_border pixel 2
+    default_floating_border pixel 2
+    corner_radius 4
+    smart_corner_radius enable
+
+    ### Gruvbox
+    set $light #ebdbb2
+    set $dark #3c3836
+    set $focused #3c3836
+    set $inactive #282828
+    set $unfocused #282828
+    set $urgent #b8bb26
+
+    ### Colors (see man 5 sway)
+    # border - border around titlebar
+    # bg - titlebar background
+    # text - text on titlebar
+    # indicator - shown where new window will open
+    # child_border - border around the window
+    # class         border      bg      text    indicator   child_border
+    client.focused          $focused    $focused    $light   $focused    $focused
+    client.focused_inactive $inactive   $inactive   $light   $inactive   $inactive
+    client.unfocused        $unfocused  $unfocused  $light  $unfocused  $unfocused
+    client.urgent           $urgent     $urgent     $light  $urgent     $urgent
 
 ### Idle configuration
 #
@@ -181,6 +214,12 @@ input "type:pointer" {
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+
+    bindsym $mod+Page_Up workspace next
+    bindsym $mod+Page_Down workspace prev
+
+    bindsym $mod+Shift+Page_Up move workspace to left
+    bindsym $mod+Shift+Page_Down move workspace to right
 #
 # Layout stuff:
 #
@@ -249,7 +288,7 @@ bindsym $mod+r mode "resize"
     # Special keys to adjust volume via PulseAudio
     bindsym XF86AudioMute exec qs -c noctalia-shell ipc call volume muteOutput
     bindsym XF86AudioLowerVolume exec qs -c noctalia-shell ipc call volume decrease
-    bindsym XF86AudioRaiseVolume qs -c noctalia-shell ipc call volume increase
+    bindsym XF86AudioRaiseVolume exec qs -c noctalia-shell ipc call volume increase
     bindsym XF86AudioMicMute exec qs -c noctalia-shell ipc call volume muteInput
     # Special keys to adjust brightness via brightnessctl
     bindsym XF86MonBrightnessDown exec qs -c noctalia-shell ipc call brightness decrease
@@ -262,8 +301,12 @@ bindsym $mod+r mode "resize"
     bindsym XF86AudioPlay exec qs -c noctalia-shell ipc call media playPause
     bindsym XF86AudioPrev exec qs -c noctalia-shell ipc call media previous
 
+    bindsym Ctrl+Shift+Space exec 1password --quick-access
+
 # Lockscreen
 bindsym $mod+Escape exec qs -c noctalia-shell ipc call lockScreen lock
+
+workspace_auto_back_and_forth yes
 
 #
 # Status Bar:
@@ -288,10 +331,14 @@ include /etc/sway/config.d/*
 
 exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
-exec --no-startup-id gnome-keyring-daemon --components=pkcs11,secrets,ssh --start
+exec --no-startup-id gnome-keyring-daemon --components=pkcs11,secrets -start
 
 exec --no-startup-id /usr/libexec/xdg-desktop-portal -r
 exec --no-startup-id qs -c noctalia-shell
+exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id /usr/bin/hypridle
+exec --no-startup-id /opt/1Password/1password --silent
+exec --no-startup-id systemctl --user start gcr-ssh-agent.service
 
 for_window [app_id="pavucontrol" title="Volume Control"] floating enable
 for_window [app_id="gpick"] floating enable sticky enable
@@ -300,3 +347,5 @@ for_window [app_id="firefox" title="^Picture-in-Picture$"] floating enable
 # chrome-based
 for_window [title="^Picture in picture$"] floating enable
 for_window [app_id="^org\.gnome\.Nautilus$" title="^All Files$"] floating enable
+
+for_window [app_id="1password" title="^Lock Screen"] floating enable
