@@ -206,11 +206,6 @@
                     "textColor": "none"
                 },
                 {
-                    "defaultSettings": {
-                    },
-                    "id": "plugin:mangowc-layout-switcher"
-                },
-                {
                     "clockColor": "primary",
                     "customFont": "",
                     "formatHorizontal": "hh:mm AP ddd, MMM dd",
