@@ -9,6 +9,7 @@ binds {
 
     // ─── Applications ───
     Mod+T                               hotkey-overlay-title="Open Terminal: Foot" { spawn "foot"; }
+    Mod+Return                          hotkey-overlay-title="Open Terminal: Foot" { spawn "foot"; }
     Mod+D                               hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+B                               hotkey-overlay-title="Open Browser: firefox" { spawn "firefox"; }
     Mod+ALT+L                           hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
