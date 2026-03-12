@@ -3,6 +3,11 @@ elixir = "1.16.2-otp-26"
 erlang = "26.2.5"
 opencode = "latest"
 rebar = "3.24.0"
+rust = {
+  version = "1.85.1",
+  profile = "default",
+  components = "rust-src"
+}
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
