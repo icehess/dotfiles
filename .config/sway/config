@@ -349,3 +349,5 @@ for_window [title="^Picture in picture$"] floating enable
 for_window [app_id="^org\.gnome\.Nautilus$" title="^All Files$"] floating enable
 
 for_window [app_id="1password" title="^Lock Screen"] floating enable
+for_window [app_id="xdg-desktop-portal-gtk" title="^All Files$"] floating enable
+for_window [app_id="org.gnome.Nautilus" title="^All Files$"] floating enable resize set 175 50
