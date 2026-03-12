@@ -44,7 +44,7 @@ config.scrollback_lines = 200000
 
 -- config.window_decorations = "RESIZE"
 -- config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
-config.enable_wayland = true
+config.enable_wayland = false
 
 config.audible_bell = "Disabled"
 
