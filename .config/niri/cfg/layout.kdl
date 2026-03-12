@@ -1,30 +1,80 @@
-    layout {
-        gaps 0
-        center-focused-column "never" // Don’t auto-center focused column
-        background-color "transparent" // <- needed for noctalia-shell to set wallpaper
-        preset-column-widths {
-            proportion 0.33333
-            proportion 0.5
-            proportion 0.66667
-        }
-        default-column-width { proportion 0.5; }
-        focus-ring {
-        //     off
-            width 1
-            // active-color "#ffc87f"
-            // active-color "#00ac89"
-            active-color "#7fc8ff"
-            inactive-color "#7fc8ff"
-            // inactive-color "#505050"
-        }
-    
-        // border {
-        //     // off
-        //     width 1
-        //     active-color "#29A855"
-        //     inactive-color "#505050"
-        //     // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
-        //     // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-        // }
-        struts {}
+layout {
+    gaps 5
+    // center-focused-column "never" // Don’t auto-center focused column
+    background-color "transparent" // <- needed for noctalia-shell to set wallpaper
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
     }
+    default-column-width { proportion 0.5; }
+    focus-ring {
+        // off
+        width 3
+
+        active-gradient from="#f00f" to="#0f05" angle=45 in="oklch longer hue"
+        inactive-color "#7fc8ff"
+
+        // Noctalia colors
+        active-color   "#c7a1d8"
+        // inactive-color "#1c1822"
+        urgent-color   "#e9899d"
+    }
+
+    border {
+        // Uncomment this line to disable the border.
+        off
+        // on
+
+        // Width of the border in logical pixels.
+        width 1
+
+        // active-color "#ffc87f"
+        // inactive-color "#505050"
+        active-gradient from="#f00f" to="#0f05" angle=45 in="oklch longer hue"
+        // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
+        inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+
+        // Color of the border around windows that request your attention.
+        urgent-color "#9b0000"
+
+        // Nocalia colors
+        // active-color   "#c7a1d8"
+        // inactive-color "#1c1822"
+        // urgent-color   "#e9899d"
+    }
+    struts {
+        left   0
+        right  0
+        top    0
+        bottom 0
+    }
+
+    // shadow {
+    //     color "#120f1870"
+    // }
+
+    tab-indicator {
+        width 8
+        gap -3
+        corner-radius 5
+        position "top"
+        // place-within-column
+        // active-color "#80c8ff"
+        active-color   "#c7a1d8"
+        inactive-color "#505050"
+        urgent-color   "#e9899d"
+    }
+
+    // insert-hint {
+    //     color "#c7a1d880"
+    // }
+
+}
+
+recent-windows {
+    highlight {
+        active-color "#c7a1d8"
+        urgent-color "#e9899d"
+    }
+}

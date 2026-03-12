@@ -13,7 +13,7 @@ binds {
     Mod+D                               hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+B                               hotkey-overlay-title="Open Browser: firefox" { spawn "firefox"; }
     Mod+ALT+L                           hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
-    Mod+Shift+Q                         hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
+    Mod+ALT+Q                           hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
 
     // Please choose your own file manager.
     Mod+E                               hotkey-overlay-title="File Manager: Nemo" { spawn "nemo"; }
@@ -36,7 +36,7 @@ binds {
     Mod+O                               repeat=false { toggle-overview; }
     Mod+Shift+O                         repeat=false { toggle-window-rule-opacity; }
 
-    Mod+Q                               repeat=false { close-window; }
+    Mod+Shift+Q                         repeat=false { close-window; }
 
     Mod+Left                            { focus-column-left; }
     Mod+H                               { focus-column-left; }
@@ -151,7 +151,8 @@ binds {
 
     // ─── Modes ───
     Mod+V                               { toggle-window-floating; }
-    Mod+F                               { maximize-column; }
+    Mod+F                               { maximize-window-to-edges; }
+    Mod+ALT+F                           { maximize-column; }
     Mod+Shift+F                         { fullscreen-window; }
     Mod+Shift+V                         { switch-focus-between-floating-and-tiling; }
     Mod+W                               { toggle-column-tabbed-display; }

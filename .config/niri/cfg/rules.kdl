@@ -3,6 +3,10 @@
     //     place-within-backdrop true
     // }
 
+    layer-rule {
+        match namespace="^notifications$"
+        block-out-from "screencast"
+    }
     // Set the overview wallpaper on the backdrop.
     layer-rule {
       match namespace="^noctalia-overview*"
@@ -14,7 +18,7 @@
         geometry-corner-radius 0
         clip-to-geometry true
         draw-border-with-background false
-        opacity 0.97
+        // opacity 0.97
     }
 
     // Work around WezTerm's initial configure bug
