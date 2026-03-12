@@ -39,9 +39,9 @@ git-global = false
 git-exclude = false
 
 [editor.statusline]
-left = ["mode", "spinner", "file-name", "version-control", "read-only-indicator", "file-modification-indicator"]
-right = ["diagnostics", "selections", "register", "file-type", "position-percentage", "position", "file-encoding"]
-separator = "┊"
+left = ["mode", "spinner", "file-name", "spacer", "read-only-indicator", "file-modification-indicator", "spacer", "version-control"]
+right = ["diagnostics", "selections", "register", "file-type", "file-indent-style", "file-encoding", "spacer", "total-line-numbers", "position-percentage", "position"]
+separator = "|"
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"

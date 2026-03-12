@@ -27,6 +27,9 @@ roots = ["package.json", "astro.config.mjs"]
 formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-astro", "--parser", "astro"] }
 auto-format = true
 
+[[language]]
+name = "git-commit"
+language-servers = [ "commit-lsp", "ltex-ls-plus" ]
 
 [[language]]
 name = "html"
