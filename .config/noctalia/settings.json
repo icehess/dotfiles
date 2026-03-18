@@ -47,6 +47,7 @@
         "contentPadding": 2,
         "density": "compact",
         "displayMode": "always_visible",
+        "enableExclusionZoneInset": true,
         "floating": false,
         "fontScale": 1,
         "frameRadius": 12,
@@ -92,6 +93,7 @@
                     "occupiedColor": "secondary",
                     "pillSize": 0.6,
                     "showApplications": true,
+                    "showApplicationsHover": false,
                     "showBadge": true,
                     "showLabelsOnlyWhenOccupied": true,
                     "unfocusedIconsOpacity": 1

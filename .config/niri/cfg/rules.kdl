@@ -47,6 +47,15 @@ window-rule {
     default-column-width { proportion 0.30; }
 }
 window-rule {
+    // chrome
+    match title="^Picture in picture$"
+    open-floating true
+    default-floating-position x=20 y=20 relative-to="bottom-right"
+    default-window-height { proportion 0.30; }
+    // 80% of the screen wide.
+    default-column-width { proportion 0.30; }
+}
+window-rule {
     // nautilus save dialog?
     match app-id=r#"^org\.gnome\.nautilus$"# title="^all files$"
     open-floating true

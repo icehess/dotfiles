@@ -1,7 +1,6 @@
 [tools]
 elixir = "1.16.2-otp-26"
 erlang = "26.2.5"
-opencode = "latest"
 rebar = "3.24.0"
 rust = {
   version = "1.85.1",
