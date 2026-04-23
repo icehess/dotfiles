@@ -268,7 +268,7 @@ alias gitAuthorMe='git config user.email "icehess@gmail.com"; git config user.na
 alias configAuthorMe='config config user.email "icehess@gmail.com"; config config user.name "Hesaam Farhang"'
 # }}}
 
-[ -s "${HOME}/.dotfiles-site/functions" ] && source "${HOME}/.dotfiles-site/functions"
+[ -s "${HOME}/.dotfiles-site/functions.bash" ] && source "${HOME}/.dotfiles-site/functions.bash"
 
 # PLATFORM=`uname -s`
 # if [ x"`uname -a | grep -o Microsoft | uniq`" = x"Microsoft" ]; then
