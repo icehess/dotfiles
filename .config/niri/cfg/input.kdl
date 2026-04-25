@@ -30,9 +30,9 @@ input {
     mouse {
         // off
         natural-scroll
-        accel-speed 0.9
+        accel-speed -0.38
         scroll-factor 3.0
-        // accel-profile "flat"
+        accel-profile "flat"
         // scroll-method "no-scroll"
     }
     trackpoint {
