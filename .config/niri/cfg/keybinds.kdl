@@ -8,12 +8,29 @@ binds {
     Mod+Shift+ESCAPE                     { show-hotkey-overlay; }
 
     // ─── Applications ───
-    Mod+T                               hotkey-overlay-title="Open Terminal: Foot" { spawn "foot"; }
-    Mod+Return                          hotkey-overlay-title="Open Terminal: Foot" { spawn "foot"; }
-    Mod+B                               hotkey-overlay-title="Open Browser: Helium" { spawn "helium-browser || firefox"; }
+    Mod+T                               hotkey-overlay-title="Open Terminal" { spawn "foot"; }
+    Mod+Return                          hotkey-overlay-title="Open Terminal" { spawn "foot"; }
+    Mod+D                               hotkey-overlay-title="Open App Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+B                               hotkey-overlay-title="Open Browser" { spawn "helium-browser"; }
+    Mod+ALT+L                           hotkey-overlay-title="Lock Screen" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+    Mod+ALT+Q                           hotkey-overlay-title="Session Menu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
 
     // Please choose your own file manager.
-    Mod+E                               hotkey-overlay-title="File Manager: Nautilus" { spawn "nautilus"; }
+    Mod+E                               hotkey-overlay-title="File Manager" { spawn "nautilus"; }
+
+    // ─── Media Controls ───
+    XF86AudioRaiseVolume                allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
+    XF86AudioLowerVolume                allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
+    XF86AudioMute                       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
+    XF86AudioMicMute                    allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteInput"; }
+    XF86AudioNext                       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media next"; }
+    XF86AudioPrev                       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media previous"; }
+    XF86AudioPlay                       allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
+    XF86AudioPause                      allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call media playPause"; }
+
+    // ─── Brightness Controls ───
+    XF86MonBrightnessUp                 allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
+    XF86MonBrightnessDown               allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
 
     // ─── Window Movement and Focus ───
     Mod+O                               repeat=false { toggle-overview; }
@@ -101,7 +118,7 @@ binds {
     Mod+CTRL+9                          { move-column-to-workspace 9; }
 
     // Switches focus between the current and the previous workspace.
-    // Mod+TAB                             { focus-workspace-previous; }
+    Mod+TAB                             { focus-workspace-previous; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
@@ -133,7 +150,7 @@ binds {
     Mod+Ctrl+R                          { reset-window-height; }
 
     // ─── Modes ───
-    Mod+V                               { toggle-window-floating; }
+    Mod+Shift+T                         hotkey-overlay-title="Toggle window float" { toggle-window-floating; }
     Mod+F                               { maximize-window-to-edges; }
     Mod+ALT+F                           { maximize-column; }
     Mod+Shift+F                         { fullscreen-window; }

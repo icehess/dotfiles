@@ -1,3 +1,9 @@
+overview {
+    workspace-shadow {
+        off
+    }
+}
+
 layer-rule {
     match namespace="^notifications$"
     block-out-from "screencast"
@@ -19,6 +25,17 @@ layer-rule {
 //     match namespace="^noctalia-wallpaper*"
 //     place-within-backdrop true
 // }
+
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
+// Open dms windows as floating by default
+window-rule {
+    match app-id=r#"org.quickshell$"#
+    match app-id=r#"com.danklinux.dms$"#
+    open-floating true
+}
 
 // work around wezterm's initial configure bug
 // by setting an empty default-column-width.
