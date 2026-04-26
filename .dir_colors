@@ -95,6 +95,8 @@ TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
 TERM xterm-termite
+TERM foot
+TERM wezterm
 
 # EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
 EIGHTBIT 1
