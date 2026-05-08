@@ -11,6 +11,15 @@ if wezterm.config_builder then
 end
 local act = wezterm.action
 
+local function file_exists(path)
+    local f = io.open(path, "r")
+    if f~=nil then io.close(f) return true else return false end
+end
+
+if file_exists("/opt/homebrew/bin/fish") then
+    config.default_prog = { '/opt/homebrew/bin/fish', '-l' }
+end
+
 -- config.debug_key_events = true
 config.use_ime = false
 
