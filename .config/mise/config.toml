@@ -1,7 +1,13 @@
 [tools]
-elixir = "1.16.2-otp-26"
-erlang = "26.2.5"
-rebar = "3.24.0"
+# elixir = "1.16.2-otp-26"
+# erlang = "26.2.5"
+# rebar = "3.24.0" # for kazoo 5.4?
+# rebar = "3.25.0" # from kazoo-master
+elixir = "1.19.5-otp-27"
+erlang = "27.3.4"
+rebar = "3.27.0"
+
+node = "lts"
 rust = {
   version = "1.85.1",
   profile = "default",
@@ -10,3 +16,6 @@ rust = {
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
+
+[settings.erlang]
+compile = true
