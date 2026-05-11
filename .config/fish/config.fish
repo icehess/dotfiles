@@ -37,6 +37,9 @@ set -x FZF_CTRL_R_COMMAND
 set -x FZF_ALT_C_COMMAND
 if functions -q fzf_key_bindings
     fzf_key_bindings
+else if test -f /opt/homebrew/Cellar/fzf/*/shell/key-bindings.fish
+    source /opt/homebrew/Cellar/fzf/*/shell/key-bindings.fish
+    fzf_key_bindings
 end
 
 # source ~/.config/fish/functions/handy.fish
