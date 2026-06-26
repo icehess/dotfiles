@@ -172,10 +172,6 @@ M.config = {
           watcher = false,
         },
       },
-      system_open = {
-        cmd = nil,
-        args = {},
-      },
     }
 
 function M.setup()

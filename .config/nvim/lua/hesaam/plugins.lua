@@ -80,15 +80,6 @@ local plugins = {
   { 'kyazdani42/blue-moon' },
   { 'sainnhe/gruvbox-material' },
 
-  -- Treesitter
-  {
-    'nvim-treesitter/nvim-treesitter',
-    config = function()
-      require("hesaam.core.treesitter").setup()
-    end
-  },
-  { 'nvim-treesitter/playground',                  lazy = true,       event = "VeryLazy", },
-
   -- Whichkey
   {
     "folke/which-key.nvim",
@@ -108,8 +99,7 @@ local plugins = {
   },
 
   {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
+    'mason-org/mason-lspconfig.nvim',
     config = function()
       require("hesaam.core.lsp").setup()
     end,
@@ -119,15 +109,19 @@ local plugins = {
         'neovim/nvim-lspconfig',
       },
       {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
         config = function()
           require("hesaam.core.mason").setup()
         end,
       },
-      { 'williamboman/mason-lspconfig.nvim' },
 
       -- for formatters and linters
-      { "jose-elias-alvarez/null-ls.nvim" },
+      {
+        "nvimtools/none-ls.nvim",
+        dependencies = {
+          "nvimtools/none-ls-extras.nvim",
+        },
+      },
 
       -- Autocompletion
       { 'hrsh7th/nvim-cmp' },
@@ -138,34 +132,34 @@ local plugins = {
       { 'hrsh7th/cmp-nvim-lua' },
 
       -- Snippets
-      { 'L3MON4D3/LuaSnip' },
-      { 'rafamadriz/friendly-snippets' },
+      -- { 'L3MON4D3/LuaSnip' },
+      -- { 'rafamadriz/friendly-snippets' },
     }
   },
 
   -- Debugging
-  {
-    "mfussenegger/nvim-dap",
-    -- event = "BufWinEnter",
-    lazy = true,
-    event = "VeryLazy",
-    config = function()
-      require("hesaam.core.dap").setup()
-    end,
-  },
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   -- event = "BufWinEnter",
+  --   lazy = true,
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("hesaam.core.dap").setup()
+  --   end,
+  -- },
 
   -- Debugger user interface
-  {
-    "rcarriga/nvim-dap-ui",
-    lazy = true,
-    event = "VeryLazy",
-    dependencies = {
-      'nvim-neotest/nvim-nio'
-    },
-    config = function()
-      require("hesaam.core.dap").setup_ui()
-    end,
-  },
+  -- {
+  --   "rcarriga/nvim-dap-ui",
+  --   lazy = true,
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     'nvim-neotest/nvim-nio'
+  --   },
+  --   config = function()
+  --     require("hesaam.core.dap").setup_ui()
+  --   end,
+  -- },
 
   {
     "nvim-tree/nvim-tree.lua",
@@ -247,14 +241,14 @@ local plugins = {
      },
   -- This plugin disables certain features if the opened file is big. File size and features to disable are configurable.
   -- Automatic features/integrations include: LSP, treesitter, indent_blankline, illuminate.vim NoMatchParen, syntax off, ... (full list at the end)
-  {
-    "lunarvim/bigfile.nvim",
-    -- config = function()
-    --   pcall(function()
-    --     require("bigfile").config(hesaam.bigfile.config)
-    --   end)
-    -- end,
-  },
+  -- {
+  --   "lunarvim/bigfile.nvim",
+  --   -- config = function()
+  --   --   pcall(function()
+  --   --     require("bigfile").config(hesaam.bigfile.config)
+  --   --   end)
+  --   -- end,
+  -- },
 
   -- winbar that shows file path and LSP context
   {
@@ -280,43 +274,5 @@ local plugins = {
   },
 
   { 'duane9/nvim-rg' },
-
-  {
-    'NvChad/nvim-colorizer.lua',
-    config = function()
-      require("colorizer").setup {
-        filetypes = {
-          'css',
-          'javascript',
-          'typescript',
-          'html'
-        },
-        user_default_options = {
-          RGB = true, -- #RGB hex codes
-          RRGGBB = true, -- #RRGGBB hex codes
-          names = true, -- "Name" codes like Blue or blue
-          RRGGBBAA = true, -- #RRGGBBAA hex codes
-          AARRGGBB = true, -- 0xAARRGGBB hex codes
-          rgb_fn = true, -- CSS rgb() and rgba() functions
-          hsl_fn = true, -- CSS hsl() and hsla() functions
-          css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-          -- Available modes for `mode`: foreground, background,  virtualtext
-          mode = "background", -- Set the display mode.
-          -- Available methods are false / true / "normal" / "lsp" / "both"
-          -- True is same as normal
-          tailwind = true, -- Enable tailwind colors
-          -- parsers can contain values used in |user_default_options|
-          sass = { enable = true, parsers = { "css" }, }, -- Enable sass colors
-          virtualtext = "■",
-          -- update color values even if buffer is not focused
-          -- example use: cmp_menu, cmp_docs
-          always_update = false
-        },
-        -- all the sub-options of filetypes apply to buftypes
-        buftypes = {},
-      }
-    end
-  },
 }
 require("lazy").setup(plugins, opts)

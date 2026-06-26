@@ -1,14 +1,14 @@
 local M = {}
 
-local pre_hook
-xpcall(function()
-  local ts_comment = require("ts_context_commentstring.integrations.comment_nvim")
+-- local pre_hook
+-- xpcall(function()
+--   local ts_comment = require("ts_context_commentstring.integrations.comment_nvim")
 
-  pre_hook = ts_comment.create_pre_hook()
-end, function()
-  print "Failed to load ts_context_commentstring.integrations.comment_nvim"
-end
-)
+--   pre_hook = ts_comment.create_pre_hook()
+-- end, function()
+--   print "Failed to load ts_context_commentstring.integrations.comment_nvim"
+-- end
+-- )
 
 M.config = {
   ---Add a space b/w comment and the line
@@ -68,7 +68,7 @@ M.config = {
 
   ---Pre-hook, called before commenting the line
   ---@type function|nil
-  pre_hook = pre_hook,
+  -- pre_hook = pre_hook,
 
   ---Post-hook, called after commenting is done
   ---@type function|nil
@@ -79,7 +79,8 @@ function M.setup()
   xpcall(function()
     local comment = require("Comment")
 
-    comment.setup(M.config)
+    -- comment.setup(M.config)
+    comment.setup({})
   end, function()
     print "Failed to load Comment"
   end
