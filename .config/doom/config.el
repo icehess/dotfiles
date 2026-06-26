@@ -31,7 +31,6 @@
 ;       doom-variable-pitch-font (font-spec :family "FantasqueSansM Nerd Font" :size 16))
 ; (setq doom-font (font-spec :family "Terminess Nerd Font" :size 14 :weight 'medium)
 ;       doom-variable-pitch-font (font-spec :family "Terminess Nerd Font" :size 14))
-
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -41,8 +40,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-; (setq doom-theme 'doom-one)
-(setq doom-theme 'doom-peacock)
+(setq doom-theme 'doom-one)
+; (setq doom-theme 'doom-peacock)
 ;; (setq doom-theme 'catppuccin)
 ;; (setq catppuccin-flavor 'macchiato) ; or 'frappe 'latte, 'macchiato, or 'mocha
 ;; (load-theme 'catppuccin t)
@@ -65,23 +64,22 @@
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
-;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
+;; `with-eval-after-load' block, otherwise Doom's defaults may override your
+;; settings. E.g.
 ;;
-;;   (after! PACKAGE
+;;   (with-eval-after-load 'PACKAGE
 ;;     (setq x y))
 ;;
 ;; The exceptions to this rule:
 ;;
 ;;   - Setting file/directory variables (like `org-directory')
 ;;   - Setting variables which explicitly tell you to set them before their
-;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
+;;     package is loaded (see 'C-h v VARIABLE' to look them up).
 ;;   - Setting doom variables (which start with 'doom-' or '+').
 ;;
 ;; Here are some additional functions/macros that will help you configure Doom.
 ;;
 ;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
 ;; - `add-load-path!' for adding directories to the `load-path', relative to
 ;;   this file. Emacs searches the `load-path' when you load packages with
 ;;   `require' or `use-package'.
@@ -96,8 +94,7 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-
-(setq fancy-splash-image "~/.config/doom/doom-emacs-color.png")
+; (setq fancy-splash-image "~/.config/doom/doom-emacs-color.png")
 (add-hook! '+doom-dashboard-functions :append
   (insert "\n" (+doom-dashboard--center +doom-dashboard--width "Emacs is journey my ass")))
 
@@ -114,6 +111,20 @@
   (unless (display-graphic-p frame)
     (set-face-background 'default "unspecified-bg" frame)))
 (add-hook 'after-make-frame-functions #'on-frame-open)
+
+;; Non-POSIX compliant shells (particularly Fish and Nushell) can cause
+;; unpredictable issues with any Emacs utilities that spawn child processes from
+;; shell commands (like diff-hl TRAMP, and terminal emulators). To get around this,
+;; configure Emacs to use a POSIX shell internally, e.g.
+
+;;; add to $DOOMDIR/config.el
+        (setq shell-file-name (executable-find "bash"))
+
+;;; Emacs' terminal emulators can be safely configured to use your original $SHELL:
+
+;;; add to $DOOMDIR/config.el
+(setq-default vterm-shell "/bin/fish")
+(setq-default explicit-shell-file-name "/bin/fish")
 
 
 (setq lsp-elixir-server-command '("elixir-ls"))
