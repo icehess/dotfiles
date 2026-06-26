@@ -177,4 +177,12 @@ binds {
     Mod+Shift+P                         { power-off-monitors; } // Turn off screens (useful for OLED or privacy)
 
     Ctrl+Shift+Space                    { spawn "1password" "--quick-access"; }
+
+    Mod+Y                               { spawn-sh "wl-kbptr"; }
+    Mod+Shift+Y                         { spawn-sh "wl-kbptr -o modes=floating','click -o mode_floating.source=detect"; }
+
+    Mod+A                               { spawn-sh "wlrctl pointer scroll -10 0"; }
+    Mod+Z                               { spawn-sh "wlrctl pointer scroll 10 0"; }
+    Mod+Shift+A                         { spawn-sh "wlrctl pointer scroll 0 -10"; }
+    Mod+Shift+Z                         { spawn-sh "wlrctl pointer scroll 0 10"; }
 }
