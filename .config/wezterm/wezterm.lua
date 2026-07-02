@@ -40,6 +40,7 @@ config.color_scheme = 'GruvboxDarkHard'
 
 config.font = wezterm.font_with_fallback {
     -- 'RecMonoDuotone Nerd Font',
+    'RecMonoCasual Nerd Font',
     'FantasqueSansM Nerd Font',
     'FantasqueSansM Nerd Font Mono',
     'Fantasque Sans MMono',

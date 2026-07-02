@@ -10,26 +10,36 @@
 # reloaded while running; some only apply to new windows and others may require
 # a full restart to take effect.
 
+command = fish -l
+
 font-family = RecMonoCasual Nerd Font
-font-size = 12
-# theme = Gruvbox Material
-theme = Rose Pine
-background = #141617
+font-size = 15
+theme = Gruvbox Dark Hard
+# theme = Rose Pine
+# background = #141617
 background-opacity = 0.97
+
+# sane colori and titlebar, like a human!
+split-divider-color = #4e5054
+window-theme = dark
+macos-titlebar-style = native
 
 gtk-toolbar-style = raised-border
 gtk-wide-tabs = false
 
 cursor-style = block
+# because it is fucking over rule cursor style, like What-The-Actual-Fuck man!
 shell-integration-features = no-cursor
 
 # Enables the ability to move the cursor at prompts by using alt+click on Linux and option+click on macOS.
 cursor-click-to-move = true
-
 copy-on-select = clipboard
 
-
 scrollback-limit = 1000000
+
+## Keybindings, because muscle memory
+keybind = ctrl+shift+alt+quote=new_split:down
+keybind = ctrl+shift+alt+semicolon=new_split:right
 
 keybind = ctrl+shift+arrow_down=goto_split:down
 keybind = ctrl+shift+arrow_left=goto_split:left

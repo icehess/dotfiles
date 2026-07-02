@@ -86,22 +86,26 @@ white   = '#ebdbb2'
 
 [font]
 builtin_box_drawing = false
-size = 11
+size = 15
 
 [font.normal]
-family = "FantasqueSansM Nerd Font"
+# family = "FantasqueSansM Nerd Font"
+family = "RecMonoCasual Nerd Font"
 style = "Regular"
 
 [font.bold]
-family = "FantasqueSansM Nerd Font"
+# family = "FantasqueSansM Nerd Font"
+family = "RecMonoCasual Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "FantasqueSansM Nerd Font"
+# family = "FantasqueSansM Nerd Font"
+family = "RecMonoCasual Nerd Font"
 style = "Italic"
 
 [font.bold_italic]
-family = "FantasqueSansM Nerd Font"
+# family = "FantasqueSansM Nerd Font"
+family = "RecMonoCasual Nerd Font"
 style = "Bold Italic"
 
 [selection]
