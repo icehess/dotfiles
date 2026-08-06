@@ -42,6 +42,8 @@ else if test -f /opt/homebrew/Cellar/fzf/*/shell/key-bindings.fish
     fzf_key_bindings
 end
 
+set -x EZA_ICONS_AUTO true
+
 # source ~/.config/fish/functions/handy.fish
 source ~/.config/fish/conf.d/alias.fish
 
