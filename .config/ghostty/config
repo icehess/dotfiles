@@ -10,7 +10,7 @@
 # reloaded while running; some only apply to new windows and others may require
 # a full restart to take effect.
 
-command = fish -l
+command = /opt/homebrew/bin/fish -l
 
 font-family = RecMonoCasual Nerd Font
 font-size = 15
@@ -35,7 +35,7 @@ shell-integration-features = no-cursor
 cursor-click-to-move = true
 copy-on-select = clipboard
 
-scrollback-limit = 1000000
+scrollback-limit = 20000000
 
 ## Keybindings, because muscle memory
 keybind = ctrl+shift+alt+quote=new_split:down

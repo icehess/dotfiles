@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+set -p PATH ~/.docker/bin
+# End of Docker Desktop section.
+
 ## Environment setup
 # Apply .profile: use this to put fish compatible .profile stuff in
 if test -f ~/.fish_profile
@@ -11,6 +15,15 @@ if test -f /home/linuxbrew/.linuxbrew/bin/brew
 else if test -f /opt/homebrew/bin/brew
     set -x HOMEBREW_NO_ANALYTICS 1
     /opt/homebrew/bin/brew shellenv | source
+    test -d /usr/local/opt/coreutils/libexec/gnubin && set -p PATH /usr/local/opt/coreutils/libexec/gnubin
+    test -d /usr/local/opt/findutils/libexec/gnubin && set -p PATH /usr/local/opt/findutils/libexec/gnubin
+    test -d /usr/local/opt/gnu-sed/libexec/gnubin && set -p PATH /usr/local/opt/gnu-sed/libexec/gnubin
+    test -d /usr/local/opt/make/libexec/gnubin && set -p PATH /usr/local/opt/make/libexec/gnubin
+    test -d /opt/homebrew/opt/coreutils/libexec/gnubin && set -p PATH /opt/homebrew/opt/coreutils/libexec/gnubin
+    test -d /opt/homebrew/opt/findutils/libexec/gnubin && set -p PATH /opt/homebrew/opt/findutils/libexec/gnubin
+    test -d /opt/homebrew/opt/gnu-sed/libexec/gnubin && set -p PATH /opt/homebrew/opt/gnu-sed/libexec/gnubin
+    test -d /opt/homebrew/opt/make/libexec/gnubin && set -p PATH /opt/homebrew/opt/make/libexec/gnubin
+    test -d /opt/homebrew/opt/grep/libexec/gnubin && set -p PATH /opt/homebrew/opt/grep/libexec/gnubin
 end
 
 if type -q mise

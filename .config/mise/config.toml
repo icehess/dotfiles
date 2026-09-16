@@ -4,10 +4,11 @@
 # rebar = "3.24.0" # for kazoo 5.4?
 # rebar = "3.25.0" # from kazoo-master
 elixir = "1.19.5-otp-27"
-erlang = "27.3.4"
-rebar = "3.27.0"
+#erlang = "27.3.4"
+#rebar = "3.27.0"
 
 node = "lts"
+rebar = "latest"
 rust = {
   version = "1.85.1",
   profile = "default",
