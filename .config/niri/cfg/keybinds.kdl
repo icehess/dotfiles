@@ -154,6 +154,7 @@ binds {
     Mod+F                               { maximize-window-to-edges; }
     Mod+ALT+F                           { maximize-column; }
     Mod+Shift+F                         { fullscreen-window; }
+    Mod+Ctrl+Shift+F                    { toggle-windowed-fullscreen; }
     Mod+Shift+V                         { switch-focus-between-floating-and-tiling; }
     Mod+W                               { toggle-column-tabbed-display; }
 
