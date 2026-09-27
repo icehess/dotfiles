@@ -54,3 +54,4 @@
 
 ;; Theme
 (package! catppuccin-theme)
+(package! hel)

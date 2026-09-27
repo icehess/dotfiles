@@ -53,7 +53,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type t)
 
 ;; Line wrapping
 (global-visual-line-mode t)
@@ -128,3 +128,8 @@
 
 
 (setq lsp-elixir-server-command '("elixir-ls"))
+
+(use-package hel
+  :ensure t
+  :custom (inhibit-startup-screen t)
+  :config (hel-mode))
