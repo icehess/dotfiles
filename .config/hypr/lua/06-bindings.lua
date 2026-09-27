@@ -10,6 +10,11 @@ local ipc = "noctalia msg "
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit())
+hl.bind(mainMod .. " + SHIFT + ALT + Delete", hl.dsp.exit())
+hl.bind(mainMod .. " + CTRL + SHIFT + Space", hl.dsp.exec_cmd("1password --quick-access"))
+hl.bind(mainMod .. " + ALT + Q", hl.dsp.exec_cmd(ipc .. "panel-toggle session"))
+
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
 
