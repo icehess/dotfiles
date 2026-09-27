@@ -1,0 +1,12 @@
+hl.on("hyprland.start", function ()
+  hl.exec_cmd("noctalia")
+end)
+
+hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
+hl.env("QT_QPA_PLATFORM", "wayland")
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
+hl.env("QS_ICON_THEME", "Mint-Y-Purple")
+hl.env("SDL_VIDEO_DRIVER", "wayland")
