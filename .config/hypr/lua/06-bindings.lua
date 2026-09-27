@@ -85,6 +85,9 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + CTRL + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
 
+hl.bind(mainMod .. " + Page_Down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + Page_Up",   hl.dsp.focus({ workspace = "e-1" }))
+
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + CTRL + S", hl.dsp.window.move({ workspace = "special:magic" }))

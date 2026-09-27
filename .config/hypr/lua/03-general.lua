@@ -90,6 +90,13 @@ hl.config({
     animations = {
         enabled = true,
     },
+
+    binds = {
+        allow_pin_fullscreen = true,
+        allow_workspace_cycles = true,
+        workspace_back_and_forth = true,
+        workspace_center_on = 0,
+    },
 })
 
 -- See https://wiki.hypr.land/configuring/layouts/dwindle-layout/ for more
