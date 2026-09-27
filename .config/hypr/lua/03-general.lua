@@ -1,10 +1,19 @@
 
-local color_primary = "rgb(c7a1d8)"
-local color_surface = "rgb(1c1822)"
-local color_secondary = "rgb(a984c4)"
-local color_error = "rgb(e9899d)"
-local color_tertiary = "rgb(e0b7c9)"
-local surface_lowest = "rgb(1e1924)"
+-- local color_primary = "#c7a1d8"
+-- local color_surface = "#1c1822"
+-- local color_secondary = "#a984c4"
+-- local color_error = "#e9899d"
+-- local color_tertiary = "#e0b7c9"
+-- local surface_lowest = "#1e1924"
+
+
+local color_primary = "#d79921"
+local color_surface = "#282828"
+local color_secondary = "#d3869b"
+local color_error = "#fb4934"
+local color_tertiary = "#83a598"
+local surface_lowest = "#1d2021"
+
 
 -- Refer to https://wiki.hypr.land/configuring/core/config-options/
 hl.config({
@@ -34,8 +43,20 @@ hl.config({
             border_locked_inactive = color_surface,
         },
         groupbar = {
-            font_size = 14,
+            font_size = 13,
+            -- height = 1,
+            -- text_offset = -9,
+            indicator_height = 0,
+            keep_upper_gap = false,
+            gradients = true,
+            gradient_rounding = 5,
+            gradient_rounding_power = 2,
+            gradient_round_only_edges = true,
+            rounding = 5,
+            rounding_power = 2,
+            round_only_edges = true,
             col = {
+
                 active = color_secondary,
                 inactive = color_surface,
                 locked_active = color_error,

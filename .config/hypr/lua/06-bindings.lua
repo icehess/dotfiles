@@ -43,10 +43,10 @@ hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.move({ direction = "right", 
 hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.move({ direction = "up", group_aware = true }))
 hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.move({ direction = "down", group_aware = true }))
 
-hl.bind(mainMod .. " + SHIFT + CTRL + left",  hl.dsp.focus({ monitor = "left" }))
-hl.bind(mainMod .. " + SHIFT + CTRL + right", hl.dsp.focus({ monitor = "right" }))
-hl.bind(mainMod .. " + SHIFT + CTRL + up",    hl.dsp.focus({ monitor = "up" }))
-hl.bind(mainMod .. " + SHIFT + CTRL + down",  hl.dsp.focus({ monitor = "down" }))
+hl.bind(mainMod .. " + SHIFT + CTRL + left",  hl.dsp.window.move({ monitor = "left" }))
+hl.bind(mainMod .. " + SHIFT + CTRL + right", hl.dsp.window.move({ monitor = "right" }))
+hl.bind(mainMod .. " + SHIFT + CTRL + up",    hl.dsp.window.move({ monitor = "up" }))
+hl.bind(mainMod .. " + SHIFT + CTRL + down",  hl.dsp.window.move({ monitor = "down" }))
 
 
 hl.bind(mainMod .. " + ALT + left",   hl.dsp.layout("consume_or_expel prev"))

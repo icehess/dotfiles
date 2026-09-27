@@ -13,10 +13,14 @@ hl.config({
         repeat_rate = 70,
         numlock_by_default = true,
 
+        focus_on_close = 1,
         follow_mouse = 1,
 
         sensitivity = 0.6,
         accel_profile = "adaptive",
+
+        natural_scroll = true,
+        scroll_factor = 2.5,
 
         touchpad = {
           natural_scroll = true,
