@@ -3,7 +3,7 @@ erlang = "27.3.4.15"
 node = "lts"
 rebar = "latest"
 rust = {
-  version = "1.85.1",
+  version = "stable",
   profile = "default",
   components = "rust-src"
 }
