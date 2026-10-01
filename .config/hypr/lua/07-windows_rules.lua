@@ -1,3 +1,10 @@
+--------------------------------
+---- WINDOWS AND WORKSPACES ----
+--------------------------------
+
+-- See https://wiki.hypr.land/configuring/core/rules/
+
+
 -- Noctalia Settings
 hl.window_rule({
     match = { class = "dev.noctalia.Noctalia" },
@@ -34,21 +41,13 @@ hl.window_rule({
     rounding    = 0,
 })
 
---------------------------------
----- WINDOWS AND WORKSPACES ----
---------------------------------
+-- local suppressMaximizeRule = hl.window_rule({
+--     -- Ignore maximize requests from all apps. You'll probably like this.
+--     name  = "suppress-maximize-events",
+--     match = { class = ".*" },
 
--- See https://wiki.hypr.land/configuring/core/rules/
-
--- Example window rules that are useful
-
-local suppressMaximizeRule = hl.window_rule({
-    -- Ignore maximize requests from all apps. You'll probably like this.
-    name  = "suppress-maximize-events",
-    match = { class = ".*" },
-
-    suppress_event = "maximize",
-})
+--     suppress_event = "maximize",
+-- })
 -- suppressMaximizeRule:set_enabled(false)
 
 hl.window_rule({
@@ -74,3 +73,38 @@ hl.window_rule({
     move  = "20 monitor_h-120",
     float = true,
 })
+
+
+hl.window_rule({
+    name  = "Browser's picture-in-picture",
+    match = { title = "^picture-in-picture|picture in picture|Picture in picture$" },
+
+    move  = {"(monitor_w-(window_w+210))", "(monitor_h-(window_h+170))"},
+    size = {"(monitor_w*0.30)", "(monitor_h*0.30)"},
+    float = true,
+})
+hl.window_rule({
+    name  = "Nautilus save dialog",
+    match = {
+        initial_class = "^xdg-desktop-portal-gtk$",
+        initial_title = "^All Files",
+    },
+
+    size = {"(monitor_w*0.50)", "(monitor_h*0.50)"},
+    float = true,
+    center = true,
+})
+hl.window_rule({
+    name  = "Blackout password managers in screen capture",
+    match = {
+        initial_class = "^com.onepassword.OnePassword$",
+    },
+    no_screen_share = true,
+})
+
+-- window-rule {
+--     match app-id=r#"^org\.keepassxc\.keepassxc$"#
+--     match app-id=r#"^org\.gnome\.world\.secrets$"#
+--     match app-id=r#"^1password$"#
+--     block-out-from "screen-capture"
+-- }
