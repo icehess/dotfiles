@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-if type -d wezterm; then
-  wezterm "$@"
+if command -v wezterm >/dev/null 2>&1; then
+  exec wezterm "$@"
 fi
 
-if [ -f /Applications/WezTerm.app/Contents/MacOS/wezterm ]; then
-  /Applications/WezTerm.app/Contents/MacOS/wezterm "$@"
+if [ -x /Applications/WezTerm.app/Contents/MacOS/wezterm ]; then
+  exec /Applications/WezTerm.app/Contents/MacOS/wezterm "$@"
 fi
+
+printf 'wizyterm: WezTerm executable not found\n' >&2
+exit 127
