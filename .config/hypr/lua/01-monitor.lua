@@ -30,3 +30,6 @@ hl.monitor({
     position = "1920x0",
     icc = "/usr/share/ghostscript/iccprofiles/srgb.icc",
 })
+
+-- xwayland pixelated look mitigation
+hl.monitor({ output = "", mode = "highres", position = "auto", scale = "2" })

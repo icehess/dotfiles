@@ -120,6 +120,7 @@ hl.config({
         fullscreen_on_one_column = true,
         follow_focus = false,
         wrap_focus = false,
+        wrap_swapcol = false,
     },
 })
 
@@ -133,4 +134,12 @@ hl.config({
         disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
         allow_session_lock_restore = true,
     },
+})
+
+
+-- xwayland pixelated look mitigation
+hl.config({
+  xwayland = {
+    force_zero_scaling = true
+  }
 })

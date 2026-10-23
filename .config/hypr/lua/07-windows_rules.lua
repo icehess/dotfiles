@@ -84,6 +84,17 @@ hl.window_rule({
     float = true,
 })
 hl.window_rule({
+    name  = "Blender File Browser",
+    match = {
+        initial_class = "^blender$",
+        initial_title = "^File Browser",
+    },
+
+    size = {"(monitor_w*0.50)", "(monitor_h*0.50)"},
+    float = true,
+    center = true,
+})
+hl.window_rule({
     name  = "Nautilus save dialog",
     match = {
         initial_class = "^xdg-desktop-portal-gtk$",
@@ -93,6 +104,14 @@ hl.window_rule({
     size = {"(monitor_w*0.50)", "(monitor_h*0.50)"},
     float = true,
     center = true,
+})
+hl.window_rule({
+    name  = "Nautilus sushi preview",
+    match = {
+        initial_class = "^org.gnome.NautilusPreviewer$",
+    },
+
+    float = false,
 })
 hl.window_rule({
     name  = "Blackout password managers in screen capture",
