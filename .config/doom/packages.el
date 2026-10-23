@@ -52,6 +52,5 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
-;; Theme
-(package! catppuccin-theme)
+
 (package! hel)

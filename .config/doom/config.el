@@ -23,9 +23,9 @@
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-
 (setq doom-font (font-spec :family "RecMonoCasual Nerd Font" :size 14 :weight 'normal)
-      doom-variable-pitch-font (font-spec :family "RecMonoCasual Nerd Font" :size 14 :weight 'normal))
+      doom-variable-pitch-font (font-spec :family "RecMonoCasual Nerd Font" :size 14 :weight 'normal)
+      doom-symbol-font (font-spec :family "RecMonoCasual Nerd Font"))
 
 ; (setq doom-font (font-spec :family "FantasqueSansM Nerd Font" :size 16 :weight 'medium)
 ;       doom-variable-pitch-font (font-spec :family "FantasqueSansM Nerd Font" :size 16))
@@ -41,15 +41,15 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
-; (setq doom-theme 'doom-peacock)
-;; (setq doom-theme 'catppuccin)
-;; (setq catppuccin-flavor 'macchiato) ; or 'frappe 'latte, 'macchiato, or 'mocha
-;; (load-theme 'catppuccin t)
-;; set transparency... I don't think this works so TODO
-;; (set-frame-parameter (selected-frame) 'alpha '(96 97))
-;; (add-to-list 'default-frame-alist '(alpha 96 97))
 (set-frame-parameter nil 'alpha-background 98)
 (add-to-list 'default-frame-alist '(alpha-background . 98))
+;; Specify both a dark and light theme, like so and Doom will choose which one
+;; to load based on your system light/dark setting:
+;;
+;;   (setq doom-theme '(doom-one   . doom-one-light))   ; (DARK . LIGHT)
+;;
+;; If you want more pro-active theme switching based on OS light/dark mode, look
+;; up the `auto-dark' package.
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -102,7 +102,7 @@
 (defun on-after-init ()
   (unless (display-graphic-p (selected-frame))
     (set-face-background 'default "unspecified-bg" (selected-frame))))
-(add-hook 'window-setup-hook #'on-after-init)
+(add-hook! 'window-setup-hook #'on-after-init)
 
 
 ;; [[https://stackoverflow.com/questions/19054228/emacs-disable-theme-background-color-in-terminal/33298750#33298750][Emacs: disable theme background color in terminal - Stack Overflow]]
@@ -110,7 +110,7 @@
   "If the FRAME created in terminal don't load background color."
   (unless (display-graphic-p frame)
     (set-face-background 'default "unspecified-bg" frame)))
-(add-hook 'after-make-frame-functions #'on-frame-open)
+(add-hook! 'after-make-frame-functions #'on-frame-open)
 
 ;; Non-POSIX compliant shells (particularly Fish and Nushell) can cause
 ;; unpredictable issues with any Emacs utilities that spawn child processes from
@@ -118,18 +118,22 @@
 ;; configure Emacs to use a POSIX shell internally, e.g.
 
 ;;; add to $DOOMDIR/config.el
-        (setq shell-file-name (executable-find "bash"))
+(setq shell-file-name (executable-find "bash"))
 
 ;;; Emacs' terminal emulators can be safely configured to use your original $SHELL:
 
 ;;; add to $DOOMDIR/config.el
-(setq-default vterm-shell "/bin/fish")
-(setq-default explicit-shell-file-name "/bin/fish")
+(setq-default vterm-shell (executable-find "fish"))
+(setq-default explicit-shell-file-name (executable-find "fish"))
 
 
 (setq lsp-elixir-server-command '("elixir-ls"))
 
-(use-package hel
-  :ensure t
-  :custom (inhibit-startup-screen t)
-  :config (hel-mode))
+; (use-package hel
+;   :ensure t
+;   :custom (inhibit-startup-screen t)
+;   :config (hel-mode))
+
+(add-hook! 'eglot-managed-mode-hook
+  (lambda ()
+    (eglot-inlay-hints-mode -1)))
