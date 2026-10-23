@@ -2,6 +2,10 @@
 set -p PATH ~/.docker/bin
 # End of Docker Desktop section.
 
+if ~/.config/emacs/bin
+    set -p PATH ~/.config/emacs/bin
+end
+
 ## Environment setup
 # Apply .profile: use this to put fish compatible .profile stuff in
 if test -f ~/.fish_profile
