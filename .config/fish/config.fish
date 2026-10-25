@@ -2,7 +2,7 @@
 set -p PATH ~/.docker/bin
 # End of Docker Desktop section.
 
-if ~/.config/emacs/bin
+if test -d ~/.config/emacs/bin
     set -p PATH ~/.config/emacs/bin
 end
 
