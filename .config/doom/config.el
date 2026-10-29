@@ -129,11 +129,29 @@
 
 (setq lsp-elixir-server-command '("elixir-ls"))
 
-; (use-package hel
-;   :ensure t
-;   :custom (inhibit-startup-screen t)
-;   :config (hel-mode))
+;; (use-package! hel
+;;   :ensure t
+;;   :custom (inhibit-startup-screen t)
+;;   :config (hel-mode))
+;; (use-package! hel-leader
+;;   :after hel)
+;; (use-package! hel-collection
+;;   :after hel
+;;   :config (hel-collection-init))
+;; (use-package! hel-leader
+;;   :after org)
+;; (use-package! hel-paredit
+;;   :after hel
+;;   :hook (emacs-lisp-mode-hook . hel-paredit-mode))
 
 (add-hook! 'eglot-managed-mode-hook
   (lambda ()
     (eglot-inlay-hints-mode -1)))
+
+;; Remove Doom's default C-z -> undo binding
+(after! evil
+  (define-key evil-motion-state-map (kbd "C-z") nil)
+  (define-key evil-normal-state-map (kbd "C-z") nil)
+  (define-key evil-visual-state-map (kbd "C-z") nil)
+  (define-key evil-insert-state-map (kbd "C-z") nil)
+  (define-key evil-emacs-state-map  (kbd "C-z") nil))

@@ -52,5 +52,19 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
 
+;; HESAAM:
+;
 
-(package! hel)
+; (package! hel)
+; (package! hel-leader :recipe
+;   (:host github
+;    :repo "helheim-emacs/hel-leader"))
+; (package! hel-collection :recipe
+;   (:host github
+;    :repo "helheim-emacs/hel-collection"))
+; (package! hel-org :recipe
+;   (:host github
+;    :repo "helheim-emacs/hel-org"))
+; (package! hel-paredit :recipe
+;   (:host github
+;    :repo "helheim-emacs/hel-paredit"))
