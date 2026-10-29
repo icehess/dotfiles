@@ -23,4 +23,4 @@ end)
 -- toolkit-specific scale
 -- The GDK_SCALE variable won’t conflict with Wayland-native GTK programs.
 hl.env("GDK_SCALE", "2")
-hl.env("XCURSOR_SIZE", "32")
+hl.env("XCURSOR_SIZE", "24")

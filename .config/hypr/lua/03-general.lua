@@ -24,7 +24,7 @@ hl.config({
         border_size = 2,
 
         resize_on_border = true,
-        extend_border_grab_area = 120,
+        extend_border_grab_area = 100,
 
         allow_tearing = false,
 
